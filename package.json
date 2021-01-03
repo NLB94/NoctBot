@@ -1,0 +1,30 @@
+{
+  "name": "i2z7",
+  "version": "1.0.2",
+  "description": "A very powerful Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NLB94",
+  "license": "MIT",
+  "dependencies": {
+    "@haileybot/captcha-generator": "^1.4.3",
+    "btoa": "^1.2.1",
+    "canvas": "^2.6.1",
+    "discord-backup": "^2.2.5",
+    "discord-giveaways": "^4.4.1",
+    "discord.js": "^12.5.0",
+    "dotenv": "^8.2.0",
+    "env": "^0.0.2",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.7",
+    "ms": "^2.1.2",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4"
+  }
+}
