@@ -2,11 +2,15 @@ const ms = require("ms")
 const { MessageEmbed } = require("discord.js");
 const { MESSAGES } = require("../../util/constants");
 
-module.exports.run = async (client, message, args) => {
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args) => {
     const settings = await client.getGuild(message.guild);
+    const x_mark = client.emojis.resolve('806440609127596032');
+
     const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
     const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.guild.member(message.mentions.users.first()) : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : message.guild.member(args[0]));
-    if (!user) return message.channel.send(`Correct usage : \`${settings.general.prefix}mute <user> (time) {reason}\``);
+    if (!user) return message.channel.send({embed: {description: `${x_mark}Correct usage : \`${settings.general.prefix}mute ${module.exports.help.usage}\``}});
     let muteRole = settings.moderation.muteRole.toLowerCase() == 'muted' ? message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted') : message.guild.roles.cache.find(r => r.id === settings.moderation.muteRole);
     let muteTime = (args[1] || '24h');
     
@@ -32,7 +36,7 @@ module.exports.run = async (client, message, args) => {
          })
     };
     if (user.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't mute an admin!");
-      if (message.guild.member(client.user).roles.highest.position <= user.roles.highest.position) return message.channel.send("I can't mute an user who have a role highest than mine!")
+      if (message.guild.me.roles.highest.position <= user.roles.highest.position) return message.channel.send("I can't mute an user who have a role highest than mine!")
     if (user.roles.cache.has(muteRole.id)) return message.channel.send("This user is already mute!");
     if (!user.roles.cache.has(muteRole.id)) {
     await user.roles.add(muteRole.id);
@@ -53,9 +57,11 @@ module.exports.run = async (client, message, args) => {
 
     message.channel.send(embed);
     if (logs !== undefined) { logs.send(embedMute);}
+        user.user.send(`You have been muted in ${message.guild.name} by ${message.author.tag} with reason : ${reason} ! You will be unmute in ${muteTime} !`).catch(() => '')
    
    setTimeout(() => {
     if (user.roles.cache.has(muteRole.id)) {
+        user.user.send(`You can now speak in ${message.guild.name}!`).catch(() => '');
     const embedUnmute = new MessageEmbed()
     .setAuthor(`${user.user.username}`, user.user.avatarURL)
     .setColor("#FFFF00")

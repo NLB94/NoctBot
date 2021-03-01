@@ -6,6 +6,7 @@ const guildSchema = mongoose.Schema({
     general: {
         "type": Object,
         "default": {
+            language: 'en',
             prefix: '~',
             logs: 'logs',
             premium: false
@@ -56,123 +57,125 @@ const guildSchema = mongoose.Schema({
             whiteList: {
                 bots: true,
                 admin: true,
-                whiteRoles: {
-                    role1: '',
-                    role2: '',
-                    role3: '',
-                    role4: '',
-                    role5: '',
-                    role6: '',
-                    role7: '',
-                    role8: '',
-                    role9: '',
-                    role10: ''
-                }
+                whiteRoles: []
             },
             antiLink: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiInvite: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiUpperCase: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiEmojis: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiSpam: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiZalgo: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             antiMentions: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    onlyWarn: false,
-                    onlyDelete: false,
-                    warnAndDelete: false,
-                    logsThis: false
-                }
+                enable: false,
+                onlyWarn: false,
+                onlyDelete: false,
+                warnAndDelete: false,
+                logsThis: false
             },
             warnPunishment: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    kick: false,
-                    ban: false,
-                    mute: false,
-                    warnLimit: 0,
-                    logsThis: true
-                }
+                enable: false,
+                kick: false,
+                ban: false,
+                mute: false,
+                warnLimit: 0,
+                logsThis: true
             },
             mutePunishment: {
-                "type": Object,
-                "default": {
-                    enable: false,
-                    kick: false,
-                    ban: false,
-                    muteLimit: 0,
-                    logsThis: true
-                }
+                enable: false,
+                kick: false,
+                ban: false,
+                muteLimit: 0,
+                logsThis: true
             }
         }
     },
     levelSystem: {
         "type": Object,
         "default": {
-            levelEnable: false,
-            levelJaugeColor: '#66CCFF',
-            levelFontImage: '',
-            levelMessage: '',
-            levelChannel: '',
-            DMUser: false,
-            dmMessage: '',
-            levelBoost: 1
+            enable: false,
+            color: '#000099',
+            image: '',
+            message: {
+                embed: {
+                    enable: false,
+                    data: {
+                        title: '',
+                        author: {
+                            name: '',
+                            iconURL: '',
+                            url: ''
+                        },
+                        url: '',
+                        description: 'GG {user}, you reached level **{level}** !',
+                        timestamp: true,
+                        footer: {
+                            name: '',
+                            iconURL: ''
+                        },
+                        color: '#FFFFFF',
+                        thumbnail: '',
+                        image: ''
+                    }
+                },
+                normalMsg: {
+                    enable: true,
+                    msg: 'GG {user}, you reached level **{level}** in {guild} !'
+                }
+            },
+            channel: '',
+            DM: {
+                enable: false,
+                message: 'GG, you reached level **{level}** in {guild} !'
+            },
+            boost: 1,
+            role: {
+                give: {
+                    enable: false,
+                    role: '',
+                    level: 0
+                },
+                rem: {
+                    enable: false,
+                    role: '',
+                    level: 0
+                }
+            }
         }
     },
     economy: {
@@ -195,22 +198,28 @@ const guildSchema = mongoose.Schema({
                 channel: '',
                 role: '',
                 isEmbed: false,
-                embed: {
-                    title: 'New Member',
-                    titleURL: '',
-                    author: '',
-                    authorIcon: '',
-                    authorURL: '',
-                    description: 'Welcome {user} in {guild} !',
-                    timeStamp: true,
-                    footer: '{guild}',
-                    footerIcon: '{guildIcon}',
-                    color: '#FFFFFF',
+                data: {
+                    title: '',
+                    author: {
+                        name: '',
+                        iconURL: '',
+                        url: ''
+                    },
+                    url: '',
+                    description: '',
+                    timestamp: true,
+                    footer: {
+                        name: '',
+                        iconURL: ''
+                    },
+                    color: '',
                     thumbnail: '',
                     image: ''
                 },
-                isNormalMsg: true,
-                normalMsg: '',
+                normalMsg: {
+                    enable: true,
+                    msg: ''
+                },
                 DMUser: {
                     enable: false,
                     msg: ''
@@ -221,18 +230,24 @@ const guildSchema = mongoose.Schema({
                 channel: '',
                 isEmbed: false,
                 embed: {
-                    title: 'Member Leave',
-                    titleURL: '',
-                    author: '',
-                    authorIcon: '',
-                    authorURL: '',
-                    description: '{user} left {guild} !',
-                    timeStamp: true,
-                    footer: '{guild}',
-                    footerIcon: '{guildIcon}',
-                    color: '#FFFFFF',
-                    thumbnail: '',
-                    image: ''
+                    data: {
+                        title: '',
+                        author: {
+                            name: '',
+                            iconURL: '',
+                            url: ''
+                        },
+                        url: '',
+                        description: '{userTag} left the guild !',
+                        timestamp: true,
+                        footer: {
+                            name: '',
+                            iconURL: ''
+                        },
+                        color: '#FFFFFF',
+                        thumbnail: '',
+                        image: ''
+                    }
                 },
                 isNormalMsg: true,
                 normalMsg: '',
@@ -243,49 +258,35 @@ const guildSchema = mongoose.Schema({
             }
         }
     },
-    customCommands: {
-        "type": Object,
-        "default": {
-            Nb: 0,
-            list: []
-        }
-    },
-    giveaways: {
-        "type": Object,
-        "default": {
-            emoji: '🎉',
-            list: []
-        }
-    },
+    customCommands: [],
+    giveaways: [],
     backups: {
         "type": Object,
         "default": {
-            Nb: 0,
-            maxMessages: 0,
-            bans: false,
-            roles: true,
-            channels: true,
+            onlyServerOwner: true,
+            admins: false,
             list: []
         }
     },
     ticket: {
         "type": Object,
         "default": {
-            tEnable: false,
-            tCategory: '',
-            tTitle: '',
-            tDescription: '',
-            tNumber: 0001
+            enable: false,
+            category: String,
+            title: String,
+            description: String,
+            msg: String,
+            number: 0001
         }
     },
     captcha: {
         "type": Object,
         "default": {
-            cEnable: false,
-            cChannel: '',
-            cRole: '{wRole}',
-            cMinAge: 0,
-            cLogs: '{logSettings}'
+            enable: false,
+            channel: '',
+            role: 'Not Verified',
+            channel: 'verification',
+            logs: '{logSettings}'
         }
     },
     lockChannels: []

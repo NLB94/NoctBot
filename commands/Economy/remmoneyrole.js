@@ -1,32 +1,34 @@
 const { MessageEmbed } = require('discord.js');
 const { MESSAGES } = require('../../util/constants');
 
-module.exports.run = async (client, message, args) => {
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args) => {
   const settings = await client.getGuild(message.guild);
     {
       const support = args[0] == 'bank' || args[0] == 'cash' ? args[0].toLowerCase() : 'cash';
       const users = [];
       const role = args[0].startsWith('<@&') && args[0].endsWith('>') || args[1].startsWith('<@&') && args[1].endsWith('>') ? message.guild.roles.cache.find(r => r.id == message.mentions.roles.first().id) : (args[0] == 'bank' || args[0] == 'cash' ? (isNaN(args[1]) ? message.guild.roles.cache.find(r => r.name == args[1]) : message.guild.roles.cache.find(r => r.id == args[1])) : (isNaN(args[0]) ? message.guild.roles.cache.find(r => r.name == args[0]) : message.guild.roles.cache.find(r => r.id == args[0])));
-      if (!role) return message.channel.send(`Correct usage : \`${settings.general.prefix}remmoney-role [cash | bank] @role (amount)\``);
+      if (!role) return message.channel.send({embed: {description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}});
       const toRem = isNaN(args[1]) ? parseInt(args[2]) : parseInt(args[1]);
-      if (isNaN(toRem)) return message.channel.send(`Correct usage : \`${settings.general.prefix}remmoney-role [cash | bank] @role (amount)\``)
+      if (isNaN(toRem)) return message.channel.send({embed: {description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}});
       message.guild.members.cache.map(m => users.push(m));
       users.forEach(async user => {
         if (!user.roles.cache.find(r => r.id == role)) return;
         else {
-          const dbUser = await client.getUser(user);
-          if (!dbUser) return await client.createUser(message.guild, user);
+          const dbUser = await client.getGuildUser(message.guild, user);
+          if (!dbUser) return await client.createGuildUser(message.guild, user);
 
 
             if (support == 'cash') {
               const newB = dbUser.moneyCash - toRem;
-              client.updateUI(message.guild, user, {
+              client.updateGuildUI(message.guild, user, {
                 "users.$.moneyCash": newB
               });
             }
             else if (support == 'bank') {
               const newB = dbUser.moneyBank - toRem;
-              client.updateUI(message.guild, user, {
+              client.updateGuildUI(message.guild, user, {
                 "users.$.moneyBank": newB
               });
             };

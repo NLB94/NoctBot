@@ -2,7 +2,7 @@ const { MessageEmbed } = require("discord.js")
 
 module.exports = async (client, member) => {
     const settings = await client.getGuild(member.guild);
-    if (settings.guildID == undefined) return;
+    if (settings == undefined) return;
     let msg = settings.lMessage;
 
     if (!settings.lEnable) return;

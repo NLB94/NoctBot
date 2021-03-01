@@ -1,18 +1,44 @@
-const { MESSAGES } = require("../../util/constants");
+const {
+    MessageEmbed
+} = require("discord.js");
+const {
+    MESSAGES
+} = require("../../util/constants");
 
-module.exports.run = (client, message, args) => {
-    let role = args[0].startsWith('<@&') && args[0].endsWith('>') ? message.guild.roles.cache.get(message.mentions.roles.first().id) : message.guild.roles.cache.find(r => r.name.toLowerCase() === args.toString().toLowerCase());
-    if (role) {
-        if (message.member.roles.cache.has(role.id)) return message.channel.send("This user have already this role!");
-        if (role.permissions.has('KICK_MEMBERS', true)) return message.channel.send("You can't add administrator role!");
+const functions = require('../../util/functions');
 
+module.exports.run = functions.run = async (client, message, args) => {
+    const settings = await client.getGuild(message.guild);
+    const roles = [];
+    const users = [];
+    const checkMark = client.emojis.resolve('770980790242377739');
+    const mentionsRoles = message.mentions.roles;
+    const mentionsUsers = message.mentions.users;
+    mentionsRoles.forEach(role => {
+        mentionsUsers.forEach(m => {
+            const member = message.guild.member(m)
+            member.roles.add(role.id).catch()
+        });
+        roles.push({
+            id: role.id
+        });
+    });
+    mentionsUsers.forEach(m => users.push({ id: m.id }))
 
-        message.member.roles.add(role)
-            .then(m => message.channel.send(`Successfully added ${role}!`))
-            .catch(e => console.log(e));
-    } else {
-        message.channel.send("Role doesn't exists! Retry");
-    }
+    if (roles.length < 1 || users.length < 1) return message.channel.send({
+        embed: {
+            title: 'Invalid Usage',
+            description: `Correct usage : ${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}`
+        }
+    })
+    const embed = new MessageEmbed()
+        .setTitle('Roles')
+        .setAuthor(message.author.tag, message.author.avatarURL())
+        .setDescription(`${checkMark}Successfully added ${roles.map(a => `<@&${a.id}>`).slice(0, 10).join(", ")} to ${users.map(a => `<@${a.id}>`).slice(0, 10).join(", ")} !`)
+        .setFooter(message.guild.name, message.guild.iconURL())
+        .setTimestamp();
+
+    await message.channel.send(embed)
 };
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.ADDROLE;

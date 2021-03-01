@@ -1,31 +1,75 @@
-const { MESSAGES } = require("../../util/constants");
+const {
+    MESSAGES
+} = require("../../util/constants");
 
-module.exports.run = (client, message, args) => {
-        const channel = message.channel;
-        if (channel.type == 'news') return message.channel.send('This channel is the discord update channel, so I can\'t delete.');
-        else if (channel.type == 'store') return message.channel.send('Can\'t delete!');
-        else if (channel.type == 'text') {
-            const position = channel.position;
-            const name = channel.name;
-            channel.send('Nuking...');
+const functions = require('../../util/functions');
 
-                        channel.clone({name: 'Nuking...'}).then(c => {
-                            channel.delete('Nuked this channel');
-                            c.send('Successfully nuked this channel!').then(msg => { 
-                                setTimeout(() => {
-                                    if (message.guild.member(client.user).hasPermission('MANAGE_MESSAGES')) {
-                                    msg.delete();
-                                }
-                                else return;
-                                }, 10000);
-                            }).catch(err => '');
-                        setTimeout(() => {
-                            c.edit({name: `${name}`, position: position})
-                        }, 3000); 
-                    });
+module.exports.run = functions.run = (client, message, args) => {
+    const channel = message.channel;
+    const x_mark = client.emojis.resolve('806440609127596032');
+    const check_mark = client.emojis.resolve('770980790242377739')
+    if (channel.id == message.guild.rulesChannelID) return message.channel.send({
+        embed: {
+            description: `${x_mark}I can't nuke the rules channel.`
+        }
+    });
+    else if (channel.id == message.guild.systemChannelID) return message.channel.send({
+        embed: {
+            description: `${x_mark}I can't nuke a system channel.`
+        }
+    });
+    else if (channel.id == message.guild.publicUpdatesChannelID) return message.channel.send({
+        embed: {
+            description: `${x_mark}I can't nuke an update channel.`
+        }
+    });
+    switch (channel.type) {
+        case 'news': {
+            if (channel.type == 'news') {
+                return message.channel.send({
+                    embed: {
+                        description: `${x_mark}I can't nuke a news channel.`
                     }
-                    else
-                        return message.channel.send('Command Canceled!');
-                };
+                });
+            }
+            break;
+        }
+        case 'store': {
+            if (channel.type == 'store') {
+                return message.channel.send({
+                    embed: {
+                        description: `${x_mark}I can't nuke a store channel.`
+                    }
+                });
+            }
+            break;
+        }
+        case 'text': {
+            if (channel.type == 'text') {
+                const position = channel.position;
+                const name = channel.name;
+                channel.send('Nuking...');
+
+                channel.clone({
+                    name: 'Nuking...'
+                }).then(async (c) => {
+                    await channel.delete('Nuked this channel');
+                    await c.send(`${check_mark}Successfully nuked this channel!`).then(msg => {
+                        setTimeout(() => {
+                            msg.delete()
+                        }, 5000);
+                    }).catch(() => '');
+                    setTimeout(() => {
+                        c.edit({
+                            name: `${name}`,
+                            position: position
+                        })
+                    }, 1500);
+                });
+            }
+            break;
+        };
+    };
+}
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.NUKE;

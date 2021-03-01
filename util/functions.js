@@ -1,86 +1,28 @@
-const mongoose = require("mongoose");
-const { Guild } = require("../models/main");
-const message = require("../events/message/message");
+const {
+  Guild,
+} = require("../models/main");
+const functions = require('./functions');
 
-module.exports = client => {
-  client.createGuild = async guild => {
-    if (!guild) return;
-    const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, guild);
-    const createGuild = await new Guild(merged);
-    createGuild.save();
-  };
-  client.getGuild = async guild => {
-    if (!guild) return;
-    const data = await Guild.findOne({ guildID: guild.id });
-    if (data) return data;
-    return client.config.DEFAULTSETTINGS;
-  };
-  client.getUser = async user => {
-    if (!user) return;
-    const data = await client.getGuild(user.guild);
-    const position = data.users.map((e) => e.id).indexOf(user.id);
-    return data.users[position];
-  };
-  client.updateGuild = async (guild, settings) => {
-    if (!guild) return;
-    let data = await client.getGuild(guild);
-    if (typeof data !== "object") data = {};
-    for (const key in settings) {
-      if (data[key] !== settings[key]) data[key] = settings[key];
-    }
-    return data.updateOne(settings);
-  };
-  client.createUser = async (guild, user) => {
-    if (!guild || !user) return;
-    const dailyCd = Date.now() - 8.64e+7;
-    const daily = new Date(dailyCd);
-    Guild.updateOne(
-      { guildID: guild.id },
-      {
-        $push: {
-          users: {
-            id: user.id,
-            XP: 0,
-            level: 0,
-            XPRequire: 250,
-            XPtoAddReq: 50,
-            warns: 0,
-            mutes: 0,
-            afk: false,
-            moneyBank: 0,
-            moneyCash: 0,
-            inventory: [],
-            dailyCd: daily,
-          },
-        },
-      }
-    ).then();
-  };
-  client.updateUI = (guild, member, options = {}) => {
-    Guild.updateOne({ guildID: guild.id, "users.id": member.id }, { $set: options }).then();
-  };
-  client.createMIOU = (guild, member, missingI = {}) => {
-    Guild.updateOne({ guildID: guild.id, "users.id": member.id }, { $set: missingI }).then();
-  };
-
-  client.random = o => {
+module.exports = functions.client = client => {
+  //random String
+  client.randomString = functions.randomString = query => {
     var a = 10,
       b = 'abcdefghijklmnopqrstuvwxyz',
       c = '',
       d = 0,
       e = '' + b;
-    if (o) {
-      if (o.startsWithLowerCase) {
+    if (query) {
+      if (query.startsWithLowerCase) {
         c = b[Math.floor(Math.random() * b.length)];
         d = 1;
       }
-      if (o.length) {
-        a = o.length;
+      if (query.length) {
+        a = query.length;
       }
-      if (o.includeUpperCase) {
+      if (query.includeUpperCase) {
         e += b.toUpperCase();
       }
-      if (o.includeNumbers) {
+      if (query.includeNumbers) {
         e += '1234567890';
       }
     }
@@ -89,37 +31,52 @@ module.exports = client => {
     }
     return c;
   };
-  client.newCustomCommand = async (guild, name, description, onlyAdmin, code) => {
-    if (!guild || !code || !name) return;
-    const settings = await client.getGuild(guild);
-    Guild.updateOne(
-      { guildID: guild.id },
-      {
-        $push: {
-          customCommands: {
-            name: name,
-            description: description,
-            onlyAdmin: onlyAdmin,
-            code: code
-          },
+  //custom command
+  client.newCustomCommand = functions.newCustomCommand = async (guild, options) => {
+    if (!guild) return;
+    const settings = await functions.getGuild(guild);
+    Guild.updateOne({
+      guildID: guild.id
+    }, {
+      $push: {
+        customCommands: {
+          name: options.commandName,
+          description: options.commandDescription,
+          reply: options.commandResponse
         },
-        customCmdsNb: settings.customCmdsNb + 1
-      }
-    ).then();
+      },
+    }).then();
   };
-  client.lockChannel = async (guild, channel) => {
+  //lock functions
+  client.lockChannel = functions.lockChannel = async (guild, channel) => {
     if (!guild || !channel) return;
-    Guild.updateOne(
-      { guildID: guild.id },
-      {
-        $push: {
-          lockChannels: {
-            channelID: channel.id,
-            channelName: channel.name,
-            permissions: channel.permissionOverwrites
-          },
+    channel.name = channel.name.replace('🔒_', '');
+    Guild.updateOne({
+      guildID: guild.id
+    }, {
+      $push: {
+        lockChannels: {
+          channelID: channel.id,
+          channelName: channel.name,
+        },
+      }
+    }).then();
+  };
+  client.unlockChannel = functions.unlockChannel = (guild, channel) => {
+    Guild.updateOne({
+      guildID: guild.id,
+    }, {
+      $pull: {
+        lockChannels: {
+          channelID: channel.id
         }
       }
-    ).then();
+    }).then();
   };
+  client.replaceText = functions.replaceText = async (text, message, options) => {
+    
+  }
+  client.replaceEmbed = functions.replaceEmbed = async (embed, message, options) => {
+
+  }
 };

@@ -1,30 +1,47 @@
 {
   "name": "i2z7",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A very powerful Discord Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start index.js --watch",
+    "logs": "pm2 logs index",
+    "nodemon": "nodemon index.js"
   },
   "author": "NLB94",
   "license": "MIT",
   "dependencies": {
     "@haileybot/captcha-generator": "^1.4.3",
-    "btoa": "^1.2.1",
+    "@statscell/brawl": "^1.2.1",
+    "brawlstars.js": "^1.0.8",
+    "canvacord": "^5.0.8",
     "canvas": "^2.6.1",
+    "dblapi.js": "^2.4.0",
     "discord-backup": "^2.2.5",
-    "discord-giveaways": "^4.4.1",
-    "discord.js": "^12.5.0",
+    "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "env": "^0.0.2",
     "express": "^4.17.1",
+    "fastify": "^3.9.2",
     "fs": "^0.0.1-security",
+    "http-proxy": "^1.18.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.7",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.6",
+    "openssl": "^1.1.0",
     "passport": "^0.4.1",
-    "passport-discord": "^0.1.4"
-  }
+    "passport-discord": "^0.1.4",
+    "pip": "^0.0.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NLB94/I2Z7.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NLB94/I2Z7/issues"
+  },
+  "homepage": "https://github.com/NLB94/I2Z7#readme"
 }

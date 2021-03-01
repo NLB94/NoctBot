@@ -1,7 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 const { MESSAGES } = require('../../util/constants');
 
-module.exports.run = async (client, message, args, userInfo) => {
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args, userInfo) => {
   if (!args.length) {
   if (message.author.bot) return;
   if (!userInfo) return;
@@ -19,7 +21,7 @@ module.exports.run = async (client, message, args, userInfo) => {
     if (args[0] && args[0].startsWith('<@')&& args[0].endsWith('>')) {
   if (message.mentions.users.first().bot) return message.channel.send("Bots have unlimited amount of money!");
   const user = message.mentions.users.first();
-  const dbUser = await client.getUser(message.guild.member(user));
+  const dbUser = await client.getGuildUser(message.guild, message.guild.member(user));
   if (!dbUser) return;
   else {
     const embed = new MessageEmbed()

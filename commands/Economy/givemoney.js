@@ -1,13 +1,15 @@
 const { MessageEmbed } = require("discord.js");
 const { MESSAGES } = require("../../util/constants");
 
-module.exports.run = async (client, message, args, userInfo) => {
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args, userInfo) => {
   const settings = await client.getGuild(message.guild);
   if (!args[0].startsWith("<@") && !args[0].endsWith(">") && isNaN(args[1]))
     return message.channel.send(
-      `Correct usage : \`${settings.general.prefix}give-money @user <amount | all>\``
+      `Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``
     );
-  const user = await client.getUser(
+  const user = await client.getGuildUser(message.guild,
     message.guild.member(message.mentions.users.first())
   );
   if (message.mentions.users.first().bot)
@@ -15,21 +17,9 @@ module.exports.run = async (client, message, args, userInfo) => {
   if (message.mentions.users.first().tag === message.author.tag)
     return message.channel.send("You can't give money to yourself!");
   if (!user || !userInfo) return;
-  //{
-  //   if (!userInfo)
-  //     await client.createUser({
-  //       guildID: message.guild.id,
-  //       userID: message.author.id,
-  //     });
-  //   else if (!user)
-  //     await client.createUser({
-  //       guildID: message.guild.id,
-  //       userID: message.mentions.users.first().id,
-  //     });
-  // }
   if (!args[1])
     return message.channel.send(
-      `Correct usage : \`${settings.general.prefix}give-money @user <amount | all>\``
+      `Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``
     );
   if (args[1] !== "all" && !isNaN(args[1])) {
     try {
@@ -56,11 +46,11 @@ module.exports.run = async (client, message, args, userInfo) => {
           const newB = user.moneyCash + m;
           const givB = userInfo.moneyCash - m;
 
-          client.updateUI(message.guild, message.member,
+          client.updateGuildUI(message.guild, message.member,
             {
               "users.$.moneyCash": givB,
             });
-          client.updateUI(message.guild, user,
+          client.updateGuildUI(message.guild, user,
             {
               "users.$.moneyCash": newB,
             });
@@ -93,11 +83,11 @@ module.exports.run = async (client, message, args, userInfo) => {
         const newB = user.moneyCash + m;
           const givB = userInfo.moneyCash - m;
 
-          client.updateUI(message.guild, message.member,
+          client.updateGuildUI(message.guild, message.member,
             {
               "users.$.moneyCash": givB,
             });
-          client.updateUI(message.guild, user,
+          client.updateGuildUI(message.guild, user,
             {
               "users.$.moneyCash": newB,
             });

@@ -1,0 +1,101 @@
+const {
+    MESSAGES
+} = require('../../util/constants');
+
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args) => {
+    const embedErr = {
+        description: 'Command canceled !',
+        title: 'Custom Command'
+    }
+    try {
+        let command = {
+            name: String,
+            aliases: [],
+            category: "customCmd",
+            description: String,
+            ownerCmd: false,
+            cooldown: 0.1,
+            enable: true,
+            usage: String,
+            example: null,
+            botPerm: false,
+            botPermName: '',
+            permissions: false,
+            onlyServerOwner: false,
+            reqPermName: null,
+            onlyPremium: false,
+            args: false
+        }
+
+        const checkMark = client.emojis.resolve('770980790242377739');
+        message.channel.send({
+            embed: {
+                description: 'What is the command to run (15 characters max) ? You can cancel at any moment.',
+                title: 'Custom Command'
+            }
+        });
+        const filter = m => {
+            if (m.author.bot) return false;
+            if (message.author.id == m.author.id) return true;
+        }
+        const userE = await message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+        })
+        if (userE.first().toString().toLowerCase() == 'cancel') return message.channel.send({
+            embed: embedErr
+        });
+        else command.name = userE.first().toString().slice(0, 15);
+
+        await message.channel.send({
+            embed: {
+                description: `${checkMark}Alright, command name is \`${command.name}\`. What should be the description of the command ? (50 characters max)`,
+                title: 'Custom Command'
+            }
+        })
+        const userE2 = await message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+        })
+        if (userE2.first().toString().toLowerCase() == 'cancel') return message.channel.send({
+            embed: embedErr
+        });
+        else command.description = userE2.first().toString().slice(0, 50);
+
+        await message.channel.send({
+            embed: {
+                description: `${checkMark}Good ! Description is \`${description}\` ! Finnaly, what the bot have to reply ? (1000 characters max) `,
+                title: 'Custom Command'
+            }
+        })
+        const userE3 = await message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+        })
+        if (userE3.first().toString().toLowerCase() == 'cancel') return message.channel.send({
+            embed: embedErr
+        });
+        else command.code = userE3.first().toString().slice(0, 1000);
+
+        client.newCustomCommand(message.guild, command).then(() => {
+            message.channel.send({
+                embed: {
+                    description: `${checkMark}Successfully created command : \nName : \`${command.name}\` \nDescription : \`${command.description}\` \nReply : \`${command.code}\``,
+                    title: 'Custom Command'
+                }
+            })
+        })
+    } catch (e) {
+        console.log(e)
+        message.channel.send({
+            embed: embedErr
+        });
+    }
+}
+
+module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.CUSTOMCMD;

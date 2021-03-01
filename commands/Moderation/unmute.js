@@ -1,11 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 const { MESSAGES } = require("../../util/constants");
 
-module.exports.run = async (client, message, args) => {
+const functions = require('../../util/functions');
+
+module.exports.run = functions.run = async (client, message, args) => {
     const settings = await client.getGuild(message.guild);
     const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
     const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.guild.member(message.mentions.users.first()) : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : message.guild.member(args[0]));
-    if (!user) return message.channel.send(`Correct usage : \`${settings.general.prefix}unmute <user>\``);
+    if (!user) return message.channel.send({embed: {title: 'Invalid Usage', description: `${arrowRight}Correct usage : \`${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}\``}});
     let muteRole = settings.moderation.muteRole.toLowerCase() == 'muted' ? message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted') : message.guild.roles.cache.find(r => r.id === settings.moderation.muteRole);
     
 

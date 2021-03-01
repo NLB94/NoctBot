@@ -1,15 +1,32 @@
 const mongoose = require("mongoose");
-const { DEFAULTSETTINGS: defaults } = require("../config");
-const message = require("../events/message/message");
 
 const backupSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     backupID: String,
-    guildName: String,
+    guildInfo: {
+        name: String,
+        icon: String,
+        banner: String,
+        afk: {
+            channel: {
+                name: String,
+                parentName: String
+            },
+            timeout: Number
+        },
+        verificationLvl: Number | String,
+        region: String,
+        explicitContentFilter: Number | String
+    },
+    authorID: String,
     roles: [],
-    textChannels: [],
-    voiceChannels: [],
     categorys: [],
+    others: {
+        text: [],
+        voice: []
+    },
+    emojis: []
+    
 });
 
 module.exports = mongoose.model("Backup", backupSchema);
