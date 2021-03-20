@@ -4,10 +4,14 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
 
 const { loadEvents, loadCommands } = require("./util/loader");
-
+const express = require('express') ;
+const app = express() 
 const functions = require('./index');
 
 require('./src/strategies/discord');
+
+app.listen(80, () => console.log('server live'))
+app.get('/', (res , req) => res.send('test'))
 
 require("./util/functions")(client);
 require("./util/guild")(client);
