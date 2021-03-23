@@ -1,5 +1,6 @@
-import { Guild, GuildMember, Message, MessageEmbed } from "discord.js";
-
+import { createCanvas } from "canvas";
+import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed, User } from "discord.js";
+import { User as DBUser } from '../models/main'
 /**
  * Up an user xp level
  * @param guild 
@@ -19,10 +20,12 @@ export declare function replaceLevelText(text: String, message: Message, options
  * @param message 
  * @example {userAvatar} to <link_of_user_avatar>
  */
-export declare function replaceLevelImage(text: String, message: Message);
+export declare function replaceLevelImage(text: String, message: Message): String;
 /**
  * Same as replaceText but with embed object
  * @param {Object} embed 
  * @example {user} to @user
  */
 export declare function replaceLevelEmbed(embed: MessageEmbed, message: Message, options: Object);
+
+export declare function drawRankCard(user: User, userInfo: Promise<typeof DBUser>): MessageAttachment;

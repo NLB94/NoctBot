@@ -51,3 +51,8 @@ import Discord from "discord.js";
      * Reset all guilds from the database
      */
     export declare function resetAllGuilds();
+
+    /**
+     * Reset all guilds's users from the users array.
+     */
+    export declare function resetAllGuildsUsers();

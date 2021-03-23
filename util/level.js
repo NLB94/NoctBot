@@ -27,33 +27,33 @@ module.exports = func.client = client => {
         });
     }
     client.replaceLevelText = functions.replaceLevelText = async (text, message, options) => {
-        let text2 = text;
-        text2 = await text2.replace("{user}", message.member)
+       if (!text) return '';
+        text = await text.replace("{user}", message.member)
             .replace("{level}", options.newLvl)
             .replace("{guild}", message.guild.name)
             .replace("{userID}", message.author.id)
             .replace("{username}", message.author.username)
             .replace("{guildID}", message.guild.id);
 
-        return await text2;
+        return await text;
     };
     client.replaceLevelImage = functions.replaceLevelImage = async (text, message) => {
-        let image = text
+        let image = text ? text
             .replace("guildIcon", message.guild.iconURL().toString())
-            .replace("userIcon", message.author.avatarURL());
+            .replace("userIcon", message.author.avatarURL()) : '';
 
         return image;
     }
     client.replaceLevelEmbed = functions.replaceLevelEmbed = async (embed, message, options) => {
         const newLvl = {
-            newLvl: options.newLvl
+            newLvl: options !== undefined ? options.newLvl : ''
         };
-        embed.setDescription(client.replaceLevelText(embed.description, message, newLvl))
-        embed.setTitle(client.replaceLevelText(embed.title, message, newLvl))
-        embed.setFooter(client.replaceLevelText(embed.footer.text, message, newLvl), client.replaceLevelImage(embed.footer.iconURL, message))
-        embed.setAuthor(client.replaceLevelText(embed.author.name, message, newLvl), client.replaceLevelImage(embed.author.iconURL))
-        embed.setThumbnail(client.replaceLevelImage(embed.thumbnail, message))
-        embed.setImage(client.replaceLevelImage(embed.image, message))
+        embed.setDescription(client.replaceLevelText(embed.description, message, newLvl).toString())
+        embed.setTitle(client.replaceLevelText(embed.title, message, newLvl).toString())
+        embed.setFooter(client.replaceLevelText(!embed.footer ? '' : embed.footer.text, message, newLvl).toString(), client.replaceLevelImage(embed.footer ? embed.footer.iconURL : '', message).toString())
+        embed.setAuthor(client.replaceLevelText(embed.author ? embed.author.name : '', message, newLvl).toString(), client.replaceLevelImage(embed.author ? embed.author.iconURL : '').toString())
+        embed.setThumbnail(client.replaceLevelImage(embed.thumbnail, message).toString())
+        embed.setImage(client.replaceLevelImage(embed.image, message).toString())
 
         return embed;
     }

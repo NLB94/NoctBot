@@ -37,6 +37,60 @@ const MESSAGES = {
         onlyPremium: false,
         args: false
       },
+      ANNONCE: {
+        name: "annonce",
+        aliases: ["annonce"],
+        category: "admin",
+        description: "Only for bot owner",
+        ownerCmd: true,
+        cooldown: 0.1,
+        enable: true,
+        usage: "Embed Data",
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true,
+      },
+      SPOIL: {
+        name: "spoil",
+        aliases: ["spoil"],
+        category: "admin",
+        description: "Only for bot owner",
+        ownerCmd: true,
+        cooldown: 0.1,
+        enable: true,
+        usage: "Embed Data",
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true,
+      },
+      UPDATE: {
+        name: "update",
+        aliases: ["update"],
+        category: "admin",
+        description: "Only for bot owner",
+        ownerCmd: true,
+        cooldown: 0.1,
+        enable: true,
+        usage: "Embed Data",
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true,
+      },
     },
     BACKUPS: {
       BACKUP: {
@@ -56,7 +110,7 @@ const MESSAGES = {
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
         args: true
-      }
+      },
     },
     ECONOMY: {
       ADDMONEY: {
@@ -504,7 +558,7 @@ const MESSAGES = {
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
-        usage: '<message_id>',
+        usage: '{message_id}',
         example: "No example for this command.",
         botPerm: false,
         botPermName: '',
@@ -512,7 +566,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "MANAGE_MESSAGES",
         onlyPremium: false,
-        args: true
+        args: false
       },
       GRESTART: {
         name: "grestart",

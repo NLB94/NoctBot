@@ -1,0 +1,62 @@
+I2Z7 Structure : {
+    Commandes :  {
+        Catégories: {
+            Admin: {
+                eval //Eval Javascript code in discord,
+                raid //Delete all channels from server,
+                test //Just a test file
+            }
+            Serveur de support: {
+                annonce //Send an announcement to announce channel in I2Z7's Community, 
+                spoil //Send a spoil, 
+                update //Send an update
+            }
+
+            Backup: {
+                create, load, delete, resave
+            }
+            Economy: {
+                addmoney, remmoney, addmoneyrole, remmoneyrole, buy, shop, daily, dep, with, giveitem, givemoney, hourly, bal, resetmoney, rob, crime, sellitem, EconomySettings, viewItem, work
+            }
+            Moderation: {
+                ban, kick, mute, unmute, addrole, remrole, clear, lock, unlock, prune, nuke, slowmode, tempBan, unban
+            }
+            Giveaway: {
+                gcreate, gedit, greroll, gcancel, grestart, gend
+            }
+            Info: {
+                userinfo, server, channel, bot, role
+            }
+            Level: {
+                rank, leaderboard, addxp, remxp, resetxp, levelSettings
+            }
+            ServerSettings: {
+                config, botsettings
+            }
+            Captcha: {
+                captchaSettings
+            }
+            Invites: {
+                invites, settings
+            }
+            Other: {
+                help, ping, links, poll, report, say
+            }
+            customCmds: {
+
+            }
+        }
+    }
+    Events: {
+        Auditlogs: {
+            
+        }
+        Guild: {            
+        }
+        member: {}
+        message: {}
+        moderation: {}
+        reactions: {}
+        ready: {}
+    }
+}

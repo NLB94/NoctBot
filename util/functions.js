@@ -74,9 +74,19 @@ module.exports = functions.client = client => {
     }).then();
   };
   client.replaceText = functions.replaceText = async (text, message, options) => {
-    
+
   }
   client.replaceEmbed = functions.replaceEmbed = async (embed, message, options) => {
 
+  };
+
+  client.translate = functions.translate = async (string, from, to) => {
+    const traduction = await client.trad(string, {
+      from: from,
+      to: to
+    }).then((res) => res.text).catch(err => {
+      console.log(err);
+    });
+    return traduction;
   }
 };

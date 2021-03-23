@@ -27,13 +27,13 @@ import { Giveaway } from "./util";
    * @param guild 
    * @param ID 
    */
-  export declare function endGiveaway(guild: Guild, ID: Snowflake);
+  export declare function endGiveaway(guild: Guild, giveaway: Giveaway);
   /**
    * Edit a giveaway
    * @param guild 
    * @param giveaway 
    */
-  export declare function editGiveaway(guild: Guild, giveaway: Giveaway);
+  export declare function editGiveaway(guild: Guild, giveaway: Giveaway, options: Object);
   /**
    * Delete a giveaway from the database
    * @param guild 

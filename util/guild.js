@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-const { Guild } = require('../models/main');
+const {
+    Guild
+} = require('../models/main');
 const functions = require('./guild');
 const func = require('./functions')
 
@@ -53,6 +55,12 @@ module.exports = func.client = async (client) => {
                     level: 0,
                     XPRequire: 250,
                     XPtoAddReq: 50,
+                    messageSent: 0,
+                    voiceTime: 0,
+                    voiceXP: 0,
+                    voiceLvl: 0,
+                    voiceXPReq: 250,
+                    voiceXPAddReq: 50,
                     warns: 0,
                     mutes: 0,
                     afk: {
@@ -86,11 +94,51 @@ module.exports = func.client = async (client) => {
         }).then();
     };
     client.resetAllGuilds = functions.resetAllGuilds = async () => {
-        await Guild.deleteOne({guildID: 727494941911154688}).then()
-        await client.createGuild({guildID: 727494941911154688})
+        await Guild.deleteOne({
+            guildID: 727494941911154688
+        }).then()
+        await client.createGuild({
+            guildID: 727494941911154688
+        })
         await client.guilds.cache.forEach(async g => {
-            await Guild.deleteOne({guildID: g.id}).then()
-            await client.createGuild({ guildID: g.id })
+            await Guild.deleteOne({
+                guildID: g.id
+            }).then();
+            await client.createGuild({
+                guildID: g.id
+            })
         });
+    }
+    client.updateAllGuildsUsers = functions.resetAllGuildsUsers = async (options = {}) => {
+        const guild1 = await Guild.findOne({
+            guildID: '727494941911154688'
+        })
+        guild1.users ? await guild1.users.forEach(u => {
+            if (!u.voiceXP || u.voiceXP == undefined) {
+                Guild.updateOne({
+                    guildID: '727494941911154688',
+                    "users.id": u.id
+                }, {
+                    $set: options
+                }).then();
+            }
+        }) : '';
+        client.guilds.cache.forEach(async g => {
+            if (g.id !== '727494941911154688') {
+                const guild = await Guild.findOne({
+                    guildID: g.id
+                });
+                guild.users ? guild.users.forEach(u => {
+                    if (!u.voiceXP || u.voiceXP == undefined) {
+                        Guild.updateOne({
+                            guild: g.id,
+                            "users.id": u.id
+                        }, {
+                            $set: options
+                        }).then();
+                    }
+                }) : ''
+            }
+        })
     }
 }

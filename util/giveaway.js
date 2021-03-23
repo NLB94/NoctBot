@@ -15,8 +15,11 @@ module.exports = func.client = client => {
           id: giveaway.id,
           author: giveaway.hostedBy,
           startedTime: giveaway.startedTime,
+          endedAt: giveaway.endedAt,
           time: ms(giveaway.time),
+          remaining: ms(giveaway.time),
           winnerCount: giveaway.winnerCount,
+          winners: giveaway.winners,
           channel: giveaway.channel.id,
           price: giveaway.price,
           status: 'en-cours',
@@ -27,20 +30,35 @@ module.exports = func.client = client => {
     }).then()
   };
   client.getGiveaway = functions.getGiveaway = async (guild, id) => {
-    const data = await Guild.findOne({ guildID: guild.id });
+    const data = await Guild.findOne({
+      guildID: guild.id
+    });
     const position = await data.giveaways.map(e => e.id).indexOf(id);
     const giveawayInfo = await data.giveaways[position];
-    if (position == -1) return undefined;
-    return giveawayInfo;
+    return await giveawayInfo;
   };
-  client.endGiveaway = functions.endGiveaway = async (guild, id) => {};
+  client.editGiveaway = functions.editGiveaway = async (guild, giveaway, options) => {
+    Guild.updateOne({ 
+      guildID: guild.id,
+      "giveaways.id": giveaway.id 
+     }, {
+       $set: options
+     }).then()
+  }
+  client.endGiveaway = functions.endGiveaway = async (guild, giveaway) => {
+    const giveData = await client.getGiveaway(guild, giveaway.id)
+    if (giveData.status !== 'en-cours') return;
+    client.editGiveaway(guild, giveData, { "giveaways.$.status": 'fini', "giveaways.$.winners": giveaway.winners, "giveaways.$.endedAt": ms(Date.now()) })
+  };
   client.restartGiveaway = functions.restartGiveaway = async (guild, giveaway) => {};
   client.deleteGiveaway = functions.deleteGiveaway = async (guild, ID) => {
     Guild.updateOne({
       guildID: guild.id
     }, {
       $pull: {
-        giveaways: { id: ID }
+        giveaways: {
+          id: ID
+        }
       }
     }).then()
   }

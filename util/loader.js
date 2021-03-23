@@ -2,7 +2,7 @@ const { readdirSync } = require("fs");
 const functions = require('./loader');
 const chalk = require('chalk');
 
-const loadCommands = functions.loadCommands = (client, dir = "./commands/") => {
+const loadCommands = functions.loadCommands = (client, dir = "./Bot/commands/") => {
     readdirSync(dir).forEach(dirs => {
         const commands = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith(".js"));
     
@@ -14,7 +14,7 @@ const loadCommands = functions.loadCommands = (client, dir = "./commands/") => {
     });
 };
 
-const loadEvents = functions.loadEvents = (client, dir = "./events/") => {
+const loadEvents = functions.loadEvents = (client, dir = "./Bot/events/") => {
     readdirSync(dir).forEach(dirs => {
         const events = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith(".js"));
  

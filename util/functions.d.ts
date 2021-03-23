@@ -41,3 +41,5 @@ export declare function replaceEmbed(embed: Object, message: Message, options: O
 export declare function run(client: Client, message: Message, args: any);
 
 export declare function client(client: Client)
+
+export declare function translate(string: String, from: String, to: String)

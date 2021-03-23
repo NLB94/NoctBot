@@ -289,7 +289,14 @@ const guildSchema = mongoose.Schema({
             logs: '{logSettings}'
         }
     },
-    lockChannels: []
+    lockChannels: [],
+    reactRoles: {
+        "type": Object,
+        "default": {
+            enable: false,
+            list: []
+        }
+    }
 });
 
 module.exports = mongoose.model("Guild", guildSchema);
