@@ -38,7 +38,7 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                                     description: `${check_mark}You have successfully got **${givRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
                                 }
                             })
-                        }).catch(() => {})
+                        }).catch((err) => {console.log(err);})
                         break;
                     }
                     case announcEmoji: {
