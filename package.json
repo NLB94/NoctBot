@@ -65,7 +65,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.7"
   },
-  "engine": {
+  "engines": {
     "node": "^14.0.0"
   }
 }
