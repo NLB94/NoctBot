@@ -9,9 +9,12 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
     const settings = await client.getGuild(message.guild);
     if (!settings || settings == undefined) return client.createGuild(message.guild);
 
-
-
     if (user.bot) return;
+
+    if (messageReaction.partial) {
+        await messageReaction.fetch();
+        return;
+    }
 
     if (message.author.id == '735824367698837555') {
         if (message.guild.id == '727494941911154688') {
