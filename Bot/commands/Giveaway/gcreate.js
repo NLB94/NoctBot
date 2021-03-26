@@ -68,7 +68,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             if (msg) msg.edit(embed);
             setTimeout(async () => {
                 if (!msg) return;
-                if (giveaway)
+                //if (giveaway)
                 const reactions = msg.reactions.resolve('770980801411678229').users;
                 reactions.remove(client.user.id);
                 let winners = await reactions.cache.filter(w => !w.bot).random(giveaway.winnerCount);
