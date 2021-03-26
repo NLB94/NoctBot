@@ -1,12 +1,16 @@
 const {
     MessageEmbed
 } = require("discord.js");
+const func = require("../../../util/functions");
 
-module.exports = (client, message) => {
-    const ownerDM = client.users.cache.get(process.env.OWNER_ID);
+module.exports = func.run = (client, message) => {
+    const channel = client.guilds.resolve('727494941911154688').channels.resolve('824287705504153610');
     if (message.author.bot) return;
+    const warning = client.emojis.resolve('806438435933913178');
+    const check_mark = client.emojis.resolve('770980790242377739')
     const user = message.author;
-    user.send('You\'re suggestion has been saved!');
+
+    user.send({embed: {description: `${warning}All your messages in this discussion will be send to bot owner as suggestions or report !! \n${check_mark}You're suggestion has been saved!`}});
 
     const embed = new MessageEmbed()
         .setAuthor("I2Z7")
@@ -17,6 +21,6 @@ module.exports = (client, message) => {
         .setFooter(user.tag, user.avatarURL());
 
     if (message.author.id !== process.env.OWNER_ID) {
-        ownerDM.send(embed);
+        channel.send(embed);
     };
 };

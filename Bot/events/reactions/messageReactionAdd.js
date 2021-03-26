@@ -35,34 +35,33 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     if (message.author.id === '735824367698837555') {
         try {
             if (messageReaction.emoji === tada) {
-                console.log(message.embeds.lastIndexOf())
-                // if (!message.embeds[0].author.name.startsWith('🎉🎉Givea')) return;
-                // if (message.embeds[0].author.name.includes('🎉🎉Giveaway🎉🎉')) {
-                //     const giveaway = await client.getGiveaway(message.guild, message.id);
-                //     const embed = new MessageEmbed()
-                //         .setDescription(`${tada}Giveaway entry accepted for \`${message.embeds[0].title}\`${tada}`)
-                //         .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
-                //         .setTitle('Giveaway Entry')
-                //         .setFooter(message.guild.name, message.guild.iconURL())
-                //         .setTimestamp()
-                //         .setColor('#FFFFFF')
-                //         .setURL('https://discord.gg/unRX2SUcvw');
-                //     try {
-                //         user.send(embed)
-                //     } catch (e) {}
-                // } else if (message.embeds[0].author.name.includes('Giveaway ended')) {
-                //     const embed = new MessageEmbed()
-                //         .setDescription(`${x_mark}Giveaway entry denied because the giveaway ended${x_mark}`)
-                //         .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
-                //         .setTitle('Giveaway Entry')
-                //         .setFooter(message.guild.name, message.guild.iconURL())
-                //         .setTimestamp()
-                //         .setColor('#FFFFFF')
-                //         .setURL('https://discord.gg/unRX2SUcvw');
-                //     try {
-                //         user.send(embed)
-                //     } catch (e) {}
-                // }
+                if (!message.embeds[0].author.name.startsWith('🎉🎉Givea')) return;
+                if (message.embeds[0].author.name.includes('🎉🎉Giveaway🎉🎉')) {
+                    const giveaway = await client.getGiveaway(message.guild, message.id);
+                    const embed = new MessageEmbed()
+                        .setDescription(`${tada}Giveaway entry accepted for \`${message.embeds[0].title}\`${tada}`)
+                        .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+                        .setTitle('Giveaway Entry')
+                        .setFooter(message.guild.name, message.guild.iconURL())
+                        .setTimestamp()
+                        .setColor('#FFFFFF')
+                        .setURL('https://discord.gg/unRX2SUcvw');
+                    try {
+                        user.send(embed)
+                    } catch (e) {console.log(e);}
+                } else if (message.embeds[0].author.name.includes('Giveaway ended')) {
+                    const embed = new MessageEmbed()
+                        .setDescription(`${x_mark}Giveaway entry denied because the giveaway ended${x_mark}`)
+                        .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+                        .setTitle('Giveaway Entry')
+                        .setFooter(message.guild.name, message.guild.iconURL())
+                        .setTimestamp()
+                        .setColor('#FFFFFF')
+                        .setURL('https://discord.gg/unRX2SUcvw');
+                    try {
+                        user.send(embed)
+                    } catch (e) {console.log(e);}
+                }
 
             }
             if (message.content !== '') {

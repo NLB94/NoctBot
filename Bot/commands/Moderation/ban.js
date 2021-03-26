@@ -16,9 +16,9 @@ module.exports.run = functions.run = async (client, message, args) => {
   const check_mark = client.emojis.resolve('770980790242377739')
 
   if (user) {
-    const member = message.guild.member(user);
+    const member = await message.guild.member(user);
     if (!member) {
-      message.guild.members.ban(user.id).then(() => {
+      message.guild.members.ban(user.id).then(async () => {
         const logsEmbed = new MessageEmbed()
           .setAuthor(`${user.username}`, user.avatarURL)
           .setColor("#ef0f0f")
@@ -32,11 +32,10 @@ module.exports.run = functions.run = async (client, message, args) => {
           .setDescription(`${check_mark} ${user} has been banned \nReason : ${reason}`)
           .setTimestamp()
           .setFooter(message.author.username, message.author.avatarURL());
-
-        if (logs !== undefined) {
-          logs.send(logsEmbed);
-        }
-        message.channel.send(embed)
+          
+        await message.channel.send(embed)
+        if (logs !== undefined) logs.send(logsEmbed);
+        
       });
     } else {
       if (member.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't ban an admin!");

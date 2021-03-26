@@ -29,7 +29,7 @@ module.exports.run = functions.run = async (client, message, args) => {
   const right = client.emojis.resolve('770976808899444776');
 
   if (!args.length) {
-    if (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR')) {
+    if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
       const embed = new MessageEmbed()
         .setColor("#000000")
         .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
@@ -43,7 +43,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
         .setTitle("Bot Commands")
         .setURL('https://discord.gg/92ffufA')
-        .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command | category>!`)
+        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
         .setTimestamp()
         .setFooter('React with ❌ to cancel command')
 
@@ -95,7 +95,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
         .setTitle("Bot Commands")
         .setURL('https://discord.gg/92ffufA')
-        .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command | category>!`)
+        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
         .setTimestamp();
 
       for (const category of categoryList) {
@@ -136,7 +136,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         .setTitle(`Name : \`${command.help.name}\``)
         .setDescription(`Enable : ${command.help.enable ? check_mark : x_mark}`)
         .addField("Description :", `${command.help.description} \n**Cooldown** : ${command.help.cooldown} second(s)`)
-        .addField("Usage :", command.help.usage ? `${settings.general.prefix}${command.help.name} ${command.help.usage}` : `${settings.general.prefix}${command.help.name}`, true)
+        .addField("Usage :", command.help.usage ? `${settings == undefined ? '~' : settings.general.prefix}${command.help.name} ${command.help.usage}` : `${settings == undefined ? '~' : settings.general.prefix}${command.help.name}`, true)
         .addField("Example :", command.help.example, false)
 
       if (command.help.aliases.length > 1) embed.addField("Alias", `${command.help.aliases.join(', ')}`, false);
@@ -149,7 +149,7 @@ module.exports.run = functions.run = async (client, message, args) => {
   } else if (!isNaN(args[0])) {
     if (parseInt(args[0]) > 7 || parseInt(args[0] < 1)) return message.channel.send({
       embed: {
-        description: `Correct usage : ${settings.general.prefix}help ${module.exports.help.usage}`
+        description: `Correct usage : ${settings == undefined ? '~' : settings.general.prefix}help ${module.exports.help.usage}`
       }
     });
     else {
@@ -160,7 +160,7 @@ module.exports.run = functions.run = async (client, message, args) => {
       const category = categorys[args[0]]
       if (category.toLowerCase() == 'admin') return message.channel.send({
         embed: {
-          description: `Correct usage : ${settings.general.prefix}help ${module.exports.help.usage}`
+          description: `Correct usage : ${settings == undefined ? '~' : settings.general.prefix}help ${module.exports.help.usage}`
         }
       });
       const embed = new MessageEmbed()

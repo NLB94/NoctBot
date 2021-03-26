@@ -10,11 +10,12 @@ module.exports = async (client, member) => {
     const wL = settings.welcomeAndLeave.welcome;
     const captcha = settings.captcha;
 
-    if (!wL.enable && !captcha.cEnable) return console.log(-1);
-    else if (!wL.enable && captcha.cEnable) {
-
+    if (!wL.enable && !captcha.enable) return console.log('Welcome not enable');
+    else if (!wL.enable && captcha.enable) {
+        
     }
-    else if (wL.enable && !captcha.cEnable) {
+    else if (wL.enable && !captcha.enable) {
+        return console.log('Welcome enable');
         let msg = '';
         if (wL.isNormalMsg) msg = wL.normalMsg;
         else if (wL.isEmbed) msg = new MessageEmbed()
@@ -107,7 +108,7 @@ module.exports = async (client, member) => {
 
 
 
-    // if (captcha.cEnable) {
+    // if (captcha.enable) {
     //     if (captcha.cChannel == undefined) continue;
     //     if (captcha.cRole == 'Not Verified') {
     //         const role = member.guild.roles.cache.find(r => r.name.toLowerCase() == 'not verified');

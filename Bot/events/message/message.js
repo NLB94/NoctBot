@@ -3,14 +3,18 @@ const {
 } = require("discord.js");
 const func = require("../../../util/functions");
 const ownerID = "616547009750499358";
+const defaultPrefix = '~';
 
 module.exports = func.run = async (client, message) => {
-  if (!message.member || !message.author) return;
+  if (!message.author) return;
 
-  if (message.channel.type == "dm") {
-    if (message.content.startsWith("~help")) {
-      client.commands.get("help").run(client, message, message.content.slice(1).split(/ +/))
-    } else client.emit("dm", (client, message));
+  let args = message.content.slice(defaultPrefix.length).split(/ +/);
+  const commandName = args.shift().toLowerCase().split("-").join("");
+
+  if (message.channel.type == 'dm') {
+    if (message.content.toLowerCase().startsWith("~help")) {
+      return client.commands.get("help").run(client, message, args);
+    } else return client.emit("dm", (client, message));
   }
 
   if (message.author.bot) return;
@@ -29,8 +33,6 @@ module.exports = func.run = async (client, message) => {
 
   if (!message.content.startsWith(settings.general.prefix) && userInfo !== undefined) return client.notStartByPrefix(message, settings, userInfo);
   if (message.content.startsWith(settings.general.prefix)) {
-    const args = message.content.slice(settings.general.prefix.length).split(/ +/);
-    const commandName = args.shift().toLowerCase().split("-").join("");
 
     let command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
 

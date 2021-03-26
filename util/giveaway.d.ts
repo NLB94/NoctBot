@@ -1,8 +1,10 @@
 import {
     Snowflake,
-    Guild
+    Guild,
+    Role,
+    Channel,
+    User
   } from "discord.js";
-import { Giveaway } from "./util";
 
   /**
    * Create a giveaway.
@@ -40,3 +42,36 @@ import { Giveaway } from "./util";
    * @param ID 
    */
   export declare function deleteGiveaway(guild: Guild, ID: Snowflake);
+
+  export declare class Giveaway {
+    constructor (GiveawayData: GiveawayData);
+    readonly id: Snowflake;
+    readonly author: Snowflake;
+    readonly startedAt: Number;
+    readonly endedAt: Number;
+    public time: Number;
+    public remaining: Number;
+    public winnerCount: Number;
+    public winners: User[];
+    readonly channel: Channel;
+    public price: String;
+    public status: String;
+    readonly blackListRoles: Role[];
+    readonly whiteListRoles: Role[];
+  }
+  
+  export interface GiveawayData {
+    id: Snowflake;
+    author: Snowflake;
+    startedAt: Number;
+    endedAt: Number;
+    time: Number;
+    remaining: Number;
+    winnerCount: Number;
+    winners: User[];
+    channel: Channel;
+    price: String;
+    status: String;
+    blackListRoles: Role[];
+    whiteListRoles: Role[];
+  }

@@ -9,7 +9,7 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
     const member = message.guild.members.cache.get(user.id);
     const emoji = messageReaction.emoji.name;
 
-    if (member.bot) return;
+    if (user.bot) return;
 
     if (["check_mark_nitro"].includes(emoji) && message.channel.id === rChannel.id) {
         switch (emoji) {
