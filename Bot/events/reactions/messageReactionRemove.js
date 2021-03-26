@@ -9,6 +9,7 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
     const settings = await client.getGuild(message.guild);
     if (!settings || settings == undefined) return client.createGuild(message.guild);
 
+    const check_mark = client.emojis.resolve('770980790242377739');
     const tada = client.emojis.resolve('770980801411678229');
     const announcEmoji = client.emojis.resolve('806438435933913178');
     const eyesEmoji = client.emojis.resolve('806438464064978944');
@@ -38,7 +39,7 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                                     description: `${check_mark}You have successfully got **${givRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
                                 }
                             })
-                        }).catch((err) => {console.log(err);})
+                        }).catch((err) => {})
                         break;
                     }
                     case announcEmoji: {
