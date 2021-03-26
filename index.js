@@ -40,12 +40,12 @@ const {
     loadCommands
 } = require("./util/loader");
 
-// const express = require('express');
+ const express = require('express');
 // const passport = require("passport");
 // const session = require('express-session');
 // const cors = require('cors')
-// const app = express();
-// const port = process.env.PORT || 80;
+ const app = express();
+const port = process.env.PORT || 80;
 // const routes = require('./src/routes');
 // const {
 //     default: Store
@@ -61,6 +61,10 @@ require("./util/backup")(client);
 require("./util/giveaway")(client);
 require("./util/economy")(client);
 require("./util/level")(client);
+
+app.get('/', (req, res) => {res.send('Hello')})
+
+app.listen(port, () => {console.log('Server is live on port 80 !')})
 
 client.mongoose = require("./util/mongoose");
 
