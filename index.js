@@ -5,6 +5,23 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
+const { GiveawaysManager } = require('./util/giveaway/');
+
+const manager = new GiveawaysManager(client, {
+    storage: './giveaways.json',
+    updateCountdownEvery: 10000,
+    hasGuildMembersIntent: false,
+    default: {
+        botsCanWin: false,
+        exemptPermissions: ['MANAGE_MESSAGES', 'ADMINISTRATOR'],
+        embedColor: '#FF0000',
+        reaction: '🎉'
+    }
+});
+
+// We now have a giveawaysManager property to access the manager everywhere!
+client.giveawaysManager = manager;
+
 const translate = require('@vitalets/google-translate-api')
 
 client.trad = translate;
