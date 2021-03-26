@@ -23,10 +23,12 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const emoji6 = client.emojis.resolve('772419404855902209');
     const emoji7 = client.emojis.resolve('770976765219831811');
     const emoji8 = client.emojis.resolve('772418662929924106');
-    const tada = client.emojis.resolve('770980801411678229');
+    
     const check_mark = client.emojis.resolve('770980790242377739');
     const x_mark = client.emojis.resolve('806440609127596032');
     const arrowRight = client.emojis.resolve('770976808899444776');
+
+    const tada = client.emojis.resolve('770980801411678229');
     const announcEmoji = client.emojis.resolve('806438435933913178');
     const eyesEmoji = client.emojis.resolve('806438464064978944');
     const alertEmoji = client.emojis.resolve('806438454082797588');

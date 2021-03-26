@@ -9,6 +9,11 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
     const settings = await client.getGuild(message.guild);
     if (!settings || settings == undefined) return client.createGuild(message.guild);
 
+    const tada = client.emojis.resolve('770980801411678229');
+    const announcEmoji = client.emojis.resolve('806438435933913178');
+    const eyesEmoji = client.emojis.resolve('806438464064978944');
+    const alertEmoji = client.emojis.resolve('806438454082797588');
+
     if (user.bot) return;
 
     if (messageReaction.partial) {
