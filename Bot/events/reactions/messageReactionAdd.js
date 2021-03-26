@@ -50,22 +50,22 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     if (messageReaction.emoji == tada) {
                         member.roles.add(givRole.id).then(() => {
                             member.send(`You have successfully got **${givRole.name}** in **${message.guild.name}** !`)
-                        }).catch(() => {})
+                        }).catch((err) => {console.log(err);})
                     }
                     if (messageReaction.emoji == announcEmoji) {
                         member.roles.add(announRole.id).then(() => {
                             member.send(`You have successfully got **${announRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch(() => {})
+                        }).catch((err) => {console.log(err);})
                     }
                     if (messageReaction.emoji == alertEmoji) {
                         member.roles.add(updateRole.id).then(() => {
                             member.send(`You have successfully got **${updateRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch(() => {})
+                        }).catch((err) => {console.log(err);})
                     }
                     if (messageReaction.emoji == eyesEmoji) {
                         member.roles.add(spoilRole.id).then(() => {
                             member.send(`You have successfully got **${updateRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch(() => {})
+                        }).catch((err) => {console.log(err);})
                     }
                 }
             }
