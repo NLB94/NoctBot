@@ -10,7 +10,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
         guildID: message.guild.id
     });
     //const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
-    const member = message.guild.members.cache.get(user.id);
+    const member = message.guild.members.resolve(user.id);
     const emoji = messageReaction.emoji.name;
 
     const loadingEmoji = client.emojis.resolve('783028992231866419');
@@ -24,6 +24,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const emoji7 = client.emojis.resolve('770976765219831811');
     const emoji8 = client.emojis.resolve('772418662929924106');
     const tada = client.emojis.resolve('770980801411678229');
+    const check_mark = client.emojis.resolve('770980790242377739');
     const x_mark = client.emojis.resolve('806440609127596032');
     const arrowRight = client.emojis.resolve('770976808899444776');
     const announcEmoji = client.emojis.resolve('806438435933913178');
@@ -47,26 +48,53 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     const updateRole = message.guild.roles.resolve('822500107973820466');
                     const spoilRole = message.guild.roles.resolve('822500061736337428');
 
-                    if (messageReaction.emoji == tada) {
-                        member.roles.add(givRole.id).then(() => {
-                            member.send(`You have successfully got **${givRole.name}** in **${message.guild.name}** !`)
-                        }).catch((err) => {console.log(err);})
+                    switch (messageReaction.emoji) {
+                        case tada: {
+                            member.roles.add(givRole.id).then(() => {
+                                member.send({
+                                    embed: {
+                                        title: 'Role Added',
+                                        description: `${check_mark}You have successfully got **${givRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                    }
+                                })
+                            }).catch(() => {})
+                            break;
+                        }
+                        case announcEmoji: {
+                            member.roles.add(announRole.id).then(() => {
+                                member.send({
+                                    embed: {
+                                        title: 'Role Added',
+                                        description: `${check_mark}You have successfully got **${announRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                    }
+                                })
+                            }).catch(() => {})
+                            break;
+                        }
+                        case alertEmoji: {
+                            member.roles.add(updateRole.id).then(() => {
+                                member.send({
+                                    embed: {
+                                        title: 'Role Added',
+                                        description: `${check_mark}You have successfully got **${updateRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                    }
+                                })
+                            }).catch(() => {})
+                            break;
+                        }
+                        case eyesEmoji: {
+                            member.roles.add(spoilRole.id).then(() => {
+                                member.send({
+                                    embed: {
+                                        title: 'Role Added',
+                                        description: `${check_mark}You have successfully got **${spoilRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                    }
+                                })
+                            }).catch(() => {})
+                            break;
+                        }
                     }
-                    if (messageReaction.emoji == announcEmoji) {
-                        member.roles.add(announRole.id).then(() => {
-                            member.send(`You have successfully got **${announRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch((err) => {console.log(err);})
-                    }
-                    if (messageReaction.emoji == alertEmoji) {
-                        member.roles.add(updateRole.id).then(() => {
-                            member.send(`You have successfully got **${updateRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch((err) => {console.log(err);})
-                    }
-                    if (messageReaction.emoji == eyesEmoji) {
-                        member.roles.add(spoilRole.id).then(() => {
-                            member.send(`You have successfully got **${updateRole.name}** in **_${message.guild.name}_** !`)
-                        }).catch((err) => {console.log(err);})
-                    }
+                    return;
                 }
             }
             if (messageReaction.emoji == tada) {
@@ -117,35 +145,43 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>! `);
 
 
-                    if (messageReaction.emoji === emoji1) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'serversettings').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Server Settings")
+                    switch (messageReaction.emoji) {
+                        case emoji1: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'serversettings').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Server Settings");
+                            break;
+                        }
+                        case emoji2: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'moderation').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Moderation");
+                            break;
+                        }
+                        case emoji3: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'level').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Level");
+                            break;
+                        }
+                        case emoji4: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'info').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Info");
+                            break;
+                        }
+                        case emoji5: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'economy').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Economy");
+                            break;
+                        }
+                        case emoji6: {
+                            embed.setDescription(`Soon...`);
+                            embed.setTitle("Giveaway");
+                            break;
+                        }
+                        case emoji7: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'other').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Other");
+                            break;
+                        }
                     }
-                    if (messageReaction.emoji === emoji2) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'moderation').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Moderation")
-                    }
-                    if (messageReaction.emoji === emoji3) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'level').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Level")
-                    }
-                    if (messageReaction.emoji === emoji4) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'info').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Info")
-                    }
-                    if (messageReaction.emoji === emoji5) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'economy').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Economy")
-                    }
-                    if (messageReaction.emoji === emoji6) {
-                        embed.setDescription(`Soon...`);
-                        embed.setTitle("Giveaway")
-                    }
-                    if (messageReaction.emoji === emoji7) {
-                        embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'other').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                        embed.setTitle("Other")
-                    }
-
                     if (message !== undefined) {
                         if (message.guild.me.permissions.has('ADMINISTRATOR')) await message.reactions.removeAll();
                         else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
@@ -156,9 +192,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         })
                     }
                 }
-                // if (messageReaction.emoji === emoji8 && message.content.includes('React to get category')) message.reactions.removeAll().then(msg => {
 
-                //     });
                 if (emoji === "↩️" && message.content.includes('Click ↩️ for return to home') && message.content.startsWith(user.tag)) {
                     if (message !== undefined) {
                         if (message.guild.me.permissions.has('ADMINISTRATOR')) await message.reactions.removeAll();
