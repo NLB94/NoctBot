@@ -40,12 +40,12 @@ const {
     loadCommands
 } = require("./util/loader");
 
- const express = require('express');
+//  const express = require('express');
 // const passport = require("passport");
 // const session = require('express-session');
 // const cors = require('cors')
- const app = express();
-const port = process.env.PORT || 80;
+//  const app = express();
+// const port = process.env.PORT || 80;
 // const routes = require('./src/routes');
 // const {
 //     default: Store
@@ -62,13 +62,13 @@ require("./util/giveaway")(client);
 require("./util/economy")(client);
 require("./util/level")(client);
 
-app.use(express.static("public"))
+// app.use(express.static("public"))
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello<h1/>')
-})
+// app.get('/', (req, res) => {
+//     res.send('<h1>Hello<h1/>')
+// })
 
-app.listen(port, () => {console.log('Server is live on port 80 !')})
+// app.listen(port, () => {console.log('Server is live on port 80 !')})
 
 client.mongoose = require("./util/mongoose");
 
