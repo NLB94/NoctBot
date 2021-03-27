@@ -1,2 +1,2 @@
 Worker: nodemon ./index.js
-Server: nodemon ./dashboard/server.js
+web: nodemon ./dashboard/server.js
