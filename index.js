@@ -62,7 +62,11 @@ require("./util/giveaway")(client);
 require("./util/economy")(client);
 require("./util/level")(client);
 
-app.get('/', (req, res) => {res.send('Hello')})
+app.use(express.static("public"))
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hello<h1/>')
+})
 
 app.listen(port, () => {console.log('Server is live on port 80 !')})
 
