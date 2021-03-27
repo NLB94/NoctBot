@@ -10,7 +10,7 @@ const { GiveawaysManager } = require('./util/giveaway/');
 const manager = new GiveawaysManager(client, {
     storage: './giveaways.json',
     updateCountdownEvery: 10000,
-    hasGuildMembersIntent: false,
+    hasGuildMembersIntent: true,
     default: {
         botsCanWin: false,
         exemptPermissions: ['MANAGE_MESSAGES', 'ADMINISTRATOR'],
