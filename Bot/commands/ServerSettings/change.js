@@ -117,9 +117,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                     }
                 })
                 newSetting = newSetting.slice(0, 2)
-                const test = await client.translate('Hello', {
-                    to: newSetting
-                }).then((res) => {
+                const test = await client.translate('Hello', 'en', newSetting).then((res) => {
                     return true
                 }).catch((err) => {
                     return false;
