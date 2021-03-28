@@ -13,8 +13,12 @@ router.get('/login', (req, res) =>
 
 router.get('/auth-guild', async (req, res) => {
   try {
-    const key = res.cookies.get('key');
-    await sessions.update(key);
+    const key = await res.cookie('key').req.query.code;
+    console.log(req.query.code)
+    await console.log(key);
+    if (key) await sessions.update(key);
+  } catch (err) {
+    console.log(err);
   } finally {
     res.redirect('/dashboard');
   }
@@ -25,7 +29,7 @@ router.get('/auth', async (req, res) => {
     const code = req.query.code;
     const key = await authClient.getAccess(code);
 
-    res.cookies.set('key', key);
+    res.cookie('key').set(key);
     res.redirect('/dashboard');
   } catch {
     res.redirect('/');

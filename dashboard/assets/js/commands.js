@@ -1,3 +1,8 @@
+const { readdirSync } = require("fs");
+const { client } = require("../../..");
+
+const categories = readdirSync('./Bot/commands');
+
 $('.categories li').on('click', setCategory);
 
 function setCategory() {
@@ -5,11 +10,8 @@ function setCategory() {
 
   const selected = $(this);
   selected.addClass('active');  
-
-  const categoryCommands = $(`.commands .${selected[0].id}`);
-  categoryCommands.show();
   
-  updateResultsText(categoryCommands);
+  updateResultsText(categories);
 }
 function blank() {
   $('.categories li').removeClass('active');
@@ -23,22 +25,14 @@ $('#search + button').on('click', () => {
     return $('.commands li').show();
   }
 
-  const results = new Fuse(commands, {
-      isCaseSensitive: false,
-      keys: [
-        { name: 'name', weight: 1 },
-        { name: 'category', weight: 0.5 }
-      ]
-    })
-    .search(query)
-    .map(r => r.item);
+  const commands = client.commands;
 
   blank(); 
   
-  for (const command of results)
+  for (const command of commands)
     $(`#${command.name}Command`).show();
 
-  updateResultsText(results);
+  updateResultsText(commands);
 });
 
 function updateResultsText(arr) {  

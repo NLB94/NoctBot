@@ -28,7 +28,7 @@ function getManageableGuilds(authGuilds) {
     const isManager = authGuilds
       .get(id).permissions
       .includes('MANAGE_GUILD');
-    const guild = bot.guilds.cache.get(id);
+    const guild = bot.guilds.resolve(id);
     if (!guild || !isManager) continue;
 
     guilds.push(guild);
