@@ -688,7 +688,7 @@ const MESSAGES = {
         description: "Get the amount of an user's invites",
         ownerCmd: false,
         cooldown: 0.1,
-        enable: false,
+        enable: true,
         usage: "{@user}",
         example: "No example for this command.",
         botPerm: false,
