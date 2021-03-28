@@ -3,7 +3,9 @@ const passport = require("passport");
 const session = require('express-session');
 const cors = require('cors')
 const app = express();
-const { client } = require('../index');
+const {
+    client
+} = require('../index');
 const port = process.env.PORT || 80;
 // const routes = require('./src/routes');
 const {
@@ -15,7 +17,9 @@ require('../backend/strategies/discord')(client);
 app.use(express.static("public"))
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+    extended: false
+}));
 
 app.use(cors({
     origin: ['http://localhost:3000'],
@@ -59,18 +63,18 @@ function checkAuth(req, res, next) {
 // const methodOverride = require('method-override');
 const middleware = require('./modules/middleware');
 const rateLimit = require('./modules/rate-limiter');
-const { sendError } = require('./modules/api-utils');
+const {
+    sendError
+} = require('./modules/api-utils');
 
 const authRoutes = require('./routes/auth-routes');
 const dashboardRoutes = require('./routes/dashboard-routes');
 const rootRoutes = require('./routes/root-routes');
 const fetch = require('node-fetch');
 
-async function fetchApp() {
+setInterval(async () => {
     await fetch('https://i2z7.herokuapp.com').then(() => console.log('Fetched alhamduliLlah !')).catch(() => {})
-}
-
-fetchApp()
+}, 200000)
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
@@ -83,13 +87,18 @@ app.use(rateLimit);
 app.use(express.static(`${__dirname}/assets`));
 app.locals.basedir = `${__dirname}/assets`;
 
-app.use('/api', (req, res) => res.json({ hello: 'earth' }));
-app.use('/api/*', (req, res) => sendError(res, { code: 404, message: 'Not found.' }));
+app.use('/api', (req, res) => res.json({
+    hello: 'earth'
+}));
+app.use('/api/*', (req, res) => sendError(res, {
+    code: 404,
+    message: 'Not found.'
+}));
 
 app.use('/',
-  middleware.updateUser, rootRoutes,
-  authRoutes,
-  middleware.validateUser, middleware.updateGuilds, dashboardRoutes
+    middleware.updateUser, rootRoutes,
+    authRoutes,
+    middleware.validateUser, middleware.updateGuilds, dashboardRoutes
 );
 app.all('*', (req, res) => res.render('errors/404'));
 
