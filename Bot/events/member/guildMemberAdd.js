@@ -13,6 +13,7 @@ module.exports = async (client, member) => {
     if (settings == undefined) await client.createGuild(message.guild);
 
     if (member.guild.id == '727494941911154688') {
+        console.log(member.pending);
         member.roles.add('770658615752261682').then(async () => {
             const channel = await member.guild.channels.resolve('769656304402563103')
             channel.send({ embed: { description: `${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size}`}})
