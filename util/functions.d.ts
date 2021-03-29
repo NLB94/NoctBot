@@ -38,7 +38,7 @@ export declare function replaceText(text: String, message: Message, options: Obj
  */
 export declare function replaceEmbed(embed: Object, message: Message, options: Object);
 
-export declare function run(client: Client, message: Message, args: any);
+export declare function run(client: Client, message: Message, args: String[]);
 
 export declare function client(client: Client)
 

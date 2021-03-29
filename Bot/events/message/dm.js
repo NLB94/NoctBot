@@ -3,24 +3,43 @@ const {
 } = require("discord.js");
 const func = require("../../../util/functions");
 
-module.exports = func.run = (client, message) => {
-    const channel = client.guilds.resolve('727494941911154688').channels.resolve('824287705504153610');
+module.exports = func.run = async (client, message, args) => {
+    const guild = await client.guilds.resolve('727494941911154688')
+    const suggestChannel = await guild.channels.resolve('824287705504153610');
+    const reportChannel = await guild.channels.resolve('797799949047562260');
+
     if (message.author.bot) return;
     const warning = client.emojis.resolve('806438435933913178');
     const check_mark = client.emojis.resolve('770980790242377739')
     const user = message.author;
 
-    user.send({embed: {description: `${warning}All your messages in this discussion will be send to bot owner as suggestions or report !! \n${check_mark}You're suggestion has been saved!`}});
+    args = await message.content.slice(defaultPrefix.length).split(/ +/);
+    const commandName = await args.shift().toLowerCase().split("-").join("");
 
     const embed = new MessageEmbed()
         .setAuthor("I2Z7")
-        .setTitle("**New DM Message**")
         .setDescription(`${message.content}`)
         .addField("User ID:", `${user.id}`)
         .setThumbnail(client.user.avatarURL())
         .setFooter(user.tag, user.avatarURL());
 
-    if (message.author.id !== process.env.OWNER_ID) {
-        channel.send(embed);
+    if (commandName == 'suggest') {
+        user.send({
+            embed: {
+                description: `${check_mark}You're suggestion has been saved!`
+            }
+        });
+        await embed.setTitle('Suggestion')
+        await suggestChannel.send(embed);
+    }
+
+    if (commandName == 'report') {
+        user.send({
+            embed: {
+                description: `${check_mark}You're report has been saved!`
+            }
+        });
+        await embed.setTitle('Report')
+        await reportChannel.send(embed);
     };
 };
