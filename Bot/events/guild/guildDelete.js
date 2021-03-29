@@ -10,7 +10,7 @@ const {
  * @param {Client} client 
  * @param {Guild} guild 
  */
-module.exports = (client, guild) => {
+module.exports = async (client, guild) => {
     const channel = await client.guilds.resolve(client.botGuild.supportGuildID).channels.resolve(client.botGuild.guildCreateDelLogs);
     await channel.send({
         embed: {
