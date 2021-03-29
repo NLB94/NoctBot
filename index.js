@@ -1,12 +1,28 @@
 require('dotenv').config();
+
 const Discord = require('discord.js');
+const {
+    GiveawaysManager
+} = require('./util/giveaway/');
+const translate = require('@vitalets/google-translate-api');
+
+const botGuild = require('./.bot.json');
+const emojis = require('./emojis.json');
+
+// const express = require('express');
+// const passport = require("passport");
+// const session = require('express-session');
+// const cors = require('cors')
+// const app = express();
+// const port = process.env.PORT || 80;
+// const routes = require('./src/routes');
+// const {
+//     default: Store
+// } = require('connect-mongo');
 
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
-
-const { GiveawaysManager } = require('./util/giveaway/');
-
 const manager = new GiveawaysManager(client, {
     storage: './giveaways.json',
     updateCountdownEvery: 10000,
@@ -19,12 +35,10 @@ const manager = new GiveawaysManager(client, {
     }
 });
 
-// We now have a giveawaysManager property to access the manager everywhere!
 client.giveawaysManager = manager;
-
-const translate = require('@vitalets/google-translate-api')
-
 client.trad = translate;
+client.botGuild = botGuild;
+client.localEmojis = emojis;
 
 /* client.trad('I need help', {to: 'fr'}).then(res => {
     console.log(res.text);
@@ -39,17 +53,6 @@ const {
     loadEvents,
     loadCommands
 } = require("./util/loader");
-
-//  const express = require('express');
-// const passport = require("passport");
-// const session = require('express-session');
-// const cors = require('cors')
-//  const app = express();
-// const port = process.env.PORT || 80;
-// const routes = require('./src/routes');
-// const {
-//     default: Store
-// } = require('connect-mongo');
 
 // require('./src/strategies/discord')(client);
 require('./util/user')(client);

@@ -1,3 +1,20 @@
+"use strict";
+
+const {
+    Client,
+    Guild
+} = require("discord.js");
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {Guild} guild 
+ */
 module.exports = (client, guild) => {
-    client.users.resolve('616547009750499358').send({embed: {description: `I've left a guild : ${guild.name}. Now I am in ${client.guilds.cache.size} servers! `}});
+    const channel = await client.guilds.resolve(client.botGuild.supportGuildID).channels.resolve(client.botGuild.guildCreateDelLogs);
+    await channel.send({
+        embed: {
+            description: `:cry: I've left a guild : ${guild.name}. Now I am in ${client.guilds.cache.size} servers ! `
+        }
+    });
 }
