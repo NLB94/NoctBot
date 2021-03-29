@@ -49,8 +49,20 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     const announRole = message.guild.roles.resolve('822500136176451684');
                     const updateRole = message.guild.roles.resolve('822500107973820466');
                     const spoilRole = message.guild.roles.resolve('822500061736337428');
+                    const verifyRole = message.guild.roles.resolve('770658615752261682');
 
                     switch (messageReaction.emoji) {
+                        case check_mark: {
+                            member.roles.add(verifyRole.id).then(() => {
+                                member.send({
+                                    embed: {
+                                        title: 'Verification',
+                                        description: `${check_mark}You have been verified by accepting the rules in **_${message.guild.name}_**`
+                                    }
+                                })
+                            })
+                            break;
+                        }
                         case tada: {
                             member.roles.add(givRole.id).then(() => {
                                 member.send({

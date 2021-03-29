@@ -1,5 +1,10 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, GuildMember, Client } = require("discord.js");
 
+/**
+ * 
+ * @param {Client} client 
+ * @param {GuildMember} member 
+ */
 module.exports = async (client, member) => {
     const user = await client.getGuildUser(member.guild, member);
     if (user == undefined) await client.createGuildUser(member.guild, member);
@@ -7,15 +12,21 @@ module.exports = async (client, member) => {
 
     if (settings == undefined) await client.createGuild(message.guild);
 
+    if (member.guild.id == '727494941911154688') {
+        member.roles.add('770658615752261682').then(async () => {
+            const channel = await member.guild.channels.resolve('769656304402563103')
+            channel.send({ embed: { description: `${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size}`}})
+        }).catch((err) => console.log(err));
+    }
     const wL = settings.welcomeAndLeave.welcome;
     const captcha = settings.captcha;
 
-    if (!wL.enable && !captcha.enable) return console.log('Welcome not enable');
+    if (!wL.enable && !captcha.enable) return;
     else if (!wL.enable && captcha.enable) {
         
     }
     else if (wL.enable && !captcha.enable) {
-        return console.log('Welcome enable');
+        return;
         let msg = '';
         if (wL.isNormalMsg) msg = wL.normalMsg;
         else if (wL.isEmbed) msg = new MessageEmbed()
