@@ -125,6 +125,7 @@ module.exports = func.run = async (client, message) => {
       }
 
       tStamps.set(message.author.id, { id: message.author.id, guildID: message.guild.id, time: timeNow });
+      //corriger CAAAAAAAAAAAAAAA!!!§§§§§§!!!!!
       setTimeout(() => tStamps.delete({ id: message.author.id, guildID: message.guild.id }), cdAmount);
     }
     command.run(client, message, args, userInfo, settings);
