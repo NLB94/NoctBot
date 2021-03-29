@@ -17,6 +17,7 @@ module.exports = func.run = async (client, message, args) => {
     args = await message.content.slice(defaultPrefix.length).split(/ +/);
     const commandName = await args.shift().toLowerCase().split("-").join("");
 
+    if (args[0] == undefined || !args.length) return;
     const embed = new MessageEmbed()
         .setAuthor("I2Z7")
         .setDescription(`${message.content}`)

@@ -114,7 +114,7 @@ module.exports.run = functions.run = async (client, message) => {
                     value: `${animatedEmojis.array().slice(50, 75).join("") !== '' ? animatedEmojis.array().slice(50, 75).join("") : '\u200b'}`,
                     inline: true
                 }, {
-                    name: `Normal **${animatedEmojis.size}**:`,
+                    name: `Normal **${normalEmojis.size}**:`,
                     value: `${normalEmojis.array().slice(0, 25).join("") !== '' ? normalEmojis.array().slice(0, 25).join("") : '\u200b'}`,
                     inline: true
                 }, {
