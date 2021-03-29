@@ -53,7 +53,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
 
                     switch (messageReaction.emoji) {
                         case check_mark: {
-                            member.roles.add(verifyRole.id).then(() => {
+                            member.roles.remove(verifyRole.id).then(() => {
                                 member.send({
                                     embed: {
                                         title: 'Verification',
