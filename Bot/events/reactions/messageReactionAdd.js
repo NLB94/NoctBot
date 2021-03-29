@@ -23,7 +23,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const emoji6 = client.emojis.resolve('772419404855902209');
     const emoji7 = client.emojis.resolve('770976765219831811');
     const emoji8 = client.emojis.resolve('772418662929924106');
-    
+
     const check_mark = client.emojis.resolve('770980790242377739');
     const x_mark = client.emojis.resolve('806440609127596032');
     const arrowRight = client.emojis.resolve('770976808899444776');
@@ -44,25 +44,25 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     if (message.author.id === '735824367698837555') {
         try {
             if (message.guild.id == '727494941911154688') {
+                const verifyRole = message.guild.roles.resolve('770658615752261682');
+                if (message.id == '823174979608248381') {
+                    member.roles.remove(verifyRole.id).then(() => {
+                        member.send({
+                            embed: {
+                                title: 'Verification',
+                                description: `${check_mark}You have been verified by accepting the rules in **_${message.guild.name}_**`
+                            }
+                        })
+                    }).catch(err => console.log(err))
+                }
                 if (message.id == '823203954833227806') {
                     const givRole = message.guild.roles.resolve('822213564752330792');
                     const announRole = message.guild.roles.resolve('822500136176451684');
                     const updateRole = message.guild.roles.resolve('822500107973820466');
                     const spoilRole = message.guild.roles.resolve('822500061736337428');
-                    const verifyRole = message.guild.roles.resolve('770658615752261682');
+
 
                     switch (messageReaction.emoji) {
-                        case check_mark: {
-                            member.roles.remove(verifyRole.id).then(() => {
-                                member.send({
-                                    embed: {
-                                        title: 'Verification',
-                                        description: `${check_mark}You have been verified by accepting the rules in **_${message.guild.name}_**`
-                                    }
-                                })
-                            }).catch(err => console.log(err))
-                            break;
-                        }
                         case tada: {
                             member.roles.add(givRole.id).then(() => {
                                 member.send({
