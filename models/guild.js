@@ -296,6 +296,13 @@ const guildSchema = mongoose.Schema({
             enable: false,
             list: []
         }
+    },
+    countChannels: {
+        "type": Object,
+        "default": {
+            enable: false,
+            list: []
+        }
     }
 });
 
