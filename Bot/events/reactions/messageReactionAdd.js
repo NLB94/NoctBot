@@ -60,7 +60,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                         description: `${check_mark}You have been verified by accepting the rules in **_${message.guild.name}_**`
                                     }
                                 })
-                            })
+                            }).catch(err => console.log(err))
                             break;
                         }
                         case tada: {
