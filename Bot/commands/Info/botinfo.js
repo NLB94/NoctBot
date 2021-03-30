@@ -15,7 +15,7 @@ module.exports.run = functions.run = async (client, message) => {
           .addFields(
               { name: '• ID', value: '735824367698837555', inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
-              { name: `• ${await client.translate('Owner', 'en', language)}`, value: 'ηLβ 94', inline: true},
+              { name: `• ${await client.translate('Owner', 'en', language)}`, value: '<I2Z7/>', inline: true},
               { name: `• ${await client.translate('I2Z7\'s Servers', 'en', language)} :`, value: `${client.guilds.cache.size}`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
               { name: `• ${await client.translate('I2Z7\'s Members', 'en', language)} :`, value: `${client.users.cache.size}`, inline: true},
