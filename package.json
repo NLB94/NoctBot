@@ -74,6 +74,6 @@
     "@types/styled-components": "^5.1.7"
   },
   "engines": {
-    "node": "^14.0.0"
+    "node": "15.12.0"
   }
 }
