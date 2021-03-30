@@ -41,14 +41,13 @@ module.exports = func.run = async (client, message) => {
     if (!command && customCommand) command = customCommand;
     if (!command) return;
 
-    const I2Z7Commu = client.guilds.resolve('727494941911154688');
+    if (message.author.id !== ownerID) {
+      const I2Z7Commu = await client.guilds.resolve('727494941911154688');
     if (!command.help.enable && (!I2Z7Commu.member(message.author) || !I2Z7Commu.member(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
       embed: {
         description: `${x_mark}This command is on devlopment. Please wait...`
       }
     });
-
-    if (command.help.ownerCmd && message.author.id !== ownerID) return;
 
     if (command.help.onlyPremium && !settings.general.premium) return message.channel.send({
       embed: {
@@ -62,7 +61,7 @@ module.exports = func.run = async (client, message) => {
         description: `${x_mark} This command require \`Server Owner\` Permissions!`
       }
     });
-
+}
     if (command.help.permissions && !message.member.hasPermission(command.help.reqPermName)) return message.reply({
       embed: {
         title: `Missing Permissions`,

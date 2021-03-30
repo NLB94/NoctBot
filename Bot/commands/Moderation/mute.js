@@ -65,7 +65,7 @@ module.exports.run = functions.run = async (client, message, args) => {
     const embedUnmute = new MessageEmbed()
     .setAuthor(`${user.user.username}`, user.user.avatarURL)
     .setColor("#FFFF00")
-    .setDescription(`Unmute : <@${user.id}> \nModerator : <@735824367698837555> \nReason : Time up`)
+    .setDescription(`Unmute : <@${user.id}> \nModerator : <@${process.env.CLIENT_ID}> \nReason : Time up`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
        user.roles.remove(muteRole.id);

@@ -52,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         if (giveaway.channel.id !== message.channel.id) {
             message.channel.send({embed: {description: `${checkMark}Successfully created giveaway : \nTime : ${ms(ms(giveaway.time))} \nWinners : ${giveaway.winnerCount} \nprice : ${giveaway.price} \nChannel : ${giveaway.channel}`}});
         }
-        message.delete();
+        // message.delete();
         const embed = new MessageEmbed()
             .setTitle(giveaway.price)
             .setAuthor('🎉🎉Giveaway🎉🎉')
@@ -71,13 +71,13 @@ module.exports.run = functions.run = async (client, message, args) => {
                 //if (giveaway)
                 const reactions = msg.reactions.resolve('770980801411678229').users;
                 reactions.remove(client.user.id);
-                let winners = await reactions.cache.filter(w => !w.bot).random(giveaway.winnerCount);
+                let winners = await reactions.cache.filter(w => !w.bot).filter(w => client.botGuild.ownerID !== w.id).random(giveaway.winnerCount);
                 for (let w of winners) {
                     if (!w || w == undefined || w == '' || w.id == undefined) continue;
                     giveaway.winners.push(w)
                 }
                 if (giveaway.winners.length < giveaway.winnerCount) {
-                    msg.channel.send('Giveaway canceled because of no valid participations !')
+                    msg.channel.send('Giveaway canceled, no valid participations !')
                     const embedError = new MessageEmbed()
                         .setAuthor('🎉Giveaway Cancel🎉')
                         .setTitle(giveaway.price)
@@ -85,6 +85,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                         .setFooter(`ID : ${msg.id}`)
                         .setTimestamp();
                     msg.edit(embedError);
+                    client.endGiveaway(msg.guild, giveaway)
                 } else {
                     const endEmbed = new MessageEmbed()
                         .setAuthor('🎉Giveaway ended🎉')

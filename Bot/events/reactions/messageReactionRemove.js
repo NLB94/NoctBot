@@ -22,7 +22,7 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
         return;
     }
 
-    if (message.author.id == '735824367698837555') {
+    if (message.author.id == client.botGuild.clientID) {
         if (message.guild.id == '727494941911154688') {
             if (message.id == '823203954833227806') {
                 const givRole = message.guild.roles.resolve('822213564752330792');

@@ -46,9 +46,9 @@ module.exports = func.client = client => {
      }).then()
   }
   client.endGiveaway = functions.endGiveaway = async (guild, giveaway) => {
-    const giveData = await client.getGiveaway(guild, giveaway.id)
+    const giveData = await client.getGiveaway(guild, giveaway.id);
     if (giveData.status !== 'en-cours') return;
-    client.editGiveaway(guild, giveData, { "giveaways.$.status": 'fini', "giveaways.$.winners": giveaway.winners, "giveaways.$.endedAt": ms(Date.now()) })
+    client.editGiveaway(guild, giveData, { "giveaways.$.status": 'fini', "giveaways.$.winners": giveaway.winners, "giveaways.$.endedAt": Date.now() })
   };
   client.restartGiveaway = functions.restartGiveaway = async (guild, giveaway) => {};
   client.deleteGiveaway = functions.deleteGiveaway = async (guild, ID) => {

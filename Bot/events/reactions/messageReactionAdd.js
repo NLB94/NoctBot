@@ -41,7 +41,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     }
 
 
-    if (message.author.id === '735824367698837555') {
+    if (message.author.id == client.botGuild.clientID) {
         try {
             if (message.guild.id == '727494941911154688') {
                 const verifyRole = message.guild.roles.resolve('770658615752261682');
