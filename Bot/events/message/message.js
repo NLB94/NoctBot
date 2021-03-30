@@ -107,7 +107,7 @@ module.exports = func.run = async (client, message) => {
       const timeNow = Date.now();
       const tStamps = client.cooldowns.get(command.help.name);
       const cdAmount = (command.help.cooldown || 0) * 1000;
-      const userCd = tStamps.filter(t => message.guild.id == t.guildID).find(t => message.author.id == t.id);
+      const userCd = tStamps.get(`${message.author.id} ${message.guild.id}`)
 
       if (userCd) {
         const cdExpirationTime = userCd.time + cdAmount;
@@ -123,10 +123,14 @@ module.exports = func.run = async (client, message) => {
           });
         }
       }
-
-      tStamps.set(message.author.id, { id: message.author.id, guildID: message.guild.id, time: timeNow });
-      //corriger CAAAAAAAAAAAAAAA!!!§§§§§§!!!!!
-      setTimeout(() => tStamps.delete({ id: message.author.id, guildID: message.guild.id }), cdAmount);
+      tStamps.set(message.author.id + ' ' + message.guild.id, {
+        id: message.author.id,
+        guildID: message.guild.id,
+        time: timeNow
+      });
+      setTimeout(async () => {
+        tStamps.delete(`${message.author.id} ${message.guild.id}`)
+      }, cdAmount);
     }
     command.run(client, message, args, userInfo, settings);
   };
