@@ -24,7 +24,7 @@ const emojis = require('./emojis.json');
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
-const brawlManager = new brawlStars({ token: process.env.BRAWL_TOKEN })
+const brawlManager = new brawlStars.Client({ token: process.env.BRAWL_TOKEN })
 const manager = new GiveawaysManager(client, {
     storage: './giveaways.json',
     updateCountdownEvery: 10000,
