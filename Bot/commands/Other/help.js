@@ -81,13 +81,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         await msg.react('772419404855902209').catch(() => '');
         await msg.react('770976765219831811').catch(() => '');
         await msg.react('❌').catch(() => '');
-        await msg.edit(`${message.author.tag} React to get a category's commands!`, newEmbed).then(() => {
-          if (msg !== undefined) {
-            msg.delete({
-              timeout: 600000
-            })
-          }
-        }).catch(err => '');
+        await msg.edit(`${message.author.tag} React to get a category's commands!`, newEmbed).then(() => {}).catch(err => '');
       });
     } else {
       const embed = new MessageEmbed()

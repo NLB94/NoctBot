@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const Discord = require('discord.js');
+const brawlStars = require('@statscell/brawl')
 const {
     GiveawaysManager
 } = require('./util/giveaway/');
@@ -23,6 +24,7 @@ const emojis = require('./emojis.json');
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
+const brawlManager = new brawlStars({ token: process.env.BRAWL_TOKEN })
 const manager = new GiveawaysManager(client, {
     storage: './giveaways.json',
     updateCountdownEvery: 10000,
@@ -39,6 +41,7 @@ client.giveawaysManager = manager;
 client.trad = translate;
 client.botGuild = botGuild;
 client.localEmojis = emojis;
+client.brawlManager = brawlManager;
 
 /* client.trad('I need help', {to: 'fr'}).then(res => {
     console.log(res.text);
