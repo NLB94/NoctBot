@@ -1,4 +1,8 @@
-const { MessageEmbed, GuildMember, Client } = require("discord.js");
+const {
+    MessageEmbed,
+    GuildMember,
+    Client
+} = require("discord.js");
 
 /**
  * 
@@ -14,19 +18,24 @@ module.exports = async (client, member) => {
 
     if (member.guild.id == '727494941911154688') {
         console.log(member.pending);
-        member.roles.add('770658615752261682').then(async () => {
-            const channel = await member.guild.channels.resolve('769656304402563103')
-            channel.send({ embed: { description: `${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size}`}})
-        }).catch((err) => console.log(err));
+        setTimeout(() => {
+            member.roles.add('770658615752261682').then(async () => {
+                const channel = await member.guild.channels.resolve('769656304402563103')
+                channel.send({
+                    embed: {
+                        description: `${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size} members in **${member.guild.name}**`
+                    }
+                })
+            }).catch((err) => console.log(err));
+        }, 10000)
     }
     const wL = settings.welcomeAndLeave.welcome;
     const captcha = settings.captcha;
 
     if (!wL.enable && !captcha.enable) return;
     else if (!wL.enable && captcha.enable) {
-        
-    }
-    else if (wL.enable && !captcha.enable) {
+
+    } else if (wL.enable && !captcha.enable) {
         return;
         let msg = '';
         if (wL.isNormalMsg) msg = wL.normalMsg;
@@ -103,8 +112,7 @@ module.exports = async (client, member) => {
             image == undefined ? '' : msg.setImage(image);
 
             member.guild.channels.cache.get(wL.channel).send(msg);
-        }
-        else if (wL.embed.isNormalMsg) {
+        } else if (wL.embed.isNormalMsg) {
             if (msg.includes("{user}" || "{member}")) msg = msg.replace("{user}" || "{member}", member)
             if (msg.includes("{server}" || "{guild}")) msg = msg.replace("{server}" || "{guild}", member.guild)
             if (msg.includes("{userID}" || '{memberID}')) msg = msg.replace("{userID}" || '{memberID}', member.id)

@@ -13,19 +13,14 @@ module.exports.run = functions.run = async (client, message, args) => {
     const x_mark = client.emojis.resolve('806440609127596032');
     const checkMark = client.emojis.resolve('770980790242377739');
     try {
-        let messageID = args[0];
-        client.giveawaysManager.reroll(messageID).then(() => {
-            message.channel.send('Success! Giveaway rerolled!');
-        }).catch((err) => {
-            message.channel.send('No giveaway found for ' + messageID + ', please check and try again');
-        });
-    }
-    // let position = !args[0] ? (parseInt(settings.giveaways.length) - 1) : settings.giveaways.map(g => g.id).indexOf(args[0]);
-    // const giveaway = settings.giveaways[position];
-    // if (position == -1 || giveaway.status == 'en-cours') return message.channel.send({ embed: { description: `${x_mark}${await client.translate(`The giveaway not ended or doesn't exists.`, 'en', settings.general.language)}`}})
+    let position = !args[0] ? (parseInt(settings.giveaways.length) - 1) : settings.giveaways.map(g => g.id).indexOf(args[0]);
+    const giveaway = settings.giveaways[position];
+    if (position == -1 || giveaway.status == 'en-cours') return message.channel.send({ embed: { description: `${x_mark}${await client.translate(`The giveaway not ended or doesn't exists.`, 'en', settings.general.language)}`}})
 
-    // const msg = await message.channel.messages.resolve(giveaway.id);
-    // console.log(giveaway);
+    const msg = await message.channel.messages.resolve(giveaway.id);
+    await console.log(giveaway);
+    await console.log(msg)
+    }
     catch (e) {
         console.log(e);
     }
