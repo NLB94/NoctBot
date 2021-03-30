@@ -52,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         if (giveaway.channel.id !== message.channel.id) {
             message.channel.send({embed: {description: `${checkMark}Successfully created giveaway : \nTime : ${ms(ms(giveaway.time))} \nWinners : ${giveaway.winnerCount} \nprice : ${giveaway.price} \nChannel : ${giveaway.channel}`}});
         }
-        // message.delete();
+        message.delete();
         const embed = new MessageEmbed()
             .setTitle(giveaway.price)
             .setAuthor('🎉🎉Giveaway🎉🎉')
@@ -66,6 +66,14 @@ module.exports.run = functions.run = async (client, message, args) => {
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
+            while (msg && msg.embeds[0].author.name == '🎉🎉Giveaway🎉🎉') {
+                setInterval(async () => {
+                    giveaway.time = ms(ms(giveaway.time) - 10000);
+                    await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
+                    await msg.edit(embed)
+                } ,10000)
+                
+            }
             setTimeout(async () => {
                 if (!msg) return;
                 //if (giveaway)
