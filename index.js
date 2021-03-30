@@ -41,7 +41,7 @@ client.giveawaysManager = manager;
 client.trad = translate;
 client.botGuild = botGuild;
 client.localEmojis = emojis;
-client.brawlManager = brawlManager;
+client.brawlManager = require('./util/brawlstars')(client);
 
 /* client.trad('I need help', {to: 'fr'}).then(res => {
     console.log(res.text);
