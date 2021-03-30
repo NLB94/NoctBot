@@ -1028,9 +1028,27 @@ const MESSAGES = {
         onlyPremium: false,
         args: true
       },
+      RESETSLOW: {
+        name: "resetslowmode",
+        aliases: ["resetslow"],
+        category: "moderation",
+        description: "Reset the slowmode in the channel.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: true,
+        usage: "{time | 5s} {#channel}",
+        example: "~slowmode 5m",
+        botPerm: true,
+        botPermName: 'MANAGE_CHANNELS',
+        permissions: true,
+        onlyServerOwner: false,
+        reqPermName: "MANAGE_CHANNELS",
+        onlyPremium: false,
+        args: false
+      },
       SLOWMODE: {
         name: "slowmode",
-        aliases: ["slowmode"],
+        aliases: ["setslowmode"],
         category: "moderation",
         description: "Set slowmode in a channel.",
         ownerCmd: false,
