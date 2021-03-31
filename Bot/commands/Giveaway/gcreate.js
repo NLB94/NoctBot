@@ -20,7 +20,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         // })
         const giveaway = {
             hostedBy: message.author.id,
-            time: typeof parseInt(args[1]) == Number ? `${args[0]}s` : args[0],
+            time: typeof args[0].slice(args[0].length - 1) !== String ? `${args[0]}s` : args[0],
             winnerCount: parseInt(args[0]),
             winners: [],
             price: args.slice(2).join(" "),
