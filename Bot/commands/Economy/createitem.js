@@ -48,7 +48,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             if (userE.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed)
             else item.name = userE.first().toString().slice(0, 35);
 
-            userE.first().delete();
+            userE.first().delete().catch(err => {})
 
             embed.addField(await client.translate('Name', 'en', language), item.name, true);
             await msg.edit(await client.translate('How much should the item cost to purchase ?', 'en', language), embed)
@@ -117,7 +117,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             else if (userE6.first().toString().toLowerCase() == 'skip') item.requiredRole = message.guild.id;
             else item.requiredRole = userE6.first().mentions.roles.first();
 
-            userE6.first().delete();
+            userE6.first().delete().catch(err => {})
 
             embed.addField(await client.translate('Required Role', 'en', language), `${item.requiredRole}`, true);
             msg.edit(client.translate('What role you want to add to an user when he buy this item ? Ping this role.', 'en', language), embed);
@@ -131,7 +131,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             else if (userE7.first().toString().toLowerCase() == 'skip') item.roleToGive = '\u200b';
             else item.roleToGive = userE7.first().mentions.roles.first();
 
-            userE7.first().delete();
+            userE7.first().delete().catch(err => {})
 
             embed.addField(await client.translate('Role to give', 'en', language), `${item.roleToGive}`, true);
             msg.edit(await client.translate('What role you want to remove from an user when he buy this item ? Ping this role.', 'en', language), embed);
@@ -145,7 +145,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             else if (userE8.first().toString().toLowerCase() == 'skip') item.roleToRemove = '\u200b';
             else item.roleToRemove = userE8.first().mentions.roles.first();
 
-            userE8.first().delete();
+            userE8.first().delete().catch(err => {})
 
             embed.addField(await client.translate('Role to remove', 'en', language), `${item.roleToRemove}`, true);
             msg.edit(await client.translate('What message you want bot reply ? (max 2000 characters)', 'en', language), embed);
@@ -159,7 +159,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             else if (userE9.first().toString().toLowerCase() == 'skip') item.replyMsg = '\u200b';
             else item.replyMsg = userE9.first().toString().slice(0, 2000);
 
-            userE9.first().delete();
+            userE9.first().delete().catch(err => {})
 
             embed.addField(await client.translate('Reply Message', 'en', language), `${item.replyMsg}`, true);
             

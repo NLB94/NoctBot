@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args) => {
-  message.deletable ? message.delete() : '';
+  message.delete().catch(err => {})
   function clean(text) {
     if (typeof text === "string") 
       return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));

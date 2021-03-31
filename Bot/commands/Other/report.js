@@ -7,7 +7,7 @@ module.exports.run = functions.run = async (client, message, args) => {
     const msg = args.join(" ");
     const checkMark = client.emojis.resolve('770980790242377739');
     const channel = client.channels.resolve('797799949047562260');
-    message.delete();
+    message.delete().catch(err => {})
 
     const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')

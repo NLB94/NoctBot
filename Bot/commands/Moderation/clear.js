@@ -31,7 +31,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         else messages = messages.filter(m => m.channel.id == message.channel.id)
 
 
-        message.delete();
+        message.delete().catch(err => {})
         if (messages.size < 1) return;
         await message.channel.bulkDelete(messages).then(async () => {
             let nbs = args[0];
@@ -56,7 +56,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                                 messages.forEach(msg => {
                                     if (msg.createdAt < (Date.now() / 1209600000) && msg) return;
                                     else {
-                                        msg.delete();
+                                        msg.delete().catch(err => {})
                                     }
                                 });
                             })
@@ -79,7 +79,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                         messages.forEach(msg => {
                             if (msg.createdAt < (Date.now() / 1209600000) && msg) return;
                             else {
-                                msg.delete();
+                                msg.delete().catch(err => {})
                             }
                         })
                     });
@@ -97,7 +97,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                         .setDescription(mesg);
                     message.channel.send(embed).then(msg => {
                         setTimeout(() => {
-                            msg.delete();
+                            msg.delete().catch(err => {})
                         }, 3000);
                     });
                 }, timeout);
@@ -106,7 +106,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             messages.forEach(msg => {
                 if (msg.createdAt < (Date.now() / 1209600000) && msg) return;
                 else {
-                    msg.delete();
+                    msg.delete().catch(err => {})
                 }
             });
         });

@@ -150,7 +150,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
             }
             if (message.content !== '') {
                 if (emoji == '❌' && (message.content.includes('React to get a category') || message.content.includes('Click ↩️ for return to home')) && message.content.startsWith(user.tag)) {
-                    if (message !== undefined) message.delete();
+                    if (message !== undefined) message.delete().catch(err => {})
                 }
                 if (message.content.includes('React to get a category') && emoji !== '❌' && message.content.startsWith(user.tag)) {
                     const embed = new MessageEmbed()

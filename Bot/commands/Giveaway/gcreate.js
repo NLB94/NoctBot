@@ -61,7 +61,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                 }
             });
         }
-        message.delete();
+        message.delete().catch(err => {})
         const embed = new MessageEmbed()
             .setTitle(giveaway.price)
             .setAuthor('🎉🎉Giveaway🎉🎉')
