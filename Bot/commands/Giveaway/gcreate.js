@@ -31,6 +31,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         }
         const correctUsage = `Correct usage : \`${settings.general.prefix}gcreate ${module.exports.help.usage}\``
 
+        if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({ embed: { description: correctUsage } })
         if (isNaN(giveaway.winnerCount) || giveaway.winnerCount > 20) return message.channel.send({
             embed: {
                 description: `${correctUsage} \n${x_mark} Number of winners have to be lower than 20`,
