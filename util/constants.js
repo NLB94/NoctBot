@@ -485,7 +485,7 @@ const MESSAGES = {
         description: "Create a giveaway",
         ownerCmd: false,
         cooldown: 0.1,
-        enable: false,
+        enable: true,
         usage: '<nb_winners> <time (s | m | h | d | w)> <price> {#channel}',
         example: "~gcreate 3 3d Nitro #giveaway-channel",
         botPerm: false,
