@@ -20,7 +20,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         // })
         const giveaway = {
             hostedBy: message.author.id,
-            time: typeof args[0].slice(args[0].length - 1) !== String ? `${args[0]}s` : args[0],
+            time: args[1].toLowerCase().includes('s' || 'h' || 'm' || 'd') ? args[1] : args[1] + 's',
             winnerCount: parseInt(args[0]),
             winners: [],
             price: args.slice(2).join(" "),
@@ -29,6 +29,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             blackListRoles: [],
             whiteListRoles: []
         }
+        
         const correctUsage = `Correct usage : \`${settings.general.prefix}gcreate ${module.exports.help.usage}\``
 
         if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({
