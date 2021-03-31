@@ -1,3 +1,2 @@
-Worker1: pm2 start index.js --watch
-Worker2: pm2 logs 0
+Worker: nodemon ./index.js
 web: nodemon ./dashboard/server.js
