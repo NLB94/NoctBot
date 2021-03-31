@@ -66,7 +66,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         value: `\u200b`
       }, {
         name: `${emoji6} Giveaway`,
-        value: `Soon...`
+        value: `\u200b`
       }, {
         name: `${emoji7} Other`,
         value: `\u200b`

@@ -189,7 +189,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             break;
                         }
                         case emoji6: {
-                            embed.setDescription(`Soon...`);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'giveaway').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
                             embed.setTitle("Giveaway");
                             break;
                         }
@@ -250,7 +250,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             value: `\u200b`
                         }, {
                             name: `${emoji6} Giveaway :`,
-                            value: `Soon...`
+                            value: `\u200b`
                         }, {
                             name: `${emoji7} Other :`,
                             value: `\u200b`

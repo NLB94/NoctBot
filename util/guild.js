@@ -79,7 +79,7 @@ module.exports = func.client = async (client) => {
             },
         }).then();
     };
-    client.getGuildUser = functions.getUser = async (guild, user) => {
+    client.getGuildUser = functions.getGuildUser = async (guild, user) => {
         if (!user) return;
         const data = await client.getGuild(guild);
         const position = data.users.map((e) => e.id).indexOf(user.id);
