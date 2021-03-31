@@ -5,7 +5,7 @@ const {
 const {
     MESSAGES
 } = require('../../../util/constants');
-
+const { Item } = require('../../../util/economy')
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args) => {
@@ -18,7 +18,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         .setTimestamp()
         .setAuthor(message.author.tag, message.author.avatarURL());
     try {
-        let item = {
+        let item = new Item({
             name: String,
             price: Number,
             description: String,
@@ -28,7 +28,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             roleToGive: Role,
             roleToRemove: Role,
             replyMsg: (String || MessageEmbed)
-        }
+        })
         const checkMark = client.emojis.resolve('770980790242377739');
         const embed = new MessageEmbed()
             .setTitle(await client.translate('Create Item', 'en', language))

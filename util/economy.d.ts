@@ -20,7 +20,7 @@ import {
    */
   export declare function deleteItem(guild: Guild, itemName: String)
   export class Item {
-    constructor(options?: any); 
+    constructor(data?: Item); 
     public setName(name: String): this;
     public setPrice(price: Number): this;
     public setDescription(description: String): this;

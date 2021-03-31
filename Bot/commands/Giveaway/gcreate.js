@@ -82,7 +82,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                     await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
                     await msg.edit(embed)
                 }
-            }, 10000)
+            }, 5000)
 
             setTimeout(async () => {
                 if (!msg) return;
