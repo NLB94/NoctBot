@@ -20,14 +20,18 @@ module.exports.run = functions.run = async (client, message, args) => {
             }
         })
 
-        const msg = await message.channel.messages.resolve(giveaway.id);
+        const msg = await (await message.channel.messages.fetch()).get(giveaway.id);
         const newNbWinners = isNaN(parseInt(args[1])) ? giveaway.winnerCount : parseInt(args[1])
         const newWinners = [];
+
+        if (msg.partial) {
+            await msg.fetch();
+        }
 
         const reactions = await msg.reactions.resolve('770980801411678229').users;
         await reactions.remove(client.user.id);
 
-        let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => client.botGuild.ownerID !== w.id)*/.random(newNbWinners);
+        let winners = await reactions.cache.filter(w => !w.bot).filter(w => client.botGuild.ownerID !== w.id).random(newNbWinners);
         for (let w of winners) {
             if (!w || w == undefined || w == '' || w.id == undefined) continue;
             newWinners.push(w)

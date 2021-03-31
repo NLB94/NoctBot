@@ -17,6 +17,7 @@ module.exports = async (client, member) => {
     if (settings == undefined) await client.createGuild(message.guild);
 
     if (member.guild.id == '727494941911154688') {
+        if (member.user.bot) return;
         console.log(member.pending);
         setTimeout(() => {
             member.roles.add('770658615752261682').then(async () => {
