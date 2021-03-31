@@ -76,9 +76,9 @@ module.exports.run = functions.run = async (client, message, args) => {
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
             setInterval(async () => {
-                if (msg.embeds[0].author.name !== embed.author.name && ms(giveaway.time) <= 10000) return;
+                if (msg.embeds[0].author.name !== embed.author.name || ms(giveaway.time) <= 10000) return;
                 else {
-                    giveaway.time = ms(ms(giveaway.time) - 10000);
+                    giveaway.time = ms(ms(giveaway.time) - 5000);
                     await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
                     await msg.edit(embed)
                 }
