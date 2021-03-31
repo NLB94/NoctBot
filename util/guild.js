@@ -41,7 +41,7 @@ module.exports = func.client = async (client) => {
         const data = await client.getGuild(guild);
         return data.users;
     };
-    client.createGuildUser = functions.createUser = async (guild, user) => {
+    client.createGuildUser = functions.createGuildUser = async (guild, user) => {
         if (!guild || !user) return;
         const dailyCd = Date.now() - 8.64e+7;
         const daily = new Date(dailyCd);
@@ -85,7 +85,7 @@ module.exports = func.client = async (client) => {
         const position = data.users.map((e) => e.id).indexOf(user.id);
         return data.users[position];
     };
-    client.updateGuildUI = functions.updateUI = (guild, member, options = {}) => {
+    client.updateGuildUI = functions.updateGuildUI = (guild, member, options = {}) => {
         Guild.updateOne({
             guildID: guild.id,
             "users.id": member.id
