@@ -20,7 +20,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         // })
         const giveaway = {
             hostedBy: message.author.id,
-            time: args[1],
+            time: typeof parseInt(args[1]) == Number ? `${args[0]}s` : args[0],
             winnerCount: parseInt(args[0]),
             winners: [],
             price: args.slice(2).join(" "),
@@ -76,7 +76,7 @@ module.exports.run = functions.run = async (client, message, args) => {
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
             setInterval(async () => {
-                if (msg.embeds[0].author.name !== embed.author.name || ms(giveaway.time) <= 10000) return;
+                if (msg.embeds[0].author.name !== embed.author.name || ms(giveaway.time) <= 5000) return;
                 else {
                     giveaway.time = ms(ms(giveaway.time) - 5000);
                     await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
