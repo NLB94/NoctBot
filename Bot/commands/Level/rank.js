@@ -169,7 +169,7 @@ module.exports.run = functions.run = async (client, message, args) => {
   ctx.closePath()
 
   const file = new MessageAttachment(canvas.toBuffer(), "rank.png");
-  message.channel.send({ embed: { description: `${user} sent **${userInfo.messageSent} messages in this server.**`}}, file)
+  message.channel.send(`${user.tag} sent **${userInfo.messageSent} messages in this server.**`, file)
 };
 
 
