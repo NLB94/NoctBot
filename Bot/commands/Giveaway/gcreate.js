@@ -75,14 +75,17 @@ module.exports.run = functions.run = async (client, message, args) => {
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
-            setInterval(async () => {
-                if (msg.embeds[0].author.name !== embed.author.name) return;
-                else {
-                    giveaway.time = ms(ms(giveaway.time) - 10000);
-                    await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
-                    await msg.edit(embed)
-                }
-            }, 10000)
+            while (msg.embeds[0].author.name == embed.author.name) {
+                setInterval(async () => {
+                    if (msg.embeds[0].author.name !== embed.author.name) return;
+                    else {
+                        giveaway.time = ms(ms(giveaway.time) - 10000);
+                        await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
+                        await msg.edit(embed)
+                    }
+                }, 10000)
+
+            }
 
             setTimeout(async () => {
                 if (!msg) return;
