@@ -1246,6 +1246,24 @@ const MESSAGES = {
         onlyPremium: false,
         args: true
       },
+      REACT: {
+        name: "react",
+        aliases: ["react"],
+        category: "other",
+        description: "React to a message with a normal/custom emoji ID",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: true,
+        usage: "<message_id | ^ (react_last_msg)> <reaction_id>",
+        example: "~react 806440609127596032 826870663569997884",
+        botPerm: true,
+        botPermName: 'ADD_REACTIONS',
+        permissions: true,
+        onlyServerOwner: false,
+        reqPermName: "ADD_REACTIONS",
+        onlyPremium: false,
+        args: true
+      },
       REPORT: {
         name: "report",
         aliases: ["rp"],
