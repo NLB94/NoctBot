@@ -50,7 +50,11 @@ module.exports.run = functions.run = async (client, message, args) => {
         })
         if (giveaway.price.includes(giveaway.channel.toString())) giveaway.price = giveaway.price.replace(giveaway.channel.toString(), '');
         if (giveaway.channel.id !== message.channel.id) {
-            message.channel.send({embed: {description: `${checkMark}Successfully created giveaway : \nTime : ${ms(ms(giveaway.time))} \nWinners : ${giveaway.winnerCount} \nprice : ${giveaway.price} \nChannel : ${giveaway.channel}`}});
+            message.channel.send({
+                embed: {
+                    description: `${checkMark}Successfully created giveaway : \nTime : ${ms(ms(giveaway.time))} \nWinners : ${giveaway.winnerCount} \nprice : ${giveaway.price} \nChannel : ${giveaway.channel}`
+                }
+            });
         }
         message.delete();
         const embed = new MessageEmbed()
@@ -66,14 +70,13 @@ module.exports.run = functions.run = async (client, message, args) => {
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
-            // while (msg && msg.embeds[0].author.name == '🎉🎉Giveaway🎉🎉') {
-            //     setInterval(async () => {
-            //         giveaway.time = ms(ms(giveaway.time) - 10000);
-            //         await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
-            //         await msg.edit(embed)
-            //     } ,10000)
-                
-            // }
+            setInterval(async (inter) => {
+                if (msg.embeds[0].author.name !== embed.author.name) clearInterval(inter);
+                giveaway.time = ms(ms(giveaway.time) - 10000);
+                await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
+                await msg.edit(embed)
+            }, 10000)
+
             setTimeout(async () => {
                 if (!msg) return;
                 //if (giveaway)
