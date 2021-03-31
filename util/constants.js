@@ -514,6 +514,24 @@ const MESSAGES = {
         onlyPremium: false,
         args: true
       },
+      GEND: {
+        name: "gend",
+        aliases: ['gend'],
+        category: 'giveaway',
+        description: "End a giveaway",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: false,
+        usage: '{message_id}',
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: true,
+        onlyServerOwner: false,
+        reqPermName: "MANAGE_MESSAGES",
+        onlyPremium: false,
+        args: false
+      },
       GDELETE: {
         name: "gdelete",
         aliases: ['gdelete'],

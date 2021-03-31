@@ -29,7 +29,6 @@ module.exports.run = functions.run = async (client, message, args) => {
             blackListRoles: [],
             whiteListRoles: []
         }
-        
         const correctUsage = `Correct usage : \`${settings.general.prefix}gcreate ${module.exports.help.usage}\``
 
         if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({
@@ -77,20 +76,20 @@ module.exports.run = functions.run = async (client, message, args) => {
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
             setInterval(async () => {
-                if (msg.embeds[0].author.name !== embed.author.name || ms(giveaway.time) <= 5000) return;
+                if (msg.embeds[0].author.name !== embed.author.name || ms(giveaway.time) <= 10000) return;
                 else {
-                    giveaway.time = ms(ms(giveaway.time) - 5000);
+                    giveaway.time = ms(ms(giveaway.time) - 10000);
                     await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
                     await msg.edit(embed)
                 }
-            }, 5000)
+            }, 10000)
 
             setTimeout(async () => {
                 if (!msg) return;
-                //if (giveaway)
+                if (msg.embeds[0].author.name !== embed.author.name) return;
                 const reactions = msg.reactions.resolve('770980801411678229').users;
                 reactions.remove(client.user.id);
-                let winners = await reactions.cache.filter(w => !w.bot).filter(w => client.botGuild.ownerID !== w.id).random(giveaway.winnerCount);
+                let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(giveaway.winnerCount);
                 for (let w of winners) {
                     if (!w || w == undefined || w == '' || w.id == undefined) continue;
                     giveaway.winners.push(w)
@@ -100,7 +99,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                     const embedError = new MessageEmbed()
                         .setAuthor('🎉Giveaway Cancel🎉')
                         .setTitle(giveaway.price)
-                        .setDescription(`To restart the giveaway, type \`${settings.general.prefix}grestart ${msg.id}\``)
+                        .setDescription(`Join [support server](${client.botGuild.supportInvite}) | [Add me](${client.botGuild.inviteLink})`)
                         .setFooter(`ID : ${msg.id}`)
                         .setTimestamp();
                     msg.edit(embedError);

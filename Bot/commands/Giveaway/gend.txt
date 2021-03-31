@@ -1,6 +1,7 @@
 const {
     MESSAGES
 } = require("../../../util/constants");
+const ms = require("ms");
 const {
     MessageEmbed
 } = require("discord.js");
@@ -14,15 +15,14 @@ module.exports.run = functions.run = async (client, message, args) => {
     try {
         let position = !args[0] ? (parseInt(settings.giveaways.length) - 1) : settings.giveaways.map(g => g.id).indexOf(args[0]);
         const giveaway = settings.giveaways[position];
-        if (position == -1 || giveaway.status == 'en-cours') return message.channel.send({
+        if (position == -1 || giveaway.status !== 'en-cours') return message.channel.send({
             embed: {
-                description: `${x_mark}${await client.translate(`The giveaway not ended or doesn't exists.`, 'en', settings.general.language)}`
+                description: `${x_mark}${await client.translate(`The giveaway already ended or doesn't exists.`, 'en', settings.general.language)}`
             }
         })
 
         const msg = await (await message.channel.messages.fetch()).get(giveaway.id);
-        const newNbWinners = isNaN(parseInt(args[1])) ? giveaway.winnerCount : parseInt(args[1])
-        const newWinners = [];
+        const wins = [];
 
         if (msg.partial) {
             await msg.fetch();
@@ -31,12 +31,15 @@ module.exports.run = functions.run = async (client, message, args) => {
         const reactions = await msg.reactions.resolve('770980801411678229').users;
         await reactions.remove(client.user.id);
 
-        let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(newNbWinners);
+        let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(giveaway.winnerCount > 1 ? parseInt(giveaway.winnerCount) : 2);
+        console.log(winners)
         for (let w of winners) {
+            console.log(w)
             if (!w || w == undefined || w == '' || w.id == undefined) continue;
-            newWinners.push(w)
+            wins.push(w)
         }
-        if (!newWinners.length || newWinners.length < 1) {
+        console.log(wins)
+        if (!wins.length || wins.length < 1) {
             msg.channel.send('Giveaway canceled, no valid participations !')
             const embedError = new MessageEmbed()
                 .setAuthor('🎉Giveaway Cancel🎉')
@@ -51,11 +54,12 @@ module.exports.run = functions.run = async (client, message, args) => {
                 .setAuthor('🎉Giveaway ended🎉')
                 .setTitle(giveaway.price)
                 .setTimestamp()
-                .setFooter(newNbWinners + ' winner(s)')
-                .setDescription(`Hosted by : <@${giveaway.hostedBy}> \nWinners : ${newWinners.join(", ")}`);
+                .setFooter(giveaway.winnerCount + ' winner(s)')
+                .setDescription(`Hosted by : <@${giveaway.hostedBy}> \nWinners : ${wins.join(", ")}`);
 
             msg.edit(endEmbed);
-            msg.channel.send(`Congratulations ${newWinners.join(", ")} ! You won \`${giveaway.price}\` !`)
+            msg.channel.send(`Congratulations ${wins.join(", ")} ! You won \`${giveaway.price}\` !`)
+
         }
     } catch (e) {
         console.log(e);
@@ -64,4 +68,5 @@ module.exports.run = functions.run = async (client, message, args) => {
 
 
 
-module.exports.help = MESSAGES.COMMANDS.GIVEAWAY.GREROLL;
+
+module.exports.help = MESSAGES.COMMANDS.GIVEAWAY.GEND;

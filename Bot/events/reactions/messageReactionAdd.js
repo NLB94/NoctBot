@@ -37,6 +37,9 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     if (member.user.bot) return;
     if (messageReaction.partial) {
         await messageReaction.fetch();
+        if (message.partial) {
+            await message.fetch()
+        }
         return;
     }
 

@@ -7,13 +7,14 @@ const func = require('./functions')
 
 module.exports = func.client = client => {
   client.createGiveaway = functions.createGiveaway = async (guild, giveaway) => {
-    Guild.updateOne({
+    const settings = await client.getGuild(guild);
+    await Guild.updateOne({
       guildID: guild.id
     }, {
       $push: {
         giveaways: {
           id: giveaway.id,
-          author: giveaway.hostedBy,
+          hostedBy: giveaway.hostedBy,
           startedTime: giveaway.startedTime,
           endedAt: giveaway.endedAt,
           time: ms(giveaway.time),
@@ -27,7 +28,10 @@ module.exports = func.client = client => {
           whiteListRoles: giveaway.whiteListRoles
         }
       }
-    }).then()
+    }).then();
+
+    const giveawayData = await client.getGiveaway(guild, giveaway.id)
+    return await giveawayData;
   };
   client.getGiveaway = functions.getGiveaway = async (guild, id) => {
     const data = await Guild.findOne({

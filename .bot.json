@@ -4,6 +4,7 @@
     "supportInvite": "https://discord.gg/92ffufA",
     "supportGuildID": "727494941911154688",
     "logs": "795563897813205012",
+    "inviteLink": "https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join",
     "guildCreateDelLogs": "826147178002120794",
     "dmSuggestID": "824287705504153610",
     "dmReportID": "797799949047562260",
