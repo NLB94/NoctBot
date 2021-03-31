@@ -48,7 +48,7 @@ module.exports = func.client = async client => {
     }
     client.notStartByPrefix = functions.notStartByPrefix = async (message, settings, userInfo) => {
         const arrowRight = client.emojis.resolve('770976808899444776');
-        if (message.content.startsWith('~') && settings.general.prefix !== '~') await message.channel.send({
+        if (message.content.startsWith('~help') && settings.general.prefix !== '~') await message.channel.send({
             embed: {
                 description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
             }
