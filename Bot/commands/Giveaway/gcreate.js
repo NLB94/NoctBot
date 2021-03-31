@@ -31,7 +31,11 @@ module.exports.run = functions.run = async (client, message, args) => {
         }
         const correctUsage = `Correct usage : \`${settings.general.prefix}gcreate ${module.exports.help.usage}\``
 
-        if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({ embed: { description: correctUsage } })
+        if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({
+            embed: {
+                description: correctUsage
+            }
+        })
         if (isNaN(giveaway.winnerCount) || giveaway.winnerCount > 20) return message.channel.send({
             embed: {
                 description: `${correctUsage} \n${x_mark} Number of winners have to be lower than 20`,
@@ -71,11 +75,13 @@ module.exports.run = functions.run = async (client, message, args) => {
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);
             if (msg) msg.edit(embed);
-            setInterval(async (inter) => {
-                if (msg.embeds[0].author.name !== embed.author.name) clearInterval(inter);
-                giveaway.time = ms(ms(giveaway.time) - 10000);
-                await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
-                await msg.edit(embed)
+            setInterval(async () => {
+                if (msg.embeds[0].author.name !== embed.author.name) return;
+                else {
+                    giveaway.time = ms(ms(giveaway.time) - 10000);
+                    await embed.setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`)
+                    await msg.edit(embed)
+                }
             }, 10000)
 
             setTimeout(async () => {
