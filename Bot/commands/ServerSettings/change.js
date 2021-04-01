@@ -96,7 +96,7 @@ module.exports.run = functions.run = async (client, message, args) => {
                 return message.channel.send({
                     embed: {
                         title: await client.translate('Server Settings', 'en', language),
-                        description: `${check_mark}${await client.translate('Prefix changed : \nOld Prefix : \`${prefix}\` \nNew Prefix', 'en', language)} : \`${newSetting}\``
+                        description: `${check_mark}${await client.translate(`Prefix changed : \nOld Prefix : \`${prefix}\` \nNew Prefix`, 'en', language)} : \`${newSetting}\``
                     }
                 });
             }

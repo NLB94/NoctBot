@@ -89,4 +89,17 @@ module.exports = functions.client = client => {
     });
     return traduction;
   }
+  client.createCount = functions.createCount = async (guild, channel, options) => {
+    await Guild.updateOne({
+      guildID: guild.id
+    }, {
+      $push: {
+        "countChannels.list": {
+          id: channel.id,
+          category: options.category,
+          type: options.type
+        }
+      }
+    }).then()
+  }
 };

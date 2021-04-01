@@ -301,6 +301,7 @@ const guildSchema = mongoose.Schema({
         "type": Object,
         "default": {
             enable: false,
+            category: '',
             list: []
         }
     }

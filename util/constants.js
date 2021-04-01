@@ -112,6 +112,26 @@ const MESSAGES = {
         args: true
       },
     },
+    COUNTS: {
+      CREATE: {
+        name: "createcount",
+        aliases: ["createcount"],
+        category: "counts",
+        description: "Create a count channel.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: false,
+        usage: "",
+        example: "No example for this command.",
+        botPerm: true,
+        botPermName: 'MANAGE_CHANNELS',
+        permissions: true,
+        onlyServerOwner: false,
+        reqPermName: "MANAGE_CHANNELS",
+        onlyPremium: false,
+        args: false
+      },
+    },
     ECONOMY: {
       ADDMONEY: {
         name: "addmoney",

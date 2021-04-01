@@ -55,4 +55,9 @@ import Discord from "discord.js";
     /**
      * Reset all guilds's users from the users array.
      */
-    export declare function resetAllGuildsUsers();
+    export declare function updateAllGuildsUsers(options: Object);
+    /**
+     * Update all guilds with missing informations
+     * @param {Object} options 
+     */
+    export declare function updateAllGuilds(options: Object, options2: Object);

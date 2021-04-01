@@ -109,7 +109,7 @@ module.exports = func.client = async (client) => {
             })
         });
     }
-    client.updateAllGuildsUsers = functions.resetAllGuildsUsers = async (options = {}) => {
+    client.updateAllGuildsUsers = functions.updateAllGuildsUsers = async (options = {}) => {
         const guild1 = await Guild.findOne({
             guildID: '727494941911154688'
         })
@@ -140,5 +140,16 @@ module.exports = func.client = async (client) => {
                 }) : ''
             }
         })
+    }
+    client.updateAllGuilds = functions.updateAllGuilds = async function (options, options2) {
+        await Guild.updateMany({ countChannels: null }, {
+            $set: {
+                countChannels: {
+                    enable: false,
+                    category: '',
+                    list: []
+                }
+            }
+        }).then()
     }
 }

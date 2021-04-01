@@ -32,13 +32,10 @@ module.exports.run = functions.run = async (client, message, args) => {
         await reactions.remove(client.user.id);
 
         let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(giveaway.winnerCount > 1 ? parseInt(giveaway.winnerCount) : 2);
-        console.log(winners)
         for (let w of winners) {
-            console.log(w)
             if (!w || w == undefined || w == '' || w.id == undefined) continue;
             wins.push(w)
         }
-        console.log(wins)
         if (!wins.length || wins.length < 1) {
             msg.channel.send('Giveaway canceled, no valid participations !')
             const embedError = new MessageEmbed()
@@ -62,7 +59,6 @@ module.exports.run = functions.run = async (client, message, args) => {
 
         }
     } catch (e) {
-        console.log(e);
     }
 };
 

@@ -18,17 +18,34 @@ module.exports = async (client, member) => {
 
     if (member.guild.id == '727494941911154688') {
         if (member.user.bot) return;
-        console.log(member.pending);
         setTimeout(() => {
             member.roles.add('770658615752261682').then(async () => {
                 const channel = await member.guild.channels.resolve('769656304402563103')
-                channel.send({
-                    embed: {
-                        description: `${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size} members in **${member.guild.name}**`
-                    }
-                })
+                const rolesChannels = await member.guild.channels.resolve('819871741823156265');
+                const commuEmbed = new MessageEmbed()
+                    .setDescription(`${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size} members in **${member.guild.name}**`)
+                    .setTimestamp()
+                    .setThumbnail(member.user.displayAvatarURL())
+                channel.send(`Hey ${member}, **welcome to ${member.guild.name}** ! \nDon't forget to **read the rules** <#769656305211539456> and **choose your roles** <#819871741823156265> !`, commuEmbed)
+                rolesChannels.send(`${member}, choose your roles !`).then(msg => msg.delete({
+                    timeout: 1000
+                })).catch(() => {})
             }).catch((err) => console.log(err));
         }, 10000)
+    }
+    if (settings.countChannels.enable) {
+        const count = settings.countChannels;
+        const membersCount = count.filter(async c => c.category.toLowerCase() == 'members')
+        if (!membersCount || !membersCount.length || membersCount == undefined || membersCount.length < 1) return;
+        else {
+            membersCount.forEach(async m => {
+                if (m.type == 'all' || (m.type == 'bots' && member.user.bot) || (m.type == 'humans' && !member.user.bot)) {
+                    const channel = await member.guild.channels.resolve(m.id);
+                    if (channel) await channel.setName(channel.name.slice(0, (channel.name.length - (member.guild.memberCount - 1).toString().length)) + member.guild.memberCount)
+                }
+            })
+
+        }
     }
     const wL = settings.welcomeAndLeave.welcome;
     const captcha = settings.captcha;

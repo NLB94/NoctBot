@@ -1,4 +1,4 @@
-import { Client, Guild, Message, TextChannel } from "discord.js";
+import { Client, Guild, Message, TextChannel, VoiceChannel } from "discord.js";
 
 /**
  * Return a random string for password or backup id
@@ -41,5 +41,16 @@ export declare function replaceEmbed(embed: Object, message: Message, options: O
 export declare function run(client: Client, message: Message, args: String[]);
 
 export declare function client(client: Client)
-
+/**
+ * Translate a string from a language to another language
+ * @param string 
+ * @param from 
+ * @param to 
+ */
 export declare function translate(string: String, from: String, to: String)
+/**
+ * Push a count channel settings in database
+ * @param guild 
+ * @param channel 
+ */
+export declare function createCount(guild: Guild, channel: VoiceChannel, options: Object)
