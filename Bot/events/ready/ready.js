@@ -52,7 +52,7 @@ module.exports = functions.client = async client => {
 
   guilds.forEach(async g => {
     try {
-      const commands = await getApp(g.id).commands.get();
+      const commands = await getApp(g.id).commands.get().catch(err => {});
       
       if (!commands.map(d => d.name).includes('ping')) {
         await getApp(g.id).commands.post({
@@ -60,7 +60,7 @@ module.exports = functions.client = async client => {
             name: 'ping',
             description: 'A simple ping command',
           }
-        })
+        }).catch(() => {})
       } 
       if (!commands.map(d => d.name).includes('embed')) {
         await getApp(g.id).commands.post({
@@ -141,7 +141,7 @@ module.exports = functions.client = async client => {
               },
             ]
           }
-        })
+        }).catch(() => {})
       }
 
 
@@ -230,7 +230,6 @@ module.exports = functions.client = async client => {
         } catch (e) {}
       }
     } catch (e) {
-      console.log(e);
     }
   })
 };
