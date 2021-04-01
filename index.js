@@ -132,5 +132,6 @@ module.exports = {
 }
 
 process.on('uncaughtException', (err) => {
+    console.log('Erreur attrapé :');
     console.log(err);
 })
