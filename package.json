@@ -30,7 +30,7 @@
     "disco-oauth": "^5.0.1",
     "discord-backup": "^2.2.5",
     "discord-giveaways": "^4.4.3",
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.2",
     "dotenv": "^8.2.0",
     "env": "^0.0.2",
     "express": "^4.17.1",
@@ -48,17 +48,13 @@
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.6",
     "npm": "^7.6.1",
-    "openssl": "^1.1.0",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
     "pip": "^0.0.1",
-    "pm2": "4.5.5",
     "pug": "^3.0.2",
     "rate-limit-mongo": "^2.3.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1",
-    "uniq": "^1.0.1",
-    "wokcommands": "^1.2.8"
+    "styled-components": "^5.2.1"
   },
   "repository": {
     "type": "git",
