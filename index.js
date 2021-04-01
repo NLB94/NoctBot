@@ -130,3 +130,7 @@ client.login(process.env.TOKEN);
 module.exports = {
     client
 }
+
+process.on('uncaughtException', (err) => {
+    console.log(err);
+})
