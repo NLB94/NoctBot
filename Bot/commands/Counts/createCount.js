@@ -10,7 +10,9 @@ module.exports.run = functions.run = async (client, message, args) => {
     try {
         const settings = await client.getGuild(message.guild);
         const loading = client.emojis.resolve('783028992231866419');
+        const x_mark = client.emojis.resolve('806440609127596032');
         const check_mark = client.emojis.resolve('770980790242377739');
+
         const countArray = ['channels', 'members', 'boosts'];
         await message.channel.send(`**What is the category of count you want ?** \nAvailable categorys : _${countArray.join(', ')}_`);
         /**
@@ -51,6 +53,12 @@ module.exports.run = functions.run = async (client, message, args) => {
 
                 // if (category.type !== 'category') return message.c;
                 const channelName = cat.toLowerCase() == `channels` ? (type == `all` ? `All Channels : ${message.guild.channels.cache.size}` : (type == `categorys` ? `Categorys : ${message.guild.channels.cache.filter(c => c.type == 'category').size}` : (type == `text` ? `Text : ${message.guild.channels.cache.filter(c => c.isText()).size}` : `Voice : ${message.guild.channels.cache.filter(c => c.type == 'voice').size}`))) : (cat.toLowerCase() == `members` ? (type == `all` ? `All members : ${message.guild.memberCount}` : (type == `humans` ? `Members : ${message.guild.members.cache.filter(m => !m.user.bot).size}` : `Bots : ${message.guild.members.cache.filter(m => m.user.bot).size}`)) : (type == `level` ? `Level : ${message.guild.premiumTier}` : `Boosts : ${message.guild.premiumSubscriptionCount}`))
+                if (!message.guild.systemChannelFlags.has('BOOST_MESSAGE_DISABLED') && (channelName.startsWith('Level') || channelName.startsWith('Boosts'))) return message.channel.send({
+                    embed: {
+                        description: `${x_mark}You have to enable **system feature \`BOOST_MESSAGE\`**. \nPlease retry after enable it.`
+                    }
+                });
+
                 await message.guild.channels.create(channelName, {
                     type: 'voice'
                 }).then(async c => {
