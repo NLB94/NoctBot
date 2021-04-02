@@ -5,7 +5,7 @@ const { MessageAttachment } = require('discord.js');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
   if (settings == undefined) client.createGuild(message.guild);
   const x_mark = client.emojis.resolve('806440609127596032');
 
@@ -21,7 +21,6 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   const member = message.guild.member(user);
   if (!member) return message.channel.send({embed: { description: `${x_mark}User not in this server!`}});
 
-  const userInfo = await client.getGuildUser(message.guild, user);
   if (userInfo == undefined) return client.createGuildUser(message.guild, user), message.channel.send('Please retry.');
 
   let statusColor = '';
@@ -52,8 +51,8 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   ctx.beginPath();
   ctx.lineWidth = 2;
  //progress bar
-  let width = (userInfo.XP / userInfo.XPRequire) * 700;
-  if (width >= 700) width = 700;
+  let width = (userInfo.XP / userInfo.XPRequire) * 657.5;
+  if (width >= 657.5) width = 657.5;
 
   ctx.fillStyle = "#999999";
   ctx.arc(260 + 18.5, 160 + 18.5 + 36.25, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
@@ -91,12 +90,12 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   ctx.globalAlpha = 1;
   ctx.font = "50px Calibri";
   ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(user.username.slice(0, 8), 280, 175, 300);
+  ctx.fillText(user.username, 280, 175, 300);
 
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
   ctx.fillStyle = "#999999";
-  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, ctx.measureText(user.username.slice(0, 8)).width + 340, 175, 300);
+  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, 300 + 340, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)

@@ -3,7 +3,7 @@ const { MESSAGES } = require("../../../util/constants");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     const msg = args.join(" ");
     const checkMark = client.emojis.resolve('770980790242377739');

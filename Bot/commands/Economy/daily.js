@@ -6,13 +6,11 @@ const {
 } = require('../../../util/constants');
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
   const dailyCd = 8.64e+7;
   const language = settings.general.language;
   const loadingEmoji = client.emojis.resolve('783028992231866419');
-
-  const userInfo = await client.getGuildUser(message.guild, message.member);
 
   if (userInfo == undefined) await client.createGuildUser(message.guild, message.member);
 

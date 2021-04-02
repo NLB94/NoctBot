@@ -64,7 +64,8 @@ module.exports = func.client = async client => {
 
             let typeMsg = settings.levelSystem.message.embed.enable ? MessageEmbed : Message;
             let msg = typeMsg === MessageEmbed ? settings.levelSystem.message.normalMsg.msg : settings.levelSystem.message.embed.data;
-            if (typeMsg === Message && msg == '') msg = 'GG {user}, you reached level **{level}**!';
+            if (typeMsg === Message && (msg == '' || !msg)) msg = 'GG {user}, you reached level **{level}**!';
+            console.log(msg)
             if (typeMsg === Message) msg = client.replaceLevelText(msg, message, {
                 newLvl: (oldLvl + 1)
             })

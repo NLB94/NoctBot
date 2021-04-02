@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
 ;
     
     const checkMark = client.emojis.resolve('770980790242377739');
@@ -114,7 +114,7 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
 
     } else if (args[0] == 'all') {
         const command = client.commands.get('nuke');
-        command.run(client, message, args, settings)
+        command.run(client, message, args, settings, userInfo)
     }
 };
 

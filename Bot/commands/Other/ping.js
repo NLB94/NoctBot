@@ -2,7 +2,7 @@ const { MESSAGES } = require("../../../util/constants");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
   const msg = await message.channel.send("Pong!");
   await msg.edit(`Pong - ${client.ws.ping}ms`);

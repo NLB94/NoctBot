@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     
     const x_mark = client.emojis.resolve('806440609127596032');
@@ -18,7 +18,6 @@ module.exports.run = functions.run = async (client, message, args, settings)  =>
 
     if (!user || user == '')  user = message.author;
 
-    const userInfo = await client.getGuildUser(message.guild, message.guild.member(user))
 
     if (userInfo == undefined || !userInfo) return client.createGuildUser(message.guild, user), message.channel.send({ embed: { description: `${arrowRight}${user} sent **0 messages** in this server.` } });
 

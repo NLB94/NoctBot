@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, userInfo) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
   
   const shop = settings.economy.shop;
   const qNb = args[0] == undefined ? 1 : (parseInt(args[0]) < 1 ? 1 : parseInt(args[0]));

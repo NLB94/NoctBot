@@ -13,7 +13,7 @@ const categoryList = readdirSync('./Bot/commands');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
 ;
   
   const loadingEmoji = client.emojis.resolve('783028992231866419');

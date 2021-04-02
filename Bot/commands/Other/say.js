@@ -4,7 +4,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
   message.delete().catch(err => {})
   let msg = args.join(" ").replace("@everyone", '').replace('@here', '');

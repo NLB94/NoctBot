@@ -1,7 +1,7 @@
 const { MESSAGES } = require("../../../util/constants");
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     const messages = await message.channel.messages.fetch({ before: message.id })
     const msg = args[0].startsWith('^') ? await message.channel.messages.resolve(messages.size > 0 ? messages.array()[0].id : '\u200b') : await message.channel.messages.resolve(args[0]);
