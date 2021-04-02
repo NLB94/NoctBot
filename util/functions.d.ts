@@ -50,7 +50,8 @@ export declare function run(
   client: Client,
   message: Message,
   args: String[],
-  settings: GuildData
+  settings: GuildData,
+  userInfo: UserData
 );
 
 export declare function client(client: Client);
