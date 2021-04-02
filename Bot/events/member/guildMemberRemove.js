@@ -13,7 +13,7 @@ module.exports = async (client, member) => {
 
     if (settings.countChannels.enable) {
         const count = settings.countChannels;
-        const membersCount = count.filter(async c => c.category.toLowerCase() == 'members')
+        const membersCount = await count.filter(async c => c.category.toLowerCase() == 'members')
         if (!membersCount || !membersCount.length || membersCount == undefined || membersCount.length < 1) return;
         else {
             membersCount.forEach(async m => {
