@@ -9,7 +9,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (settings == undefined) client.createGuild(message.guild);
   const x_mark = client.emojis.resolve('806440609127596032');
 
-  const canvas = createCanvas(1000, 300);
+  const canvas = createCanvas(1000, 300); 
   const ctx = canvas.getContext("2d");
 
   const image = await loadImage("./Bot/Assets/rank.png");
@@ -21,6 +21,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const member = message.guild.member(user);
   if (!member) return message.channel.send({embed: { description: `${x_mark}User not in this server!`}});
 
+  if (user !== message.author) userInfo = await client.getGuildUser(message.guild, member)
   if (userInfo == undefined) return client.createGuildUser(message.guild, user), message.channel.send('Please retry.');
 
   let statusColor = '';
@@ -95,12 +96,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
   ctx.fillStyle = "#999999";
-  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, 300 + 280, 175, 300);
+  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, (ctx.measureText(user.username).width / 300) + 580, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)
   ctx.lineWidth = 6
-  ctx.strokeStyle = "#000000"
+  ctx.strokeStyle = "#FFFFFF"
   ctx.closePath()
   ctx.clip();
   const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
