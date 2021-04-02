@@ -1,9 +1,30 @@
-const { MessageEmbed } = require("discord.js")
+const { MessageEmbed, Client, GuildMember } = require("discord.js")
 
+/**
+ * 
+ * @param {Client} client 
+ * @param {GuildMember} member 
+ * @returns 
+ */
 module.exports = async (client, member) => {
     const settings = await client.getGuild(member.guild);
-    if (settings == undefined) return;
+    if (settings == undefined) await client.createGuild({ guildID: member.guild.id });
     let msg = settings.lMessage;
+
+    if (settings.countChannels.enable) {
+        const count = settings.countChannels;
+        const membersCount = count.filter(async c => c.category.toLowerCase() == 'members')
+        if (!membersCount || !membersCount.length || membersCount == undefined || membersCount.length < 1) return;
+        else {
+            membersCount.forEach(async m => {
+                if (m.type == 'all' || (m.type == 'bots' && member.user.bot) || (m.type == 'humans' && !member.user.bot)) {
+                    const channel = await member.guild.channels.resolve(m.id);
+                    if (channel) await channel.setName(channel.name.slice(0, (channel.name.length - (member.guild.memberCount - 1).toString().length)) + member.guild.memberCount)
+                }
+            })
+
+        }
+    }
 
     if (!settings.lEnable) return;
     if (settings.lEnable && msg == undefined) return;

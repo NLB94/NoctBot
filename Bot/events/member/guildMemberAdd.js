@@ -12,6 +12,7 @@ const {
 module.exports = async (client, member) => {
     const user = await client.getGuildUser(member.guild, member);
     if (user == undefined) await client.createGuildUser(member.guild, member);
+    
     const settings = await client.getGuild(member.guild);
 
     if (settings == undefined) await client.createGuild(message.guild);
@@ -36,15 +37,13 @@ module.exports = async (client, member) => {
     if (settings.countChannels.enable) {
         const count = settings.countChannels;
         const membersCount = count.filter(async c => c.category.toLowerCase() == 'members')
-        if (!membersCount || !membersCount.length || membersCount == undefined || membersCount.length < 1) return;
-        else {
+        if (membersCount || membersCount.length || membersCount !== undefined || membersCount.length > 0) {
             membersCount.forEach(async m => {
                 if (m.type == 'all' || (m.type == 'bots' && member.user.bot) || (m.type == 'humans' && !member.user.bot)) {
                     const channel = await member.guild.channels.resolve(m.id);
                     if (channel) await channel.setName(channel.name.slice(0, (channel.name.length - (member.guild.memberCount - 1).toString().length)) + member.guild.memberCount)
                 }
             })
-
         }
     }
     const wL = settings.welcomeAndLeave.welcome;
