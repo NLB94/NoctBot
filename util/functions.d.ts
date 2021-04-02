@@ -49,7 +49,8 @@ export declare function replaceEmbed(
 export declare function run(
   client: Client,
   message: Message,
-  args: StringArray
+  args: String[],
+  settings: GuildData
 );
 
 export declare function client(client: Client);

@@ -15,7 +15,7 @@ const { Guild } = require('../../../models/main');
 module.exports = async (client, channel) => {
     if (channel.type == "dm") return;
     else {
-        const settings = await client.getGuild(channel.guild)
+        (channel.guild)
         const logs = settings.general.logs == 'logs' ? 'None' : channel.guild.channels.resolve(settings.general.logs);
         await channel.guild.fetchAuditLogs({
             limit: 1,

@@ -6,7 +6,8 @@ const functions = require('./messageReactionRemove')
 module.exports = functions.reactionRem = async (client, messageReaction, user) => {
     const message = messageReaction.message;
     const member = message.guild.members.resolve(user.id)
-    const settings = await client.getGuild(message.guild);
+    
+    const settings = await client.getGuild(message.guild)
     if (!settings || settings == undefined) return client.createGuild(message.guild);
 
     const check_mark = client.emojis.resolve('770980790242377739');

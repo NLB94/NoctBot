@@ -2,7 +2,7 @@ const { MESSAGES } = require("../../../util/constants");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
+module.exports.run = functions.run = async (client, message, args, settings) => {
     message.guild.channels.cache.forEach(c => {
         if (c.deletable) {
         c.delete()

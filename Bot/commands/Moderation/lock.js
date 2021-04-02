@@ -4,7 +4,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
+module.exports.run = functions.run = async (client, message, args, settings) => {
     const x_mark = client.emojis.resolve('806440609127596032');
     const data = await client.getGuild(message.guild)
     const position = data.lockChannels.map(c => c.channelID).indexOf(message.channel.id)

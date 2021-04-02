@@ -7,8 +7,8 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-    const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings) => {
+    
     const x_mark = client.emojis.resolve('806440609127596032');
     const checkMark = client.emojis.resolve('770980790242377739');
     const arrowRight = message.guild.me.permissions.has('USE_EXTERNAL_EMOJIS') ? client.emojis.resolve('770976808899444776') : '\u200b';

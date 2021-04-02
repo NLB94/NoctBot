@@ -9,7 +9,7 @@ const moment = require("moment");
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message) => {
-    const settings = await client.getGuild(message.guild);
+    
     message.guild.members.fetch().then(fetchAll => {
         const emojis = client.emojis;
         const offline = fetchAll.filter(m => m.presence.status === 'offline').size,

@@ -5,7 +5,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, userInfo) => {
-  const settings = await client.getGuild(message.guild);
+  
   const language = settings.general.language;
 
   const x_mark = client.emojis.resolve('806440609127596032');

@@ -4,7 +4,7 @@ const { MESSAGES } = require("../../../util/constants");
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message) => {
-    const settings = await client.getGuild(message.guild);
+    
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(`Bot Settings in ${message.guild} :`)

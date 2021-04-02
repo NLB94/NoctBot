@@ -5,7 +5,7 @@ const functions = require('./messageReactionAdd');
 
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {
     const message = messageReaction.message;
-    const settings = await client.getGuild(message.guild);
+    
     if (settings == undefined) client.createGuild({
         guildID: message.guild.id
     });

@@ -13,8 +13,8 @@ const categoryList = readdirSync('./Bot/commands');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-  const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings) => {
+  
   const loadingEmoji = client.emojis.resolve('783028992231866419');
   const emoji1 = client.emojis.resolve('772418754583855134');
   const emoji2 = client.emojis.resolve('770976748082298891');

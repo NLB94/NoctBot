@@ -7,8 +7,8 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-    const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings) => {
+    
     const getSetting = args[0].toLowerCase().split("-").join("");
     const prefix = settings.general.prefix;
     let newSetting = args.slice(1).join(" ");

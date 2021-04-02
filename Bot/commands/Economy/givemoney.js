@@ -4,7 +4,7 @@ const { MESSAGES } = require("../../../util/constants");
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, userInfo) => {
-  const settings = await client.getGuild(message.guild);
+  
   if (!args[0].startsWith("<@") && !args[0].endsWith(">") && isNaN(args[1]))
     return message.channel.send(
       `Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``

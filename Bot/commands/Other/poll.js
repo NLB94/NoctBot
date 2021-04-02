@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = (client, message, args) => {
+module.exports.run = functions.run = (client, message, args, settings) => {
     message.delete().catch(err => {})
     const query = args.join(" ").split("\"")
     let question = ''
