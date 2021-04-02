@@ -4,7 +4,8 @@ const {
 } = require("../../../util/constants");
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   const tada = client.emojis.resolve('770980801411678229'),
     warning = client.emojis.resolve('806438435933913178'),
     eyes = client.emojis.resolve('806438464064978944'),

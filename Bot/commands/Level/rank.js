@@ -5,7 +5,8 @@ const { MessageAttachment } = require('discord.js');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   
   if (settings == undefined) client.createGuild(message.guild);
   const x_mark = client.emojis.resolve('806440609127596032');
@@ -110,25 +111,25 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
 
   ctx.save()
 //xp 
-  ctx.globalAlpha = 1;
-  ctx.font = "30px Calibri";
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(`${xp}`, 750, 270, 100);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "30px Calibri";
+  // ctx.fillStyle = "#FFFFFF";
+  // ctx.fillText(`${xp}`, 750, 270, 100);
 
-  ctx.globalAlpha = 1;
-  ctx.font = "30px Calibri";
-  ctx.fillStyle = "#999999";
-  ctx.fillText(`/ ${xpReq} XP`, 850, 270, 100);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "30px Calibri";
+  // ctx.fillStyle = "#999999";
+  // ctx.fillText(`/ ${xpReq} XP`, 850, 270, 100);
 //rank & level
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
   ctx.fillStyle = "#FFFFFF";
   ctx.fillText('RANK', 500, 100, 75);
 
-  ctx.globalAlpha = 1;
-  ctx.font = "75px Calibri";
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(`#${userRank}`, 585, 100, 175);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "75px Calibri";
+  // ctx.fillStyle = "#FFFFFF";
+  // ctx.fillText(`#${userRank}`, 585, 100, 175);
 
 
   ctx.globalAlpha = 1;
@@ -136,20 +137,20 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   ctx.fillStyle = "#FFFFFF";
   ctx.fillText('LEVEL', 775, 175, 75);
 
-  ctx.globalAlpha = 1;
-  ctx.font = "75px Calibri";
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(`${userInfo.level}`, 875, 175, 175);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "75px Calibri";
+  // ctx.fillStyle = "#FFFFFF";
+  // ctx.fillText(`${userInfo.level}`, 875, 175, 175);
 //username & tag
-  ctx.globalAlpha = 1;
-  ctx.font = "50px Calibri";
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText(user.username.slice(0, 8), 280, 175, 300);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "50px Calibri";
+  // ctx.fillStyle = "#FFFFFF";
+  // ctx.fillText(user.username.slice(0, 8), 280, 175, 300);
 
-  ctx.globalAlpha = 1;
-  ctx.font = "30px Calibri";
-  ctx.fillStyle = "#999999";
-  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, ctx.measureText(user.username.slice(0, 8)).width + 340, 175, 300);
+  // ctx.globalAlpha = 1;
+  // ctx.font = "30px Calibri";
+  // ctx.fillStyle = "#999999";
+  // ctx.fillText(`#${user.discriminator.substr(0, 4)}`, ctx.measureText(user.username.slice(0, 8)).width + 340, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)
@@ -157,8 +158,8 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   ctx.strokeStyle = "#000000"
   ctx.closePath()
   ctx.clip();
-  const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
-  ctx.drawImage(avatar, 35, 55, 200, 200)
+  // const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
+  // ctx.drawImage(avatar, 35, 55, 200, 200)
   ctx.restore();
 
   //user status

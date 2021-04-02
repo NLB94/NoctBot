@@ -4,7 +4,8 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   message.delete().catch(err => {})
   let msg = args.join(" ").replace("@everyone", '').replace('@here', '');
   if (msg && msg !== '') {

@@ -4,7 +4,8 @@ const fetch = require('node-fetch');
  
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   message.delete().catch(err => {})
   function clean(text) {
     if (typeof text === "string") 

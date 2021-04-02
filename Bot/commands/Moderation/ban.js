@@ -7,7 +7,8 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   
   let reason = args.splice(1).join(' ') || 'Unspecified';
   const logs = settings.general.logs == 'logs' ? 'None' : message.guild.channels.cache.find(c => c.id == settings.general.logs);

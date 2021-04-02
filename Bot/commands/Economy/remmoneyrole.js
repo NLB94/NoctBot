@@ -3,7 +3,8 @@ const { MESSAGES } = require('../../../util/constants');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings) => {
+module.exports.run = functions.run = async (client, message, args) => {
+const settings = await client.getGuild(message.guild);
   
     {
       const support = args[0] == 'bank' || args[0] == 'cash' ? args[0].toLowerCase() : 'cash';
