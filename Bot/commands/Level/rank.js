@@ -6,15 +6,13 @@ const { MessageAttachment } = require('discord.js');
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings) => {
-;
-  
   if (settings == undefined) client.createGuild(message.guild);
   const x_mark = client.emojis.resolve('806440609127596032');
 
   const canvas = createCanvas(1000, 300);
   const ctx = canvas.getContext("2d");
 
-  const noir = await loadImage("./Bot/Assets/noir.png");
+  const image = await loadImage("./Bot/Assets/rank.png");
 
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
   if (user == undefined) return message.channel.send({embed: { description: `${x_mark}User not found !`}})
@@ -49,47 +47,11 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   let userRank = users.sort((a, b) => (a.XP + (a.level * 99999999999999999999) < b.XP + (b.level * 99999999999999999999)) ? 1 : -1).map(e => e.id).indexOf(user.id)
   userRank += 1
 //start ctx image
-  ctx.drawImage(noir, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
   ctx.beginPath();
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "black";
-  ctx.globalAlpha = 0.5;
-  ctx.fillStyle = "black";
-  ctx.fillRect(20, 20, 925, 225);
-  ctx.globalAlpha = 1;
-  ctx.strokeRect(20, 20, 925, 225);
-
-  //contour
-  ctx.strokeStyle = "#000033";
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = "#000033";
-  ctx.fillRect(0, 0, 20, 300);
-  ctx.globalAlpha = 1;
-  ctx.strokeRect(0, 0, 20, 300);
-
-  ctx.strokeStyle = "#000033";
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = "#000033";
-  ctx.fillRect(0, 0, 1000, 20);
-  ctx.globalAlpha = 1;
-  ctx.strokeRect(0, 0, 1000, 20);
-
-  ctx.strokeStyle = "#000033";
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = "#000033";
-  ctx.fillRect(980, 0, 20, 300);
-  ctx.globalAlpha = 1;
-  ctx.strokeRect(980, 0, 20, 300);
-
-
-  ctx.strokeStyle = "#000033";
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = "#000033";
-  ctx.fillRect(0, 280, 1000, 20);
-  ctx.globalAlpha = 1;
-  ctx.strokeRect(0, 280, 1000, 20);
-  //progress bar
+ //progress bar
   let width = (userInfo.XP / userInfo.XPRequire) * 700;
   if (width >= 700) width = 700;
 
@@ -111,46 +73,30 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
 
   ctx.save()
 //xp 
-  // ctx.globalAlpha = 1;
-  // ctx.font = "30px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(`${xp}`, 750, 270, 100);
-
-  // ctx.globalAlpha = 1;
-  // ctx.font = "30px Calibri";
-  // ctx.fillStyle = "#999999";
-  // ctx.fillText(`/ ${xpReq} XP`, 850, 270, 100);
+  ctx.globalAlpha = 1;
+  ctx.font = "30px Calibri";
+  ctx.fillStyle = "#000000";
+  ctx.fillText(`${xp} / ${xpReq} XP`, 500, 225, 200);
 //rank & level
   ctx.globalAlpha = 1;
-  ctx.font = "30px Calibri";
+  ctx.font = "75px Calibri";
   ctx.fillStyle = "#FFFFFF";
-  ctx.fillText('RANK', 500, 100, 75);
+  ctx.fillText(`#${userRank}`, 815, 100, 175);
 
-  // ctx.globalAlpha = 1;
-  // ctx.font = "75px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(`#${userRank}`, 585, 100, 175);
-
+  ctx.globalAlpha = 1;
+  ctx.font = "75px Calibri";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(`${userInfo.level}`, 815, 175, 175);
+//username & tag
+  ctx.globalAlpha = 1;
+  ctx.font = "50px Calibri";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(user.username.slice(0, 8), 280, 175, 300);
 
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillText('LEVEL', 775, 175, 75);
-
-  // ctx.globalAlpha = 1;
-  // ctx.font = "75px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(`${userInfo.level}`, 875, 175, 175);
-//username & tag
-  // ctx.globalAlpha = 1;
-  // ctx.font = "50px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(user.username.slice(0, 8), 280, 175, 300);
-
-  // ctx.globalAlpha = 1;
-  // ctx.font = "30px Calibri";
-  // ctx.fillStyle = "#999999";
-  // ctx.fillText(`#${user.discriminator.substr(0, 4)}`, ctx.measureText(user.username.slice(0, 8)).width + 340, 175, 300);
+  ctx.fillStyle = "#999999";
+  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, ctx.measureText(user.username.slice(0, 8)).width + 340, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)
@@ -158,8 +104,8 @@ module.exports.run = functions.run = async (client, message, args, settings) => 
   ctx.strokeStyle = "#000000"
   ctx.closePath()
   ctx.clip();
-  // const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
-  // ctx.drawImage(avatar, 35, 55, 200, 200)
+  const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
+  ctx.drawImage(avatar, 35, 55, 200, 200)
   ctx.restore();
 
   //user status

@@ -9,7 +9,6 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings)  => {
 
   const dailyCd = 8.64e+7;
-  (message.guild)
   const language = settings.general.language;
   const loadingEmoji = client.emojis.resolve('783028992231866419');
 

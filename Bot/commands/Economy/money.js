@@ -3,9 +3,10 @@ const { MESSAGES } = require('../../../util/constants');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, userInfo) => {
+module.exports.run = functions.run = async (client, message, args, settings) => {
   if (!args.length) {
   if (message.author.bot) return;
+  const userInfo = await client.getGuildUser(message.guild, message.member)
   if (!userInfo) return;
   else {
     const embed = new MessageEmbed()
