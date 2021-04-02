@@ -20,6 +20,7 @@ module.exports = async (client, channel) => {
             limit: 1,
             type: 'CHANNEL_CREATE'
         }).then(async f => {
+            if (!channel.manageable || !channel) return;
             const count = settings.countChannels;
             if (count.enable) {
                 const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
@@ -50,20 +51,7 @@ module.exports = async (client, channel) => {
 
             // logs == undefined || !logs || logs == 'None' ? (channel.isText() ? channel.send(embed) : '') : logs.send(embed);
 
-        }).catch((err) => {
-            console.log(err)
-            // const logs = message.channel;
-
-            // const embed = new MessageEmbed()
-            //     .setAuthor("Channel Updated")
-            //     .setColor("#000000")
-            //     .setDescription(`Before : ${oldChannel.name} \nAfter : ${channel} (${channel.name}) \nType : ${channel.type}`)
-            //     .setTimestamp()
-            //     .setFooter(channel.guild.name, channel.guild.iconURL());
-
-
-            // logs.send(embed)
-        });
+        }).catch((err) => {});
 
 
     };

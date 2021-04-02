@@ -7,8 +7,8 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings)  => {
+
     message.delete().catch(err => {})
     const query = args.join(" ").split("\"")
     let question = ''

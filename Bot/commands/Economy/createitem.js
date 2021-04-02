@@ -8,8 +8,8 @@ const {
 const { Item } = require('../../../util/economy')
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings)  => {
+
     
     const language = settings.general.language;
 

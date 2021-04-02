@@ -3,8 +3,8 @@ const { Guild } = require('../../../models/main');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args) => {
-const settings = await client.getGuild(message.guild);
+module.exports.run = functions.run = async (client, message, args, settings)  => {
+
     
     const x_mark = client.emojis.resolve('806440609127596032');
 
