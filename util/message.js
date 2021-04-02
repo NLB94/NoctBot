@@ -63,22 +63,24 @@ module.exports = func.client = async client => {
             });
 
             let typeMsg = settings.levelSystem.message.embed.enable ? MessageEmbed : Message;
-            let msg = typeMsg === MessageEmbed ? settings.levelSystem.message.normalMsg.msg : settings.levelSystem.message.embed.data;
+            let msg = typeMsg !== MessageEmbed ? settings.levelSystem.message.normalMsg.msg : settings.levelSystem.message.embed.data;
             if (typeMsg === Message && (msg == '' || !msg)) msg = 'GG {user}, you reached level **{level}**!';
-            console.log(msg)
-            if (typeMsg === Message) msg = client.replaceLevelText(msg, message, {
+            
+            if (typeMsg === Message) msg = await client.replaceLevelText(msg, message, {
                 newLvl: (oldLvl + 1)
             })
-            // else if (typeMsg = MessageEmbed) msg = client.replaceLevelEmbed(msg, message, { newLvl: (oldLvl + 1) })
+            // else if (typeMsg = MessageEmbed) msg = await client.replaceLevelEmbed(msg, message, { newLvl: (oldLvl + 1) })
 
-            let channel = settings.levelSystem.channel;
-            if (channel == '') channel = message.channel;
-            channel.send(`${msg}`);
+            if (settings.levelSystem.channel !== undefined) {
+                let channel = message.guild.channels.resolve(settings.levelSystem.channel);
+                if (channel == '' || !channel || channel == undefined) channel = message.channel;
+                channel.send(msg)
 
-            if (settings.levelSystem.DM.enable) {
-                let msgDm = settings.levelSystem.DM.message
-                if (msgDm == '') msgDm = msg;
-                message.author.send(`${msgDm}`);
+                if (settings.levelSystem.DM.enable) {
+                    let msgDm = settings.levelSystem.DM.message
+                    if (msgDm == '') msgDm = msg;
+                    message.author.send(`${msgDm}`);
+                }
             }
         };
     };

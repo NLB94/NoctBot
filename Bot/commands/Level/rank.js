@@ -95,7 +95,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
   ctx.fillStyle = "#999999";
-  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, 300 + 340, 175, 300);
+  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, 300 + 280, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)

@@ -136,7 +136,7 @@ module.exports = async (client, message) => {
           tStamps.delete(`${message.author.id} ${message.guild.id}`)
         }, cdAmount);
       }
-      command.run(client, message, args, settings);
+      command.run(client, message, args, settings, userInfo);
     };
   } else if (message.type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION')) {
     

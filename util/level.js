@@ -27,13 +27,13 @@ module.exports = func.client = client => {
         });
     }
     client.replaceLevelText = functions.replaceLevelText = async (text, message, options) => {
-       if (!text) return '';
-        text = await text.replace("{user}", message.member)
-            .replace("{level}", options.newLvl)
-            .replace("{guild}", message.guild.name)
-            .replace("{userID}", message.author.id)
-            .replace("{username}", message.author.username)
-            .replace("{guildID}", message.guild.id);
+        if (!text) return 'test';
+        text = text.includes("{user}") ? await text.replace("{user}", message.member) : text;
+        text = text.includes("{level}") ? await text.replace("{level}", options.newLvl) : text;
+        text = text.includes("{guild}") ? await text.replace("{guild}", message.guild) : text;
+        text = text.includes("{userID}") ? await text.replace("{userID}", message.author.id) : text;
+        text = text.includes("{username}") ? await text.replace("{username}", message.author.username) : text;
+        text = text.includes("{guildID}") ? text.replace("{guildID}", message.guild.id) : text;
 
         return await text;
     };
