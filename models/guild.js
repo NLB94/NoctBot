@@ -54,6 +54,7 @@ const guildSchema = mongoose.Schema({
     automod: {
         "type": Object,
         "default": {
+            enable: false,
             whiteList: {
                 bots: true,
                 admin: true,

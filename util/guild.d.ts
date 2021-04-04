@@ -60,4 +60,4 @@ import Discord from "discord.js";
      * Update all guilds with missing informations
      * @param {Object} options 
      */
-    export declare function updateAllGuilds(options: Object, options2: Object);
+    export declare function updateAllGuilds(query: Object, options: Object);

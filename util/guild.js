@@ -141,15 +141,9 @@ module.exports = func.client = async (client) => {
             }
         })
     }
-    client.updateAllGuilds = functions.updateAllGuilds = async function (options, options2) {
-        await Guild.updateMany({ countChannels: null }, {
-            $set: {
-                countChannels: {
-                    enable: false,
-                    category: '',
-                    list: []
-                }
-            }
+    client.updateAllGuilds = functions.updateAllGuilds = async function (query, options) {
+        await Guild.updateMany(query, {
+            $set: options
         }).then()
     }
 }

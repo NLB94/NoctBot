@@ -20,7 +20,7 @@ module.exports = func.run = async (client, message, args) => {
     if (args[0] == undefined || !args.length) return;
     const embed = new MessageEmbed()
         .setAuthor("I2Z7")
-        .setDescription(`${message.content}`)
+        .setDescription(`${args.join(" ")}`)
         .addField("User ID:", `${user.id}`)
         .setThumbnail(client.user.avatarURL())
         .setFooter(user.tag, user.avatarURL());

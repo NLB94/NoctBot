@@ -116,6 +116,7 @@ export declare class GuildData {
   };
   users: UserDataArray;
   automod: {
+    enable: Boolean,
     whiteList: {
       bots: Boolean;
       admin: Boolean;
