@@ -1230,6 +1230,24 @@ const MESSAGES = {
         onlyPremium: false,
         args: false
       },
+      NICK: {
+        name: "nick",
+        aliases: ["nick"],
+        category: "other",
+        description: "Change an user nickname",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: true,
+        usage: "<new_nick> {@user}",
+        example: "~nick BestBot @I2Z7",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true
+      },
       PING: {
         name: "ping",
         aliases: ["ping"],
