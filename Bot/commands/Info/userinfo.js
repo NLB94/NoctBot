@@ -14,7 +14,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (!user || user === '\u200b') return message.channel.send({embed: {description: `${x_mark}User not found!`}});
 
   if (user && user !== '\u200b') {
-    const dbUser = await client.getGuildUser(message.guild, member);
+    if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
 
     const customStat = user.presence.activities.length > 0 ? user.presence.activities.find(a => a.type == 'CUSTOM_STATUS') : '';
 
@@ -42,8 +42,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     embed.addField('Joined Discord At :', `${moment(user.createdAt).format('ddd, DD/MM/YYYY HH:mm')} (${(Math.round(Math.floor(Date.now() - user.createdAt) / (1000 * 3600 * 24)))} days ago)`, true);
 
     if (member) {
-      if (dbUser) embed.addField('Message Sent', `${dbUser.messageSent} message(s)`)
-      if (dbUser && dbUser.warns > 0) embed.addField('Infractions :', `${dbUser.warns} warn(s)`);
+      if (userInfo) embed.addField('Message Sent', `${userInfo.messageSent} message(s)`)
+      if (userInfo && userInfo.warns > 0) embed.addField('Infractions :', `${userInfo.warns} warn(s)`);
       if (member.hasPermission('BAN_MEMBERS', true)) embed.addField('Administrator :', `${check_mark}`)
       else if (member.hasPermission('SEND_MESSAGES', false)) embed.addField('Administrator :', `${x_mark}`);
     }
