@@ -8,7 +8,7 @@ const moment = require("moment");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
     
     message.guild.members.fetch().then(fetchAll => {
         const emojis = client.emojis;
