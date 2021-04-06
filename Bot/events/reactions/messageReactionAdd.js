@@ -264,7 +264,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             await message.react('❌').catch(() => {})
                         }).then(setTimeout(() => {
                             message.edit(`${user.tag}, React to get a category's commands`, embed2)
-                        }, '9000'))
+                        }, 10000))
                     }; //pour la commande help jusqu'à ici
                 }
             }
