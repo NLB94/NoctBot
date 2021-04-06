@@ -45,6 +45,17 @@ module.exports = func.client = async (client) => {
         if (!guild || !user) return;
         const dailyCd = Date.now() - 8.64e+7;
         const daily = new Date(dailyCd);
+
+        const invites = await guild.fetchInvites();
+
+        const userInvites = invites.array().filter(o => o.inviter.id === user.id);
+        var userInviteCount = 0;
+
+        for (var i = 0; i < userInvites.length; i++) {
+            var invite = userInvites[i];
+            userInviteCount += invite.uses;
+        }
+
         Guild.updateOne({
             guildID: guild.id
         }, {
@@ -74,6 +85,16 @@ module.exports = func.client = async (client) => {
                         daily: daily,
                         hourly: daily,
                         rob: daily
+                    },
+                    invites: {
+                        total: userInviteCount,
+                        all: [],
+                        leaves: [],
+                        regular: userInviteCount,
+                        regArray: [],
+                        fakes: [],
+                        bonus: 0,
+                        inviterID: ''
                     }
                 },
             },
@@ -110,35 +131,18 @@ module.exports = func.client = async (client) => {
         });
     }
     client.updateAllGuildsUsers = functions.updateAllGuildsUsers = async (options = {}) => {
-        const guild1 = await Guild.findOne({
-            guildID: '727494941911154688'
-        })
-        guild1.users ? await guild1.users.forEach(u => {
-            if (!u.voiceXP || u.voiceXP == undefined) {
+        await client.guilds.cache.forEach(async g => {
+            const guild = await Guild.findOne({
+                guildID: g.id
+            });
+            if (guild.users) guild.users.forEach(u => {
                 Guild.updateOne({
-                    guildID: '727494941911154688',
+                    guild: g.id,
                     "users.id": u.id
                 }, {
                     $set: options
                 }).then();
-            }
-        }) : '';
-        client.guilds.cache.forEach(async g => {
-            if (g.id !== '727494941911154688') {
-                const guild = await Guild.findOne({
-                    guildID: g.id
-                });
-                guild.users ? guild.users.forEach(u => {
-                    if (!u.voiceXP || u.voiceXP == undefined) {
-                        Guild.updateOne({
-                            guild: g.id,
-                            "users.id": u.id
-                        }, {
-                            $set: options
-                        }).then();
-                    }
-                }) : ''
-            }
+            })
         })
     }
     client.updateAllGuilds = functions.updateAllGuilds = async function (query, options) {
