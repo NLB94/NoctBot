@@ -27,7 +27,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       !customStat ? '' : embed.addField('Custom Status', `Name : ${customStat.name} \nDescription : ${customStat.emoji ? (customStat.emoji.name ? customStat.emoji.name : '') : ''}${customStat.state}`)
       .addField('\u200b', '\u200b')
       .setTimestamp()
-      .setFooter("By <I2Z7/>");
+      .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
 
     if (member && member.roles.cache.size > 1) embed.addField('\u200b', '\u200b'), embed.addField('User Roles :', `${member.roles.cache.map(r => `<@&${r.id}>`).join(', ')}`)
     if (member && !member.premiumSince) embed.addField('\u200b', '\u200b'), embed.addField('Is Booster :', 'No'), embed.addField('\u200b', '\u200b')

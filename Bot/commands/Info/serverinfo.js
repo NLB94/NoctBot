@@ -57,15 +57,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     inline: true
                 }, {
                     name: '• Partner :',
-                    value: `${guild.partnered ? 'Yes' : 'No'}`,
+                    value: `${guild.partnered ? `${emojis.resolve(client.localEmojis.checkMark)}` : `${emojis.resolve(client.localEmojis.x_mark)}`}`,
                     inline: true
                 }, {
                     name: '\u200b',
                     value: '\u200b',
                     inline: true
                 }, {
-                    name: `${emojis.resolve('770980790242377739')} Verified :`,
-                    value: `${guild.verified ? 'Yes' : 'No'}`,
+                    name: `• Verified :`,
+                    value: `${guild.verified ? `${emojis.resolve(client.localEmojis.checkMark)}` : `${emojis.resolve(client.localEmojis.x_mark)}`}`,
                     inline: true
                 }, {
                     name: '• Vanity URL :',
@@ -84,11 +84,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 //     name: '• Update Channel :',
                 //     value: `${guild.publicUpdatesChannel == undefined ? 'Not defined' : `${guild.publicUpdatesChannel} (${guild.publicUpdatesChannelID})`}`,
                 //     inline: true
-                // }, /*{
-                /*    name: '• Bans :',
-                    value: `${bans}`,
-                    inline: false
-                },*/
+                // }, {
+                //     name: '• Bans :',
+                //     value: `${bans}`,
+                //     inline: false
+                // },
                 {
                     name: '\u200b',
                     value: `\u200b`,

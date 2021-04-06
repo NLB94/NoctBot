@@ -20,7 +20,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             //⌠ ⌡ ►
           )
           .setTimestamp()
-          .setFooter("By <I2Z7/>");
+          .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
         //   if (settings.wChannel) embed.addField('• Welcome Channel :', `${settings.wChannel}`, true)
         //   else embed.addField('• Welcome Channel :', '\u200b', true);
         //   embed.addField('\u200b', '\u200b', true);

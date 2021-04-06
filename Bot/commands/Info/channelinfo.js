@@ -21,12 +21,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .addField('ID :', `${channel.id}`, true)
       .addField('\u200b', '\u200b', true)
       channel.topic == undefined ? '' : embed.setDescription(`Topic : **${channel.topic}**`);
-      embed.addField('Category :', `**${channel.parentID == undefined ? 'None' : `${channel.parent.name} (${channel.parentID})`}**`, true)
+      embed.addField('Category :', `**${channel.parentID == undefined ? 'None' : `Name : ${channel.parent.name} (${channel.parentID})`}**`, true)
       .addField('Created at :', `**${moment(channel.createdAt).format('ddd, DD/MM/YYYY HH:mm')} (${(Math.round(Math.floor(Date.now() - channel.createdAt) / (1000 * 3600 * 24)))} days ago)**`, true)
       .addField('\u200b', '\u200b', true)
       .addField('Messages in cache :', `${channel.messages == undefined || !channel.messages ? '\u200b' : channel.messages.cache.size }`, true)
       .setTimestamp()
-      .setFooter("By <I2Z7/>");
+      .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
 
     message.channel.send(embed);
   };

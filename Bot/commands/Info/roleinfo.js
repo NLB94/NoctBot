@@ -37,7 +37,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .addField('\u200b', '\u200b', true)
       .addField('Mentionable :', `${role.mentionable ? `${check_mark}` : `${x_mark}`}`, true)
       .setTimestamp()
-      .setFooter("By <I2Z7/>");
+      .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
 
     message.channel.send(embed);
   };
