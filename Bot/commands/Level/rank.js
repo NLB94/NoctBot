@@ -22,7 +22,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (!member) return message.channel.send({embed: { description: `${x_mark}User not in this server!`}});
 
   if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
-  if (userInfo == undefined) return client.createGuildUser(message.guild, user), message.channel.send('Please retry.');
+  if (userInfo == undefined) await client.createGuildUser(message.guild, user);
 
   let statusColor = '';
   if (user.presence.status == 'online') statusColor = '#009966';

@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const {
   Guild,
 } = require("../models/main");
@@ -99,6 +100,19 @@ module.exports = functions.client = client => {
           category: options.category,
           type: options.type
         }
+      }
+    }).then()
+  };
+  /**
+   * 
+   * @param {Discord.Guild} guild 
+   * @param {functions.ModCase} options
+   * @param {functions.GuildData} settings
+   */
+  client.createCase = async (guild, options, settings) => {
+    await Guild.updateOne({ guildID: guild.id }, {
+      $push: {
+        "moderation.case": options
       }
     }).then()
   }

@@ -7,9 +7,11 @@ const {
  * @param {Guild} guild 
  */
 module.exports = async (client, guild) => {
+    const settings = await client.getGuild(guild);
     const ownerMessageDM = `Thanks for adding I2Z7 in your server! \nType **~help** to show all bot's commands \nBot dashboard : Soon... \nJoin support server to get more help : ${client.botGuild.supportInvite}`;
     const owner = await client.users.resolve(guild.ownerID);
-    await client.createGuild({
+    if (!settings || settings == undefined) await client.createGuild({
         guildID: guild.id,
-    }), owner.send(ownerMessageDM).catch(() => {})
+    });
+    owner.send(ownerMessageDM).catch(() => {})
 };

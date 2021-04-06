@@ -9,7 +9,7 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
-  
+  //RAJOUTER L'EMOJI BANNNNNNNNNNNNNNN
   let reason = args.splice(1).join(' ') || 'Unspecified';
   const logs = settings.general.logs == 'logs' ? 'None' : message.guild.channels.cache.find(c => c.id == settings.general.logs);
   const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : args[0]);

@@ -1210,6 +1210,24 @@ const MESSAGES = {
         onlyPremium: false,
         args: true
       },
+      WARNINGS: {
+        name: "warnings",
+        aliases: ["warnings"],
+        category: "moderation",
+        description: "Show an user warnings.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: true,
+        usage: "@user",
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: true,
+        onlyServerOwner: false,
+        reqPermName: "MUTE_MEMBERS",
+        onlyPremium: false,
+        args: true
+      },
     },
     OTHER: {
       ADDBOT: {
