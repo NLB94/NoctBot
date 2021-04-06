@@ -134,31 +134,6 @@ const guildSchema = mongoose.Schema({
             color: '#000099',
             image: '',
             message: {
-                embed: {
-                    enable: false,
-                    data: {
-                        title: '',
-                        author: {
-                            name: '',
-                            iconURL: '',
-                            url: ''
-                        },
-                        url: '',
-                        description: 'GG {user}, you reached level **{level}** !',
-                        timestamp: true,
-                        footer: {
-                            name: '',
-                            iconURL: ''
-                        },
-                        color: '#FFFFFF',
-                        thumbnail: '',
-                        image: ''
-                    }
-                },
-                normalMsg: {
-                    enable: true,
-                    msg: 'GG {user}, you reached level **{level}** in {guild} !'
-                }
                 type: 'normal',
                 msg: 'GG {user}, you reached level **{level}** !'
             },
@@ -168,18 +143,6 @@ const guildSchema = mongoose.Schema({
                 message: 'GG, you reached level **{level}** in {guild} !'
             },
             boost: 1,
-            role: {
-                give: {
-                    enable: false,
-                    role: '',
-                    level: 0
-                },
-                rem: {
-                    enable: false,
-                    role: '',
-                    level: 0
-                }
-            }
             roles: []
         }
     },
@@ -190,8 +153,6 @@ const guildSchema = mongoose.Schema({
             workMsg1: 'You helped the owner and got {money} !',
             workMsg2: 'You helped the owner and got {money} !',
             workMsg3: 'You helped the owner and got {money} !',
-            robTrue: 'You robed {money} from {user}!',
-            robFalse: 'You have caught and fined {money} !',
             shop: [],
         }
     },
