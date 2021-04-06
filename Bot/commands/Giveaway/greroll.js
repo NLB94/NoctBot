@@ -30,6 +30,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         }
 
         const reactions = await msg.reactions.resolve('770980801411678229').users;
+
+        await reactions.fetch();
         await reactions.remove(client.user.id);
 
         let winners = await reactions.cache.filter(w => !w.bot).filter(w => giveaway.hostedBy !== w.id).random(newNbWinners);
@@ -37,7 +39,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             if (!w || w == undefined || w == '' || w.id == undefined) continue;
             newWinners.push(w)
         }
-        if (!newWinners.length || newWinners.length < 1) {
+        
+        if (newWinners.length < 1) {
             msg.channel.send('Giveaway canceled, no valid participations !')
             const embedError = new MessageEmbed()
                 .setAuthor('🎉Giveaway Cancel🎉')
