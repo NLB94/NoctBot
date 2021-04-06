@@ -7,9 +7,9 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
 
-    
+
     const x_mark = client.emojis.resolve('806440609127596032');
     const checkMark = client.emojis.resolve('770980790242377739');
     try {
@@ -42,7 +42,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             const embedError = new MessageEmbed()
                 .setAuthor('🎉Giveaway Cancel🎉')
                 .setTitle(giveaway.price)
-                .setDescription(`Join [support server](${client.botGuild.supportInvite}) | [Add me](${client.botGuild.inviteLink})`)
+                .setDescription(`**Giveaway canceled, no valid participations !**\nHosted by ${giveaway.hostedBy} \n\n \nJoin [support server](${client.botGuild.supportInvite}) | [Add me](${client.botGuild.inviteLink})`)
                 .setFooter(`ID : ${msg.id}`)
                 .setTimestamp();
             msg.edit(embedError);
