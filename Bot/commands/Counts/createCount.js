@@ -7,16 +7,15 @@ const {
 const functions = require("../../../util/functions");
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-;
     try {
-        
         const loading = client.emojis.resolve('783028992231866419');
         const x_mark = client.emojis.resolve('806440609127596032');
         const warning = client.emojis.resolve('806438435933913178');
         const check_mark = client.emojis.resolve('770980790242377739');
 
         const countArray = ['channels', 'members', 'boosts'];
-        await message.channel.send(`**What is the category of count you want ?** \nAvailable categorys : _${countArray.join(', ')}_`);
+        let i = 1;
+        await message.channel.send(`**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`);
         /**
          * Filter parameters for messages awaiter
          * @param {Message} m 
@@ -27,17 +26,37 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             errors: ['time'],
             max: 1
         })
-        if (!countArray.includes(userE.first().toString().toLowerCase())) return message.channel.send('Command canceled ! **Please provide a correct category next time !**')
+        let cat = 0;
+        if (userE.first().toString().startsWith('1')) cat = 'channels';
+        else if (userE.first().toString().startsWith('2')) cat = 'members';
+        else if (userE.first().toString().startsWith('3')) cat = 'boosts';
+
+        if (typeof cat !== "string") return message.channel.send('Command canceled ! **Please provide a correct category next time !**')
         else {
-            let cat = userE.first().toString();
-            const array = cat.toLowerCase() == 'channels' ? ['all', 'categorys', 'text', 'voice'] : (cat.toLowerCase() == 'members' ? ['all', 'humans', 'bots'] : ['boosts', 'level'])
-            message.channel.send(`Alright, category is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : _${array.join(', ')}_`)
+            const array = cat == 'channels' ? ['all', 'categorys', 'text', 'voice'] : (cat == 'members' ? ['all', 'humans', 'bots'] : ['boosts', 'level']);
+            let j = 1;
+            message.channel.send(`Alright, category is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`)
             const userE2 = await message.channel.awaitMessages(filter, {
                 time: '10000',
                 errors: ['time'],
                 max: 1
             })
-            if (!array.includes(userE2.first().toString().toLowerCase())) return message.channel.send('Command canceled ! **Please provide a correct type next time !**')
+            let type = 0;
+            const nb = userE2.first().toString().slice(0, 1);
+            if (cat == 'channels') {
+                if (nb == '1') type = 'all';
+                else if (nb == '2') type = 'categorys';
+                else if (nb == '3') type = 'text';
+                else if (nb == '4') type = 'voice'
+            } else if (cat == 'members') {
+                if (nb == '1') type = 'all';
+                else if (nb == '2') type = 'humans';
+                else if (nb == '3') type = 'bots';
+            } else if (cat == 'boosts') {
+                if (nb == '1') type = 'boosts';
+                else if (nb == '2') type = 'level';
+            }
+            if (typeof type == "number") return message.channel.send('Command canceled ! **Please provide a correct type next time !**')
             else {
                 let type = userE2.first().toString().toLowerCase();
                 await message.channel.send(`Done, the channel will be appear in few time${loading}`).then(msg => {
