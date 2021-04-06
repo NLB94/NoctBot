@@ -32,7 +32,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const reactions = await msg.reactions.resolve('770980801411678229').users;
         await reactions.remove(client.user.id);
 
-        let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(newNbWinners);
+        let winners = await reactions.cache.filter(w => !w.bot).filter(w => giveaway.hostedBy !== w.id).random(newNbWinners);
         for (let w of winners) {
             if (!w || w == undefined || w == '' || w.id == undefined) continue;
             newWinners.push(w)

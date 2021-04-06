@@ -90,7 +90,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 if (msg.embeds[0].author.name !== embed.author.name) return;
                 const reactions = msg.reactions.resolve('770980801411678229').users;
                 reactions.remove(client.user.id);
-                let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(giveaway.winnerCount);
+                let winners = await reactions.cache.filter(w => !w.bot).filter(w => giveaway.hostedBy !== w.id).random(giveaway.winnerCount);
                 for (let w of winners) {
                     if (!w || w == undefined || w == '' || w.id == undefined) continue;
                     giveaway.winners.push(w)
