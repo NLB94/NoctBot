@@ -73,7 +73,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 }
             });
             await client.updateGuild(message.guild, {
-                "automod.antiInvite.enable": false
+                "automod.antiInvite.enable": false,
+                "automod.antiInvite.justWarn": false,
+                "automod.antiInvite.justDelete": false,
+                "automod.antiInvite.warnAndDelete": false,
+                "automod.antiInvite.logsThis": false
             })
             message.channel.send({
                 embed: {
