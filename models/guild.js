@@ -58,7 +58,8 @@ const guildSchema = mongoose.Schema({
             whiteList: {
                 bots: true,
                 admin: true,
-                whiteRoles: []
+                whiteRoles: [],
+                permissions: []
             },
             antiLink: {
                 enable: false,
