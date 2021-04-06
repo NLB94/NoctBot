@@ -45,14 +45,14 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
 
     const embedMute = new MessageEmbed()
-    .setAuthor(`${user.user.username}`)
+    .setAuthor(`${user.user.tag}`, user.user.avatarURL())
     .setColor("#000000")
     .setDescription(`Mute : <@${user.id}> \nModerator : ${message.author} \nReason : ${reason} \nTime : ${ms(ms(muteTime))}`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
     const embed = new MessageEmbed()
-    .setAuthor(`${user.user.username} has been muted`)
+    .setAuthor(`${user.user.tag} has been muted`, user.user.avatarURL())
     .setColor("#000000")
     .setDescription(`Reason : ${reason} \nTime : ${ms(ms(muteTime))}`);
 
@@ -64,7 +64,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (user.roles.cache.has(muteRole.id)) {
         user.user.send(`You can now speak in ${message.guild.name}!`).catch(() => '');
     const embedUnmute = new MessageEmbed()
-    .setAuthor(`${user.user.username}`, user.user.avatarURL)
+    .setAuthor(`${user.user.username}`, user.user.avatarURL())
     .setColor("#FFFF00")
     .setDescription(`Unmute : <@${user.id}> \nModerator : <@${process.env.CLIENT_ID}> \nReason : Time up`)
     .setTimestamp()

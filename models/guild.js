@@ -59,7 +59,8 @@ const guildSchema = mongoose.Schema({
                 bots: true,
                 admin: true,
                 whiteRoles: [],
-                permissions: []
+                permissions: [],
+                channels: []
             },
             antiLink: {
                 enable: false,
@@ -152,7 +153,6 @@ const guildSchema = mongoose.Schema({
             money: '$',
             workMsg1: 'You helped the owner and got {money} !',
             workMsg2: 'You helped the owner and got {money} !',
-            workMsg3: 'You helped the owner and got {money} !',
             shop: [],
         }
     },

@@ -122,7 +122,8 @@ export declare class GuildData {
       bots: Boolean;
       admin: Boolean;
       whiteRoles: Role[];
-      permissions: PermissionResolvable[]
+      permissions: PermissionResolvable[];
+      channels: [];
     };
     antiLink: {
       enable: Boolean;
@@ -193,7 +194,10 @@ export declare class GuildData {
     enable: Boolean;
     color: ColorResolvable;
     image: String;
-    message: String | Object;
+    message: {
+      type: 'embed' | 'normal';
+      msg: String | MessageEmbedOptions
+    };
     channel: String;
     DM: {
       enable: Boolean;
@@ -206,7 +210,6 @@ export declare class GuildData {
     money: String;
     workMsg1: String;
     workMsg2: String;
-    workMsg3: String;
     shop: [];
   };
   welcomeAndLeave: {
@@ -288,18 +291,18 @@ export interface UserData {
   moneyCash: Number;
   inventory: [];
   cd: {
-    daily: Date;
-    hourly: Date;
-    rob: Date;
+    daily: Number;
+    hourly: Number;
+    rob: Number;
   };
   invites: {
     total: Number;
     regular: Number;
     inviterID: String;
-    regArray: String[];
-    all: String[];
-    leaves: String[];
-    fakes: String[];
+    regArray: [];
+    all: [];
+    leaves: [];
+    fakes: [];
   }
 }
 

@@ -14,7 +14,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   const embed = new MessageEmbed()
     .setAuthor(message.guild.name, message.guild.iconURL())
-    .setTitle('Server Shop');
+    .setTitle('Bot Shop')
+    .setFooter('Soon...');
 
     const shopArray = []
     shop.map(s => shopArray.push(`${s.name} ($${s.price})\n${s.description}`));
@@ -22,7 +23,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const pageNbs = parseInt(((shopArray.length % 100) - (shopArray.length % 10)).toString().slice(0, 1)) + 1;
     if (isNaN(qNb) || qNb > pageNbs) return message.channel.send({ embed: { description: "Incorrect page number ! Please give a number between 1 and " + pageNbs}});
     
-    if (shopArray.length < 1) embed.setDescription(`There are no items in the shop... Type ${settings.general.prefix}create-item to create one.`), embed.setFooter('Page 1/1');
+    if (shopArray.length < 1) embed.setDescription(`This is the **bot shop** and there are no items in it... Type \`${settings.general.prefix}create-item\` to create one and \`${settings.general.prefix}server-shop\` to show the server shop.`), embed.setFooter('Page 1/1');
     else embed.setDescription(`For purchase an item, type \`${settings.general.prefix}buy-item <item_name> (amount)\` \nList of all items : \n${shopArray.map(item => `**${item}**`).slice(qNb * 10, (qNb * 10) + 10).join('\n')}`), embed.setFooter(`Page ${qNb}/${pageNbs}`);
 
     message.channel.send(embed);

@@ -15,6 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (userInfo == undefined) await client.createGuildUser(message.guild, message.member);
 
   const lastD = userInfo.cd.daily;
+  console.log(lastD)
   if (lastD !== null && dailyCd - (Date.now() - lastD) > 0) {
     const cdT = dailyCd - (Date.now() - lastD);
     const cdEmbed = new MessageEmbed()
@@ -108,17 +109,19 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       await msg.edit(embed);
 
 
-      if (embed.fields[0].name == embed.fields[1].name == embed.fields[2].name) {
-        embed.setFooter(`$${parseInt(embed.fields[0].value) * 10}`);
-      } else if (embed.fields[0].name !== embed.fields[1].name == embed.fields[2].name) {
-        embed.setFooter(`$${(parseInt(embed.fields[1].value) * 3)}`);
-      } else if (embed.fields[0].name == embed.fields[1].name !== embed.fields[2].name) {
-        embed.setFooter(`$${(parseInt(embed.fields[1].value) * 3)}`);
-      } else if (embed.fields[0].name == embed.fields[2].name !== embed.fields[1].name) {
-        embed.setFooter(`$${(parseInt(embed.fields[2].value) * 3)}`);
-      } else if (embed.fields[0].name !== embed.fields[1].name !== embed.fields[2].name) {
-        embed.setFooter(`$${100}`);
-      }
+      // if (embed.fields[0].name == embed.fields[1].name == embed.fields[2].name) {
+      //   embed.setFooter(`$${parseInt(embed.fields[0].value) * 10}`);
+      // } else if (embed.fields[0].name !== embed.fields[1].name == embed.fields[2].name) {
+      //   embed.setFooter(`$${(parseInt(embed.fields[1].value) * 3)}`);
+      // } else if (embed.fields[0].name == embed.fields[1].name !== embed.fields[2].name) {
+      //   embed.setFooter(`$${(parseInt(embed.fields[1].value) * 3)}`);
+      // } else if (embed.fields[0].name == embed.fields[2].name !== embed.fields[1].name) {
+      //   embed.setFooter(`$${(parseInt(embed.fields[2].value) * 3)}`);
+      // } else if (embed.fields[0].name !== embed.fields[1].name !== embed.fields[2].name) {
+      //   embed.setFooter(`$${100}`);
+      // }
+
+      embed.setFooter(`$${(parseInt(embed.fields[1].value) + parseInt(embed.fields[2].value) + parseInt(embed.fields[0].value))}`)
 
       const nbWin = parseInt(embed.footer.text.slice(1))
       const newB = userInfo.moneyCash + nbWin;

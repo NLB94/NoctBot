@@ -34,7 +34,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     client.updateGuildUI(message.guild, message.member, {
       "users.$.moneyCash": newB
     });
-    client.updateGuildUI(message.guild, message.member, { "users.$.hourlyCd": Date.now() });
+    client.updateGuildUI(message.guild, message.member, { "users.$.cd.hourly": Date.now() });
     message.channel.send(embed);
   };
 };

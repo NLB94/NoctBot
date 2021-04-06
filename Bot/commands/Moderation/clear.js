@@ -8,8 +8,8 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-;
-    
+    ;
+
     const checkMark = client.emojis.resolve('770980790242377739');
     const x_mark = client.emojis.resolve('806440609127596032');
 
@@ -109,6 +109,16 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 else {
                     msg.delete().catch(err => {})
                 }
+            });
+            let mesg = user == undefined ? `${checkMark}Successfully cleared ${nbs} message(s) in ${message.channel}!` : `${checkMark}Successfully cleared ${nbs} message(s) of ${user} in ${message.channel}!`;
+            const embed = new MessageEmbed()
+                .setAuthor(message.author.username, message.author.avatarURL())
+                .setColor("#ef0f0f")
+                .setDescription(mesg);
+            message.channel.send(embed).then(msg => {
+                setTimeout(() => {
+                    msg.delete().catch(err => {})
+                }, 5000);
             });
         });
 

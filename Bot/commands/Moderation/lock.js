@@ -5,9 +5,8 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-    ;
     const x_mark = client.emojis.resolve('806440609127596032');
-    const position = data.lockChannels.map(c => c.channelID).indexOf(message.channel.id)
+    const position = settings.lockChannels.map(c => c.channelID).indexOf(message.channel.id)
     if (position !== -1) return message.channel.send({
         embed: {
             description: `${x_mark}This channel is already lock !`
