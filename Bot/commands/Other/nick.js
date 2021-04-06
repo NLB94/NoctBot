@@ -43,7 +43,7 @@ module.exports.run = functions.run = async (client, message, args) => {
         }).catch(err => message.channel.send({ embed: { title: 'Error !', description: `Cannot change user's nickname ! \nThe error is : \`${err}\`` }}))
     } catch (e) {
         // console.log(e);
-        message.channel.send({ embed: { title: 'Error !', description: `Cannot change user's nickname ! \nThe error is : \`${e}\`` }})
+        message.channel.send({ embed: { title: 'Error !', description: `Cannot change user's nickname ! \nMissing permissions !` }})
     }
 
 }

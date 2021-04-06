@@ -118,7 +118,20 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             break;
         }
         case "color": {
-
+            if (!settings.levelSystem.enable) return message.channel.send({
+                embed: {
+                    description: `${x_mark}Level system is not enable !`
+                }
+            });
+            await client.updateGuild(message.guild, {
+                "levelSystem.enable": false
+            });
+            ColorResolvable
+            message.channel.send({
+                embed: {
+                    description: `${check_mark}Successfully disabled level system !`
+                }
+            });
             break;
         }
         case "image": {

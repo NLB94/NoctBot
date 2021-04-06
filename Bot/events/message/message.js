@@ -28,13 +28,16 @@ module.exports = async (client, message) => {
     const arrowRight = client.emojis.resolve('770976808899444776');
 
     const settings = await client.getGuild(message.guild);
-    if (!settings || settings.guildID == undefined) await client.createGuild({
+    if (!settings || settings == undefined) await client.createGuild({
       guildID: message.guild.id
     })
     const position = await settings.users.map((e) => e.id).indexOf(message.author.id);
     const userInfo = await settings.users[position];
 
     if (message.guild && position === -1) await client.createGuildUser(message.guild, message.member);
+
+    if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({ client, message, args, type: 'invite', settings, userInfo }));
+    if (message.content.includes("https://") || message.content.includes("http://")) await client.emit('automod', ({ client, message, args, type: 'link', settings, userInfo }));
 
     if (!message.content.startsWith(settings.general.prefix) && userInfo !== undefined) return client.notStartByPrefix(message, settings, userInfo);
     if (message.content.startsWith(settings.general.prefix)) {

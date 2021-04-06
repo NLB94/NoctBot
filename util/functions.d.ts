@@ -1,4 +1,5 @@
-import { Client, Guild, Message, TextChannel, VoiceChannel } from "discord.js";
+import { Client, Guild, Message, MessageEmbedOptions, PermissionResolvable, Permissions, Role, TextChannel, User, VoiceChannel } from "discord.js";
+import { Giveaway } from './giveaway'
 
 /**
  * Return a random string for password or backup id
@@ -77,13 +78,13 @@ export declare class GuildData {
   constructor(any: any);
   public guildID: String;
   general: {
-    language: String;
+    language: 'en' | 'fr';
     prefix: String;
     logs: String;
     premium: Boolean;
   };
   moderation: {
-    case: Array;
+    case: ModCase[];
     muteRole: String;
     banMsg: String;
   };
@@ -114,13 +115,14 @@ export declare class GuildData {
     userUpdate: Boolean;
     voiceStateUpdate: Boolean;
   };
-  users: UserDataArray;
+  users: UserData[];
   automod: {
-    enable: Boolean,
+    enable: Boolean;
     whiteList: {
       bots: Boolean;
       admin: Boolean;
-      whiteRoles: Array;
+      whiteRoles: Role[];
+      permissions: PermissionResolvable[]
     };
     antiLink: {
       enable: Boolean;
@@ -176,172 +178,91 @@ export declare class GuildData {
       kick: Boolean;
       ban: Boolean;
       mute: Boolean;
-      warnLimit: 0;
+      warnLimit: Number;
       logsThis: Boolean;
     };
     mutePunishment: {
       enable: Boolean;
       kick: Boolean;
       ban: Boolean;
-      muteLimit: 0;
+      muteLimit: Number;
       logsThis: Boolean;
     };
   };
   levelSystem: {
     enable: Boolean;
-    color: String;
+    color: ColorResolvable;
     image: String;
-    message: {
-      embed: {
-        enable: Boolean;
-        data: {
-          title: String;
-          author: {
-            name: String;
-            iconURL: String;
-            url: String;
-          };
-          url: String;
-          description: String;
-          timestamp: Boolean;
-          footer: {
-            name: String;
-            iconURL: String;
-          };
-          color: String;
-          thumbnail: String;
-          image: String;
-        };
-      };
-      normalMsg: {
-        enable: Boolean;
-        msg: String;
-      };
-    };
+    message: String | Object;
     channel: String;
     DM: {
       enable: Boolean;
       message: String;
     };
     boost: Number;
-    role: {
-      give: {
-        enable: Boolean;
-        role: String;
-        level: Number;
-      };
-      rem: {
-        enable: Boolean;
-        role: String;
-        level: Number;
-      };
-    };
+    role: [];
   };
   economy: {
     money: String;
     workMsg1: String;
     workMsg2: String;
     workMsg3: String;
-    robTrue: String;
-    robFalse: String;
-    shop: Array;
+    shop: [];
   };
   welcomeAndLeave: {
     welcome: {
       enable: Boolean;
       channel: String;
       role: String;
-      isEmbed: Boolean;
-      data: {
-        title: String;
-        author: {
-          name: String;
-          iconURL: String;
-          url: String;
-        };
-        url: String;
-        description: String;
-        timestamp: Boolean;
-        footer: {
-          name: String;
-          iconURL: String;
-        };
-        color: String;
-        thumbnail: String;
-        image: String;
-      };
-      normalMsg: {
-        enable: Boolean;
-        msg: String;
-      };
+      type: 'normal' | 'embed';
       DMUser: {
         enable: Boolean;
         msg: String;
       };
+      msg: String | MessageEmbedOptions;
     };
     leave: {
       enable: Boolean;
       channel: String;
-      isEmbed: Boolean;
-      embed: {
-        data: {
-          title: String;
-          author: {
-            name: String;
-            iconURL: String;
-            url: String;
-          };
-          url: String;
-          description: String;
-          timestamp: Boolean;
-          footer: {
-            name: String;
-            iconURL: String;
-          };
-          color: String;
-          thumbnail: String;
-          image: String;
-        };
-      };
-      isNormalMsg: Boolean;
-      normalMsg: String;
       DMUser: {
         enable: Boolean;
         msg: String;
       };
+      msg: String | MessageEmbedOptions;
+      type: 'normal' | 'embed'
     };
   };
-  customCommands: Array;
-  giveaways: Array;
+  customCommands: CustomCmds[];
+  giveaways: Giveaway[];
   backups: {
     onlyServerOwner: Boolean;
     admins: Boolean;
-    list: Array;
+    list: [];
   };
   ticket: {
     enable: Boolean;
     category: String;
-    title: String;
-    description: String;
     msg: String;
+    embed: MessageEmbedOptions;
+    list: TicketData[];
     number: Number;
   };
   captcha: {
     enable: Boolean;
     channel: String;
     role: String;
-    channel: String;
+    minAge: String;
     logs: String;
   };
-  lockChannels: Array;
+  lockChannels: LockChannels[];
   reactRoles: {
     enable: Boolean;
-    list: Array;
+    list: ReactRoles[];
   };
   countChannels: {
     enable: Boolean;
     category: String;
-    list: Array;
+    list: CountChannels[];
   };
 }
 
@@ -365,10 +286,104 @@ export interface UserData {
   };
   moneyBank: Number;
   moneyCash: Number;
-  inventory: Array;
+  inventory: [];
   cd: {
     daily: Date;
     hourly: Date;
     rob: Date;
   };
+  invites: {
+    total: Number;
+    regular: Number;
+    inviterID: String;
+    regArray: String[];
+    all: String[];
+    leaves: String[];
+    fakes: String[];
+  }
 }
+
+export declare interface ModCase {
+  user: User;
+  type: 'Warn' | 'Ban' | 'Mute';
+  id: Number;
+  reason: String;
+  moderator: User;
+}
+
+export interface RoleRewards {
+  roleID: String;
+  type: 'give' | 'remove';
+  level: Number;
+}
+
+export interface TicketData {
+  userID: String;
+  channelID: String;
+}
+
+export interface ReactRoles {
+  msgID: String;
+  reactionID: String;
+  roleID: String;
+}
+
+export interface CountChannels {
+  category: CategoryCount;
+  type: String;
+  id: String;
+}
+
+export interface LockChannels {
+  channelID: String;
+  channelName: String;
+}
+
+export class CustomCmds {
+  constructor (data?: CustomCmds);
+  public name: String;
+  public cooldown: Number;
+  private args: Boolean;
+  public usage: String;
+  private msgType: 'embed' | 'normal';
+  public msg: String | MessageEmbedOptions;
+}
+
+type CategoryCount = 
+  | 'channels'
+  | 'members'
+  | 'boosts' ;
+export type ColorResolvable =
+    | 'DEFAULT'
+    | 'WHITE'
+    | 'AQUA'
+    | 'GREEN'
+    | 'BLUE'
+    | 'YELLOW'
+    | 'PURPLE'
+    | 'LUMINOUS_VIVID_PINK'
+    | 'GOLD'
+    | 'ORANGE'
+    | 'RED'
+    | 'GREY'
+    | 'DARKER_GREY'
+    | 'NAVY'
+    | 'DARK_AQUA'
+    | 'DARK_GREEN'
+    | 'DARK_BLUE'
+    | 'DARK_PURPLE'
+    | 'DARK_VIVID_PINK'
+    | 'DARK_GOLD'
+    | 'DARK_ORANGE'
+    | 'DARK_RED'
+    | 'DARK_GREY'
+    | 'LIGHT_GREY'
+    | 'DARK_NAVY'
+    | 'BLURPLE'
+    | 'GREYPLE'
+    | 'DARK_BUT_NOT_BLACK'
+    | 'NOT_QUITE_BLACK'
+    | 'RANDOM'
+    | [number, number, number]
+    | number
+    | string;
