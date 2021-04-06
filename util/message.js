@@ -62,8 +62,8 @@ module.exports = func.client = async client => {
                 "users.$.XPtoAddReq": newAddReq
             });
 
-            let typeMsg = settings.levelSystem.message.embed.enable ? MessageEmbed : Message;
-            let msg = typeMsg !== MessageEmbed ? settings.levelSystem.message.normalMsg.msg : settings.levelSystem.message.embed.data;
+            let typeMsg = settings.levelSystem.message.type == 'embed' ? MessageEmbed : Message;
+            let msg = typeMsg !== MessageEmbed ? settings.levelSystem.message.msg : new MessageEmbed(settings.levelSystem.message.msg);
             if (typeMsg === Message && (msg == '' || !msg)) msg = 'GG {user}, you reached level **{level}**!';
             
             if (typeMsg === Message) msg = await client.replaceLevelText(msg, message, {
