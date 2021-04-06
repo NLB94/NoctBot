@@ -24,6 +24,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const emoji6 = client.emojis.resolve('772419404855902209');
   const emoji7 = client.emojis.resolve('770976765219831811');
   const emoji8 = client.emojis.resolve('772418662929924106');
+  const emoji9 = client.emojis.resolve('772419459968532520')
   const x_mark = client.emojis.resolve('806440609127596032');
   const check_mark = client.emojis.resolve('770980790242377739')
   const right = client.emojis.resolve('770976808899444776');
@@ -32,17 +33,17 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+        .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
         .setTitle("Bot Commands")
-        .setURL('https://discord.gg/92ffufA')
+        .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`Loading commands${loadingEmoji}`)
         .setTimestamp()
         .setFooter(message.guild == undefined ? '' : message.guild.name);
       const newEmbed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+        .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
         .setTitle("Bot Commands")
-        .setURL('https://discord.gg/92ffufA')
+        .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
         .setTimestamp()
         .setFooter('React with ❌ to cancel command')
@@ -70,25 +71,32 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       }, {
         name: `${emoji7} Other`,
         value: `\u200b`
-      }, );
+      }, {
+        name: `${emoji8} Count`,
+        value: `\u200b`
+      }, /*{
+        name: `${emoji9} Other`,
+        value: `\u200b`
+      },*/ );
 
       return message.channel.send(embed).then(async msg => {
-        await msg.react('772418754583855134').catch(() => '');
-        await msg.react('770976748082298891').catch(() => '');
-        await msg.react('772419302133334046').catch(() => '');
-        await msg.react('772418814594777099').catch(() => '');
-        await msg.react('772419197673930782').catch(() => '');
-        await msg.react('772419404855902209').catch(() => '');
-        await msg.react('770976765219831811').catch(() => '');
-        await msg.react('❌').catch(() => '');
+        await msg.react(emoji1).catch(() => {});
+        await msg.react(emoji2).catch(() => {});
+        await msg.react(emoji3).catch(() => {});
+        await msg.react(emoji4).catch(() => {});
+        await msg.react(emoji5).catch(() => {});
+        await msg.react(emoji6).catch(() => {});
+        await msg.react(emoji7).catch(() => {});
+        await msg.react(emoji8).catch(() => {});
+        await msg.react('❌').catch(() => {});
         await msg.edit(`${message.author.tag} React to get a category's commands!`, newEmbed).then(() => {}).catch(err => '');
       });
     } else {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+        .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
         .setTitle("Bot Commands")
-        .setURL('https://discord.gg/92ffufA')
+        .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
         .setTimestamp();
 
@@ -141,7 +149,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       return message.channel.send(embed);
     }
   } else if (!isNaN(args[0])) {
-    if (parseInt(args[0]) > 7 || parseInt(args[0] < 1)) return message.channel.send({
+    if (parseInt(args[0]) > 9 || parseInt(args[0] < 1)) return message.channel.send({
       embed: {
         description: `Correct usage : ${settings == undefined ? '~' : settings.general.prefix}help ${module.exports.help.usage}`
       }
@@ -159,8 +167,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       });
       const embed = new MessageEmbed()
         .setTitle(category)
-        .setAuthor(client.user.tag, client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
-        .setFooter(`Page ${args[0]} / 7`)
+        .setAuthor(client.user.tag, client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+        .setFooter(`Page ${args[0]} / 9`)
         .setTimestamp()
         .setDescription(client.commands.filter(cat => cat.help.category === category.toLowerCase()).map(cmd => `${right}${cmd.help.name} - ${cmd.help.description}`).join('\n'));
 

@@ -826,7 +826,7 @@ const MESSAGES = {
         permissions: true,
         onlyServerOwner: false,
         reqPermName: "MANAGE_ROLES",
-        onlyPremium: false,
+        onlyPremium: true,
         args: true,
       },
       LEADERBOARD: {
@@ -881,7 +881,7 @@ const MESSAGES = {
         permissions: true,
         onlyServerOwner: false,
         reqPermName: "MANAGE_ROLES",
-        onlyPremium: false,
+        onlyPremium: true,
         args: true,
       },
       RESETXP: {

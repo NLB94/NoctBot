@@ -11,7 +11,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     message.delete().catch(err => {})
 
     const embed = new MessageEmbed()
-    .setAuthor(message.author.tag, message.author.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+    .setAuthor(message.author.tag, message.author.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
     .setTitle('New Report !')
     .setURL('https://discord.gg/unRX2SUcvw')
     .setDescription(msg)

@@ -33,9 +33,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const normalEmojis = guild.emojis.cache.filter(e => !e.animated);
 
         const embed = new MessageEmbed()
-            .setAuthor(guild.name, guild.iconURL, 'https://discord.gg/92ffufA')
+            .setAuthor(guild.name, guild.iconURL, `${client.botGuild.supportInvite}`)
             .setTitle('Server Info')
-            .setURL('https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+            .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
             .setThumbnail(guild.iconURL())
             .setTimestamp()
             .setDescription(`${emojis.resolve('806440886535192616')}${guild.id}`)

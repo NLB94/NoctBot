@@ -8,9 +8,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(`Bot Settings in ${message.guild} :`)
-          .setURL('https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+          .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription('[Add Me](https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [Support Server](https://discord.gg/92ffufA)')
+          .setDescription(`[Add Me](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [Support Server](${client.botGuild.supportInvite})`)
           .addFields(
               { name: `► Prefix :`, value: settings.general.prefix !== '~' ? settings.general.prefix : "~", inline: true},
               { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Undefined ! Type \`${settings.general.prefix}config logs #channel\`!`, inline: true},

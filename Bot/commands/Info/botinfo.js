@@ -9,11 +9,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(client.user.tag)
-          .setURL('https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+          .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription(`[${language == 'fr' ? 'Ajoute-moi' : 'Add me'}](https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [${language == 'fr' ? 'Serveur de support' : 'Support server'}](https://discord.gg/92ffufA)`)
+          .setDescription(`[${language == 'fr' ? 'Ajoute-moi' : 'Add me'}](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [${language == 'fr' ? 'Serveur de support' : 'Support server'}](${client.botGuild.supportInvite})`)
           .addFields(
-              { name: '• ID', value: '735824367698837555', inline: true},
+              { name: '• ID', value: `${client.user.id}`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
               { name: `• ${language == 'fr' ? 'Fondateur' : 'Owner'} :`, value: (await client.fetchApplication()).owner.tag, inline: true},
               { name: `• ${language == 'fr' ? 'Librairie' : 'Library'} :`, value: '[Discord.js](https://discord.js.org/#/)', inline: false},

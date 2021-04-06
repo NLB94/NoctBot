@@ -24,6 +24,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const emoji6 = client.emojis.resolve('772419404855902209');
     const emoji7 = client.emojis.resolve('770976765219831811');
     const emoji8 = client.emojis.resolve('772418662929924106');
+    const emoji9 = client.emojis.resolve('772419459968532520');
 
     const check_mark = client.emojis.resolve('770980790242377739');
     const x_mark = client.emojis.resolve('806440609127596032');
@@ -121,7 +122,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     const giveaway = await client.getGiveaway(message.guild, message.id);
                     const embed = new MessageEmbed()
                         .setDescription(`${tada}Giveaway entry accepted for \`${message.embeds[0].title}\`${tada}`)
-                        .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+                        .setAuthor(user.username, user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
                         .setTitle('Giveaway Entry')
                         .setFooter(message.guild.name, message.guild.iconURL())
                         .setTimestamp()
@@ -132,22 +133,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     } catch (e) {
                         console.log(e);
                     }
-                } else if (message.embeds[0].author.name.includes('Giveaway ended')) {
-                    const embed = new MessageEmbed()
-                        .setDescription(`${x_mark}Giveaway entry denied because the giveaway ended${x_mark}`)
-                        .setAuthor(user.username, user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
-                        .setTitle('Giveaway Entry')
-                        .setFooter(message.guild.name, message.guild.iconURL())
-                        .setTimestamp()
-                        .setColor('#FFFFFF')
-                        .setURL('https://discord.gg/unRX2SUcvw');
-                    try {
-                        user.send(embed)
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-
+                };
             }
             if (message.content !== '') {
                 if (emoji == '❌' && (message.content.includes('React to get a category') || message.content.includes('Click ↩️ for return to home')) && message.content.startsWith(user.tag)) {
@@ -156,8 +142,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                 if (message.content.includes('React to get a category') && emoji !== '❌' && message.content.startsWith(user.tag)) {
                     const embed = new MessageEmbed()
                         .setColor("#000000")
-                        .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
-                        .setURL('https://discord.gg/92ffufA')
+                        .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                        .setURL(`${client.botGuild.supportInvite}`)
                         .setTimestamp()
                         .setFooter(`Requested by ${user.tag}`)
                         .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>! `);
@@ -199,6 +185,11 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             embed.setTitle("Other");
                             break;
                         }
+                        case emoji8: {
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'counts').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle("Count channels");
+                            break;
+                        }
                     }
                     if (message !== undefined) {
                         if (message.guild.me.permissions.has('ADMINISTRATOR')) await message.reactions.removeAll();
@@ -217,17 +208,17 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
                         const embed = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+                            .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
                             .setTitle("Bot Commands")
-                            .setURL('https://discord.gg/92ffufA')
+                            .setURL(`${client.botGuild.supportInvite}`)
                             .setDescription(`Loading commands${loadingEmoji}`)
                             .setTimestamp()
                             .setFooter(message.guild.name);
                         const embed2 = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("I2Z7", client.user.avatarURL(), 'https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join')
+                            .setAuthor("I2Z7", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
                             .setTitle("Bot Commands")
-                            .setURL('https://discord.gg/92ffufA')
+                            .setURL(`${client.botGuild.supportInvite}`)
                             .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>!`)
                             .setTimestamp()
                             .setFooter(`React with ❌ to cancel command | Requested by ${user.tag}`)
@@ -255,18 +246,22 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         }, {
                             name: `${emoji7} Other :`,
                             value: `\u200b`
-                        }, );
+                        }, {
+                            name: `${emoji8} Count :`,
+                            value: `\u200b`
+                        });
 
                         await message.edit(embed).then(async message => {
                             await message.reactions.removeAll();
-                            await message.react('772418754583855134').catch(() => '');
-                            await message.react('770976748082298891').catch(() => '');
-                            await message.react('772419302133334046').catch(() => '');
-                            await message.react('772418814594777099').catch(() => '');
-                            await message.react('772419197673930782').catch(() => '');
-                            await message.react('772419404855902209').catch(() => '');
-                            await message.react('770976765219831811').catch(() => '');
-                            await message.react('❌').catch(() => '')
+                            await message.react(emoji1).catch(() => {});
+                            await message.react(emoji2).catch(() => {});
+                            await message.react(emoji3).catch(() => {});
+                            await message.react(emoji4).catch(() => {});
+                            await message.react(emoji5).catch(() => {});
+                            await message.react(emoji6).catch(() => {});
+                            await message.react(emoji7).catch(() => {});
+                            await message.react(emoji8).catch(() => {})
+                            await message.react('❌').catch(() => {})
                         }).then(setTimeout(() => {
                             message.edit(`${user.tag}, React to get a category's commands`, embed2)
                         }, '9000'))
