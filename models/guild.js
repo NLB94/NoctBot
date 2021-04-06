@@ -159,6 +159,8 @@ const guildSchema = mongoose.Schema({
                     enable: true,
                     msg: 'GG {user}, you reached level **{level}** in {guild} !'
                 }
+                type: 'normal',
+                msg: 'GG {user}, you reached level **{level}** !'
             },
             channel: '',
             DM: {
@@ -178,6 +180,7 @@ const guildSchema = mongoose.Schema({
                     level: 0
                 }
             }
+            roles: []
         }
     },
     economy: {
