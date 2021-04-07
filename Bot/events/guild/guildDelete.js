@@ -3,7 +3,7 @@
 const {
     Client,
     Guild
-} = require("discord.js");
+} = require('discord.js');
 
 /**
  * 

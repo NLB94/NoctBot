@@ -1,6 +1,6 @@
 const {
     MessageEmbed
-} = require("discord.js");
+} = require('discord.js');
 const functions = require('./messageReactionAdd');
 
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {

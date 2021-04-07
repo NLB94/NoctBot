@@ -1,7 +1,7 @@
 const {
   MessageEmbed,
   ClientUser
-} = require("discord.js");
+} = require('discord.js');
 const {
   readdirSync
 } = require("fs");

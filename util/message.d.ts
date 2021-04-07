@@ -1,4 +1,4 @@
-import { Client, Collection, Message } from "discord.js";
+import { Client, Collection, Message } from 'discord.js';
 import { UserData, GuildData } from "./functions";
 
 export declare function checkDM(message: Message, args: String[]);

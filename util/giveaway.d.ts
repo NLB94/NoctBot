@@ -4,7 +4,7 @@ import {
     Role,
     Channel,
     User
-  } from "discord.js";
+  } from 'discord.js';
 
   /**
    * Create a giveaway.

@@ -1,6 +1,6 @@
 const {
     MessageEmbed
-} = require("discord.js");
+} = require('discord.js');
 const func = require("../../../util/functions");
 const defaultPrefix = '~';
 

@@ -2,7 +2,7 @@ const {
     MessageEmbed,
     GuildMember,
     Client
-} = require("discord.js");
+} = require('discord.js');
 
 /**
  * 

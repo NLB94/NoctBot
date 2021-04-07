@@ -1,6 +1,6 @@
 const {
   MessageEmbed
-} = require("discord.js");
+} = require('discord.js');
 const {
   MESSAGES
 } = require("../../../util/constants");

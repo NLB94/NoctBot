@@ -1,4 +1,4 @@
-const { MessageEmbed, Client, GuildMember } = require("discord.js")
+const { MessageEmbed, Client, GuildMember } = require('discord.js')
 
 /**
  * 

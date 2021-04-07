@@ -5,7 +5,7 @@ import {
     RoleResolvable,
     TextChannel,
     VoiceChannel,
-  } from "discord.js";
+  } from 'discord.js';
   
   /**
    * Create a backup in database

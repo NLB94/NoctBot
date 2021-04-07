@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js');
 const { MESSAGES } = require("../../../util/constants");
 const moment = require("moment");
 

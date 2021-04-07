@@ -1,6 +1,6 @@
 const {
     MessageReaction
-} = require("discord.js");
+} = require('discord.js');
 const functions = require('./messageReactionRemove')
 
 module.exports = functions.reactionRem = async (client, messageReaction, user) => {

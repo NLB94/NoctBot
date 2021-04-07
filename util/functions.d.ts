@@ -1,4 +1,4 @@
-import { Client, Guild, Message, MessageEmbedOptions, PermissionResolvable, Permissions, Role, TextChannel, User, VoiceChannel } from "discord.js";
+import { Client, Guild, Message, MessageEmbedOptions, PermissionResolvable, Permissions, Role, TextChannel, User, VoiceChannel } from 'discord.js';
 import { Giveaway } from './giveaway'
 
 /**

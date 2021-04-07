@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const {
   MessageEmbed,
   APIMessage
-} = require("discord.js");
+} = require('discord.js');
 const {
   response
 } = require("express");

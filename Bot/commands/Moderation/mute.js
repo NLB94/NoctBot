@@ -1,5 +1,5 @@
 const ms = require("ms")
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js');
 const { MESSAGES } = require("../../../util/constants");
 
 const functions = require('../../../util/functions');
