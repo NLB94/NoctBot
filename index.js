@@ -21,7 +21,8 @@ const emojis = require('./emojis.json');
 // } = require('connect-mongo');
 
 const client = new Discord.Client({
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+    intents: ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INTEGRATIONS', 'GUILD_INVITES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING', 'GUILD_PRESENCES', 'GUILD_VOICE_STATES', 'GUILD_WEBHOOKS', 'DIRECT_MESSAGE_TYPING', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS']
 });
 const manager = new GiveawaysManager(client, {
     storage: './giveaways.json',

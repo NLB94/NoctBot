@@ -12,27 +12,29 @@ const {
 module.exports = async (client, member) => {
     const user = await client.getGuildUser(member.guild, member);
     if (user == undefined) await client.createGuildUser(member.guild, member);
-    
+
     const settings = await client.getGuild(member.guild);
 
     if (settings == undefined) await client.createGuild(message.guild);
 
     if (member.guild.id == '727494941911154688') {
         if (member.user.bot) return;
-        setTimeout(() => {
-            member.roles.add('770658615752261682').then(async () => {
-                const channel = await member.guild.channels.resolve('769656304402563103')
-                const rolesChannels = await member.guild.channels.resolve('819871741823156265');
-                const commuEmbed = new MessageEmbed()
-                    .setDescription(`${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size} members in **${member.guild.name}**`)
-                    .setTimestamp()
-                    .setThumbnail(member.user.displayAvatarURL())
-                channel.send(`Hey ${member}, **welcome to ${member.guild.name}** ! \nDon't forget to **read the rules** <#769656305211539456> and **choose your roles** <#819871741823156265> !`, commuEmbed)
-                rolesChannels.send(`${member}, choose your roles !`).then(msg => msg.delete({
-                    timeout: 1000
-                })).catch(() => {})
-            }).catch((err) => console.log(err));
-        }, 10000)
+        while (member.pending) {
+            return;
+        }
+        console.log(member.pending)
+        // member.roles.add('770658615752261682')
+        const channel = await member.guild.channels.resolve('769656304402563103')
+        const rolesChannels = await member.guild.channels.resolve('819871741823156265');
+        const commuEmbed = new MessageEmbed()
+            .setDescription(`${member} just joined the server ! We are now ${(await member.guild.members.fetch()).size} members in **${member.guild.name}**`)
+            .setTimestamp()
+            .setThumbnail(member.user.displayAvatarURL())
+        channel.send(`Hey ${member}, **welcome to ${member.guild.name}** ! \nDon't forget to **read the rules** <#769656305211539456> and **choose your roles** <#819871741823156265> !`, commuEmbed)
+        rolesChannels.send(`${member}, choose your roles !`).then(msg => msg.delete({
+            timeout: 1000
+        })).catch(() => {})
+
     }
     if (settings.countChannels.enable) {
         const count = settings.countChannels.list;
