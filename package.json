@@ -21,6 +21,7 @@
     "@vitalets/google-translate-api": "^5.1.0",
     "axios": "^0.21.1",
     "brawlstars.js": "^1.0.8",
+    "bufferutil": "^4.0.3",
     "canvacord": "^5.0.8",
     "canvas": "^2.6.1",
     "connect-mongo": "^4.2.2",
@@ -55,6 +56,7 @@
     "rate-limit-mongo": "^2.3.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
+    "utf-8-validate": "^5.0.4",
     "ws": "^7.4.4"
   },
   "repository": {
