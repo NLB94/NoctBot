@@ -1,15 +1,22 @@
 const {
-  Collection, Client, Message,
+  Collection,
+  Client,
+  Message,
+  Channel,
 } = require("discord.js");
 const func = require("../../../util/functions");
 const ownerID = "616547009750499358";
 const defaultPrefix = '~';
+const {
+  CountChannels
+} = require('../../../util/functions')
 
 /**
  * @param {Client} client 
  * @param {Message} message 
  */
 module.exports = async (client, message) => {
+  const settings = await client.getGuild(message.guild);
   if (message.type == 'DEFAULT') {
     if (!message.author) return;
 
@@ -27,7 +34,7 @@ module.exports = async (client, message) => {
     const check_mark = client.emojis.resolve('770980790242377739');
     const arrowRight = client.emojis.resolve('770976808899444776');
 
-    const settings = await client.getGuild(message.guild);
+
     if (!settings || settings == undefined) await client.createGuild({
       guildID: message.guild.id
     })
@@ -36,8 +43,22 @@ module.exports = async (client, message) => {
 
     if (message.guild && position === -1) await client.createGuildUser(message.guild, message.member);
 
-    if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({ client, message, args, type: 'invite', settings, userInfo }));
-    if (message.content.includes("https://") || message.content.includes("http://")) await client.emit('automod', ({ client, message, args, type: 'link', settings, userInfo }));
+    if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({
+      client,
+      message,
+      args,
+      type: 'invite',
+      settings,
+      userInfo
+    }));
+    if (message.content.includes("https://") || message.content.includes("http://")) await client.emit('automod', ({
+      client,
+      message,
+      args,
+      type: 'link',
+      settings,
+      userInfo
+    }));
 
     if (!message.content.startsWith(settings.general.prefix) && userInfo !== undefined) return client.notStartByPrefix(message, settings, userInfo);
     if (message.content.startsWith(settings.general.prefix)) {
@@ -142,6 +163,40 @@ module.exports = async (client, message) => {
       command.run(client, message, args, settings, userInfo);
     };
   } else if (message.type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION')) {
-    
+    if (!settings) await client.createGuild(message.guild);
+    const count = settings.countChannels;
+    if (!count.enable) return;
+
+    const channels = count.list.filter(c => c.category.toLowerCase() == 'boosts');
+    if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
+
+    if (message.type == 'USER_PREMIUM_GUILD_SUBSCRIPTION') {
+      channels.forEach(
+        /**
+         * 
+         * @param {CountChannels} c 
+         */
+        async (c) => {
+          if (c.type == 'boosts') {
+            const chnl = await message.guild.channels.resolve(c.id);
+            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
+          }
+        })
+    } else {
+      channels.forEach(
+        /**
+         * 
+         * @param {CountChannels} c 
+         */
+        async (c) => {
+          if (c.type == 'boosts') {
+            const chnl = await message.guild.channels.resolve(c.id);
+            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
+          } else if (c.type == 'level') {
+            const chnl = await message.guild.channels.resolve(c.id);
+            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - 1).toString().length) + message.guild.premiumTier)
+          }
+        })
+    }
   }
 };
