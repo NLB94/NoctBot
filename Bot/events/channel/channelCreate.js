@@ -5,7 +5,6 @@ const {
 } = require('discord.js');
 
 /**
- * 
  * @event Client#channelCreate 
  * @param {Client} client
  * @param {GuildChannel} channel 
@@ -16,25 +15,30 @@ module.exports = async (client, channel) => {
     else {
         const settings = await client.getGuild(channel.guild)
         const logs = settings.general.logs == 'logs' ? 'None' : channel.guild.channels.resolve(settings.general.logs);
-        await channel.guild.fetchAuditLogs({
-            limit: 1,
-            type: 'CHANNEL_CREATE'
-        }).then(async f => {
-            if (!channel.manageable || !channel) return;
-            const count = settings.countChannels;
-            if (count.enable) {
-                const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
-                if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
-                else {
-                    channels.forEach(async m => {
-                        if (m.type == 'all' || (m.type == 'categorys' && channel.type == 'category') || (m.type == 'voice' && channel.type == 'voice' || (m.type == 'text' && (channel.type == 'text' || channel.type == 'news')))) {
-                            const chnl = await channel.guild.channels.resolve(m.id);
-                            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (channel.guild.channels.cache.size - 1).toString().length)) + channel.guild.channels.cache.size)
-                        }
-                    })
 
-                }
+        if (!channel.manageable || !channel) return;
+        const count = settings.countChannels;
+        if (count.enable) {
+            const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
+            if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
+            else {
+                channels.forEach(async m => {
+                    if (m.type == 'all' || (m.type == 'categorys' && channel.type == 'category') || (m.type == 'voice' && channel.type == 'voice' || (m.type == 'text' && (channel.type == 'text' || channel.type == 'news')))) {
+                        const chnl = await channel.guild.channels.resolve(m.id);
+                        if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (channel.guild.channels.cache.size - 1).toString().length)) + channel.guild.channels.cache.size)
+                    }
+                })
+
             }
+        }
+
+
+        if (!channel.guild.me.hasPermission('VIEW_AUDIT_LOG')) return;
+        // await channel.guild.fetchAuditLogs({
+        //     limit: 1,
+        //     type: 'CHANNEL_CREATE'
+        // }).then(async f => {
+
             // const latestChannelCreated = await f.entries.first();
             // const {
             //     executor
@@ -51,7 +55,7 @@ module.exports = async (client, channel) => {
 
             // logs == undefined || !logs || logs == 'None' ? (channel.isText() ? channel.send(embed) : '') : logs.send(embed);
 
-        }).catch((err) => {});
+        // }).catch((err) => {});
 
 
     };

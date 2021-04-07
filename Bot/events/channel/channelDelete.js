@@ -3,7 +3,9 @@ const {
     Client,
     GuildChannel
 } = require('discord.js');
-const { Guild } = require('../../../models/main');
+const {
+    Guild
+} = require('../../../models/main');
 
 /**
  * 
@@ -17,24 +19,29 @@ module.exports = async (client, channel) => {
     else {
         const settings = await client.getGuild(channel.guild);
         const logs = settings.general.logs == 'logs' ? 'None' : channel.guild.channels.resolve(settings.general.logs);
-        await channel.guild.fetchAuditLogs({
-            limit: 1,
-            type: 'CHANNEL_DELETE'
-        }).then(async f => {
-            const count = settings.countChannels;
-            if (count.enable) {
-                const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
-                if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
-                else {
-                    const chnl = channels.find(c => c.id == channel.id);
-                    if (!chnl) return;
-                    await Guild.updateOne({ guildID: channel.guild.id }, {
-                        $pull: {
-                            "countChannels.id": chnl.id
-                        }
-                    }).then()
-                }
+
+        const count = settings.countChannels;
+        if (count.enable) {
+            const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
+            if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
+            else {
+                const chnl = channels.find(c => c.id == channel.id);
+                if (!chnl) return;
+                await Guild.updateOne({
+                    guildID: channel.guild.id
+                }, {
+                    $pull: {
+                        "countChannels.id": chnl.id
+                    }
+                }).then()
             }
+        }
+        if (!channel.guild.me.permissions.has('VIEW_AUDIT_LOG')) return;
+        // await channel.guild.fetchAuditLogs({
+        //     limit: 1,
+        //     type: 'CHANNEL_DELETE'
+        // }).then(async f => {
+
             // const latestChannelCreated = await f.entries.first();
             // const {
             //     executor
@@ -51,20 +58,9 @@ module.exports = async (client, channel) => {
 
             // logs == undefined || !logs || logs == 'None' ? (channel.isText() ? channel.send(embed) : '') : logs.send(embed);
 
-        }).catch((err) => {
-            console.log(err)
-            // const logs = message.channel;
-
-            // const embed = new MessageEmbed()
-            //     .setAuthor("Channel Updated")
-            //     .setColor("#000000")
-            //     .setDescription(`Before : ${oldChannel.name} \nAfter : ${channel} (${channel.name}) \nType : ${channel.type}`)
-            //     .setTimestamp()
-            //     .setFooter(channel.guild.name, channel.guild.iconURL());
-
-
-            // logs.send(embed)
-        });
+        // }).catch((err) => {
+        //     console.log(err);
+        // });
 
 
     };
