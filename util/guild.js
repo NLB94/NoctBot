@@ -46,16 +46,6 @@ module.exports = func.client = async (client) => {
         const dailyCd = Date.now() - 8.64e+7;
         const daily = new Date(dailyCd);
 
-        const invites = await guild.fetchInvites();
-
-        const userInvites = invites.array().filter(o => o.inviter.id === user.id);
-        var userInviteCount = 0;
-
-        for (var i = 0; i < userInvites.length; i++) {
-            var invite = userInvites[i];
-            userInviteCount += invite.uses;
-        }
-
         Guild.updateOne({
             guildID: guild.id
         }, {
@@ -87,10 +77,10 @@ module.exports = func.client = async (client) => {
                         rob: daily
                     },
                     invites: {
-                        total: userInviteCount,
+                        total: 0,
                         all: [],
                         leaves: [],
-                        regular: userInviteCount,
+                        regular: 0,
                         regArray: [],
                         fakes: [],
                         bonus: 0,
