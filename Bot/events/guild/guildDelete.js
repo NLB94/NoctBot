@@ -17,4 +17,5 @@ module.exports = async (client, guild) => {
             description: `:cry: I've left a guild : ${guild.name}. Now I am in ${client.guilds.cache.size} servers ! `
         }
     });
+    client.guilds.cache.delete(guild.id);
 }

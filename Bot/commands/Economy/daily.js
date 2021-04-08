@@ -19,8 +19,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (lastD !== null && dailyCd - (Date.now() - lastD) > 0) {
     const cdT = dailyCd - (Date.now() - lastD);
     const cdEmbed = new MessageEmbed()
-      .setTitle(await client.translate('Daily Cooldown', 'en', language))
-      .setDescription(await client.translate(`You have to wait ${Math.floor(cdT / (1000 * 60 * 60) % 24)}h, ${Math.floor(cdT / (1000 * 60) % 60)}m and ${Math.floor(cdT / (1000) % 24)}s before next daily rewards!`, 'en', language))
+      .setTitle(language == 'fr' ? 'Cooldown' : 'Cooldown')
+      .setDescription(`You have to wait ${Math.floor(cdT / (1000 * 60 * 60) % 24)}h, ${Math.floor(cdT / (1000 * 60) % 60)}m and ${Math.floor(cdT / (1000) % 24)}s before next daily rewards!`)
       .setFooter(message.author.tag, message.author.avatarURL())
       .setTimestamp();
     message.reply(cdEmbed);
@@ -28,8 +28,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor('#000000')
-      .setTitle(await client.translate('Daily Spin', 'en', language))
-      .setDescription(await client.translate(`Please wait${loadingEmoji}`, 'en', language))
+      .setTitle('Daily Spin')
+      .setDescription(`Please wait${loadingEmoji}`)
       .setTimestamp();
 
     const emojis = [{
@@ -126,7 +126,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const nbWin = parseInt(embed.footer.text.slice(1))
       const newB = userInfo.moneyCash + nbWin;
 
-      await embed.setDescription(await client.translate(`You won $${nbWin} for daily spin ! You have now $${newB} on your hand !`, 'en', language));
+      await embed.setDescription(`You won $${nbWin} for daily spin ! You have now $${newB} on your hand !`);
       await msg.edit(embed)
 
       client.updateGuildUI(message.guild, message.member, {
