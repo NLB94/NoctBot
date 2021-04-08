@@ -1,4 +1,5 @@
 import { Client, Guild, Message, MessageEmbedOptions, PermissionResolvable, Permissions, Role, TextChannel, User, VoiceChannel } from 'discord.js';
+import { Item } from './economy';
 import { Giveaway } from './giveaway'
 
 /**
@@ -210,7 +211,7 @@ export declare class GuildData {
     money: String;
     workMsg1: String;
     workMsg2: String;
-    shop: [];
+    shop: Item[];
   };
   welcomeAndLeave: {
     welcome: {

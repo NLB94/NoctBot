@@ -9,7 +9,7 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
   
-  const shop = settings.economy.shop;
+  let shop = settings.economy.shop;
   const qNb = args[0] == undefined ? 1 : (parseInt(args[0]) < 1 ? 1 : parseInt(args[0]));
 
   const embed = new MessageEmbed()
@@ -17,14 +17,19 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     .setTitle('Bot Shop')
     .setFooter('Soon...');
 
-    const shopArray = []
-    shop.map(s => shopArray.push(`${s.name} ($${s.price})\n${s.description}`));
 
-    const pageNbs = parseInt(((shopArray.length % 100) - (shopArray.length % 10)).toString().slice(0, 1)) + 1;
+    const pageNbs = parseInt(((shop.length % 100) - (shop.length % 10)).toString().slice(0, 1)) + 1;
     if (isNaN(qNb) || qNb > pageNbs) return message.channel.send({ embed: { description: "Incorrect page number ! Please give a number between 1 and " + pageNbs}});
     
-    if (shopArray.length < 1) embed.setDescription(`This is the **bot shop** and there are no items in it... Type \`${settings.general.prefix}create-item\` to create one and \`${settings.general.prefix}server-shop\` to show the server shop.`), embed.setFooter('Page 1/1');
-    else embed.setDescription(`For purchase an item, type \`${settings.general.prefix}buy-item <item_name> (amount)\` \nList of all items : \n${shopArray.map(item => `**${item}**`).slice(qNb * 10, (qNb * 10) + 10).join('\n')}`), embed.setFooter(`Page ${qNb}/${pageNbs}`);
+    shop = await shop.slice((qNb - 1) * 10, ((qNb - 1) * 10) + 10)
+
+    if (!(shop.length > -1)) embed.setDescription(`There are no items in shop... Type \`${settings.general.prefix}create-item\` to create one.`), embed.setFooter('Page 1/1');
+    else {
+      embed.setDescription(`To purchase an item, type \`${settings.general.prefix}buy-item <item_id> (amount)\` \nList of all items :`), embed.setFooter(`Page ${qNb}/${pageNbs}`)
+      shop.forEach(s => {
+        embed.addField(`${s.name} - ${s.id}`, `Price : **$${s.price}** \nDescription : **${s.description}**`)
+      })
+    };
 
     message.channel.send(embed);
 };

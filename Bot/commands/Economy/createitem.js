@@ -21,11 +21,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setDescription(language == 'fr' ? 'Commande annulée' : 'Command canceled')
         .setTimestamp()
         .setAuthor(message.author.tag, message.author.avatarURL());
+
     try {
         let item = {
             name: String,
             price: Number,
             description: String,
+            id: (settings.economy.shop.length + 1),
             stock: Number,
             timeInShop: (Number || Date),
             requiredRole: String,
@@ -71,7 +73,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             msg.edit(language == 'fr' ? 'Donnez une description. (500 caractères max)' : 'Please provide a description. (500 characters max)', embed)
             const userE3 = await message.channel.awaitMessages(filter, {
                 max: 1,
-                time: 20000,
+                time: 150000,
                 errors: ['time']
             })
             if (userE3.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
@@ -96,20 +98,20 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             userE4.first().delete().catch(() => {})
 
             embed.addField('Stock', item.stock);
-            msg.edit(language == 'fr' ? 'Combien de temps le produit doit rester dans le magasin ? (5m min, 2j max) (skip = illimité)' : 'How long the item have to appear in shop ? (5m min, 2d max) (skip = unlimited)', embed);
+            // msg.edit(language == 'fr' ? 'Combien de temps le produit doit rester dans le magasin ? (5m min, 2j max) (skip = illimité)' : 'How long the item have to appear in shop ? (5m min, 2d max) (skip = unlimited)', embed);
 
-            const userE5 = await message.channel.awaitMessages(filter, {
-                max: 1,
-                time: 20000,
-                errors: ['time']
-            })
-            if (userE5.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
-            else if (userE5.first().toString().toLowerCase() == 'skip') item.timeInShop = 'Unlimited';
-            else item.timeInShop = ((ms(userE5.first().toString()) > 300000 && ms(userE5.first().toString()) < 1, 728e+8) ? 'Unlimited' : userE5.first().toString());
+            // const userE5 = await message.channel.awaitMessages(filter, {
+            //     max: 1,
+            //     time: 20000,
+            //     errors: ['time']
+            // })
+            // if (userE5.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
+            // else if (userE5.first().toString().toLowerCase() == 'skip') item.timeInShop = 'Unlimited';
+            // else item.timeInShop = ((ms(userE5.first().toString()) > 300000 && ms(userE5.first().toString()) < 1, 728e+8) ? 'Unlimited' : userE5.first().toString());
 
-            userE5.first().delete().catch(() => {})
+            // userE5.first().delete().catch(() => {})
 
-            embed.addField(language == 'fr' ? 'Temps dans le magasin' : 'Time in shop', item.timeInShop);
+            // embed.addField(language == 'fr' ? 'Temps dans le magasin' : 'Time in shop', item.timeInShop);
             msg.edit(language == 'fr' ? 'Quelle role doit avoir l\'utilisateur pour acheter ce produit ? Mentionnez-le.' : 'What role user must already have to buy this item ?', embed);
 
             const userE6 = await message.channel.awaitMessages(filter, {
@@ -152,16 +154,16 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             userE8.first().delete().catch(err => {})
 
             embed.addField(language == 'fr' ? 'Role à retirer' : 'Role to remove', `<@&${item.roleToRemove}>`, true);
-            msg.edit(language == 'fr' ? 'Quelle message voulez-vous que le bot envoie une fois l\'achat terminé ? (max 2000 caractères)' : 'What message you want bot reply ? (max 2000 characters)', embed);
+            msg.edit(language == 'fr' ? 'Quelle message voulez-vous que le bot envoie une fois l\'achat terminé ? (max 1500 caractères)' : 'What message you want bot reply ? (max 2000 characters)', embed);
 
             const userE9 = await message.channel.awaitMessages(filter, {
                 max: 1,
-                time: 20000,
+                time: 300000,
                 errors: ['time']
             })
             if (userE9.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
             else if (userE9.first().toString().toLowerCase() == 'skip') item.replyMsg = '\u200b';
-            else item.replyMsg = userE9.first().toString().slice(0, 2000);
+            else item.replyMsg = userE9.first().toString().slice(0, 1500);
 
             userE9.first().delete().catch(err => {})
 
@@ -172,7 +174,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
         })
     } catch (e) {
-        console.log(e)
+        console.log(e);
         message.channel.send(cancelEmbed);
     }
 }

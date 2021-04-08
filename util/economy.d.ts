@@ -26,6 +26,7 @@ export declare function deleteItem(guild: Guild, itemName: String);
 export interface Item {
   public name: String;
   public price: Number;
+  public id: Number;
   public description: String;
   public stock: Number;
   public timeInShop: Number;

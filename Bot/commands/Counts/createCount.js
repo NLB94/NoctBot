@@ -14,9 +14,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const warning = client.emojis.resolve('806438435933913178');
         const check_mark = client.emojis.resolve('770980790242377739');
 
-        const m1 = language == 'fr' ? `**Quelle type de catégorie de compte voulez-vous ?** \nCatégories disponibles : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`
         const countArray = ['channels', 'members', 'boosts'];
         let i = 1;
+
+        const m1 = language == 'fr' ? `**Quelle type de catégorie de compte voulez-vous ?** \nCatégories disponibles : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`
+
         await message.channel.send(m1);
         /**
          * Filter parameters for messages awaiter
@@ -63,7 +65,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 let type = userE2.first().toString().toLowerCase();
                 await message.channel.send(language == 'fr' ? `Le salon apparaitra dans un moment${loading}` : `Done, the channel will be appear in few time${loading}`).then(msg => {
                     setTimeout(() => {
-                        msg.edit(language == 'fr'? `${check_mark}**Le salon a été crée !**` : `${check_mark}**Channel created !**`).catch(err => {})
+                        msg.edit(language == 'fr' ? `${check_mark}**Le salon a été crée !**` : `${check_mark}**Channel created !**`).catch(err => {})
                     }, 2000)
                 })
 
@@ -106,7 +108,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             }
         }
     } catch (e) {
-        message.channel.send(language == 'fr' ? '**Commande annulée !**' :'**Command canceled !**')
+        message.channel.send(language == 'fr' ? '**Commande annulée !**' : '**Command canceled !**')
     }
 }
 
