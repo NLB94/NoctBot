@@ -7,15 +7,17 @@ const {
 const functions = require("../../../util/functions");
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
+    const language = settings.general.language;
     try {
         const loading = client.emojis.resolve('783028992231866419');
         const x_mark = client.emojis.resolve('806440609127596032');
         const warning = client.emojis.resolve('806438435933913178');
         const check_mark = client.emojis.resolve('770980790242377739');
 
+        const m1 = language == 'fr' ? `**Quelle type de catégorie de compte voulez-vous ?** \nCatégories disponibles : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`
         const countArray = ['channels', 'members', 'boosts'];
         let i = 1;
-        await message.channel.send(`**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`);
+        await message.channel.send(m1);
         /**
          * Filter parameters for messages awaiter
          * @param {Message} m 
@@ -31,11 +33,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         else if (userE.first().toString().startsWith('2')) cat = 'members';
         else if (userE.first().toString().startsWith('3')) cat = 'boosts';
 
-        if (typeof cat !== "string") return message.channel.send('Command canceled ! **Please provide a correct category next time !**')
+        if (typeof cat !== "string") return message.channel.send(language == 'fr' ? 'Commande annulée ! **Donnez un nombre correct la prochaine fois !**' : 'Command canceled ! **Please provide a correct number next time !**')
         else {
             const array = cat == 'channels' ? ['all', 'categorys', 'text', 'voice'] : (cat == 'members' ? ['all', 'humans', 'bots'] : ['boosts', 'level']);
             let j = 1;
-            message.channel.send(`Alright, category is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`)
+            message.channel.send(language == 'fr' ? `Le type de catégorie est \`${cat}\`. Quelle est le **type de compte** que vous voulez ? \nTypes disponibles pour la catégorie \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `The category type is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`)
             const userE2 = await message.channel.awaitMessages(filter, {
                 time: '10000',
                 errors: ['time'],
@@ -56,12 +58,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 if (nb == '1') type = 'boosts';
                 else if (nb == '2') type = 'level';
             }
-            if (typeof type == "number") return message.channel.send('Command canceled ! **Please provide a correct type next time !**')
+            if (typeof type == "number") return message.channel.send(language == 'fr' ? 'Commande annulée ! **Donnez un nombre correct la prochaine fois !**' : 'Command canceled ! **Please provide a correct number next time !**')
             else {
                 let type = userE2.first().toString().toLowerCase();
-                await message.channel.send(`Done, the channel will be appear in few time${loading}`).then(msg => {
+                await message.channel.send(language == 'fr' ? `Le salon apparaitra dans un moment${loading}` : `Done, the channel will be appear in few time${loading}`).then(msg => {
                     setTimeout(() => {
-                        msg.edit(`${check_mark}Channel created !`).catch(err => {})
+                        msg.edit(language == 'fr'? `${check_mark}**Le salon a été crée !**` : `${check_mark}**Channel created !**`).catch(err => {})
                     }, 2000)
                 })
 
@@ -76,7 +78,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 const channelName = cat.toLowerCase() == `channels` ? (type == `all` ? `All Channels : ${message.guild.channels.cache.size}` : (type == `categorys` ? `Categorys : ${message.guild.channels.cache.filter(c => c.type == 'category').size}` : (type == `text` ? `Text : ${message.guild.channels.cache.filter(c => c.isText()).size}` : `Voice : ${message.guild.channels.cache.filter(c => c.type == 'voice').size}`))) : (cat.toLowerCase() == `members` ? (type == `all` ? `All members : ${message.guild.memberCount}` : (type == `humans` ? `Members : ${message.guild.members.cache.filter(m => !m.user.bot).size}` : `Bots : ${message.guild.members.cache.filter(m => m.user.bot).size}`)) : (type == `level` ? `Level : ${message.guild.premiumTier}` : `Boosts : ${message.guild.premiumSubscriptionCount}`))
                 if (!message.guild.systemChannelFlags.has('BOOST_MESSAGE_DISABLED') && (channelName.startsWith('Level') || channelName.startsWith('Boosts'))) message.channel.send({
                     embed: {
-                        description: `${warning}You have to enable **system feature \`BOOST_MESSAGE\`**. \n${x_mark}If you don't enable it or will not enable it, bot can't auto update the count channel.`
+                        description: language == 'fr' ? `${warning}Vous n'avez pas activé **la fonction du serveur \`BOOST_MESSAGE\`**. \n${x_mark}Si vous ne l'avez pas activer ou ne l'activez pas, le bot ne pourra pas modifier automatiquement le salon.` : `${warning}You have to enable **server feature \`BOOST_MESSAGE\`**. \n${x_mark}If you did't enable it or will not enable it, bot can't auto update the count channel.`,
+                        title: language == 'fr' ? 'ATTENTION' : 'WARNING'
                     }
                 });
 
@@ -103,7 +106,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             }
         }
     } catch (e) {
-        message.channel.send('**Command canceled !**')
+        message.channel.send(language == 'fr' ? '**Commande annulée !**' :'**Command canceled !**')
     }
 }
 

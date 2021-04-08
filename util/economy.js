@@ -9,18 +9,7 @@ module.exports = func.client = client => {
             guildID: guild.id
         }, {
             $push: {
-                "economy.shop": {
-                    name: item.name,
-                    price: item.price,
-                    description: item.description,
-                    requiredRole: item.requiredRole,
-                    stock: item.stock,
-                    timeInShop: item.timeInShop,
-                    roleToGive: item.roleToGive,
-                    roleToRem: item.roleToRemove,
-                    typeMsg: item.typeMsg,
-                    replyMsg: item.replyMsg
-                }
+                "economy.shop": item
             }
         }).then()
     }

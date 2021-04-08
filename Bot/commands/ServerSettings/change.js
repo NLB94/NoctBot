@@ -7,9 +7,9 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
 
-    
+
     const getSetting = args[0].toLowerCase().split("-").join("");
     const prefix = settings.general.prefix;
     let newSetting = args.slice(1).join(" ");
@@ -24,10 +24,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case "keys": {
             const embed = new MessageEmbed()
                 .setAuthor(client.user.tag, client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
-                .setTitle(await client.translate('Config Keys', 'en', language))
+                .setTitle('Config Keys')
                 .setURL('https://discord.gg/unRX2SUcvw')
                 .setTimestamp()
-                .setDescription(`${await client.translate('If you need help, join [support server](https://discord.gg/unRX2SUcvw). \n\nAvailable Keys :', 'en', language)} \n${keys.join(", ")}`)
+                .setDescription(`${language == 'fr'? 'Si vous voulez de l\'aide, rejoignez le [serveur de support](https://discord.gg/unRX2SUcvw). \n\nListe des disponibilités :' : 'If you need help, join [support server](https://discord.gg/unRX2SUcvw). \n\nAvailable Keys :'} \n${keys.join(", ")}`)
                 .setFooter(message.author.tag, message.author.avatarURL());
 
             message.channel.send(embed);
@@ -39,8 +39,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 newSetting = channel;
                 if (newSetting = undefined || newSetting == 'none') return message.channel.send({
                     embed: {
-                        title: await client.translate('Server Settings', 'en', language),
-                        description: `${x_mark}${await client.translate('Channel not found', 'en', language)}`
+                        description: `${x_mark}**${language == 'fr' ? 'Le salon est introuvable' : 'Channel not found'}** !`
                     }
                 })
                 await client.updateGuild(message.guild, {
@@ -48,46 +47,22 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 });
                 return message.channel.send({
                     embed: {
-                        title: await client.translate('Server Settings', 'en', language),
-                        description: `${check_mark}${await client.translate('Logs channel changed : \nOld Logs channel', 'en', language)} : \`${settings.general.logs}\` \n${await client.translate('New logs channel', 'en', language)} : \`${newSetting}\``
+                        description: `${check_mark}${language == 'fr' ? 'Salon des logs changé : \nAvant' : 'Logs channel changed : \nOld Logs channel'} : \`${settings.general.logs}\` \n${language == 'fr' ? 'Maintenant' : 'New logs channel'} : \`${newSetting}\``
                     }
                 });
             }
             message.channel.send({
                 embed: {
-                    title: await client.translate('Server Settings', 'en', language),
-                    description: `${arrowRight}${await client.translate('Logs channel in this server', 'en', language)} : \`${settings.general.logs}\``
+                    description: `${arrowRight}${language == 'fr' ? 'Le salon de logs dans ce serveur' : 'Logs channel in this server'} : \`${settings.general.logs}\``
                 }
             });
             break;
         }
-        // case "money": {
-        //     if (newSetting) {
-        //         newSetting = newSetting.slice(0, 2);
-        //         await client.updateGuild(message.guild, {
-        //             "economy.money": newSetting
-        //         });
-        //         return message.channel.send({
-        //             embed: {
-        //                title: await client.translate('Server Settings', 'en', language),
-        //                 description: `${check_mark}Money prefix changed : \nOld Money prefix : \`${settings.economy.money}\` \nNew Money prefix : \`${newSetting}\``
-        //             }
-        //         });
-        //     }
-        //     message.channel.send({
-        //         embed: {
-        //               title: await client.translate('Server Settings', 'en', language),
-        //             description: `${arrowRight}Money prefix in this server : \`${settings.economy.money}\``
-        //         }
-        //     });
-        //     break;
-        // }
         case "prefix": {
             if (newSetting) {
                 if (newSetting == prefix) return message.channel.send({
                     embed: {
-                        title: await client.translate('Server Settings', 'en', language),
-                        description: `${x_mark}${await client.translate('Prefix in this server is already', 'en', language)} \`${newSetting}\` !`
+                        description: `${x_mark}${language == 'fr' ? 'Le préfixe dans ce serveur est déja'  : 'Prefix in this server is already'} \`${newSetting}\` !`
                     }
                 })
                 newSetting = newSetting.slice(0, 3)
@@ -96,15 +71,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 });
                 return message.channel.send({
                     embed: {
-                        title: await client.translate('Server Settings', 'en', language),
-                        description: `${check_mark}${await client.translate(`Prefix changed : \nOld Prefix : \`${prefix}\` \nNew Prefix`, 'en', language)} : \`${newSetting}\``
+                        description: `${check_mark}${language == 'fr' ? 'Préfixe changé' : 'Prefix changed'} : \n${language == 'fr' ? 'Ancien préfixe' : 'Old Prefix'} : \`${prefix}\` \n${language == 'fr' ? 'Nouveau préfixe' : 'New Prefix'} : \`${newSetting}\``
                     }
                 });
             }
             message.channel.send({
                 embed: {
-                    title: await client.translate('Server Settings', 'en', language),
-                    description: `${arrowRight}${await client.translate('Prefix in this server', 'en', language)} : \`${prefix}\``
+                    description: `${arrowRight}${language == 'fr' ? 'Préfixe dans ce serveur' : 'Prefix in this server'} : \`${prefix}\``
                 }
             });
             break;
@@ -113,61 +86,33 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             if (newSetting) {
                 if (newSetting == language) return message.channel.send({
                     embed: {
-                        title: await client.translate('Server Settings', 'en', language),
-                        description: `${x_mark}${await client.translate('Language in this server is already', 'en', language)} \`${newSetting}\` !`
+                        description: `${x_mark}${language == 'fr' ? 'La langue dans ce serveur est déjà' : 'Language in this server is already'} \`${newSetting}\` !`
                     }
                 })
                 newSetting = newSetting.slice(0, 2)
-                const test = await client.translate('Hello', 'en', newSetting).then((res) => {
-                    return true
-                }).catch((err) => {
-                    return false;
-                });
-                if (test) {
+                if (newSetting == 'fr' || newSetting == 'en') {
+                    message.channel.send({
+                        embed: {
+                            description: `${check_mark}${language == 'fr' ? `Langue changée : \nAvant : \`${language}\` \nAprès` : `Language changed : \nBefore : \`${language}\` \nAfter`} : \`${newSetting}\``
+                        }
+                    });
                     await client.updateGuild(message.guild, {
                         "general.language": newSetting
                     });
-                    return message.channel.send({
-                        embed: {
-                            title: await client.translate('Server Settings', 'en', language),
-                            description: `${check_mark}${await client.translate(`Language changed : \nBefore : \`${language}\` \nAfter`, 'en', language)} : \`${newSetting}\``
-                        }
-                    });
-                } else return message.channel.send({
+                } else message.channel.send({
                     embed: {
-                        description: `${x_mark}${await client.translate("This language is not supported or doesn't exists!", 'en', language)}`
+                        description: `${x_mark}${language == 'fr' ? "**Cette langue n'est pas supportée !**\n**Langues supportées : \`en\`, \`fr\`**" : "**This language is not supported !** \n**Supported language : \`en\`, \`fr\`**"}`
                     }
                 })
+                break;
             }
             message.channel.send({
                 embed: {
-                    title: await client.translate('Server Settings', 'en', language),
-                    description: `${arrowRight}${await client.translate('Language in this server', 'en', language)} : \`${language}\``
+                    description: `${arrowRight}${language == 'fr' ? 'Langue dans ce serveur' : 'Language in this server'} : \`${language}\``
                 }
             });
             break;
         }
-        // case ("banmsg" || "banmessage"): {
-        //     if (newSetting) {
-        //         newSetting = newSetting.slice(0, 100);
-        //         await client.updateGuild(message.guild, {
-        //             "moderation.banMsg": newSetting
-        //         });
-        //         return message.channel.send({
-        //             embed: {
-        //               title: await client.translate('Server Settings', 'en', language),
-        //                 description: `${check_mark}Ban Message is now : \`${newSetting}\``
-        //             }
-        //         })
-        //     }
-        //     message.channel.send({
-        //         embed: {
-        //                title: await client.translate('Server Settings', 'en', language),
-        //             description: `${arrowRight}Ban Message is : \`${settings.moderation.banMsg}\``
-        //         }
-        //     });
-        //     break;
-        // }
     }
 };
 

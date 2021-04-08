@@ -23,19 +23,20 @@ module.exports = functions.client = async client => {
     chalk.bgWhite.black(`${client.user.tag} est prêt alhamduliLlah ! ${guilds.length} serveurs, ${client.users.cache.size} membres!`)
   );
 
-  let activities = ["~help or ping me", `${client.users.cache.size} members in ${guilds.length} servers !`],
-    i = 0,
+  let i = 0,
     presence = ['LISTENING', 'WATCHING'],
     j = 0;
 
   setInterval(
-    () =>
+    () => {
+    let activities = ["~help or ping me", `${client.users.cache.size} members in ${guilds.length} servers !`];
     client.user.setPresence({
       activity: {
         name: `${activities[i++ % activities.length]}`,
         type: `${presence[j++ % presence.length]}`,
       },
-    }),
+    })
+  },
     7000
   );
 

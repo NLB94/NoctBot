@@ -2,41 +2,44 @@ const {
     Role,
     MessageEmbed
 } = require('discord.js');
+const ms = require('ms');
 const {
     MESSAGES
 } = require('../../../util/constants');
-const { Item } = require('../../../util/economy')
+const {
+    Item
+} = require('../../../util/economy')
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
 
-    
+
     const language = settings.general.language;
 
     const cancelEmbed = new MessageEmbed()
-        .setTitle(await client.translate('Create Item', 'en', language))
-        .setDescription(await client.translate('Command canceled', 'en', language))
+        .setTitle(language == 'fr' ? 'Création de produit' : 'Create Item')
+        .setDescription(language == 'fr' ? 'Commande annulée' : 'Command canceled')
         .setTimestamp()
         .setAuthor(message.author.tag, message.author.avatarURL());
     try {
-        let item = new Item({
+        let item = {
             name: String,
             price: Number,
             description: String,
             stock: Number,
             timeInShop: (Number || Date),
-            requiredRole: Role,
-            roleToGive: Role,
-            roleToRemove: Role,
+            requiredRole: String,
+            roleToGive: String,
+            roleToRemove: String,
             replyMsg: (String || MessageEmbed)
-        })
+        }
         const checkMark = client.emojis.resolve('770980790242377739');
         const embed = new MessageEmbed()
-            .setTitle(await client.translate('Create Item', 'en', language))
+            .setTitle(language == 'fr' ? 'Création de produit' : 'Create Item')
             .setColor('#000000')
             .setTimestamp();
 
-        message.channel.send(await client.translate('What is the name of the item ? (35 characters max) ', 'en', language), embed).then(async msg => {
+        message.channel.send(language == 'fr' ? 'Quelle est le nom du produit ? (35 caractères max)' : 'What is the name of the item ? (35 characters max) ', embed).then(async msg => {
             const filter = m => {
                 if (m.author.bot) return false;
                 if (message.author.id == m.author.id) return true;
@@ -51,8 +54,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
             userE.first().delete().catch(err => {})
 
-            embed.addField(await client.translate('Name', 'en', language), item.name, true);
-            await msg.edit(await client.translate('How much should the item cost to purchase ?', 'en', language), embed)
+            embed.addField(language == 'fr' ? 'Nom' : 'Name', item.name, true);
+            await msg.edit(language == 'fr' ? 'Combien coûte le produit ? (Par défaut : 1000)' : 'How much should the item cost to purchase ? (Default : 1000)', embed)
 
             const userE2 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -60,12 +63,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 errors: ['time']
             })
             if (userE2.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed)
-            else item.price = parseInt(userE2.first().toString());
+            else item.price = isNaN(parseInt(userE2.first().toString())) ? 1000 : parseInt(userE2.first().toString());
 
-            userE2.first().delete()
+            userE2.first().delete().catch(() => {})
 
-            embed.addField('price', item.price, true)
-            msg.edit(await client.translate('Please provide a description. (500 characters max).', 'en', language), embed)
+            embed.addField('Price', item.price, true)
+            msg.edit(language == 'fr' ? 'Donnez une description. (500 caractères max)' : 'Please provide a description. (500 characters max)', embed)
             const userE3 = await message.channel.awaitMessages(filter, {
                 max: 1,
                 time: 20000,
@@ -75,11 +78,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             else if (userE3.first().toString().toLowerCase() == 'skip') item.description = '\u200b';
             else item.description = userE3.first().toString().slice(0, 500);
 
-            userE3.first().delete()
+            userE3.first().delete().catch(() => {})
 
-            embed.setFooter(await client.translate('You can type cancel or skip at any moment', 'en', language))
-            embed.addField(await client.translate('Description', 'en', language), item.description, false)
-            msg.edit(await client.translate('How much this item is on stock ? (skip = unlimited)', 'en', language), embed)
+            embed.setFooter(language == 'fr' ? 'Vous pouvez taper cancel ou skip à n\'importe quelle moment' : 'You can type cancel or skip at any moment')
+            embed.addField('Description', item.description, false)
+            msg.edit(language == 'fr' ? 'Quelle est le stock de ce produit ? (skip = illimité)' : 'How much this item is on stock ? (skip = unlimited)', embed)
 
             const userE4 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -88,12 +91,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
             if (userE4.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
             else if (userE4.first().toString().toLowerCase() == 'skip') item.stock = 'Unlimited';
-            else item.stock = parseInt(userE4.first().toString());
+            else item.stock = isNaN(parseInt(userE4.first().toString())) ? 'Unlimited' : parseInt(userE4.first().toString());
 
-            userE4.first().delete()
+            userE4.first().delete().catch(() => {})
 
-            embed.addField(await client.translate('Stock', 'en', language), item.stock);
-            msg.edit(await client.translate('How long the item have to appear in shop ? (5m min, 2d max) (skip = unlimited)', 'en', language), embed);
+            embed.addField('Stock', item.stock);
+            msg.edit(language == 'fr' ? 'Combien de temps le produit doit rester dans le magasin ? (5m min, 2j max) (skip = illimité)' : 'How long the item have to appear in shop ? (5m min, 2d max) (skip = unlimited)', embed);
 
             const userE5 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -102,13 +105,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
             if (userE5.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
             else if (userE5.first().toString().toLowerCase() == 'skip') item.timeInShop = 'Unlimited';
-            else item.timeInShop = parseInt(userE5.first().toString());
+            else item.timeInShop = ((ms(userE5.first().toString()) > 300000 && ms(userE5.first().toString()) < 1, 728e+8) ? 'Unlimited' : userE5.first().toString());
 
-            userE5.first().delete()
+            userE5.first().delete().catch(() => {})
 
-            embed.addField(await client.translate('Time in shop', 'en', language), item.timeInShop);
-            msg.edit(await client.translate('What role user must already have to buy this item ?', 'en', language), embed);
-            
+            embed.addField(language == 'fr' ? 'Temps dans le magasin' : 'Time in shop', item.timeInShop);
+            msg.edit(language == 'fr' ? 'Quelle role doit avoir l\'utilisateur pour acheter ce produit ? Mentionnez-le.' : 'What role user must already have to buy this item ?', embed);
+
             const userE6 = await message.channel.awaitMessages(filter, {
                 max: 1,
                 time: 20000,
@@ -116,12 +119,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
             if (userE6.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
             else if (userE6.first().toString().toLowerCase() == 'skip') item.requiredRole = message.guild.id;
-            else item.requiredRole = userE6.first().mentions.roles.first();
+            else item.requiredRole = userE6.first().mentions.roles.first() ? userE6.first().mentions.roles.first().id : message.guild.id;
 
             userE6.first().delete().catch(err => {})
 
-            embed.addField(await client.translate('Required Role', 'en', language), `${item.requiredRole}`, true);
-            msg.edit(client.translate('What role you want to add to an user when he buy this item ? Ping this role.', 'en', language), embed);
+            embed.addField(language == 'fr' ? 'Role Requis' : 'Required Role', `<@&${item.requiredRole}>`, true);
+            msg.edit(language == 'fr' ? 'Quelle role voulez-vous ajouter à l\'utilisateur lorsqu\'il achète ce produit ? Mentionnez-le.' : 'What role you want to add to an user when he buy this item ? Ping this role.', embed);
 
             const userE7 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -129,13 +132,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 errors: ['time']
             })
             if (userE7.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
-            else if (userE7.first().toString().toLowerCase() == 'skip') item.roleToGive = '\u200b';
-            else item.roleToGive = userE7.first().mentions.roles.first();
+            else if (userE7.first().toString().toLowerCase() == 'skip') item.roleToGive = message.guild.id;
+            else item.roleToGive = userE7.first().mentions.roles.first() ? userE7.first().mentions.roles.first().id : message.guild.id;
 
             userE7.first().delete().catch(err => {})
 
-            embed.addField(await client.translate('Role to give', 'en', language), `${item.roleToGive}`, true);
-            msg.edit(await client.translate('What role you want to remove from an user when he buy this item ? Ping this role.', 'en', language), embed);
+            embed.addField('Role to give', `<@&${item.roleToGive}>`, true);
+            msg.edit(language == 'fr' ? 'Quelle role voulez-vous retirer à l\'utilisateur lorsqu\'il achète ce produit ? Mentionnez-le.' : 'What role you want to remove from an user when he buy this item ? Ping this role.', embed);
 
             const userE8 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -143,13 +146,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 errors: ['time']
             })
             if (userE8.first().toString().toLowerCase() == 'cancel') return message.channel.send(cancelEmbed);
-            else if (userE8.first().toString().toLowerCase() == 'skip') item.roleToRemove = '\u200b';
-            else item.roleToRemove = userE8.first().mentions.roles.first();
+            else if (userE8.first().toString().toLowerCase() == 'skip') item.roleToRemove = message.guild.id;
+            else item.roleToRemove = userE8.first().mentions.roles.first() ? userE8.first().mentions.roles.first().id : message.guild.id;
 
             userE8.first().delete().catch(err => {})
 
-            embed.addField(await client.translate('Role to remove', 'en', language), `${item.roleToRemove}`, true);
-            msg.edit(await client.translate('What message you want bot reply ? (max 2000 characters)', 'en', language), embed);
+            embed.addField(language == 'fr' ? 'Role à retirer' : 'Role to remove', `<@&${item.roleToRemove}>`, true);
+            msg.edit(language == 'fr' ? 'Quelle message voulez-vous que le bot envoie une fois l\'achat terminé ? (max 2000 caractères)' : 'What message you want bot reply ? (max 2000 characters)', embed);
 
             const userE9 = await message.channel.awaitMessages(filter, {
                 max: 1,
@@ -162,10 +165,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
             userE9.first().delete().catch(err => {})
 
-            embed.addField(await client.translate('Reply Message', 'en', language), `${item.replyMsg}`, true);
-            
+            embed.addField(language == 'fr' ? 'Réponse' : 'Reply Message', `${item.replyMsg}`, true);
+
             client.createItem(message.guild, item).then(() => {
-                msg.edit(`${checkMark}${client.translate('Successfully created item !', 'en', language)}`, embed);
+                msg.edit(`${checkMark}${language == 'fr' ? 'Produit crée avec succès !' : 'Successfully created item !'}`, embed);
             })
         })
     } catch (e) {
