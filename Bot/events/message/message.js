@@ -20,6 +20,7 @@ module.exports = async (client, message) => {
   if (message.type == 'DEFAULT') {
     if (!message.author) return;
 
+    if (message.guild.id == client.botGuild.supportGuildID && client.user.id == '797809055758286879') return;
     let args = message.content.slice(defaultPrefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase().split("-").join("");
 

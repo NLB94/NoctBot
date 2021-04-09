@@ -19,7 +19,7 @@ module.exports = func.client = client => {
       guildID: `${backup.guildID}`
     }, {
       $push: {
-        backups: {
+        "backups.list": {
           backupID: backup.id
         }
       }
