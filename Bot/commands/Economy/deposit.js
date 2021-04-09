@@ -8,14 +8,13 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-  
-
+  const language = settings.general.language;
   const checkMark = client.emojis.resolve('770980790242377739');
   const x_mark = client.emojis.resolve('806440609127596032');
 
   if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({
     embed: {
-      description: `${x_mark}Correct usage : \`${settings.general.prefix}deposit ${module.exports.help.usage}\``
+      description: language == 'fr' ? `${x_mark}Usage correct : \`${settings.general.prefix}dep ${module.exports.help.usage}\`` : `${x_mark}Correct usage : \`${settings.general.prefix}dep ${module.exports.help.usage}\``
     }
   });
 
