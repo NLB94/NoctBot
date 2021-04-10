@@ -44,7 +44,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     xpReq = test2.join(".")
   }
   const users = await client.getGuildUsers(message.guild);
-  let userRank = users.sort((a, b) => (a.XP + (a.level * 99999999999999999999) < b.XP + (b.level * 99999999999999999999)) ? 1 : -1).map(e => e.id).indexOf(user.id)
+  let userRank = users.sort((a, b) => (a.XP * (a.level * 99999999999999999999) < b.XP * (b.level * 99999999999999999999)) ? 1 : -1).map(e => e.id).indexOf(user.id)
   userRank += 1
 //start ctx image
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
