@@ -1,7 +1,8 @@
 const chalk = require("chalk");
 const {
   MessageEmbed,
-  APIMessage
+  APIMessage,
+  Guild
 } = require('discord.js');
 const {
   response
@@ -42,8 +43,13 @@ module.exports = functions.client = async client => {
 
 
 
-  const getApp = guildID => {
-    const app = client.api.applications(client.user.id)
+  const getApp = 
+  /**
+   * 
+   * @param {String} guildID
+   * @returns 
+   */ async (guildID) => {
+    const app = await client.api.applications(client.user.id)
     if (guildID) {
       app.guilds(guildID)
     }
@@ -51,10 +57,14 @@ module.exports = functions.client = async client => {
   }
 
 
-  guilds.forEach(async g => {
+  guilds.forEach(
+    /**
+     * @param {Guild} g 
+     */
+    async g => {
     try {
       const commands = await getApp(g.id).commands.get().catch(err => {});
-      
+
       if (!commands.map(d => d.name).includes('ping')) {
         await getApp(g.id).commands.post({
           data: {
@@ -142,7 +152,9 @@ module.exports = functions.client = async client => {
               },
             ]
           }
-        }).catch(() => {})
+        }).catch((err) => {
+          console.log(err);
+        })
       }
 
 
