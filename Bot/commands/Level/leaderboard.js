@@ -19,7 +19,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setTimestamp();
 
     await client.getGuildUsers(message.guild).then(p => {
-        p.sort((a, b) => ((a.XP + a.level * 999999999999999999999) < (b.XP + b.level * 999999999999999999999)) ? 1 : -1).splice(0, 10).forEach(e => {
+        p.sort((a, b) => ((a.XP + (a.level * 999999999999999999999)) < (b.XP + (b.level * 999999999999999999999))) ? 1 : -1).splice(0, 10).forEach(e => {
             if (e.XP > 0) embed.addField(message.guild.members.cache.find(m => m.id == e.id).user.tag, `${levelTrad} ${e.level} - ${e.XP} XP`);
         })
     }).catch((err) => {
