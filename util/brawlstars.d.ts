@@ -1,27 +1,63 @@
 
-export declare function fetchURL(url: String);
+export declare function fetchBrawlURL(url: String);
 
-export declare function getPlayer(tag: String, v: String): Promise<Player>;
+/**
+ * Get a brawl player
+ * @param {String}  tag 
+ * @param {String} v 
+ */
+export declare function getBrawlPlayer(tag: String, v: String): Promise<Player>;
+/**
+ * Get a brawl player's battles
+ * @param {String} playerTag 
+ */
+export declare function getBrawlPlayerBattles(playerTag: string): Promise<PlayerBattles>;
+/**
+ * Get a brawl club
+ * @param clubTag 
+ */
+export declare function getBrawlClub(clubTag: string): Promise<Club>;
+/***
+ * Get a brawl club's members
+ */
+export declare function getBrawlClubMembers(clubTag: string): Promise<ClubMembers>;
+/**
+ * Get all the brawlers
+ */
+export declare function getBrawlBrawlers(): Promise<Brawlers>;
+/**
+ * Get a specific brawler
+ * @param brawlerId 
+ */
+export declare function getBrawlBrawler(brawlerId: string | number): Promise<Brawler>;
+/**
+ * Get a club place in specific country leaderboard
+ * @param countryCode 
+ * @param options 
+ */
+export declare function getBrawlClubRankings(countryCode?: string, options?: SearchOptions): Promise<ClubRankings>;
+/**
+ * Get a player place in specific country leaderboard
+ * @param countryCode 
+ * @param options 
+ */
+export declare function getBrawlPlayerRankings(countryCode?: string, options?: SearchOptions): Promise<Rankings>;
+/**
+ * Get a brawler place in specific country leaderboard
+ * @param brawlerId 
+ * @param countryCode 
+ * @param options 
+ */
+export declare function getBrawlBrawlerRanking(brawlerId: string | number, countryCode?: string, options?: SearchOptions): Promise<Rankings>;
+/**
+ *  * Get a brawler's power play place in specific country leaderboard
+ * @param seasonId 
+ * @param countryCode 
+ * @param options 
+ */
+export declare function getBrawlPowerPlayRankings(seasonId: string, countryCode?: string, options?: SearchOptions): Promise<Rankings>;
 
-export declare function getPlayerBattles(playerTag: string): Promise<PlayerBattles>;
-
-export declare function getClub(clubTag: string): Promise<Club>;
-
-export declare function getClubMembers(clubTag: string): Promise<ClubMembers>;
-
-export declare function getBrawlers(): Promise<Brawlers>;
-
-export declare function getBrawler(brawlerId: string | number): Promise<Brawler>;
-
-export declare function getClubRankings(countryCode?: string, options?: SearchOptions): Promise<ClubRankings>;
-
-export declare function getPlayerRankings(countryCode?: string, options?: SearchOptions): Promise<Rankings>;
-
-export declare function getBrawlerRanking(brawlerId: string | number, countryCode?: string, options?: SearchOptions): Promise<Rankings>;
-
-export declare function getPowerPlayRankings(seasonId: string, countryCode?: string, options?: SearchOptions): Promise<Rankings>;
-
-export declare function getPowerPlaySeasons(countryCode?: string, options?: SearchOptions): Promise<Seasons>;
+export declare function getBrawlPowerPlaySeasons(countryCode?: string, options?: SearchOptions): Promise<Seasons>;
 
 export interface Player {
     icon: {

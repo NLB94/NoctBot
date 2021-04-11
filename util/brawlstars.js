@@ -9,7 +9,7 @@ const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtY
  * @param {Client} client 
  */
 module.exports = async (client) => {
-    client.fetchURL = functions.fetchURL = async (url) => {
+    client.fetchBrawlURL = functions.fetchBrawlURL = async (url) => {
         try {
             const response = await fetch(url, {
                 method: 'GET',
@@ -26,13 +26,18 @@ module.exports = async (client) => {
             return false;
         }
     };
-    client.getPlayer = functions.getPlayer = async function (tag, v) {
+    client.getBrawlPlayer = functions.getBrawlPlayer = async function (tag, v) {
         let newTag = await tag.replace('#', '');
         if (newTag.startsWith('%23') || newTag.startsWith('#')) newTag = newTag.startsWith('%') ? newTag.slice(3) : newTag.slice(1);
         tag = newTag;
-        const player = await client.fetchURL(`https://api.brawlstars.com/${v}/players/%23${newTag}`);
+        const player = await client.fetchBrawlURL(`https://api.brawlstars.com/${v}/players/%23${newTag}`);
         if (!player) return false;
         else return player;
+    }
+    client.getBrawlBrawlers = functions.getBrawlBrawlers = async function (v) {
+        if (v == '') v = 'v1';
+        const brawlers = await client.fetchBrawlURL(`https://api.brawlstars.com/${v}/brawlers`);
+        return brawlers;
     }
 }
 // client.brawlStars.fetchURL('https://api.brawlstars.com/v1/players/%23CVJCVPG0')
