@@ -13,13 +13,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     message.guild.members.fetch().then(fetchAll => {
         const emojis = client.emojis;
         const offline = fetchAll.filter(m => m.presence.status === 'offline').size,
-            offlineEmoji = emojis.resolve('809321099678187540');
+            offlineEmoji = emojis.resolve(client.localEmojis.offline);
         const online = fetchAll.filter(m => m.presence.status === 'online').size,
             onlineEmoji = '🟢';
         const dnd = fetchAll.filter(m => m.presence.status === 'dnd').size,
-            dndEmoji = emojis.resolve('809321081365069854');
+            dndEmoji = emojis.resolve(client.localEmojis.dnd);
         const idle = fetchAll.filter(m => m.presence.status === 'idle').size,
-            idleEmoji = emojis.resolve('809321081441222656');
+            idleEmoji = emojis.resolve(client.localEmojis.idle);
 
         const guild = message.guild;
         const author = message.author;
@@ -38,9 +38,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
             .setThumbnail(guild.iconURL())
             .setTimestamp()
-            .setDescription(`${emojis.resolve('806440886535192616')}${guild.id}`)
+            .setDescription(`${emojis.resolve(client.localEmojis.id)}${guild.id}`)
             .addFields({
-                    name: `${emojis.resolve('806440886682648597')}Owner :`,
+                    name: `${emojis.resolve(client.localEmojis.owner)}Owner :`,
                     value: `${guild.owner.user.tag} \nID : ${guild.ownerID} (<@${guild.ownerID}>)`,
                     inline: false
                 }, {
@@ -94,7 +94,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     value: `\u200b`,
                     inline: true
                 }, {
-                    name: `${emojis.resolve('806440885483077662')} Emojis **${guild.emojis.cache.size}** :`,
+                    name: `${emojis.resolve(client.localEmojis.emojis)} Emojis **${guild.emojis.cache.size}** :`,
                     value: `\u200b`,
                     inline: true
                 }, {
@@ -127,22 +127,22 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     inline: true
                 }, {
                     name: `• All Members ***${fetchAll.size}*** :`,
-                    value: `${emojis.resolve('806440887332372482')} Members : **${memberCount}**\nBots : **${botCount}** \n${emojis.resolve('806440884043644929')}Admins : **${guild.members.cache.filter(m => m.hasPermission('BAN_MEMBERS', { checkAdmin: true})).size}** \n${onlineEmoji}Online : **${online}** \n${idleEmoji}Idle : **${idle}** \n${dndEmoji}Do not Disturb : **${dnd}** \n${offlineEmoji}Offline : **${offline}**`,
+                    value: `${emojis.resolve(client.localEmojis.members)} Members : **${memberCount}**\nBots : **${botCount}** \n${emojis.resolve(client.localEmojis.admins)}Admins : **${guild.members.cache.filter(m => m.hasPermission('BAN_MEMBERS', { checkAdmin: true})).size}** \n${onlineEmoji}Online : **${online}** \n${idleEmoji}Idle : **${idle}** \n${dndEmoji}Do not Disturb : **${dnd}** \n${offlineEmoji}Offline : **${offline}**`,
                     inline: false
                 }, {
                     name: `• Channels **${channels.size}** :`,
-                    value: `Categorys : ${channels.filter(c => c.type === "category").size} \n${emojis.resolve('806440888590008360')} Text : ${channels.filter(c => c.type === "text", c => c.type == 'news').size} \n${emojis.resolve('806440887797153793')} Voice : ${channels.filter(c => c.type === "voice").size}`,
+                    value: `Categorys : ${channels.filter(c => c.type === "category").size} \n${emojis.resolve(client.localEmojis.textChannels)} Text : ${channels.filter(c => c.type === "text", c => c.type == 'news').size} \n${emojis.resolve(client.localEmojis.voiceChannels)} Voice : ${channels.filter(c => c.type === "voice").size}`,
                     inline: true
                 }, {
                     name: '• Roles :',
                     value: `${roles.cache.size} \nHighest : ${roles.highest.id} (<@&${roles.highest.id}>)`,
                     inline: true
                 }, {
-                    name: `${emojis.resolve('770977413848629260')} Boosts :`,
+                    name: `${emojis.resolve(client.localEmojis.boost)} Boosts :`,
                     value: `${guild.premiumSubscriptionCount} \nLevel : ${guild.premiumTier}`,
                     inline: false
                 }, {
-                    name: `${emojis.resolve('806440887365795870')} Bot Settings :`,
+                    name: `${emojis.resolve(client.localEmojis.settings)} Bot Settings :`,
                     value: `\`${settings.general.prefix}bot-settings\` to show bot's settings`,
                     inline: true
                 },

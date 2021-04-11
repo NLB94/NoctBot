@@ -10,8 +10,8 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
-  const x_mark = client.emojis.resolve('806440609127596032');
-  const check_mark = client.emojis.resolve('770980790242377739')
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+  const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const role = args[0] ? (args[0].startsWith('<@&') && args[0].endsWith('>') ? message.mentions.roles.first() : (isNaN(args[0]) ? message.guild.roles.cache.find(r => args[0].toLowerCase() == r.name.toLowerCase()) : message.guild.roles.resolve(args[0]))) : null;
 
   if (!role || role == '\u200b') return message.channel.send({

@@ -31,12 +31,12 @@ module.exports = async (client, message) => {
     }
 
     if (message.author.bot) return;
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const check_mark = client.emojis.resolve('770980790242377739');
-    const arrowRight = client.emojis.resolve('770976808899444776');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
+    const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
 
 
-    if (!settings || settings == undefined) await client.createGuild({
+    if (!settings || settings.guildID == undefined) await client.createGuild({
       guildID: message.guild.id
     })
     const position = await settings.users.map((e) => e.id).indexOf(message.author.id);

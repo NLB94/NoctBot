@@ -14,26 +14,26 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const member = message.guild.members.resolve(user.id);
     const emoji = messageReaction.emoji.name;
 
-    const loadingEmoji = client.emojis.resolve('783028992231866419');
+    const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
     //emoji number
-    const emoji1 = client.emojis.resolve('772418754583855134');
-    const emoji2 = client.emojis.resolve('770976748082298891');
-    const emoji3 = client.emojis.resolve('772419302133334046');
-    const emoji4 = client.emojis.resolve('772418814594777099');
-    const emoji5 = client.emojis.resolve('772419197673930782');
-    const emoji6 = client.emojis.resolve('772419404855902209');
-    const emoji7 = client.emojis.resolve('770976765219831811');
-    const emoji8 = client.emojis.resolve('772418662929924106');
-    const emoji9 = client.emojis.resolve('772419459968532520');
+    const emoji1 = client.emojis.resolve(client.client.localEmojis.emoji1);
+    const emoji2 = client.emojis.resolve(client.client.localEmojis.emoji2);
+    const emoji3 = client.emojis.resolve(client.client.localEmojis.emoji3);
+    const emoji4 = client.emojis.resolve(client.localEmojis.emoji4);
+    const emoji5 = client.emojis.resolve(client.localEmojis.emoji5);
+    const emoji6 = client.emojis.resolve(client.localEmojis.emoji6);
+    const emoji7 = client.emojis.resolve(client.localEmojis.emoji7);
+    const emoji8 = client.emojis.resolve(client.localEmojis.emoji8);
+    const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
 
-    const check_mark = client.emojis.resolve('770980790242377739');
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const arrowRight = client.emojis.resolve('770976808899444776');
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
 
-    const tada = client.emojis.resolve('770980801411678229');
-    const announcEmoji = client.emojis.resolve('806438435933913178');
-    const eyesEmoji = client.emojis.resolve('806438464064978944');
-    const alertEmoji = client.emojis.resolve('806438454082797588');
+    const tada = client.emojis.resolve(client.localEmojis.tada);
+    const announcEmoji = client.emojis.resolve(client.localEmojis.warning);
+    const eyesEmoji = client.emojis.resolve(client.localEmojis.alert);
+    const alertEmoji = client.emojis.resolve(client.localEmojis.alert);
 
 
     if (member.user.bot) return;

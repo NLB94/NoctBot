@@ -10,7 +10,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   const dailyCd = 8.64e+7;
   const language = settings.general.language;
-  const loadingEmoji = client.emojis.resolve('783028992231866419');
+  const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
 
   if (userInfo == undefined) await client.createGuildUser(message.guild, message.member);
 

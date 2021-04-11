@@ -11,8 +11,8 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const checkMark = client.emojis.resolve('770980790242377739');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     try {
         // client.giveawaysManager.start(message.channel, {
         //     time: ms(args[0]),
@@ -71,7 +71,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             .setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`);
 
         giveaway.channel.send(embed).then(async msg => {
-            msg.react('770980801411678229');
+            msg.react(client.localEmojis.tada);
             giveaway.id = msg.id;
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);
@@ -88,7 +88,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             setTimeout(async () => {
                 if (!msg) return;
                 if (msg.embeds[0].author.name !== embed.author.name) return;
-                const reactions = msg.reactions.resolve('770980801411678229').users;
+                const reactions = msg.reactions.resolve(client.localEmojis.tada).users;
                 reactions.remove(client.user.id);
                 let winners = await reactions.cache.filter(w => !w.bot).filter(w => giveaway.hostedBy !== w.id).random(giveaway.winnerCount);
                 for (let w of winners) {

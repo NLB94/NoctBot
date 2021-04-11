@@ -6,10 +6,10 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
-  const tada = client.emojis.resolve('770980801411678229'),
-    warning = client.emojis.resolve('806438435933913178'),
-    eyes = client.emojis.resolve('806438464064978944'),
-    alert = client.emojis.resolve('806438454082797588'),
+  const tada = client.emojis.resolve(client.localEmojis.tada),
+    warning = client.emojis.resolve(client.localEmojis.warning),
+    eyes = client.emojis.resolve(client.localEmojis.alert),
+    alert = client.emojis.resolve(client.localEmojis.alert),
     embed = new MessageEmbed()
       .setAuthor(message.guild.name, message.guild.iconURL(), `https://discord.gg/${(await message.guild.fetchInvites()).filter(i => !i.temporary).first().code}`)
       .setTitle(`Choose your roles`)

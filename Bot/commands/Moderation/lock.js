@@ -5,7 +5,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-    const x_mark = client.emojis.resolve('806440609127596032');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const position = settings.lockChannels.map(c => c.channelID).indexOf(message.channel.id)
     if (position !== -1) return message.channel.send({
         embed: {

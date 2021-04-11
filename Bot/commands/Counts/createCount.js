@@ -9,10 +9,10 @@ const functions = require("../../../util/functions");
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
     const language = settings.general.language;
     try {
-        const loading = client.emojis.resolve('783028992231866419');
-        const x_mark = client.emojis.resolve('806440609127596032');
-        const warning = client.emojis.resolve('806438435933913178');
-        const check_mark = client.emojis.resolve('770980790242377739');
+        const loading = client.emojis.resolve(client.localEmojis.loadingEmoji);
+        const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+        const warning = client.emojis.resolve(client.localEmojis.warning);
+        const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
 
         const countArray = ['channels', 'members', 'boosts'];
         let i = 1;

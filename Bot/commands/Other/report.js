@@ -6,7 +6,7 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     const msg = args.join(" ");
-    const checkMark = client.emojis.resolve('770980790242377739');
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     const channel = client.channels.resolve('797799949047562260');
     message.delete().catch(err => {})
 

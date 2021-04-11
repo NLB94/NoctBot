@@ -8,8 +8,8 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
-  const checkMark = client.emojis.resolve('770980790242377739');
-  const x_mark = client.emojis.resolve('806440609127596032');
+  const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
   const language = settings.general.language;
   const support = args[0].toLowerCase() == 'bank' || (args[0]).toLowerCase() == 'cash' ? args.shift().toLowerCase() : 'cash';

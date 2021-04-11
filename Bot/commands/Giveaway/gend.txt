@@ -11,8 +11,8 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const checkMark = client.emojis.resolve('770980790242377739');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     try {
         let position = !args[0] ? (parseInt(settings.giveaways.length) - 1) : settings.giveaways.map(g => g.id).indexOf(args[0]);
         const giveaway = settings.giveaways[position];
@@ -29,7 +29,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             await msg.fetch();
         }
 
-        const reactions = await msg.reactions.resolve('770980801411678229').users;
+        const reactions = await msg.reactions.resolve(client.localEmojis.tada).users;
         await reactions.remove(client.user.id);
 
         let winners = await reactions.cache.filter(w => !w.bot)/*.filter(w => giveaway.hostedBy !== w.id)*/.random(giveaway.winnerCount > 1 ? parseInt(giveaway.winnerCount) : 2);

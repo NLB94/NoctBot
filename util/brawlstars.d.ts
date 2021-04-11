@@ -1,7 +1,7 @@
 
 export declare function fetchURL(url: String);
 
-export declare function getPlayer(tag: String): Promise<Player>;
+export declare function getPlayer(tag: String, v: String): Promise<Player>;
 
 export declare function getPlayerBattles(playerTag: string): Promise<PlayerBattles>;
 

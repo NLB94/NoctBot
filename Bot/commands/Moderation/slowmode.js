@@ -10,8 +10,8 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
-    const checkMark = client.emojis.resolve('770980790242377739');
-    const x_mark = client.emojis.resolve('806440609127596032');
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
     let newNb = args[0] ? parseInt(args[0]) : 5;
 

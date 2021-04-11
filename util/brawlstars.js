@@ -3,14 +3,13 @@ const {
 } = require('discord.js');
 const fetch = require('node-fetch')
 const functions = require('./brawlstars');
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImZjMjk0YTZlLTY3YjUtNDQzNy05MzkzLWI4MTQ2MmRkOWUxNCIsImlhdCI6MTYxNzA5NDkzNCwic3ViIjoiZGV2ZWxvcGVyL2IzMmEzNWZhLWU3MTYtM2EyMi03MjNkLWI3NTIwMzMzNDgxYSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIzNC4yNDQuNjQuMjE4IiwiMzQuMjQwLjIuMzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.Dnz0jENdzcNU4-TRADtkNOH-MvpiA2D1WfDRI-tVujZdioT1djc7-2RnzU5AwfEsriOplVvD1IySI-XEp6S7OA'
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6Ijg5NDQ2MGNiLTk3YzctNDM3Yi1iOWE0LWJiMWQ4ODk0NmI0ZCIsImlhdCI6MTYxODEyMDYwNywic3ViIjoiZGV2ZWxvcGVyL2ZkOGUwNWRiLTAzZGQtOTZjMC0xNTk2LTYyZGM1ZTY5MGExMCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiOTIuOTAuMTE1LjIwIl0sInR5cGUiOiJjbGllbnQifV19.QDvhjm31bv9-TKbWTzRwFVEDN0FaMeMRswc5tMQvkMGoOqPkxhizL5Vk3hb_6Yfwy9VZs0ufYjnsquglCji7rg'
 /**
  * 
  * @param {Client} client 
  */
 module.exports = async (client) => {
-    client.brawlStars = {
-        fetchURL: functions.fetchURL = async (url) => {
+    client.fetchURL = functions.fetchURL = async (url) => {
         try {
             const response = await fetch(url, {
                 method: 'GET',
@@ -19,15 +18,21 @@ module.exports = async (client) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            if (!response.ok) {
-                console.log(response.statusText);
-            }
+            if (!response.ok) return false;
             const data = await response.json();
-            console.log(data)
             return data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return false;
         }
-    }}
-    client.brawlStars.fetchURL('https://api.brawlstars.com/v1/players/%23CVJCVPG0')
+    };
+    client.getPlayer = functions.getPlayer = async function (tag, v) {
+        let newTag = await tag.replace('#', '');
+        if (newTag.startsWith('%23') || newTag.startsWith('#')) newTag = newTag.startsWith('%') ? newTag.slice(3) : newTag.slice(1);
+        tag = newTag;
+        const player = await client.fetchURL(`https://api.brawlstars.com/${v}/players/%23${newTag}`);
+        if (!player) return false;
+        else return player;
+    }
 }
+// client.brawlStars.fetchURL('https://api.brawlstars.com/v1/players/%23CVJCVPG0')

@@ -35,7 +35,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             roleToRemove: String,
             replyMsg: (String || MessageEmbed)
         }
-        const checkMark = client.emojis.resolve('770980790242377739');
+        const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
         const embed = new MessageEmbed()
             .setTitle(language == 'fr' ? 'Création de produit' : 'Create Item')
             .setColor('#000000')

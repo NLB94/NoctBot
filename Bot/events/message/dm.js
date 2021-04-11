@@ -10,8 +10,8 @@ module.exports = func.run = async (client, message, args) => {
     const reportChannel = await guild.channels.resolve('797799949047562260');
 
     if (message.author.bot) return;
-    const warning = client.emojis.resolve('806438435933913178');
-    const check_mark = client.emojis.resolve('770980790242377739')
+    const warning = client.emojis.resolve(client.localEmojis.warning);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
     const user = message.author;
 
     args = await message.content.slice(defaultPrefix.length).split(/ +/);

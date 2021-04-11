@@ -9,8 +9,8 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
-    const checkMark = client.emojis.resolve('770980790242377739');
-    const x_mark = client.emojis.resolve('806440609127596032');
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
     const channel = args[0] ? (args[0].startsWith('<#') && args[0].endsWith('>') ? message.mentions.channels.first() : (isNaN(args[0]) ? message.guild.channels.cache.find(c => args[0].toLowerCase() == c.name.toLowerCase()) : message.guild.channels.resolve(args[0]))) : message.channel;
 

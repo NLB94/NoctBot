@@ -12,7 +12,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     
     const roles = [];
     const users = [];
-    const checkMark = client.emojis.resolve('770980790242377739');
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     const mentionsRoles = message.mentions.roles;
     const mentionsUsers = message.mentions.users;
     mentionsRoles.forEach(role => {

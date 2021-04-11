@@ -11,8 +11,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     
     const getSetting = args[0].toLowerCase();
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const check_mark = client.emojis.resolve('770980790242377739')
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
     //const logs = client.channels.cache.get('789919985307746304');
     const keys = ["captcha - Not ready", "welcome - Enable Welcome System", "leave - Enable Leave System", "ticket - Not ready yet", "antlink - Block all links started (http/https)", "antiinvite - Block all discord invites (discord.gg)", "level - Enable level system"]
 

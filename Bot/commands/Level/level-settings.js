@@ -10,8 +10,8 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
 
     (message.guild)
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const check_mark = client.emojis.resolve('770980790242377739');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const keys = [{
             name: 'enable',
             description: 'Enable level system.'

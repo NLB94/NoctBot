@@ -41,6 +41,7 @@ const { readdirSync } = require('fs');
 // require('./src/strategies/discord')(client);
 require('./util/user')(client);
 
+require('./util/brawlstars')(client);
 require("./util/guild")(client);
 require('./util/message')(client);
 require("./util/functions")(client);

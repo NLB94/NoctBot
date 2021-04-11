@@ -4,8 +4,8 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args) => {
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const check_mark = client.emojis.resolve('770980790242377739');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
 
     try {
         const user = args[1] ? (args[1].startsWith('<@') && args[1].endsWith('>') ? message.mentions.users.first() : (isNaN(args[1]) ? (args[1].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[1].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[1].toLowerCase()))) : client.users.resolve(args[1]))) : message.author;

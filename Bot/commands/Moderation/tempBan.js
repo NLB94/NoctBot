@@ -8,8 +8,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   
   let reason = args.splice(2).join(' ') || 'Unspecified';
-  const x_mark = client.emojis.resolve('806440609127596032');
-  const check_mark = client.emojis.resolve('770980790242377739')
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+  const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
   const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : args[0]);
   const time = args[1] ? ms(args[1]) : ms('24 hours');

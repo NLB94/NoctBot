@@ -7,7 +7,7 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
   if (settings == undefined) client.createGuild(message.guild);
-  const x_mark = client.emojis.resolve('806440609127596032');
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
   const canvas = createCanvas(1000, 300); 
   const ctx = canvas.getContext("2d");

@@ -13,9 +13,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const getSetting = args[0].toLowerCase().split("-").join("");
     const prefix = settings.general.prefix;
     let newSetting = args.slice(1).join(" ");
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const check_mark = client.emojis.resolve('770980790242377739')
-    const arrowRight = client.emojis.resolve('770976808899444776');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
+    const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
     //const logs = client.channels.cache.get('789919985307746304');
     const keys = ["logs", "prefix", "language"];
     const language = settings.general.language;

@@ -13,10 +13,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     
     const language = settings.general.language;
 
-    const x_mark = client.emojis.resolve('806440609127596032');
-    const loadingEmoji = client.emojis.resolve('783028992231866419');
-    const arrowRigth = client.emojis.resolve('770976808899444776');
-    const checkMark = client.emojis.resolve('770980790242377739');
+    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
+    const arrowRigth = client.emojis.resolve(client.localEmojis.arrowRight);
+    const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     const action = args[0].toLowerCase();
     switch (action) {
         case "create": {
