@@ -40,7 +40,7 @@ client.brawlManager = brawlManager;
 client.topAPI = topAPI;
 
 setInterval(() => {
-    topAPI.postStats({
+    if (client.user.id !== client.botGuild.clientID) topAPI.postStats({
         serverCount: client.guilds.cache.size,
         shardId: client.shard ? client.shard.ids[0] : '', // if you're sharding
         shardCount: client.options.shardCount

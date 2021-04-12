@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const passport = require("passport");
 
-const { client } = require('../index')
+const {
+    client
+} = require('../index')
 
 const session = require('express-session');
 const cors = require('cors');
@@ -16,15 +18,24 @@ const {
 
 require('./strategies/discord')(client);
 
-app.use(express.static("public"))
-
 app.use(express.json())
 app.use(express.urlencoded({
     extended: false
 }));
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
+
+app.use(express.static(`${__dirname}/assets`));
+app.locals.basedir = `${__dirname}/assets`;
+
+
+app.get('/', (req, res) => {
+    res.send('Hello')
+});
+
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost'],
     credentials: true
 }))
 
@@ -47,6 +58,10 @@ app.use('/api', routes);
 app.use('/discord', passport.authenticate('discord'))
 app.use('/dashboard', dashboard)
 
+app.get('/login', (req, res) => {
+    res.redirect('/api/auth/discord/redirect');
+});
+
 app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
@@ -61,5 +76,10 @@ function checkAuth(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.send('not logged in :(');
 }
+
+app.all('*', (req, res) => {
+    res.render('errors/404');
+})
+
 
 app.listen(port, () => console.log(`Server is live on port ${port}`));

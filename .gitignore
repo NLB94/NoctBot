@@ -2,6 +2,9 @@ node_modules/
 .vscode
 package-lock.json
 test.html
+test.js
+test.css
+test.php
 z_prv
 .env
 dashboard
