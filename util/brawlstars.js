@@ -35,9 +35,8 @@ module.exports = async (client) => {
         else return player;
     }
     client.getBrawlBrawlers = functions.getBrawlBrawlers = async function (v) {
-        if (v == '') v = 'v1';
         const brawlers = await client.fetchBrawlURL(`https://api.brawlstars.com/${v}/brawlers`);
-        return brawlers;
+        return console.log(brawlers);
     }
 }
 // client.brawlStars.fetchURL('https://api.brawlstars.com/v1/players/%23CVJCVPG0')

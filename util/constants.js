@@ -1358,6 +1358,24 @@ const MESSAGES = {
         onlyPremium: false,
         args: false
       },
+      AVATAR: {
+        name: "avatar",
+        aliases: ["pp"],
+        category: "other",
+        description: "Show an user profile picture.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: true,
+        usage: "{@user}",
+        example: "No example for this command.",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: false
+      },
       POLL: {
         name: "poll",
         aliases: ["poll"],

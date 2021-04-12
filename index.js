@@ -7,6 +7,8 @@ const Discord = require('discord.js');
 const Brawl = require('@statscell/brawl');
 const translate = require('@vitalets/google-translate-api');
 
+const DBLApi = require('@top-gg/sdk');
+
 const botGuild = require('./.bot.json');
 const emojis = require('./emojis.json');
 
@@ -25,18 +27,34 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
     intents: ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INTEGRATIONS', 'GUILD_INVITES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING', 'GUILD_PRESENCES', 'GUILD_VOICE_STATES', 'GUILD_WEBHOOKS', 'DIRECT_MESSAGE_TYPING', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS']
 });
-const brawlManager = new Brawl.Client({ token: process.env.BRAWL_TOKEN });
+const topAPI = new DBLApi.Api(process.env.DBL_TOKEN);
+
+const brawlManager = new Brawl.Client({
+    token: process.env.BRAWL_TOKEN
+});
 
 client.trad = translate;
 client.botGuild = botGuild;
 client.localEmojis = emojis;
 client.brawlManager = brawlManager;
+client.topAPI = topAPI;
+
+setInterval(() => {
+    topAPI.postStats({
+        serverCount: client.guilds.cache.size,
+        shardId: client.shard ? client.shard.ids[0] : '', // if you're sharding
+        shardCount: client.options.shardCount
+    })
+}, 1800000);
+
 
 const {
     loadEvents,
     loadCommands
 } = require("./util/loader");
-const { readdirSync } = require('fs');
+const {
+    readdirSync
+} = require('fs');
 
 // require('./src/strategies/discord')(client);
 require('./util/user')(client);

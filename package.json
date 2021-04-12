@@ -18,6 +18,7 @@
     "@haileybot/captcha-generator": "^1.4.3",
     "@statscell/brawl": "^1.2.1",
     "@testing-library/react": "^11.2.5",
+    "@top-gg/sdk": "^3.0.9",
     "@vitalets/google-translate-api": "^5.1.0",
     "axios": "^0.21.1",
     "brawlstars.js": "^1.0.8",
