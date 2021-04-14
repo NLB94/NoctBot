@@ -18,11 +18,4 @@ router.get('/guilds', async (req, res) => {
     }
 });
 
-router.put('/guilds/:guildID/prefix', async (req, res) => {
-    const { prefix } = req.body;
-    if (!prefix) res.render('errors/400')
-})
-
-
-
 module.exports = router;

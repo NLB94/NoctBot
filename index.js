@@ -73,7 +73,9 @@ require("./util/level")(client);
 client.mongoose = require("./util/mongoose");
 
 ["commands", "cooldowns"].forEach(x => client[x] = new Discord.Collection());
-client.categorys = readdirSync('./Bot/commands')
+client.categories = readdirSync('./Bot/commands')
+loadCommands(client);
+loadEvents(client);
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }));
@@ -118,15 +120,13 @@ client.categorys = readdirSync('./Bot/commands')
 
 // app.listen(port, () => console.log(`Server is live on port ${port}`));
 
-loadCommands(client);
-loadEvents(client);
+
 client.mongoose.init();
 
 client.login(process.env.TOKEN);
 
-module.exports = {
-    client
-}
+module.exports.client = client;
+
 process.on('uncaughtException', (err) => {
     console.log('Erreur attrapé :');
     console.log(err);

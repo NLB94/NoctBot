@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-router.all('/discord', passport.authenticate('discord'), (req, res) => {
+router.get('/discord/redirect', passport.authenticate('discord'), (req, res) => {
     res.redirect('http://localhost/dashboard')
 });
 

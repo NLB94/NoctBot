@@ -11,6 +11,7 @@ const cors = require('cors');
 
 const port = process.env.PORT || 80;
 const routes = require('./routes');
+const docs = require('./docs');
 const dashboard = require('./pages/dashboard')
 const {
     default: Store
@@ -31,7 +32,7 @@ app.locals.basedir = `${__dirname}/assets`;
 
 
 app.get('/', (req, res) => {
-    res.send('Hello')
+    res.render('index')
 });
 
 app.use(cors({
@@ -53,6 +54,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/docs', docs)
 
 app.use('/api', routes);
 app.use('/discord', passport.authenticate('discord'))

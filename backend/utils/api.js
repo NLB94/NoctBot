@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
+const axios = require('axios').default;
 
-getBotGuilds = async () => {
+const getBotGuilds = async () => {
     const response = await fetch('https://discord.com/api/v6/users/@me/guilds', {
         method: 'GET',
         headers: {
@@ -10,4 +11,6 @@ getBotGuilds = async () => {
     return response.json()
 }
 
-module.exports = { getBotGuilds }
+module.exports = {
+    getBotGuilds
+}
