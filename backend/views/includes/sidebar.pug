@@ -1,7 +1,7 @@
 #sidebar.float-left
   a(href='/dashboard')
     .icon.round.shadow
-      img.round(alt=user.username, src=user.avatarUrl(64))
+      img.round(alt=user.tag, src=user.avatarURL({ size: 64 }))
   hr
   each guild in guilds
     a(href='/servers/' + guild.id)

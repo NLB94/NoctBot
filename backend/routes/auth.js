@@ -5,7 +5,7 @@ router.get('/discord/redirect', passport.authenticate('discord'), (req, res) => 
     res.redirect('http://localhost/dashboard')
 });
 
-router.get('/', (req, res) => {
+router.get('/user', (req, res) => {
     if (req.user) {
         res.send(req.user)
     } else {

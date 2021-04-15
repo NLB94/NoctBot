@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
+
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useMutation } from '@apollo/client';
 import { Button, Input, useToast } from '@chakra-ui/react';
@@ -11,7 +11,7 @@ export const PrefixForm = ({
   guildID,
 }) => {
 
-  const [cmdPrefix, setCmdPrefix] = React.useState(prefix);
+  const [cmdPrefix, setCmdPrefix] = useState(prefix);
   const [updatePrefix] = useMutation(updatePrefixMutation);
   const toast = useToast();
   const formik = useFormik({

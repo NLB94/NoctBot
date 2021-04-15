@@ -1,6 +1,6 @@
 {
   "name": "i2z7",
-  "version": "1.0.3",
+  "version": "1.5",
   "description": "A very powerful Discord Bot",
   "main": "index.js",
   "scripts": {
@@ -12,12 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.3.11",
-    "@chakra-ui/react": "^1.3.4",
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
     "@haileybot/captcha-generator": "^1.4.3",
     "@statscell/brawl": "^1.2.1",
-    "@testing-library/react": "^11.2.5",
     "@top-gg/sdk": "^3.0.9",
     "@vitalets/google-translate-api": "^5.1.0",
     "axios": "^0.21.1",
@@ -34,6 +30,7 @@
     "discord-giveaways": "^4.4.3",
     "discord.js": "12.5.0",
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
     "env": "^0.0.2",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
@@ -42,7 +39,6 @@
     "fastify": "^3.9.2",
     "framer-motion": "^3.10.0",
     "fs": "^0.0.1-security",
-    "fuse": "^0.0.8",
     "http-proxy": "^1.18.1",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
@@ -55,8 +51,6 @@
     "pip": "^0.0.1",
     "pug": "^3.0.2",
     "rate-limit-mongo": "^2.3.0",
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1",
     "utf-8-validate": "^5.0.4",
     "ws": "^7.4.4"
   },
@@ -69,13 +63,10 @@
   },
   "homepage": "https://github.com/NLB94/I2Z7#readme",
   "devDependencies": {
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.7",
-    "@types/ws": "^7.4.1"
+    "@types/ws": "^7.4.1",
+    "eslint-plugin-react-pug": "^0.8.4"
   },
   "engines": {
-    "node": "15.12.0"
+    "node": "^15.12.0"
   }
 }

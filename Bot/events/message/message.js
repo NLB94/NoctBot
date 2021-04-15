@@ -17,10 +17,12 @@ const {
  */
 module.exports = async (client, message) => {
   const settings = await client.getGuild(message.guild);
+  if (!settings || settings.guildID == undefined) await client.createGuild({
+    guildID: message.guild.id
+  });
   if (message.type == 'DEFAULT') {
     if (!message.author) return;
 
-    if (message.guild.id == client.botGuild.supportGuildID && client.user.id == '797809055758286879') return;
     let args = message.content.slice(defaultPrefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase().split("-").join("");
 
@@ -31,14 +33,15 @@ module.exports = async (client, message) => {
     }
 
     if (message.author.bot) return;
-    const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
-    const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
-    const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
+    const x_mark = client.emojis.resolve('806440609127596032');
+    const check_mark = client.emojis.resolve('770980790242377739');
+    const arrowRight = client.emojis.resolve('770976808899444776');
 
 
-    if (!settings || settings.guildID == undefined) await client.createGuild({
+    if (!settings || settings == undefined) await client.createGuild({
       guildID: message.guild.id
     })
+
     const position = await settings.users.map((e) => e.id).indexOf(message.author.id);
     const userInfo = await settings.users[position];
 
@@ -163,41 +166,44 @@ module.exports = async (client, message) => {
       }
       command.run(client, message, args, settings, userInfo);
     };
-  } else if (message.type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION')) {
-    if (!settings) await client.createGuild(message.guild);
-    const count = settings.countChannels;
-    if (!count.enable) return;
+  } else {
+    if (message.type == undefined) return;
+    if (message.type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION')) {
+      if (!settings) await client.createGuild(message.guild);
+      const count = settings.countChannels;
+      if (!count.enable) return;
 
-    const channels = count.list.filter(c => c.category.toLowerCase() == 'boosts');
-    if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
+      const channels = count.list.filter(c => c.category.toLowerCase() == 'boosts');
+      if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
 
-    if (message.type == 'USER_PREMIUM_GUILD_SUBSCRIPTION') {
-      channels.forEach(
-        /**
-         * 
-         * @param {CountChannels} c 
-         */
-        async (c) => {
-          if (c.type == 'boosts') {
-            const chnl = await message.guild.channels.resolve(c.id);
-            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
-          }
-        })
-    } else {
-      channels.forEach(
-        /**
-         * 
-         * @param {CountChannels} c 
-         */
-        async (c) => {
-          if (c.type == 'boosts') {
-            const chnl = await message.guild.channels.resolve(c.id);
-            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
-          } else if (c.type == 'level') {
-            const chnl = await message.guild.channels.resolve(c.id);
-            if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - 1).toString().length) + message.guild.premiumTier)
-          }
-        })
+      if (message.type == 'USER_PREMIUM_GUILD_SUBSCRIPTION') {
+        channels.forEach(
+          /**
+           * 
+           * @param {CountChannels} c 
+           */
+          async (c) => {
+            if (c.type == 'boosts') {
+              const chnl = await message.guild.channels.resolve(c.id);
+              if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
+            }
+          })
+      } else {
+        channels.forEach(
+          /**
+           * 
+           * @param {CountChannels} c 
+           */
+          async (c) => {
+            if (c.type == 'boosts') {
+              const chnl = await message.guild.channels.resolve(c.id);
+              if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - (message.guild.premiumSubscriptionCount - 1).toString().length)) + message.guild.premiumSubscriptionCount)
+            } else if (c.type == 'level') {
+              const chnl = await message.guild.channels.resolve(c.id);
+              if (chnl) await chnl.setName(chnl.name.slice(0, (chnl.name.length - 1).toString().length) + message.guild.premiumTier)
+            }
+          })
+      }
     }
   }
 };

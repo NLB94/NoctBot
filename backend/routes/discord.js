@@ -2,20 +2,49 @@ const router = require('express').Router();
 const {
     getBotGuilds
 } = require('../utils/api');
-const { User } = require('../../models/main');
-const { getMutualGuilds } = require('../utils/utils');
+const {
+    User
+} = require('../../models/main');
+const {
+    getMutualGuilds, getNonMutualGuilds, getAdminGuilds, getGuildIcon, sortGuilds
+} = require('../utils/utils');
 
 router.get('/guilds', async (req, res) => {
-    const guilds = await getBotGuilds()
-    const user = await User.findOne({ userID: req.user ? req.user.userID : null });
-    if (user) {
-        const userGuilds = user.guilds;
-        const mutualGuilds = await getMutualGuilds(userGuilds, guilds);
-        res.send(mutualGuilds);
-    }
-    else {
-        res.render('errors/401');
+    if (req.user) {
+        const guilds = req.user.guilds;
+        const botGuilds = await getBotGuilds();
+        let userGuilds = await getAdminGuilds(guilds);
+        const mutualGuilds = await getMutualGuilds(userGuilds, botGuilds);
+        const notMutualGuilds = await getNonMutualGuilds(userGuilds, mutualGuilds);
+        userGuilds = await sortGuilds(userGuilds, mutualGuilds);
+        let response = '';
+        for (let i = 0; i < mutualGuilds.length; i++) {
+            const guild = mutualGuilds[i];
+            response+=(`<img src="${getGuildIcon(guild.id, guild.icon)}" alt="test"/><br/>`)
+        };
+        await res.send(response);
+    } else {
+        res.render('errors/401')
     }
 });
+
+router.get('/guilds/:query', async (req, res) => {
+    if (req.user) {
+        const guilds = req.user.guilds;
+        const botGuilds = await getBotGuilds();
+        let userGuilds = await getAdminGuilds(guilds);
+        const mutualGuilds = await getMutualGuilds(userGuilds, botGuilds);
+        const notMutualGuilds = await getNonMutualGuilds(userGuilds, mutualGuilds);
+        userGuilds = await sortGuilds(userGuilds, mutualGuilds);
+        let response = '';
+        for (let i = 0; i < mutualGuilds.length; i++) {
+            const guild = mutualGuilds[i];
+            response+=(`<img src="${getGuildIcon(guild.id, guild.icon)}" alt="test"/><br/>`)
+        };
+        await res.send(response);
+    } else {
+        res.render('errors/401')
+    }
+})
 
 module.exports = router;

@@ -59,6 +59,7 @@ const {
 // require('./src/strategies/discord')(client);
 require('./util/user')(client);
 
+require('./backend/server')(client);
 require('./util/brawlstars')(client);
 require("./util/guild")(client);
 require('./util/message')(client);
@@ -125,7 +126,9 @@ client.mongoose.init();
 
 client.login(process.env.TOKEN);
 
-module.exports.client = client;
+module.exports = {
+    client
+};
 
 process.on('uncaughtException', (err) => {
     console.log('Erreur attrapé :');

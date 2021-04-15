@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -11,11 +11,14 @@ import reducer from './reducers';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(logger)));
 
+require('react-dom');
+window.React2 = require('react');
+console.log(window.React1 === window.React2);
+
 const link = createHttpLink({
-  uri: 'http://localhost/graphql',
+  uri: 'http://localhost:3000/graphql',
   credentials: 'include',
 })
 const client = new ApolloClient({
@@ -30,7 +33,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <Router>
-    <React.StrictMode>
+    <StrictMode>
       <ThemeProvider>
         <CSSReset />
         <ApolloProvider client={client}>
@@ -39,7 +42,7 @@ ReactDOM.render(
           </Provider>
         </ApolloProvider>
       </ThemeProvider>
-    </React.StrictMode>
+    </StrictMode>
   </Router>,
   document.getElementById("root")
 );

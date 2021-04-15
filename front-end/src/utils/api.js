@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as fetch from 'node-fetch'
 
-export const getUserDetails = () => axios.get('http://localhost/api/auth', {
+export const getUserDetails = () => axios.get('http://localhost/api/auth/user', {
   withCredentials: true
 });
 

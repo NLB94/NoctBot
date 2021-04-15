@@ -1,31 +1,46 @@
 const router = require('express').Router();
-const fetch = require('node-fetch');
-const {
-    getBotGuilds
-} = require('../utils/api');
-const {
-    getMutualGuilds,
-} = require('../utils/utils');
 
 router.get('/', async (req, res) => {
     if (req.user) {
+        const {
+            getBotGuilds
+        } = require('../utils/api');
+        const {
+            getGuildIcon,
+            getAdminGuilds,
+            getMutualGuilds,
+            getNonMutualGuilds,
+            sortGuilds
+        } = require('../utils/utils');
+        const guilds = req.user.guilds;
         const botGuilds = await getBotGuilds();
-        let userGuilds = [];
-        req.user.guilds.forEach(g => {
-            if ((g.permissions & 32) == 32) userGuilds.push(g);
-        });
+        let userGuilds = await getAdminGuilds(guilds);
         const mutualGuilds = await getMutualGuilds(userGuilds, botGuilds);
-        // const guildsIcon = mutualGuilds.map(g => (g.icon ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.webp` : ''));
-        userGuilds = userGuilds.sort((a, b) => (mutualGuilds.includes(a) && !mutualGuilds.includes(b) ? -1 : 1))
-        const notMutualGuilds = [];
-        userGuilds.forEach(g => {
-            if (!mutualGuilds.includes(g)) notMutualGuilds.push(g);
-        });
-        // let response = '';
-        // for (let i = 0; i < mutualGuilds.length; i++) {
-        //     response+=(`<img src="${guildsIcon[i]}" alt="test"/><br/>`)
-        // };
-        await res.send('Here mutual guilds : <br/>' + mutualGuilds.map(g => `${g.name + ' ' + g.id + ' ' + g.icon}`).join('<br/>') + '<br/>And here not mutual guilds : <br/>' + notMutualGuilds.map(g => `${g.name + ' ' + g.id + ' ' + g.icon}`).join("<br/>"));
+        const notMutualGuilds = await getNonMutualGuilds(userGuilds, mutualGuilds);
+        userGuilds = await sortGuilds(userGuilds, mutualGuilds);
+
+        let start = `<div class="guild-menu-container"> <div class="guild-menu-item">
+        <div class="guild-details-wrapper">`
+        let response = '';
+        for (let i = 0; i < mutualGuilds.length; i++) {
+            const guild = mutualGuilds[i];
+            response += (`
+            <div class="guild-text">${guild.name}</div>
+            <div class="btn-container">
+              <a
+                class="base-btn dashboard-btn"
+                href="/dashboard/${guild.id}"}}
+              />
+              <img src="${getGuildIcon(guild.id, guild.icon)}" alt="test"/>
+            </div><br/>`)
+        };
+        let final = ((start += response) + `</div></div></div>`)
+        // await res.send(final);
+        res.render('dashboard/index', {
+            mutualGuilds,
+            notMutualGuilds,
+            images: final
+        })
     } else {
         res.render('errors/401')
     }
