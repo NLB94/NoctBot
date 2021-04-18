@@ -2,7 +2,7 @@ const {
     MessageEmbed
 } = require('discord.js');
 const func = require("../../util/functions");
-const defaultPrefix = '~';
+const defaultPrefix = 't~';
 
 module.exports = func.run = async (client, message, args) => {
     const guild = await client.guilds.resolve('727494941911154688')
@@ -19,7 +19,7 @@ module.exports = func.run = async (client, message, args) => {
 
     if (args[0] == undefined || !args.length) return;
     const embed = new MessageEmbed()
-        .setAuthor("I2Z7")
+        .setAuthor("Noct")
         .setDescription(`${args.join(" ")}`)
         .addField("User ID:", `${user.id}`)
         .setThumbnail(client.user.avatarURL())

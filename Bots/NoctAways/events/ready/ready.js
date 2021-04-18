@@ -30,7 +30,7 @@ module.exports = functions.client = async client => {
 
   setInterval(
     () => {
-    let activities = ["~help or ping me", `${client.users.cache.size} members in ${guilds.length} servers !`];
+    let activities = ["g~help or ping me", `${client.users.cache.size} members in ${guilds.length} servers !`];
     client.user.setPresence({
       activity: {
         name: `${activities[i++ % activities.length]}`,

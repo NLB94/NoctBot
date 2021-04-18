@@ -71,8 +71,8 @@ module.exports = async (client, message) => {
     if (!command) return;
 
     if (message.author.id !== ownerID) {
-      const I2Z7Commu = await client.guilds.resolve('727494941911154688');
-      if (!command.help.enable && (!I2Z7Commu.member(message.author) || !I2Z7Commu.member(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
+      const NoctCommu = await client.guilds.resolve('727494941911154688');
+      if (!command.help.enable && (!NoctCommu.member(message.author) || !NoctCommu.member(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
         embed: {
           description: `${x_mark}This command is on devlopment. Please wait...`
         }

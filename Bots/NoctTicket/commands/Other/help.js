@@ -33,7 +33,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`Loading commands${loadingEmoji}`)
@@ -41,10 +41,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setFooter(message.guild == undefined ? '' : message.guild.name);
       const newEmbed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.ticketPrefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.ticketPrefix}help <command | category>!`)
+        .setDescription(`My prefix in this server is ***\`${settings == undefined ? 't~' : settings.general.ticketPrefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? 't~' : settings.general.ticketPrefix}help <command | category>!`)
         .setTimestamp()
         .setFooter('React with ❌ to cancel command')
 
@@ -94,10 +94,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     } else {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.ticketPrefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.ticketPrefix}help <command | category>!`)
+        .setDescription(`My prefix in this server is ***\`${settings == undefined ? 't~' : settings.general.ticketPrefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? 't~' : settings.general.ticketPrefix}help <command | category>!`)
         .setTimestamp();
 
       for (const category of categoryList) {
@@ -138,7 +138,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setTitle(`Name : \`${command.help.name}\``)
         .setDescription(`Enable : ${command.help.enable ? check_mark : x_mark}`)
         .addField("Description :", `${command.help.description} \n**Cooldown** : ${command.help.cooldown} second(s)`)
-        .addField("Usage :", command.help.usage ? `${settings == undefined ? '~' : settings.general.ticketPrefix}${command.help.name} ${command.help.usage}` : `${settings == undefined ? '~' : settings.general.ticketPrefix}${command.help.name}`, true)
+        .addField("Usage :", command.help.usage ? `${settings == undefined ? 't~' : settings.general.ticketPrefix}${command.help.name} ${command.help.usage}` : `${settings == undefined ? 't~' : settings.general.ticketPrefix}${command.help.name}`, true)
         .addField("Example :", command.help.example, false)
 
       if (command.help.aliases.length > 1) embed.addField("Alias", `${command.help.aliases.join(', ')}`, false);
@@ -151,7 +151,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   } else if (!isNaN(args[0])) {
     if (parseInt(args[0]) > 9 || parseInt(args[0] < 1)) return message.channel.send({
       embed: {
-        description: `Correct usage : ${settings == undefined ? '~' : settings.general.ticketPrefix}help ${module.exports.help.usage}`
+        description: `Correct usage : ${settings == undefined ? 't~' : settings.general.ticketPrefix}help ${module.exports.help.usage}`
       }
     });
     else {
@@ -162,7 +162,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const category = categorys[args[0]]
       if (category.toLowerCase() == 'admin') return message.channel.send({
         embed: {
-          description: `Correct usage : ${settings == undefined ? '~' : settings.general.ticketPrefix}help ${module.exports.help.usage}`
+          description: `Correct usage : ${settings == undefined ? 't~' : settings.general.ticketPrefix}help ${module.exports.help.usage}`
         }
       });
       const embed = new MessageEmbed()

@@ -33,7 +33,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`Loading commands${loadingEmoji}`)
@@ -41,7 +41,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setFooter(message.guild == undefined ? '' : message.guild.name);
       const newEmbed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
@@ -94,7 +94,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     } else {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
         .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)

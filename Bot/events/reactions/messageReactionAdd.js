@@ -142,7 +142,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                 if (message.content.includes('React to get a category') && emoji !== '❌' && message.content.startsWith(user.tag)) {
                     const embed = new MessageEmbed()
                         .setColor("#000000")
-                        .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+                        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                         .setURL(`${client.botGuild.supportInvite}`)
                         .setTimestamp()
                         .setFooter(`Requested by ${user.tag}`)
@@ -208,7 +208,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
                         const embed = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                             .setTitle("Bot Commands")
                             .setURL(`${client.botGuild.supportInvite}`)
                             .setDescription(`Loading commands${loadingEmoji}`)
@@ -216,7 +216,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             .setFooter(message.guild.name);
                         const embed2 = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("I2Z7", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                             .setTitle("Bot Commands")
                             .setURL(`${client.botGuild.supportInvite}`)
                             .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>!`)

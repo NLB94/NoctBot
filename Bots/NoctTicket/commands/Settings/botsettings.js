@@ -12,7 +12,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           .setThumbnail(client.user.displayAvatarURL())
           .setDescription(`[Add Me](${client.botGuild.ticketInviteLink}) | [Support Server](${client.botGuild.supportInvite})`)
           .addFields(
-              { name: `► Prefix :`, value: settings.general.ticketPrefix !== '~' ? settings.general.ticketPrefix : "~", inline: true},
+              { name: `► Prefix :`, value: settings.general.ticketPrefix !== 't~' ? settings.general.ticketPrefix : "t~", inline: true},
               { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Unspecified ! Type \`${settings.general.ticketPrefix}config logs #channel\`!`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
               // { name: `► Welcome Enabled :`, value: settings.welcomeAndLeave.welcome.enable ? 'Yes' : `No.`/* For enable, type \`${settings.general.ticketPrefix}enable welcome\``*/, inline: true},

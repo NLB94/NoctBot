@@ -12,7 +12,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           .setThumbnail(client.user.displayAvatarURL())
           .setDescription(`[Add Me](${client.botGuild.giveawayInviteLink}) | [Support Server](${client.botGuild.supportInvite})`)
           .addFields(
-              { name: `► Prefix :`, value: settings.general.giveawayPrefix !== '~' ? settings.general.giveawayPrefix : 'g~', inline: true},
+              { name: `► Prefix :`, value: settings.general.giveawayPrefix !== 'g~' ? settings.general.giveawayPrefix : 'g~', inline: true},
               { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Unspecified ! Type \`${settings.general.giveawayPrefix}config logs #channel\`!`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
               // { name: `► Welcome Enabled :`, value: settings.welcomeAndLeave.welcome.enable ? 'Yes' : `No.`/* For enable, type \`${settings.general.giveawayPrefix}enable welcome\``*/, inline: true},

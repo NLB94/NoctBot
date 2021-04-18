@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const func = require("../../util/functions");
 const ownerID = "616547009750499358";
-const defaultPrefix = '~';
+const defaultPrefix = 't~';
 const {
   CountChannels
 } = require("../../util/functions")
@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
   const commandName = args.shift().toLowerCase().split("-").join("");
 
   if (message.channel.type == 'dm') {
-    if (message.content.toLowerCase().startsWith("~help")) {
+    if (message.content.toLowerCase().startsWith("t~help")) {
       return client.commands.get("help").run(client, message, args);
     } else return client.emit("dm", (client, message));
   }
@@ -69,8 +69,8 @@ module.exports = async (client, message) => {
     if (!command) return;
 
     if (message.author.id !== ownerID) {
-      const I2Z7Commu = await client.guilds.resolve('727494941911154688');
-      if (!command.help.enable && (!I2Z7Commu.member(message.author) || !I2Z7Commu.member(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
+      const NoctCommu = await client.guilds.resolve('727494941911154688');
+      if (!command.help.enable && (!NoctCommu.member(message.author) || !NoctCommu.member(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
         embed: {
           description: `${x_mark}This command is on devlopment. Please wait...`
         }

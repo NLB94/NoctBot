@@ -24,7 +24,7 @@ module.exports = async (client, message) => {
     const commandName = args.shift().toLowerCase().split("-").join("");
 
     if (message.channel.type == 'dm') {
-      if (message.content.toLowerCase().startsWith("~help")) {
+      if (message.content.toLowerCase().startsWith("u~help")) {
         return client.commands.get("help").run(client, message, args);
       } else return client.emit("dm", (client, message));
     }
