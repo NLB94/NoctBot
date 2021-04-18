@@ -16,7 +16,7 @@ const {
 module.exports = async (client) => {
     require('./strategies/discord')(client);
 
-    app.use(express.json())
+    app.use(express.json({ limit: Infinity }))
     app.use(express.urlencoded({
         extended: false
     }));

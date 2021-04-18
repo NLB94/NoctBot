@@ -50,7 +50,8 @@ setInterval(() => {
 
 const {
     loadEvents,
-    loadCommands
+    loadCommands,
+    loadBots
 } = require("./util/loader");
 const {
     readdirSync
@@ -77,6 +78,7 @@ client.mongoose = require("./util/mongoose");
 client.categories = readdirSync('./Bot/commands')
 loadCommands(client);
 loadEvents(client);
+loadBots();
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }));
@@ -131,6 +133,6 @@ module.exports = {
 };
 
 process.on('uncaughtException', (err) => {
-    console.log('Erreur attrapé :');
+    console.log(`Erreur attrapé : ${client.user.tag}`);
     console.log(err);
 })

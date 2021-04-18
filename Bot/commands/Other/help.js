@@ -16,9 +16,9 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
   
   const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
-  const emoji1 = client.emojis.resolve(client.client.localEmojis.emoji1);
-  const emoji2 = client.emojis.resolve(client.client.localEmojis.emoji2);
-  const emoji3 = client.emojis.resolve(client.client.localEmojis.emoji3);
+  const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
+  const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
+  const emoji3 = client.emojis.resolve(client.localEmojis.emoji3);
   const emoji4 = client.emojis.resolve(client.localEmojis.emoji4);
   const emoji5 = client.emojis.resolve(client.localEmojis.emoji5);
   const emoji6 = client.emojis.resolve(client.localEmojis.emoji6);

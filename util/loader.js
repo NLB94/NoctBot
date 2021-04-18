@@ -1,4 +1,6 @@
-const { readdirSync } = require("fs");
+const {
+    readdirSync
+} = require("fs");
 const functions = require('./loader');
 const chalk = require('chalk');
 
@@ -20,7 +22,7 @@ const loadEvents = functions.loadEvents = (client, dir = "./Bot/events/") => {
     console.log(`${chalk.red('Evènement chargés')} : `)
     readdirSync(dir).forEach(dirs => {
         const events = readdirSync(`${dir}/${dirs}/`).filter(files => files.endsWith(".js"));
-        
+
         console.log(chalk.green(dirs))
         for (const event of events) {
             const evt = require(`../${dir}/${dirs}/${event}`);
@@ -30,8 +32,15 @@ const loadEvents = functions.loadEvents = (client, dir = "./Bot/events/") => {
         };
     });
 };
+const loadBots = functions.loadBots = async () => {
+    require('../Bots/NoctAways/index');
+    require('../Bots/NoctProtect/index');
+    require('../Bots/NoctUtil');
+    require('../Bots/NoctTicket');
+};
 
 module.exports = {
     loadCommands,
     loadEvents,
+    loadBots
 }

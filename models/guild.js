@@ -9,7 +9,11 @@ const guildSchema = mongoose.Schema({
             language: 'en',
             prefix: '~',
             logs: 'logs',
-            premium: false
+            premium: false,
+            giveawayPrefix: 'g~',
+            protectPrefix: 'p~',
+            utilPrefix: 'g~',
+            ticketPrefix: 't~'
         }
     },
     moderation: {
