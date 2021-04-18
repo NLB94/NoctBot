@@ -122,7 +122,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     const giveaway = await client.getGiveaway(message.guild, message.id);
                     const embed = new MessageEmbed()
                         .setDescription(`${tada}Giveaway entry accepted for \`${message.embeds[0].title}\`${tada}`)
-                        .setAuthor(user.username, user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                        .setAuthor(user.username, user.avatarURL(), `${client.botGuild.giveawayInviteLink}`)
                         .setTitle('Giveaway Entry')
                         .setFooter(message.guild.name, message.guild.iconURL())
                         .setTimestamp()
@@ -142,16 +142,16 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                 if (message.content.includes('React to get a category') && emoji !== '❌' && message.content.startsWith(user.tag)) {
                     const embed = new MessageEmbed()
                         .setColor("#000000")
-                        .setAuthor("Noct", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.giveawayInviteLink}`)
                         .setURL(`${client.botGuild.supportInvite}`)
                         .setTimestamp()
                         .setFooter(`Requested by ${user.tag}`)
-                        .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>! `);
+                        .setDescription(`My prefix in this server is ***\`${settings.general.giveawayPrefix}\`*** \nIf you need more informations about commands, type ${settings.general.giveawayPrefix}help <command>! `);
 
 
                     switch (messageReaction.emoji) {
                         case emoji1: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'serversettings').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'configuration').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
                             embed.setTitle("Server Settings");
                             break;
                         }
@@ -208,7 +208,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
                         const embed = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("Noct", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.giveawayInviteLink}`)
                             .setTitle("Bot Commands")
                             .setURL(`${client.botGuild.supportInvite}`)
                             .setDescription(`Loading commands${loadingEmoji}`)
@@ -216,10 +216,10 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             .setFooter(message.guild.name);
                         const embed2 = new MessageEmbed()
                             .setColor("#000000")
-                            .setAuthor("Noct", client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.giveawayInviteLink}`)
                             .setTitle("Bot Commands")
                             .setURL(`${client.botGuild.supportInvite}`)
-                            .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>!`)
+                            .setDescription(`My prefix in this server is ***\`${settings.general.giveawayPrefix}\`*** \nIf you need more informations about commands, type ${settings.general.giveawayPrefix}help <command>!`)
                             .setTimestamp()
                             .setFooter(`React with ❌ to cancel command | Requested by ${user.tag}`)
 

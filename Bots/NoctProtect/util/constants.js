@@ -1449,11 +1449,11 @@ const MESSAGES = {
         args: true
       },
     },
-    SERVERSETTINGS: {
+    CONFIGURATION: {
       ANTIRAID: {
         name: "antiraid",
         aliases: ["antiraid"],
-        category: "serversettings",
+        category: "configuration",
         description: "Set anti raid mode in server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1471,7 +1471,7 @@ const MESSAGES = {
       ANTIINVITE: {
         name: "antiinvite",
         aliases: ["antiinvite"],
-        category: "serversettings",
+        category: "configuration",
         description: "Set anti invite mode in server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1489,7 +1489,7 @@ const MESSAGES = {
       ANTILINK: {
         name: "antilink",
         aliases: ["antilink"],
-        category: "serversettings",
+        category: "configuration",
         description: "Set anti link mode in server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1507,7 +1507,7 @@ const MESSAGES = {
       AUTOMOD: {
         name: "automod",
         aliases: ["automod"],
-        category: "serversettings",
+        category: "configuration",
         description: "Configure auto-moderation system.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1525,7 +1525,7 @@ const MESSAGES = {
       BOTSETTINGS: {
         name: "botsettings",
         aliases: ["botconfig"],
-        category: "serversettings",
+        category: "configuration",
         description: "Show bot's settings in server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1543,7 +1543,7 @@ const MESSAGES = {
       CHANGE: {
         name: "config",
         aliases: ["change", "setup"],
-        category: "serversettings",
+        category: "configuration",
         description: "Config bot's general settings in the server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1561,7 +1561,7 @@ const MESSAGES = {
       CUSTOMCMD:{
         name: "newcmd",
         aliases: ["createcmd"],
-        category: "serversettings",
+        category: "configuration",
         description: "Create a new custom command for the server.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1579,7 +1579,7 @@ const MESSAGES = {
       ENABLE: {
         name: "enable",
         aliases: ["enable"],
-        category: "serversettings",
+        category: "configuration",
         description: "Enable some bot's features.",
         ownerCmd: false,
         cooldown: 0.1,
@@ -1597,7 +1597,7 @@ const MESSAGES = {
       DISABLE: {
         name: "disable",
         aliases: ["disable"],
-        category: "serversettings",
+        category: "configuration",
         description: "Disable some bot's features.",
         ownerCmd: false,
         cooldown: 0.1,

@@ -65,7 +65,7 @@ module.exports.run = async (client, message, args, settings, userInfo) => {
 
             const embed = new MessageEmbed()
                 .setAuthor(`${player.name} • ${player.tag}`)
-                .setDescription(`[Vote](https://top.gg/bot/${client.user.id}) • [Add me](https://discord.com/oauth2/authorize?client_id=735824367698837555&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join)`)
+                .setDescription(`[Vote](https://top.gg/bot/${client.user.id}) • [Add me](${client.botGuild.utilInviteLink})`)
                 .addFields({
                     name: 'Trophies',
                     value: `\`${player.trophies}\``,

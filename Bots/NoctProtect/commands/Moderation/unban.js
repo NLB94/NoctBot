@@ -14,7 +14,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   if (isNaN(args[0])) return message.channel.send({
     embed: {
-      description: `${x_mark}Correct usage : \`${settings.general.prefix}unban <user_id>\``
+      description: `${x_mark}Correct usage : \`${settings.general.protectPrefix}unban <user_id>\``
     }
   });
   await client.users.fetch(args[0]).then(async (user) => {

@@ -10,15 +10,15 @@ module.exports = func.client = async client => {
 
     client.notStartByPrefix = functions.notStartByPrefix = async (message, settings, userInfo) => {
         const arrowRight = client.emojis.resolve('770976808899444776');
-        if (message.content.startsWith('p~help') && settings.general.prefix !== 'p~') await message.channel.send({
+        if (message.content.startsWith('p~help') && settings.general.protectPrefix !== 'p~') await message.channel.send({
             embed: {
-                description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
+                description: `${arrowRight}My prefix in this server is \`${settings.general.protectPrefix}\``
             }
         });
         if (message.content.startsWith("<@") || message.content.includes('<@')) {
             if (message.content.includes(client.user.id) || message.content.includes(client.user.id)) message.channel.send({
                 embed: {
-                    description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
+                    description: `${arrowRight}My prefix in this server is \`${settings.general.protectPrefix}\``
                 }
             })
         };

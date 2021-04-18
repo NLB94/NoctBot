@@ -11,7 +11,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
 
     const getSetting = args[0].toLowerCase().split("-").join("");
-    const prefix = settings.general.prefix;
+    const prefix = settings.general.utilPrefix;
     let newSetting = args.slice(1).join(" ");
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
@@ -23,7 +23,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     switch (getSetting) {
         case "keys": {
             const embed = new MessageEmbed()
-                .setAuthor(client.user.tag, client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                .setAuthor(client.user.tag, client.user.avatarURL(), `${client.botGuild.utilInviteLink}`)
                 .setTitle('Config Keys')
                 .setURL('https://discord.gg/unRX2SUcvw')
                 .setTimestamp()
@@ -67,7 +67,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 })
                 newSetting = newSetting.slice(0, 3)
                 await client.updateGuild(message.guild, {
-                    "general.prefix": newSetting
+                    "general.utilPrefix": newSetting
                 });
                 return message.channel.send({
                     embed: {
@@ -116,4 +116,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 };
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.CHANGE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.CHANGE;

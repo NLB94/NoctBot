@@ -8,15 +8,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(`Bot Settings in ${message.guild} :`)
-          .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+          .setURL(`${client.botGuild.ticketInviteLink}`)
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription(`[Add Me](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [Support Server](${client.botGuild.supportInvite})`)
+          .setDescription(`[Add Me](${client.botGuild.ticketInviteLink}) | [Support Server](${client.botGuild.supportInvite})`)
           .addFields(
-              { name: `► Prefix :`, value: settings.general.prefix !== '~' ? settings.general.prefix : "~", inline: true},
-              { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Unspecified ! Type \`${settings.general.prefix}config logs #channel\`!`, inline: true},
+              { name: `► Prefix :`, value: settings.general.ticketPrefix !== '~' ? settings.general.ticketPrefix : "~", inline: true},
+              { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Unspecified ! Type \`${settings.general.ticketPrefix}config logs #channel\`!`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},
-              // { name: `► Welcome Enabled :`, value: settings.welcomeAndLeave.welcome.enable ? 'Yes' : `No.`/* For enable, type \`${settings.general.prefix}enable welcome\``*/, inline: true},
-              // { name: `► Leave Enabled :`, value: settings.welcomeAndLeave.leave.enable ? 'Yes' : `No.` /*For enable, type \`${settings.general.prefix}enable leave\``*/, inline: true},
+              // { name: `► Welcome Enabled :`, value: settings.welcomeAndLeave.welcome.enable ? 'Yes' : `No.`/* For enable, type \`${settings.general.ticketPrefix}enable welcome\``*/, inline: true},
+              // { name: `► Leave Enabled :`, value: settings.welcomeAndLeave.leave.enable ? 'Yes' : `No.` /*For enable, type \`${settings.general.ticketPrefix}enable leave\``*/, inline: true},
             //⌠ ⌡ ►
           )
           .setTimestamp()
@@ -39,4 +39,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           message.channel.send(embed);
     };
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.BOTSETTINGS;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.BOTSETTINGS;

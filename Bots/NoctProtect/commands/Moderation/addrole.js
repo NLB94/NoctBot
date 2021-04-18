@@ -29,7 +29,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (roles.length < 1 || users.length < 1) return message.channel.send({
         embed: {
             title: 'Invalid Usage',
-            description: `Correct usage : ${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}`
+            description: `Correct usage : ${settings.general.protectPrefix}${module.exports.help.name} ${module.exports.help.usage}`
         }
     })
     const embed = new MessageEmbed()

@@ -55,4 +55,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 }
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.AUTOMOD;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.AUTOMOD;

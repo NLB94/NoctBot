@@ -12,7 +12,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const language = settings.general.language;
     const levelTrad = await client.translate('Level', 'en', language)
     const embed = new MessageEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+        .setAuthor(message.guild.name, message.guild.iconURL(), `${client.botGuild.inviteLink}`)
         .setTitle(await client.translate("Server's XP Leaderboard", 'en', language))
         .setURL(`${client.botGuild.supportInvite}`)
         .setFooter(message.author.tag, message.author.avatarURL())

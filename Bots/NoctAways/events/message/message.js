@@ -60,8 +60,8 @@ module.exports = async (client, message) => {
     userInfo
   }));
 
-  if (!message.content.startsWith(settings.general.prefix) && userInfo !== undefined) return client.notStartByPrefix(message, settings, userInfo);
-  if (message.content.startsWith(settings.general.prefix)) {
+  if (!message.content.startsWith(settings.general.giveawayPrefix) && userInfo !== undefined) return client.notStartByPrefix(message, settings, userInfo);
+  if (message.content.startsWith(settings.general.giveawayPrefix)) {
 
     let command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
 
@@ -109,9 +109,9 @@ module.exports = async (client, message) => {
       let noArgsReply = `${arrowRight}${message.author} Correct usage :`;
 
       if (command.help.usage)
-        noArgsReply += `\`${settings.general.prefix}${command.help.name} ${command.help.usage}\``;
+        noArgsReply += `\`${settings.general.giveawayPrefix}${command.help.name} ${command.help.usage}\``;
       if (command.help.name === `config` || command.help.name == 'level' || command.help.name == 'captcha' || command.help.name == 'ticket' || command.help.name == 'welcome' || command.help.name == 'leave')
-        noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.prefix}${command.help.name} keys\``;
+        noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.giveawayPrefix}${command.help.name} keys\``;
 
       return message.channel.send({
         embed: {

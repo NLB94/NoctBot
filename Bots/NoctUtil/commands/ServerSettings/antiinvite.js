@@ -16,7 +16,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case 'enable': {
             if (!settings.automod.enable) return message.channel.send({
                 embed: {
-                    description: `${x_mark} Auto-Moderation **is not enable** ! Type \`${settings.general.prefix}automod enable\` and **retry !**`,
+                    description: `${x_mark} Auto-Moderation **is not enable** ! Type \`${settings.general.utilPrefix}automod enable\` and **retry !**`,
                     title: 'Error !'
                 }
             })
@@ -90,4 +90,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 }
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.ANTIINVITE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.ANTIINVITE;

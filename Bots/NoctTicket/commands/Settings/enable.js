@@ -19,7 +19,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     switch (getSetting) {
         case "keys": {
             const embed = new MessageEmbed()
-                .setAuthor(client.user.tag, client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+                .setAuthor(client.user.tag, client.user.avatarURL(), `${client.botGuild.ticketInviteLink}`)
                 .setTitle('Keys')
                 .setURL('https://discord.gg/unRX2SUcvw')
                 .setTimestamp()
@@ -52,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             await client.updateGuild(message.guild, {
                 "welcomeAndLeave.welcome.enable": true
             });
-            message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully enabled welcome system !Type ${settings.general.prefix}welcome keys for more !`}});
+            message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully enabled welcome system !Type ${settings.general.ticketPrefix}welcome keys for more !`}});
             break;
         }
         case "leave": {
@@ -60,10 +60,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             await client.updateGuild(message.guild, {
                 "welcomeAndLeave.leave.enable": true
             });
-            message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully enabled leave system \nType ${settings.general.prefix}leave keys for more !`}});
+            message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully enabled leave system \nType ${settings.general.ticketPrefix}leave keys for more !`}});
             break;
         }
     }
 };
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.ENABLE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.ENABLE;

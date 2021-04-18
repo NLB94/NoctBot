@@ -9,9 +9,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(client.user.tag)
-          .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+          .setURL(`${client.botGuild.utilInviteLink}`)
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription(`[${language == 'fr' ? 'Ajoute-moi' : 'Add me'}](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [${language == 'fr' ? 'Serveur de support' : 'Support server'}](${client.botGuild.supportInvite})`)
+          .setDescription(`[${language == 'fr' ? 'Ajoute-moi' : 'Add me'}](${client.botGuild.utilInviteLink}) | [${language == 'fr' ? 'Serveur de support' : 'Support server'}](${client.botGuild.supportInvite})`)
           .addFields(
               { name: '• ID', value: `${client.user.id}`, inline: true},
               { name: '\u200b', value: '\u200b', inline: true},

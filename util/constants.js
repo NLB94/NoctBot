@@ -1449,7 +1449,7 @@ const MESSAGES = {
         args: true
       },
     },
-    SERVERSETTINGS: {
+    CONFIGURATION: {
       ANTIRAID: {
         name: "antiraid",
         aliases: ["antiraid"],

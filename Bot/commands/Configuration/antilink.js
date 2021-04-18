@@ -1,4 +1,3 @@
-const { Message } = require('discord.js');
 const {
     MESSAGES
 } = require('../../../util/constants');
@@ -21,9 +20,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 }
             })
             else {
-                if (settings.automod.antiInvite.enable) return message.channel.send({
+                if (settings.automod.antiLink.enable) return message.channel.send({
                     embed: {
-                        description: `${x_mark} Anti-Invite **is already enable** !`,
+                        description: `${x_mark} Anti-Link **is already enable** !`,
                         title: 'Error !'
                     }
                 });
@@ -31,7 +30,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                  * @param {Message} m 
                  */
                 const filter = m => m.author.id == message.author.id;
-                message.channel.send(`${message.author} What type of system you want with **anti-invite** ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**CHOOSE A NUMBER**`)
+                message.channel.send(`${message.author} What type of system you want with **anti-link** ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**CHOOSE A NUMBER**`)
                 const userE = await message.channel.awaitMessages(filter, {
                     max: 1, time: 15000, errors: ['time']
                 })
@@ -51,37 +50,37 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 else if (userE2.first().toString().toLowerCase().startsWith('n')) logs = false
                 message.channel.send({
                     embed: {
-                        description: `${check_mark}Successfully **enabled anti-invite system** !`,
+                        description: `${check_mark}Successfully **enabled anti-link system** !`,
                         title: 'Auto-Moderation'
                     }
                 })
                 await client.updateGuild(message.guild, {
-                    "automod.antiInvite.enable": true,
-                    "automod.antiInvite.logsThis": logs,
-                    "automod.antiInvite.justWarn": type == 2 ? true : false,
-                    "automod.antiInvite.justDelete": type == 1 ? true : false,
-                    "automod.antiInvite.warnAndDelete": type == 3 ? true : false
+                    "automod.antiLink.enable": true,
+                    "automod.antiLink.logsThis": logs,
+                    "automod.antiLink.justWarn": type == 2 ? true : false,
+                    "automod.antiLink.justDelete": type == 1 ? true : false,
+                    "automod.antiLink.warnAndDelete": type == 3 ? true : false
                 })
             }
             break;
         }
         case 'disable': {
-            if (!settings.automod.antiInvite.enable) return message.channel.send({
+            if (!settings.automod.antiLink.enable) return message.channel.send({
                 embed: {
-                    description: `${x_mark} Anti-Invite **is already disable** !`,
+                    description: `${x_mark} Anti-Link **is already disable** !`,
                     title: 'Error !'
                 }
             });
             await client.updateGuild(message.guild, {
-                "automod.antiInvite.enable": false,
-                "automod.antiInvite.justWarn": false,
-                "automod.antiInvite.justDelete": false,
-                "automod.antiInvite.warnAndDelete": false,
-                "automod.antiInvite.logsThis": false
+                "automod.antiLink.enable": false,
+                "automod.antiLink.justWarn": false,
+                "automod.antiLink.justDelete": false,
+                "automod.antiLink.warnAndDelete": false,
+                "automod.antiLink.logsThis": false
             })
             message.channel.send({
                 embed: {
-                    description: `${check_mark}Successfully **disabled anti-invite system** !`,
+                    description: `${check_mark}Successfully **disabled anti-link system** !`,
                     title: 'Auto-Moderation'
                 }
             })
@@ -90,4 +89,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 }
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.ANTIINVITE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.ANTILINK;

@@ -8,9 +8,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(`Bot Settings in ${message.guild} :`)
-          .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+          .setURL(`${client.botGuild.inviteLink}`)
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription(`[Add Me](https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join) | [Support Server](${client.botGuild.supportInvite})`)
+          .setDescription(`[Add Me](${client.botGuild.inviteLink}) | [Support Server](${client.botGuild.supportInvite})`)
           .addFields(
               { name: `► Prefix :`, value: settings.general.prefix !== '~' ? settings.general.prefix : "~", inline: true},
               { name: '► Logs Channel :', value: settings.general.logs !== 'logs' ? `<#${settings.general.logs}>` : `Unspecified ! Type \`${settings.general.prefix}config logs #channel\`!`, inline: true},
@@ -39,4 +39,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           message.channel.send(embed);
     };
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.BOTSETTINGS;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.BOTSETTINGS;

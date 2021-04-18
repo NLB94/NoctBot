@@ -99,4 +99,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 }
 
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.CUSTOMCMD;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.CUSTOMCMD;

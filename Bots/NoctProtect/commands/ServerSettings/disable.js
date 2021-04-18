@@ -15,7 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     switch(getSetting) {
         case "keys": {
             const embed = new MessageEmbed()
-            .setAuthor(client.user.tag, client.user.avatarURL(), `https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2146958847&response_type=code&scope=identify%20applications.commands%20bot%20guilds%20guilds.join`)
+            .setAuthor(client.user.tag, client.user.avatarURL(), `${client.botGuild.protectInviteLink}`)
             .setTitle('Keys')
             .setURL('https://discord.gg/unRX2SUcvw')
            .setTimestamp()
@@ -60,4 +60,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
 };
  
-module.exports.help = MESSAGES.COMMANDS.SERVERSETTINGS.DISABLE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.DISABLE;

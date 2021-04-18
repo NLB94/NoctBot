@@ -45,7 +45,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             const embedError = new MessageEmbed()
                 .setAuthor('🎉Giveaway Cancel🎉')
                 .setTitle(giveaway.price)
-                .setDescription(`**Giveaway canceled, no valid participations !**\nHosted by <@${giveaway.hostedBy}> \n\n \nJoin [support server](${client.botGuild.supportInvite}) | [Add me](${client.botGuild.inviteLink})`)
+                .setDescription(`**Giveaway canceled, no valid participations !**\nHosted by <@${giveaway.hostedBy}> \n\n \nJoin [support server](${client.botGuild.supportInvite}) | [Add me](${client.botGuild.giveawayInviteLink})`)
                 .setFooter(`ID : ${msg.id}`)
                 .setTimestamp();
             msg.edit(embedError);

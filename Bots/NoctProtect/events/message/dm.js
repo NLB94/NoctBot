@@ -2,7 +2,7 @@ const {
     MessageEmbed
 } = require('discord.js');
 const func = require("../../util/functions");
-const defaultPrefix = '~';
+const defaultPrefix = 'p~';
 
 module.exports = func.run = async (client, message, args) => {
     const guild = await client.guilds.resolve('727494941911154688')
