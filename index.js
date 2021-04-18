@@ -78,7 +78,7 @@ client.mongoose = require("./util/mongoose");
 client.categories = readdirSync('./Bot/commands')
 loadCommands(client);
 loadEvents(client);
-loadBots();
+// loadBots();
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }));
