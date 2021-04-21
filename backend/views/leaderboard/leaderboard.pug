@@ -1,0 +1,29 @@
+doctype
+html(lang='en')
+  head
+    include ../includes/header.pug
+
+    link(rel='stylesheet', href='/css/leaderboard.css')
+  body
+    include ../includes/navbar.pug
+    if guild
+      header.text-center
+        h1
+          img.round.mr-3(src=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`)
+          span #{guild.name} Leaderboard
+        p.lead View the top 100 richest users in #{guild.name}.
+
+      ul.list-group.container.mt-5
+        each dbUser, index in dbUsers
+          - const user = client.users.resolve(dbUser.id)
+            li.list-group-item
+              span
+                strong.round.mr-3 #{index + 1}
+                img.round.user-avatar.mr-2(src=user.avatarURL(40))
+                span.lead #{user.username}
+                span.text-muted ##{user.discriminator}
+              span.float-right.pt-2 #{dbUser.moneyCash} #[i.fas.fa-coins.text-warning]
+              span.float-right.pt-2 #{dbUser.moneyCash} #[i.fas.fa-coins.text-warning]
+    else 
+      header.text-center
+        - res.render('errors/404')

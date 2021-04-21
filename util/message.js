@@ -15,8 +15,8 @@ module.exports = func.client = async client => {
                 description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
             }
         });
-        if (message.content.startsWith("<@") || message.content.includes('<@')) {
-            if (message.content.includes("<@!735824367698837555>") || message.content.includes("<@735824367698837555>")) message.channel.send({
+        if (message.content.startsWith("<@")) {
+            if (message.content.startsWith("<@!735824367698837555>") || message.content.startsWith("<@735824367698837555>")) message.channel.send({
                 embed: {
                     description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
                 }

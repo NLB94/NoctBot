@@ -56,6 +56,6 @@ module.exports = {
     client
 }
 process.on('uncaughtException', (err) => {
-    console.log(`Erreur attrapé : ${client.user.tag}`);
+    console.log(`Erreur attrapé :`);
     console.log(err);
 })

@@ -45,6 +45,6 @@ loadEvents(client);
 client.login(process.env.Protect_TOKEN);
 
 process.on('uncaughtException', (err) => {
-    console.log(`Erreur attrapé : ${client.user.tag}`);
+    console.log(`Erreur attrapé :`);
     console.log(err);
 })

@@ -1,0 +1,38 @@
+doctype
+html(lang='en')
+  head
+    include ../includes/header.pug
+
+    link(rel='stylesheet', href='/css/leaderboard.css')
+  body
+    include ../includes/navbar.pug
+    if guild
+      header.text-center
+        h1
+          if (guild.icon)
+            img.round.mr-3(src=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`)
+          else 
+            p.text-center.abbr #{guild.name.split(/ +/).slice(0, 3).map(g => g.slice(0, 1)).join("")}
+          span #{guild.name} Leaderboard
+        p.lead View the top 100 richest users in #{guild.name}.
+
+      - dbUsers = dbUsers.sort((a, b) => ((a.moneyCash + a.moneyBank) < (b.moneyCash + b.moneyBank) ? 1 : -1));
+      - let dbUsers2 = []
+      each dbUser in dbUsers
+          - const user = client.users.resolve(dbUser.id);
+          if (user)
+            if (!user.bot)
+                - dbUsers2.push(dbUser)
+      ul.list-group.container.mt-5
+        each dbUser, index in dbUsers2
+          - const user = client.users.resolve(dbUser.id)
+            li.list-group-item
+              span
+                strong.round.mr-3 #{index + 1}
+                img.round.user-avatar.mr-2(src=user.avatarURL(40))
+                span.lead #{user.username}
+                span.text-muted ##{user.discriminator}
+              span.float-right.pt-2 $#{dbUser.moneyCash + dbUser.moneyBank} #[i.fas.fa-coins.text-warning]
+    else 
+      header.text-center There are nothing to see here.
+      a.btn.btn-dark(href="/leaderboard/modules") Back to leaderboard modules.

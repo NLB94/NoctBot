@@ -1,18 +1,20 @@
 #sidebar.float-left
-  a(href='/dashboard')
-    .icon.round.shadow
-      img.round(alt=user.tag, src=user.avatarURL({ size: 64 }))
+  icon.round.shadow
+    .hamburger.px-1
+      i.fas.fa-bars
+      //- img.round(alt=client.user.tag, src=client.user.avatarURL({ size: 64 }))
   hr
-  each guild in guilds
-    a(href='/servers/' + guild.id)
+  each guild in guilds.mutualGuilds
+    a(href='/dashboard/' + guild.id)
       .icon.round.shadow.my-2(data-toggle='tooltip', data-placement='right', title=guild.name)
         if guild.icon
-          img.round(alt=guild.name, src=guild.iconURL({ dynamic: true, size: 64 }))
+          - const guildIcon = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`
+            
+          img.round(alt=guild.name, src=guildIcon)
         else
-          p.text-center.abbr #{guild.nameAcronym}
+          p.text-center.abbr #{guild.name.split(/ +/).slice(0, 3).map(g => g.slice(0, 1)).join("")}
   a(href='/invite')
     .icon
       p.abbr.text-success.text-center
         i.fas.fa-plus
-  .hamburger.px-1
-    i.fas.fa-bars
+  

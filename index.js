@@ -60,7 +60,9 @@ const {
 // require('./src/strategies/discord')(client);
 require('./util/user')(client);
 
-require('./backend/server')(client);
+setTimeout(() => {
+    require('./backend/server')(client);
+}, 3000)
 require('./util/brawlstars')(client);
 require("./util/guild")(client);
 require('./util/message')(client);
@@ -75,7 +77,8 @@ require("./util/level")(client);
 client.mongoose = require("./util/mongoose");
 
 ["commands", "cooldowns"].forEach(x => client[x] = new Discord.Collection());
-client.categories = readdirSync('./Bot/commands')
+client.categories = readdirSync('./Bot/commands');
+
 loadCommands(client);
 loadEvents(client);
 // loadBots();
@@ -133,6 +136,6 @@ module.exports = {
 };
 
 process.on('uncaughtException', (err) => {
-    console.log(`Erreur attrapé : ${client.user.tag}`);
+    console.log(`Erreur attrapé :`);
     console.log(err);
 })

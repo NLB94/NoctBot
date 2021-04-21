@@ -28,10 +28,6 @@ module.exports = async (client) => {
     app.locals.basedir = `${__dirname}/assets`;
 
 
-    // app.get('/', (req, res) => {
-    //     res.render('index')
-    // });
-
     app.use(cors({
         origin: ['http://localhost'],
         credentials: true

@@ -1,5 +1,5 @@
 nav.navbar.navbar-expand-lg
-  a.navbar-brand(href='/') I2Z7
+  a.navbar-brand(href='/') Noct
   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label='Toggle navigation')
     span.navbar-toggler-icon
   #navbar.collapse.navbar-collapse
@@ -8,10 +8,14 @@ nav.navbar.navbar-expand-lg
         i.fas.fa-code
         span.pl-1 Commands
     .navbar-nav.ml-auto
-      if user
+      select#themeSelect.form-control
+        option(value='ASCETIC', selected) White
+        option(value='DISCORD') Dark
+    .navbar-nav.ml-auto
+      if req.user
         .dropdown
           .dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            img.user-avatar.round(src=user.avatarUrl(32))
+            img.user-avatar.round(src=user.avatarURL(32))
             span.pl-2 #{user.username}
           .dropdown-menu.dropdown-menu-right
             a.dropdown-item(href='/dashboard') #[i.fas.fa-cogs.text-muted] Dashboard

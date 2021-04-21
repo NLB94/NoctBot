@@ -15,8 +15,8 @@ module.exports = func.client = async client => {
                 description: `${arrowRight}My prefix in this server is \`${settings.general.ticketPrefix}\``
             }
         });
-        if (message.content.startsWith("<@") || message.content.includes('<@')) {
-            if (message.content.includes(`<@!${client.botGuild.ticketInviteLink}>`) || message.content.includes(`<@${client.botGuild.ticketInviteLink}>`)) message.channel.send({
+        if (message.content.startsWith("<@")) {
+            if (message.content.startsWith(`<@!${client.botGuild.ticketInviteLink}>`) || message.content.startsWith(`<@${client.botGuild.ticketInviteLink}>`)) message.channel.send({
                 embed: {
                     description: `${arrowRight}My prefix in this server is \`${settings.general.ticketPrefix}\``
                 }

@@ -1,3 +1,5 @@
+const { default: fetch } = require("node-fetch");
+
 $('.categories li').on('click', setCategory);
 
 function setCategory() {
@@ -6,10 +8,8 @@ function setCategory() {
   const selected = $(this);
   selected.addClass('active');  
 
-  const categoryCommands = $(`.commands .${selected[0].id}`);
-  categoryCommands.show();
-  
-  updateResultsText(categoryCommands);
+  let commands = await fetch('http://206.217.221.202:4000/commands').then(res => res.json());
+  console.log(commands)
 }
 function blank() {
   $('.categories li').removeClass('active');
