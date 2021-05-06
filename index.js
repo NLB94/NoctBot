@@ -7,7 +7,7 @@ const Discord = require('discord.js');
 const Brawl = require('@statscell/brawl');
 const translate = require('@vitalets/google-translate-api');
 
-const DBLApi = require('@top-gg/sdk');
+const DBLApi = require('@top-gg/sdk/dist');
 
 const botGuild = require('./.bot.json');
 const emojis = require('./emojis.json');
@@ -61,7 +61,9 @@ const {
 require('./util/user')(client);
 
 setTimeout(() => {
-    require('./backend/server')(client);
+    require('./website/Dashboard');
+    // require('./website/Home');
+    // require('./website/Docs');
 }, 3000)
 require('./util/brawlstars')(client);
 require("./util/guild")(client);
@@ -77,7 +79,7 @@ require("./util/level")(client);
 client.mongoose = require("./util/mongoose");
 
 ["commands", "cooldowns"].forEach(x => client[x] = new Discord.Collection());
-client.categories = readdirSync('./Bot/commands');
+client.categories = readdirSync('./Bot/commands').slice(1);
 
 loadCommands(client);
 loadEvents(client);

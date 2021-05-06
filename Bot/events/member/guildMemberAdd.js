@@ -19,11 +19,7 @@ module.exports = async (client, member) => {
 
     if (member.guild.id == '727494941911154688') {
         if (member.user.bot) return;
-        while (member.pending) {
-            return;
-        }
-        console.log(member.pending)
-        // member.roles.add('770658615752261682')
+        member.roles.add('770658615752261682')
         const channel = await member.guild.channels.resolve('769656304402563103')
         const rolesChannels = await member.guild.channels.resolve('819871741823156265');
         const commuEmbed = new MessageEmbed()
