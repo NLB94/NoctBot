@@ -9,10 +9,10 @@ const functions = require("../../../util/functions");
 module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
     const language = settings.general.language;
     try {
-        const loading = client.emojis.resolve(client.localEmojis.loadingEmoji);
-        const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
-        const warning = client.emojis.resolve(client.localEmojis.warning);
-        const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
+        const loading = client.emojis.resolve('783028992231866419');
+        const x_mark = client.emojis.resolve('806440609127596032');
+        const warning = client.emojis.resolve('806438435933913178');
+        const check_mark = client.emojis.resolve('770980790242377739');
 
         const countArray = ['channels', 'members', 'boosts'];
         let i = 1;
@@ -60,9 +60,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 if (nb == '1') type = 'boosts';
                 else if (nb == '2') type = 'level';
             }
+            console.log(type)
             if (typeof type == "number") return message.channel.send(language == 'fr' ? 'Commande annulée ! **Donnez un nombre correct la prochaine fois !**' : 'Command canceled ! **Please provide a correct number next time !**')
             else {
-                let type = userE2.first().toString().toLowerCase();
                 await message.channel.send(language == 'fr' ? `Le salon apparaitra dans un moment${loading}` : `Done, the channel will be appear in few time${loading}`).then(msg => {
                     setTimeout(() => {
                         msg.edit(language == 'fr' ? `${check_mark}**Le salon a été crée !**` : `${check_mark}**Channel created !**`).catch(err => {})
