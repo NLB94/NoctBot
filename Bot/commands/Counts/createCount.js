@@ -62,7 +62,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             }
             if (typeof type == "number") return message.channel.send(language == 'fr' ? 'Commande annulée ! **Donnez un nombre correct la prochaine fois !**' : 'Command canceled ! **Please provide a correct number next time !**')
             else {
-                let type = userE2.first().toString().toLowerCase();
                 await message.channel.send(language == 'fr' ? `Le salon apparaitra dans un moment${loading}` : `Done, the channel will be appear in few time${loading}`).then(msg => {
                     setTimeout(() => {
                         msg.edit(language == 'fr' ? `${check_mark}**Le salon a été crée !**` : `${check_mark}**Channel created !**`).catch(err => {})
