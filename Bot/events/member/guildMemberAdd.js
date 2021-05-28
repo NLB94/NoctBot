@@ -18,10 +18,8 @@ module.exports = async (client, member) => {
     if (settings == undefined) await client.createGuild(message.guild);
 
     if (member.guild.id == '727494941911154688') {
-        console.log(2);
         if (member.user.bot) return;
         if (member.pending) return;
-        console.log(3);
         member.roles.add('770658615752261682')
         const channel = await member.guild.channels.resolve('769656304402563103')
         const rolesChannels = await member.guild.channels.resolve('819871741823156265');

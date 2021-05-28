@@ -132,7 +132,8 @@ module.exports = functions.client = client => {
       bot: vote.bot,
       type: vote.type,
       isWeekend: vote.isWeekend,
-      time: timeS
+      time: timeS,
+      day: await (moment(Date.now()).format("DD"))
     };
     let date = `${moment(Date.now()).format("MM/YYYY")}`
     const votes = await Votes.findOne({

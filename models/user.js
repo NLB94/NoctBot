@@ -35,7 +35,7 @@ const userSchema = mongoose.Schema({
         type: Object,
         default: {
             total: 0,
-            dateToday: 'JJ/MM/AA',
+            dateToday: '01/01/21',
             daily: {
                 cooldown: false,
                 usedToday: 0,

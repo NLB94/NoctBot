@@ -471,5 +471,10 @@ export declare interface VoteData {
   public user: string;
   private type: "upvote" | "test";
   public isWeekend: boolean;
-  readonly query: string
+  readonly query: string;
 }
+
+export declare interface Votes {
+  private month: String;
+  public votes: VoteData[];
+};
