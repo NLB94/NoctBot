@@ -89,14 +89,14 @@ module.exports = async (client, message) => {
         }
       });
     }
-    if (command.help.permissions && !message.member.hasPermission(command.help.reqPermName)) return message.reply({
+    if (command.help.permissions && !message.member.permissions.has(command.help.reqPermName)) return message.reply({
       embed: {
         title: `Missing Permissions`,
         description: `${x_mark} You don't have enough permissions to use \`${command.help.name}\` command! \nNeeded permissions : \`${command.help.reqPermName}\``
       }
     });
 
-    if (command.help.botPerm && !message.guild.me.hasPermission(command.help.botPermName)) return message.channel.send({
+    if (command.help.botPerm && !message.guild.me.permissions.has(command.help.botPermName)) return message.channel.send({
       embed: {
         title: `Missing Bot Permissions`,
         description: `${x_mark} I don't have enough permissions to run this command ! Give me \`${command.help.botPermName}\` permission(s)`
@@ -125,7 +125,7 @@ module.exports = async (client, message) => {
       }
     })
 
-    if ((command.help.args && args.length || !command.help.args) && (command.help.permissions && message.member.hasPermission(command.help.reqPermName) || !command.help.permissions) && !command.help.ownerCmd && (command.help.name == 'report' && args.join(` `).length >= 25 || command.help.name !== 'report')) {
+    if ((command.help.args && args.length || !command.help.args) && (command.help.permissions && message.member.permissions.has(command.help.reqPermName) || !command.help.permissions) && !command.help.ownerCmd && (command.help.name == 'report' && args.join(` `).length >= 25 || command.help.name !== 'report')) {
       if (!client.cooldowns.has(command.help.name)) {
         client.cooldowns.set(command.help.name, new Collection());
       }

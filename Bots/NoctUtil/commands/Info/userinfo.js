@@ -44,8 +44,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (member) {
       if (userInfo) embed.addField('Message Sent', `${userInfo.messageSent} message(s)`)
       if (userInfo && userInfo.warns > 0) embed.addField('Infractions :', `${userInfo.warns} warn(s)`);
-      if (member.hasPermission('BAN_MEMBERS', true)) embed.addField('Administrator :', `${check_mark}`)
-      else if (member.hasPermission('SEND_MESSAGES', false)) embed.addField('Administrator :', `${x_mark}`);
+      if (member.permissions.has('BAN_MEMBERS', true)) embed.addField('Administrator :', `${check_mark}`)
+      else if (member.permissions.has('SEND_MESSAGES', false)) embed.addField('Administrator :', `${x_mark}`);
     }
     message.channel.send(embed);
   };

@@ -127,7 +127,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     inline: true
                 }, {
                     name: `• All Members ***${fetchAll.size}*** :`,
-                    value: `${emojis.resolve(client.localEmojis.members)} Members : **${memberCount}**\nBots : **${botCount}** \n${emojis.resolve(client.localEmojis.admins)}Admins : **${guild.members.cache.filter(m => m.hasPermission('BAN_MEMBERS', { checkAdmin: true})).size}** \n${onlineEmoji}Online : **${online}** \n${idleEmoji}Idle : **${idle}** \n${dndEmoji}Do not Disturb : **${dnd}** \n${offlineEmoji}Offline : **${offline}**`,
+                    value: `${emojis.resolve(client.localEmojis.members)} Members : **${memberCount}**\nBots : **${botCount}** \n${emojis.resolve(client.localEmojis.admins)}Admins : **${guild.members.cache.filter(m => m.permissions.has('BAN_MEMBERS', { checkAdmin: true})).size}** \n${onlineEmoji}Online : **${online}** \n${idleEmoji}Idle : **${idle}** \n${dndEmoji}Do not Disturb : **${dnd}** \n${offlineEmoji}Offline : **${offline}**`,
                     inline: false
                 }, {
                     name: `• Channels **${channels.size}** :`,

@@ -14,7 +14,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const member = message.guild.members.resolve(user);
       if (!member) return message.reply("That user isn't in this guild!");
       else {
-      if (member.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't kick an admin!");
+      if (member.permissions.has('BAN_MEMBERS', true)) return message.channel.send("I can't kick an admin!");
       if (message.guild.me.roles.highest.position <= member.roles.highest.position) return message.channel.send("I can't kick an user who have a role highest than mine!");
    
 

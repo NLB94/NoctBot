@@ -39,7 +39,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         
       });
     } else {
-      if (member.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't ban an admin!");
+      if (member.permissions.has('BAN_MEMBERS', true)) return message.channel.send("I can't ban an admin!");
       if (message.guild.me.roles.highest.position <= member.roles.highest.position) return message.channel.send("I can't ban an user who have a role highest than mine!");
       member.ban({
         days: 7,

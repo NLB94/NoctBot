@@ -33,7 +33,7 @@ module.exports = async (client, channel) => {
         }
 
 
-        if (!channel.guild.me.hasPermission('VIEW_AUDIT_LOG')) return;
+        if (!channel.guild.me.permissions.has('VIEW_AUDIT_LOG')) return;
         // await channel.guild.fetchAuditLogs({
         //     limit: 1,
         //     type: 'CHANNEL_CREATE'

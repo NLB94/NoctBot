@@ -16,12 +16,7 @@ module.exports = func.client = async (client) => {
     client.findAndUpdateUser = functions.findAndUpdateUser = async (userID, options) => {
         const user = await User.findOneAndUpdate({
             userID: userID
-        }, {
-            discordTag: `${options.username}#${options.discriminator}`,
-            email: options.email,
-            avatar: options.avatar,
-            guilds: options.guilds,
-        }, {
+        }, options, {
             new: true
         });
         return user;

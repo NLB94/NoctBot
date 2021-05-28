@@ -36,7 +36,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
              "moderation.muteRole": roleID
          })
     };
-    if (user.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't mute an admin!");
+    if (user.permissions.has('BAN_MEMBERS', true)) return message.channel.send("I can't mute an admin!");
       if (message.guild.me.roles.highest.position <= user.roles.highest.position) return message.channel.send("I can't mute an user who have a role highest than mine!")
     if (user.roles.cache.has(muteRole.id)) return message.channel.send("This user is already mute!");
     if (!user.roles.cache.has(muteRole.id)) {
