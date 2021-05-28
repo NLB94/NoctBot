@@ -139,13 +139,15 @@ module.exports = functions.client = client => {
       month: date
     });
     if (!votes) await client.changeVoteMonth();
-    await Votes.updateOne({
-      month: date
-    }, {
-      $push: {
-        votes: data
-      }
-    })
+    setTimeout(async () => {
+      await Votes.updateOne({
+        month: date
+      }, {
+        $push: {
+          votes: data
+        }
+      })
+    }, 3000);
   };
   client.changeVoteMonth = async () => {
     const dateNow = Date.now();
