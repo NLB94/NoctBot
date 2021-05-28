@@ -30,7 +30,6 @@ module.exports = func.client = async (client) => {
      */
     client.getUser = async (user) => {
         const dbUser = await User.findOne({ userID: user.id });
-        setTimeout(() => {console.log(dbUser)}, 2000)
         if (dbUser) return dbUser;
     }
     /**

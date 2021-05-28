@@ -27,7 +27,7 @@ module.exports = async (client, options) => {
             else {
                 const logs = options.message.guild.channels.resolve(settings.general.logs);
                 if (antiinvite.onlyDelete) {
-                    options.message.delete().catch(err => console.log(err))
+                    options.message.delete().catch(err => {})
                 } else if (antiinvite.onlyWarn) {
                     const newWarns = Math.floor(userInfo.warns + 1);
                     await options.client.updateGuildUI(options.message.guild, options.message.member, {
@@ -42,7 +42,7 @@ module.exports = async (client, options) => {
 
                     if (antiinvite.logsThis && logs !== undefined) logs.send(embed);
                 } else if (antiinvite.warnAndDelete) {
-                    message.delete().catch(err => console.log(err))
+                    message.delete().catch(err => {})
                     const newWarns = Math.floor(userInfo.warns + 1);
                     await options.client.updateGuildUI(options.message.guild, options.message.member, {
                         "users.$.warns": newWarns
@@ -66,7 +66,7 @@ module.exports = async (client, options) => {
             else {
                 const logs = options.message.guild.channels.resolve(settings.general.logs);
                 if (antilink.onlyDelete) {
-                    options.message.delete().catch(err => console.log(err))
+                    options.message.delete().catch(err => {})
                 } else if (antilink.onlyWarn) {
                     const newWarns = Math.floor(userInfo.warns + 1);
                     await options.client.updateGuildUI(options.message.guild, options.message.member, {
@@ -81,7 +81,7 @@ module.exports = async (client, options) => {
 
                     if (antilink.logsThis && logs !== undefined) logs.send(embed);
                 } else if (antilink.warnAndDelete) {
-                    message.delete().catch(err => console.log(err))
+                    message.delete().catch(err => {})
                     const newWarns = Math.floor(userInfo.warns + 1);
                     await options.client.updateGuildUI(options.message.guild, options.message.member, {
                         "users.$.warns": newWarns
