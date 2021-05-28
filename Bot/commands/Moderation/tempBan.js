@@ -15,7 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const time = args[1] ? ms(args[1]) : ms('24 hours');
 
   if (user) {
-    const member = message.guild.member(user);
+    const member = message.guild.members.resolve(user);
     if (!member) {
       message.guild.members.ban(user).then(() => {
         const logsEmbed = new MessageEmbed()

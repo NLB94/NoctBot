@@ -15,7 +15,7 @@ module.exports.run = fnc.run = async (client, message, args, settings, userInfo)
     })
     if (user.bot) return message.channel.send("Bots can't receive experience!");
 
-    const member = message.guild.member(user);
+    const member = message.guild.members.resolve(user);
     if (!member) return message.channel.send({
         embed: {
             description: `${x_mark}User not in this server!`

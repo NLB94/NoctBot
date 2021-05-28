@@ -11,7 +11,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
 
     if (user) {
-      const member = message.guild.member(user);
+      const member = message.guild.members.resolve(user);
       if (!member) return message.reply("That user isn't in this guild!");
       else {
       if (member.hasPermission('BAN_MEMBERS', true)) return message.channel.send("I can't kick an admin!");

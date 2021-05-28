@@ -299,7 +299,7 @@ class Giveaway extends EventEmitter {
      */
     async checkWinnerEntry (user) {
         const guild = this.channel.guild;
-        const member = guild.member(user.id) || await guild.members.fetch(user.id).catch(() => {});
+        const member = guild.members.resolve(user.id) || await guild.members.fetch(user.id).catch(() => {});
         if (!member) return false;
         const exemptMember = await this.exemptMembers(member);
         if (exemptMember) return false;
@@ -347,7 +347,7 @@ class Giveaway extends EventEmitter {
             }
         }
 
-        return winners.map((user) => guild.member(user) || user);
+        return winners.map((user) => guild.members.resolve(user) || user);
     }
 
     /**

@@ -10,7 +10,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
     const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
-    const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.guild.member(message.mentions.users.first()) : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : message.guild.member(args[0]));
+    const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.guild.members.resolve(message.mentions.users.first()) : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : message.guild.members.resolve(args[0]));
     if (!user) return message.channel.send({embed: {description: `${x_mark}Correct usage : \`${settings.general.prefix}mute ${module.exports.help.usage}\``}});
     let muteRole = settings.moderation.muteRole.toLowerCase() == 'muted' ? message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted') : message.guild.roles.cache.find(r => r.id === settings.moderation.muteRole);
     let muteTime = (args[1] || '24h');

@@ -15,7 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     );
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
 
-  const dbUser = await client.getGuildUser(message.guild, message.guild.member(user));
+  const dbUser = await client.getGuildUser(message.guild, message.guild.members.resolve(user));
   if (user.bot) return message.channel.send("You can't give money to bots!");
   if (user.tag === message.author.tag) return message.channel.send("You can't give money to yourself!");
   if (!dbUser || !userInfo) return;
@@ -25,7 +25,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const m = parseInt(args[1]);
       if (userInfo.moneyCash < m) return message.reply(`You don't have enough money to give! \nRequire : $${Math.floor(m - userInfo.moneyCash)}`);
       else if (dbUser && userInfo.moneyCash >= m) {
-        message.channel.send(`Do you want to pay $${m} to ${message.guild.member(user)} ? (yes or cancel)`);
+        message.channel.send(`Do you want to pay $${m} to ${message.guild.members.resolve(user)} ? (yes or cancel)`);
 
         const filter = (f) => message.author.id === f.author.id;
         const userE = await message.channel.awaitMessages(filter, {
@@ -45,7 +45,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             "users.$.moneyCash": newB,
           });
 
-          message.reply(`You gave $${m} to ${message.guild.member(user)}`);
+          message.reply(`You gave $${m} to ${message.guild.members.resolve(user)}`);
         } else if (userE.first().content.toLowerCase() === "cancel" || userE.first().content.toLowerCase() === "no") return message.channel.send("Command canceled!");
       }
     } catch (e) {
@@ -55,7 +55,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     try {
       const m = userInfo.moneyCash;
       message.channel.send(
-        `Do you want to pay $${m} to <@${message.guild.member(user.id)}> ? (yes or cancel)`
+        `Do you want to pay $${m} to <@${message.guild.members.resolve(user.id)}> ? (yes or cancel)`
       );
       const filter = (f) => message.author.id === f.author.id;
       const userE = await message.channel.awaitMessages(filter, {
@@ -73,7 +73,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         client.updateGuildUI(message.guild, dbUser, {
           "users.$.moneyCash": newB,
         });
-        message.reply(`You gave $${m} to <@${message.guild.member(user).id}>`);
+        message.reply(`You gave $${m} to <@${message.guild.members.resolve(user).id}>`);
       } else if (userE.first().content.toLowerCase() === "cancel" || userE.first().content.toLowerCase() === "no") return message.channel.send("Command canceled!");
     } catch (e) {
       message.channel.send("Command canceled!");

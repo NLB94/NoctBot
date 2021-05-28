@@ -17,7 +17,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
 
   if (user) {
-    const member = await message.guild.member(user);
+    const member = await message.guild.members.resolve(user);
     if (!member) {
       message.guild.members.ban(user.id).then(async () => {
         const logsEmbed = new MessageEmbed()

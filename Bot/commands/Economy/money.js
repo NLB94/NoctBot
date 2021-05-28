@@ -18,7 +18,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       description: `${x_mark}**User not found !**`
     }
   })
-  userInfo = user.id == message.author.id ? userInfo : await client.getGuildUser(message.guild, message.guild.member(user))
+  userInfo = user.id == message.author.id ? userInfo : await client.getGuildUser(message.guild, message.guild.members.resolve(user))
   if (!userInfo) return;
   else {
     const embed = new MessageEmbed()

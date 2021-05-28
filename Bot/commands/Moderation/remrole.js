@@ -17,7 +17,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const mentionsUsers = message.mentions.users;
     mentionsRoles.forEach(role => {
         mentionsUsers.forEach(m => {
-            const member = message.guild.member(m)
+            const member = message.guild.members.resolve(m)
             member.roles.remove(role.id).catch()
         });
         roles.push({

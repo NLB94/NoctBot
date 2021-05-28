@@ -18,7 +18,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (user == undefined) return message.channel.send({embed: { description: `${x_mark}User not found !`}})
   if (user.bot) return message.channel.send("Bots can't receive experience!");
 
-  const member = message.guild.member(user);
+  const member = message.guild.members.resolve(user);
   if (!member) return message.channel.send({embed: { description: `${x_mark}User not in this server!`}});
 
   if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)

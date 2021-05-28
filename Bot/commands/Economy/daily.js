@@ -15,7 +15,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (userInfo == undefined) await client.createGuildUser(message.guild, message.member);
 
   const lastD = userInfo.cd.daily;
-  console.log(lastD)
   if (lastD !== null && dailyCd - (Date.now() - lastD) > 0) {
     const cdT = dailyCd - (Date.now() - lastD);
     const cdEmbed = new MessageEmbed()

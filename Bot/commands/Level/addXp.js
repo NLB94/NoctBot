@@ -10,7 +10,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
 
-  const user = message.guild.member(message.mentions.users.first()) || message.guild.member(message.author.id);
+  const user = message.guild.members.resolve(message.mentions.users.first()) || message.guild.members.resolve(message.author.id);
   const expToAdd = parseInt(args[0]);
   if (isNaN(expToAdd)) return message.channel.send({
     embed: {

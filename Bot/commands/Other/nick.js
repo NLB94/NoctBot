@@ -17,7 +17,7 @@ module.exports.run = functions.run = async (client, message, args) => {
 
         if (user.id !== message.author.id && (!message.member.permissions.has('MANAGE_NICKNAMES') || message.member.roles.highest.position < member)) return message.channel.send({ embed: { description: `${x_mark} You don't have enough permissions to change this user nickname !` }})
 
-        const member = message.guild.member(user);
+        const member = message.guild.members.resolve(user);
         if (!member) return message.channel.send({
             embed: {
                 description: `${x_mark}User not in this server!`
