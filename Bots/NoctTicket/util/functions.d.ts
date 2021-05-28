@@ -53,7 +53,7 @@ export declare function run(
   message: Message,
   args: String[],
   settings: GuildData,
-  userInfo: UserData
+  userInfo: GuildUserData
 );
 
 export declare function client(client: Client);
@@ -116,7 +116,7 @@ export declare class GuildData {
     userUpdate: Boolean;
     voiceStateUpdate: Boolean;
   };
-  users: UserData[];
+  users: GuildUserData[];
   automod: {
     enable: Boolean;
     whiteList: {
@@ -270,7 +270,7 @@ export declare class GuildData {
   };
 }
 
-export interface UserData {
+export interface GuildUserData {
   id: String;
   XP: Number;
   level: Number;

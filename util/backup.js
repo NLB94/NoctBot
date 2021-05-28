@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {
   Guild,
   Backup
-} = require("../models/main");
+} = require("../models");
 const functions = require('./backup');
 const func = require('./functions')
 

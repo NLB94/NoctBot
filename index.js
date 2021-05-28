@@ -7,27 +7,21 @@ const Discord = require('discord.js');
 const Brawl = require('@statscell/brawl');
 const translate = require('@vitalets/google-translate-api');
 
-const DBLApi = require('@top-gg/sdk/dist');
+const DBLApi = require('@top-gg/sdk');
 
 const botGuild = require('./.bot.json');
 const emojis = require('./emojis.json');
 
-// const express = require('express');
-// const passport = require("passport");
-// const session = require('express-session');
-// const cors = require('cors')
-// const app = express();
-// const port = process.env.PORT || 80;
-// const routes = require('./src/routes');
-// const {
-//     default: Store
-// } = require('connect-mongo');
+const express = require('express');
+const app = express();
+const port = 4000;
 
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
     intents: ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INTEGRATIONS', 'GUILD_INVITES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING', 'GUILD_PRESENCES', 'GUILD_VOICE_STATES', 'GUILD_WEBHOOKS', 'DIRECT_MESSAGE_TYPING', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS']
 });
 const topAPI = new DBLApi.Api(process.env.DBL_TOKEN);
+const webhook = new DBLApi.Webhook('Topgg_94Noct_94');
 
 const brawlManager = new Brawl.Client({
     token: process.env.BRAWL_TOKEN
@@ -74,8 +68,6 @@ require("./util/giveaway")(client);
 require("./util/economy")(client);
 require("./util/level")(client);
 
-// app.use(express.static("public"))
-
 client.mongoose = require("./util/mongoose");
 
 ["commands", "cooldowns"].forEach(x => client[x] = new Discord.Collection());
@@ -85,54 +77,27 @@ loadCommands(client);
 loadEvents(client);
 // loadBots();
 
-// app.use(express.json())
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
-// app.use(cors({
-//     origin: ['http://localhost:3000'],
-//     credentials: true
-// }))
-
-// app.use(session({
-//     store: Store.create({
-//         mongoUrl: process.env.DBCONNECTION
-//     }),
-//     secret: 'secret',
-//     cookie: {
-//         maxAge: 60000 * 60 * 24
-//     },
-//     resave: false,
-//     saveUninitialized: false,
-// }))
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// app.use('/api', routes);
-// app.use('/discord', passport.authenticate('discord'))
-
-// app.get('/logout', (req, res) => {
-//     req.logout();
-//     res.redirect('/');
-// });
-
-// app.get('/info', checkAuth, (req, res) => {
-//     console.log(req.user.email)
-//     res.json(req.user);
-// });
-
-// function checkAuth(req, res, next) {
-//     if (req.isAuthenticated()) return next();
-//     res.send('not logged in :(');
-// }
-
-// app.listen(port, () => console.log(`Server is live on port ${port}`));
+app.listen(port, () => console.log(`Server is live on port ${port}`));
 
 
 client.mongoose.init();
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).then(async() => {
+    await app.get('/commands', (req, res) => {
+        res.send(client.commands.map(cmd => cmd.help))
+    })
+	await app.get('/client', (req, res) => {
+        if(req.headers.authorization !== 'Bearer 817kHUIa7189.ioHuaoç9.PIIHOan') return res.status(403).send({ msg: 'Unauthorized'})
+        res.send(client);
+    })
 
+	app.post('/dblwebhook', webhook.listener(async vote => {
+  		if (!vote.bot) return;
+        await client.newVote(vote, Date.now());
+	})) 
+});
 module.exports = {
     client
 };

@@ -2,7 +2,7 @@ const passport = require('passport');
 const DiscordStrat = require('passport-discord')
 const {
     User
-} = require("../../../models/main");
+} = require("../../../models");
 const mongoose = require('mongoose')
 
 module.exports = async (client) => {

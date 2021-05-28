@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
+const moment = require('moment');
 const {
   Guild,
-} = require("../models/main");
+  Votes,
+} = require("../models");
+const mongoose = require('mongoose');
 const functions = require('./functions');
 
 module.exports = functions.client = client => {
@@ -110,10 +113,49 @@ module.exports = functions.client = client => {
    * @param {functions.GuildData} settings
    */
   client.createCase = async (guild, options, settings) => {
-    await Guild.updateOne({ guildID: guild.id }, {
+    await Guild.updateOne({
+      guildID: guild.id
+    }, {
       $push: {
         "moderation.case": options
       }
     }).then()
-  }
+  };
+  /**
+   * 
+   * @param {functions.VoteData} vote 
+   * @param {Number} timeS 
+   */
+  client.newVote = async (vote, timeS) => {
+    let data = {
+      user: vote.user,
+      bot: vote.bot,
+      type: vote.type,
+      isWeekend: vote.isWeekend,
+      time: timeS
+    };
+    let date = `${moment(Date.now()).format("MM/YYYY")}`
+    const votes = await Votes.findOne({
+      month: date
+    });
+    if (!votes) await client.changeVoteMonth();
+    await Votes.updateOne({
+      month: date
+    }, {
+      $push: {
+        votes: data
+      }
+    })
+  };
+  client.changeVoteMonth = async () => {
+    const dateNow = Date.now();
+    let date = `${moment(dateNow).format("MM/YYYY")}`
+    const merged = Object.assign({
+      _id: mongoose.Types.ObjectId()
+    }, {
+      month: date
+    });
+    const changeVoteMonth = await new Votes(merged);
+    changeVoteMonth.save();
+  };
 };

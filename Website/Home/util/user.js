@@ -3,7 +3,7 @@ const functions = require('./user');
 const mongoose = require('mongoose');
 const {
     User
-} = require("../../../models/main")
+} = require("../../../models")
 
 module.exports = func.client = async (client) => {
     client.createUser = functions.createUser = async (userInfo) => {

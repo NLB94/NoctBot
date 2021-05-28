@@ -8,7 +8,7 @@ const {
 } = require("../../../util/constants");
 const {
     GuildData,
-    UserData
+    GuildUserData
 } = require('../../../util/functions');
 const brawlClient = require('@statscell/brawl').Client;
 
@@ -17,7 +17,7 @@ const brawlClient = require('@statscell/brawl').Client;
  * @param {Message} message 
  * @param {String[]} args 
  * @param {GuildData} settings 
- * @param {UserData} userInfo 
+ * @param {GuildUserData} userInfo 
  */
 module.exports.run = async (client, message, args, settings, userInfo) => {
     const tag = args[0];

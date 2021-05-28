@@ -5,7 +5,7 @@ const {
 } = require('discord.js');
 const {
     Guild
-} = require('../../../models/main');
+} = require('../../../models');
 
 /**
  * 

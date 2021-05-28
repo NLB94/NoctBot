@@ -27,9 +27,28 @@ const userSchema = mongoose.Schema({
             duration: ''
         }
     },
-    noctCredits: {
+    lastVoteTS: {
         type: Number,
         default: 0
+    },
+    noctCredits: {
+        type: Object,
+        default: {
+            total: 0,
+            dateToday: 'JJ/MM/AA',
+            daily: {
+                cooldown: false,
+                usedToday: 0,
+                maxUsesPerDay: 10,
+                limitIfNoVote: 5,
+            },
+            hourly: {
+                cooldown: false,
+                usedToday: 0,
+                maxUsesPerDay: 20,
+                limitIfNoVote: 10,
+            },
+        }
     },
 });
 

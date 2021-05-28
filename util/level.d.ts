@@ -1,6 +1,6 @@
 import { createCanvas } from "canvas";
 import { Guild, GuildMember, Message, MessageAttachment, MessageEmbed, User } from 'discord.js';
-import { User as DBUser } from '../models/main'
+import { User as DBUser } from '../models'
 /**
  * Up an user xp level
  * @param guild 

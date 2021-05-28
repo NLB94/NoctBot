@@ -4,7 +4,7 @@ const {
 } = require('../util/api');
 const {
     User
-} = require("../../../models/main");
+} = require("../../../models");
 const {
     getMutualGuilds, getNonMutualGuilds, getAdminGuilds, getGuildIcon, sortGuilds
 } = require('../util/utils');

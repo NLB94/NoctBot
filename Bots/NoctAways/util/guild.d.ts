@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { GuildData, UserData } from "./functions";
+import { GuildData, GuildUserData } from "./functions";
   
   /**
    * Create a new guild in the database
@@ -26,7 +26,7 @@ import { GuildData, UserData } from "./functions";
    * @returns {Array}
    * @param guild
    */
-  export declare function getGuildUsers(guild: Discord.Guild): UserData[];
+  export declare function getGuildUsers(guild: Discord.Guild): GuildUserData[];
   /**
      * Create an user in the database
      * @param guild 
@@ -40,7 +40,7 @@ import { GuildData, UserData } from "./functions";
      * @param user 
      * @returns {Object}
      */
-    export declare function getGuildUser(guild: Discord.Guild, user: Discord.GuildMember): UserData;
+    export declare function getGuildUser(guild: Discord.Guild, user: Discord.GuildMember): GuildUserData;
     /**
      * Update an user's info in the database
      * @param guild 

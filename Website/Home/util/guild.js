@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const {
     Guild
-} = require("../../../models/main");
+} = require("../../../models");
 const functions = require('./guild');
 const func = require('./functions')
 

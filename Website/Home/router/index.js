@@ -18,7 +18,7 @@ const {
 } = require('../../../util/guild');
 const {
     Guild
-} = require("../../../models/main");
+} = require("../../../models");
 const { validateGuild } = require('../util/utils');
 
 router.use('/api', api);

@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const {
   Guild,
-} = require("../../../models/main");
+} = require("../../../models");
 const functions = require('./functions');
 
 module.exports = functions.client = client => {

@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import { GuildData, UserData } from '../../util/functions'
+import { GuildData, GuildUserData } from '../../util/functions'
 
 export declare interface AutomodOpt {
   client: Discord.Client;
@@ -7,5 +7,5 @@ export declare interface AutomodOpt {
   args: String[];
   type: 'link' | 'invite' | 'uppercase' | 'emojis' | 'spam' | 'zalgo' | 'mentions' | 'warn-limit' | 'mute-limit';
   settings: GuildData;
-  userInfo: UserData
+  userInfo: GuildUserData
 }

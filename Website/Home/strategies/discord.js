@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 module.exports = async (client) => {
     const {
         User
-    } = require("../../../models/main");
+    } = require("../../../models");
     console.log('Strategy => done !')
     passport.serializeUser((user, done) => {
         done(null, user.userID)

@@ -2,7 +2,7 @@ const { client } = require('../../../index');
 const { getBotGuilds } = require('./api');
 const functions = require('./util');
 const { NextFunction } = require('express');
-const { UserData } = require('../../../util/functions')
+const { GuildUserData } = require('../../../util/functions')
 
 const getMutualGuilds = functions.getMutualGuilds = async (userGuilds) => {
   const botGuilds = await getBotGuilds();
@@ -46,7 +46,7 @@ const sortGuilds = functions.sortGuilds = async (userGuilds, mutualGuilds) => {
 };
 /**
  * 
- * @param {UserData[]} users 
+ * @param {GuildUserData[]} users 
  * @param {String} type 
  */
 const sortUsers = async (users, type) => {

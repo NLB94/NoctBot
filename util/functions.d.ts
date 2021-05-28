@@ -1,6 +1,17 @@
-import { Client, Guild, Message, MessageEmbedOptions, PermissionResolvable, Permissions, Role, TextChannel, User, VoiceChannel } from 'discord.js';
-import { Item } from './economy';
-import { Giveaway } from './giveaway'
+import {
+  Client,
+  Guild,
+  Message,
+  MessageEmbedOptions,
+  PermissionResolvable,
+  Permissions,
+  Role,
+  TextChannel,
+  User,
+  VoiceChannel,
+} from "discord.js";
+import { Item } from "./economy";
+import { Giveaway } from "./giveaway";
 
 /**
  * Return a random string for password or backup id
@@ -53,7 +64,7 @@ export declare function run(
   message: Message,
   args: String[],
   settings: GuildData,
-  userInfo: UserData
+  userInfo: GuildUserData
 );
 
 export declare function client(client: Client);
@@ -79,7 +90,7 @@ export declare class GuildData {
   constructor(any: any);
   public guildID: String;
   general: {
-    language: 'en' | 'fr';
+    language: "en" | "fr";
     prefix: String;
     logs: String;
     premium: Boolean;
@@ -116,7 +127,7 @@ export declare class GuildData {
     userUpdate: Boolean;
     voiceStateUpdate: Boolean;
   };
-  users: UserData[];
+  users: GuildUserData[];
   automod: {
     enable: Boolean;
     whiteList: {
@@ -196,8 +207,8 @@ export declare class GuildData {
     color: ColorResolvable;
     image: String;
     message: {
-      type: 'embed' | 'normal';
-      msg: String | MessageEmbedOptions
+      type: "embed" | "normal";
+      msg: String | MessageEmbedOptions;
     };
     channel: String;
     DM: {
@@ -218,7 +229,7 @@ export declare class GuildData {
       enable: Boolean;
       channel: String;
       role: String;
-      type: 'normal' | 'embed';
+      type: "normal" | "embed";
       DMUser: {
         enable: Boolean;
         msg: String;
@@ -233,7 +244,7 @@ export declare class GuildData {
         msg: String;
       };
       msg: String | MessageEmbedOptions;
-      type: 'normal' | 'embed'
+      type: "normal" | "embed";
     };
   };
   customCommands: CustomCmds[];
@@ -270,7 +281,7 @@ export declare class GuildData {
   };
 }
 
-export interface UserData {
+export interface GuildUserData {
   id: String;
   XP: Number;
   level: Number;
@@ -304,12 +315,45 @@ export interface UserData {
     all: [];
     leaves: [];
     fakes: [];
-  }
+  };
+}
+
+export declare interface UserData {
+  userID: String;
+  tag: String;
+  avatar: String;
+  guilds: Array;
+  games: {
+    brawlStars: Array;
+    clashRoyale: Array;
+  };
+  premium: {
+    enable: Boolean;
+    startedTimestamp: String;
+    duration: String;
+  };
+  lastVoteTS: Number;
+  noctCredits: {
+    total: Number;
+    dateToday: String;
+    daily: {
+      cooldown: Boolean;
+      usedToday: Number;
+      maxUsesPerDay: Number;
+      limitIfNoVote: Number;
+    };
+    hourly: {
+      cooldown: Boolean;
+      usedToday: Number;
+      maxUsesPerDay: Number;
+      limitIfNoVote: Number;
+    };
+  };
 }
 
 export declare interface ModCase {
   userID: String;
-  type: 'Warn' | 'Ban' | 'Mute';
+  type: "Warn" | "Ban" | "Mute";
   id: Number;
   reason: String;
   moderatorID: String;
@@ -317,7 +361,7 @@ export declare interface ModCase {
 
 export interface RoleRewards {
   roleID: String;
-  type: 'give' | 'remove';
+  type: "give" | "remove";
   level: Number;
 }
 
@@ -344,83 +388,88 @@ export interface LockChannels {
 }
 
 export class CustomCmds {
-  constructor (data?: CustomCmds);
+  constructor(data?: CustomCmds);
   public name: String;
   public cooldown: Number;
   private args: Boolean;
   public usage: String;
-  private msgType: 'embed' | 'normal';
+  private msgType: "embed" | "normal";
   public msg: String | MessageEmbedOptions;
 }
 
-type CategoryCount = 
-  | 'channels'
-  | 'members'
-  | 'boosts' ;
+type CategoryCount = "channels" | "members" | "boosts";
 export type ColorResolvable =
-    | 'DEFAULT'
-    | 'WHITE'
-    | 'AQUA'
-    | 'GREEN'
-    | 'BLUE'
-    | 'YELLOW'
-    | 'PURPLE'
-    | 'LUMINOUS_VIVID_PINK'
-    | 'GOLD'
-    | 'ORANGE'
-    | 'RED'
-    | 'GREY'
-    | 'DARKER_GREY'
-    | 'NAVY'
-    | 'DARK_AQUA'
-    | 'DARK_GREEN'
-    | 'DARK_BLUE'
-    | 'DARK_PURPLE'
-    | 'DARK_VIVID_PINK'
-    | 'DARK_GOLD'
-    | 'DARK_ORANGE'
-    | 'DARK_RED'
-    | 'DARK_GREY'
-    | 'LIGHT_GREY'
-    | 'DARK_NAVY'
-    | 'BLURPLE'
-    | 'GREYPLE'
-    | 'DARK_BUT_NOT_BLACK'
-    | 'NOT_QUITE_BLACK'
-    | 'RANDOM'
-    | [number, number, number]
-    | number
-    | string;
+  | "DEFAULT"
+  | "WHITE"
+  | "AQUA"
+  | "GREEN"
+  | "BLUE"
+  | "YELLOW"
+  | "PURPLE"
+  | "LUMINOUS_VIVID_PINK"
+  | "GOLD"
+  | "ORANGE"
+  | "RED"
+  | "GREY"
+  | "DARKER_GREY"
+  | "NAVY"
+  | "DARK_AQUA"
+  | "DARK_GREEN"
+  | "DARK_BLUE"
+  | "DARK_PURPLE"
+  | "DARK_VIVID_PINK"
+  | "DARK_GOLD"
+  | "DARK_ORANGE"
+  | "DARK_RED"
+  | "DARK_GREY"
+  | "LIGHT_GREY"
+  | "DARK_NAVY"
+  | "BLURPLE"
+  | "GREYPLE"
+  | "DARK_BUT_NOT_BLACK"
+  | "NOT_QUITE_BLACK"
+  | "RANDOM"
+  | [number, number, number]
+  | number
+  | string;
 
 export declare type PermissionResolvable =
-  | 'CREATE_INSTANT_INVITE'
-  | 'KICK_MEMBERS'
-  | 'BAN_MEMBERS'
-  | 'ADMINISTRATOR'
-  | 'MANAGE_CHANNELS'
-  | 'MANAGE_GUILD'
-  | 'ADD_REACTIONS'
-  | 'VIEW_AUDIT_LOG'
-  | 'PRIORITY_SPEAKER'
-  | 'STREAM'
-  | 'VIEW_CHANNEL'
-  | 'SEND_MESSAGES'
-  | 'SEND_TTS_MESSAGES'
-  | 'MANAGE_MESSAGES'
-  | 'EMBED_LINKS'
-  | 'ATTACH_FILES'
-  | 'READ_MESSAGE_HISTORY'
-  | 'MENTION_EVERYONE'
-  | 'USE_EXTERNAL_EMOJIS'
-  | 'VIEW_GUILD_INSIGHTS'
-  | 'CONNECT'
-  | 'SPEAK'
-  | 'MUTE_MEMBERS'
-  | 'DEAFEN_MEMBERS'
-  | 'MOVE_MEMBERS'
-  | 'USE_VAD'
-  | 'CHANGE_NICKNAME'
-  | 'MANAGE_NICKNAMES'
-  | 'MANAGE_ROLES'
-  | 'MANAGE_WEBHOOKS'
-  | 'MANAGE_EMOJIS';
+  | "CREATE_INSTANT_INVITE"
+  | "KICK_MEMBERS"
+  | "BAN_MEMBERS"
+  | "ADMINISTRATOR"
+  | "MANAGE_CHANNELS"
+  | "MANAGE_GUILD"
+  | "ADD_REACTIONS"
+  | "VIEW_AUDIT_LOG"
+  | "PRIORITY_SPEAKER"
+  | "STREAM"
+  | "VIEW_CHANNEL"
+  | "SEND_MESSAGES"
+  | "SEND_TTS_MESSAGES"
+  | "MANAGE_MESSAGES"
+  | "EMBED_LINKS"
+  | "ATTACH_FILES"
+  | "READ_MESSAGE_HISTORY"
+  | "MENTION_EVERYONE"
+  | "USE_EXTERNAL_EMOJIS"
+  | "VIEW_GUILD_INSIGHTS"
+  | "CONNECT"
+  | "SPEAK"
+  | "MUTE_MEMBERS"
+  | "DEAFEN_MEMBERS"
+  | "MOVE_MEMBERS"
+  | "USE_VAD"
+  | "CHANGE_NICKNAME"
+  | "MANAGE_NICKNAMES"
+  | "MANAGE_ROLES"
+  | "MANAGE_WEBHOOKS"
+  | "MANAGE_EMOJIS";
+
+export declare interface VoteData {
+  public bot: string;
+  public user: string;
+  private type: "upvote" | "test";
+  public isWeekend: boolean;
+  readonly query: string
+}

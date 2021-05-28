@@ -5,7 +5,7 @@ const {
 const functions = require('./automod')
 const {
     Guild
-} = require('../../../models/main');
+} = require('../../../models');
 
 /**
  * 

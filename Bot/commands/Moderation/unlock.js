@@ -1,5 +1,5 @@
 const { MESSAGES } = require('../../../util/constants');
-const { Guild } = require('../../../models/main');
+const { Guild } = require('../../../models');
 
 const functions = require('../../../util/functions');
 

@@ -1,5 +1,5 @@
 import { Guild, GuildFeatures } from "discord.js";
-import { UserData } from "../util/functions";
+import { GuildUserData } from "../util/functions";
 
 export declare function getMutualGuilds(userGuilds: UserGuild[], botGuilds: Guild[]): UserGuild[];
 
@@ -11,7 +11,7 @@ export declare function getNonMutualGuilds(userGuilds: UserGuild[], mutualGuilds
 
 export declare function sortGuilds(userGuilds: UserGuild[], mutualGuilds: UserGuild[]): UserGuild[];
 
-export declare function sortUsers(users: UserData[], type: String);
+export declare function sortUsers(users: GuildUserData[], type: String);
 
 export declare interface UserGuild {
     id: String;

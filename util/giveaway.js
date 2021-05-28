@@ -1,7 +1,7 @@
 const ms = require('ms');
 const {
   Guild,
-} = require("../models/main");
+} = require("../models");
 const functions = require('./giveaway');
 const func = require('./functions')
 
