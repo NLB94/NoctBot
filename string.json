@@ -2,6 +2,14 @@
   "fr": {
     "usage": "Usage correct :",
     "configuration": {
+      "whiteL": "Liste blanche",
+      "enable": "Activé",
+      "reset": "```Réagissez à 🔄 pour réinitialiser les paramètres du système {type}```",
+      "afterReset": "```Les paramètres ont été réinitialisés```",
+      "logsThis": "Logs Activés",
+      "onlyDelete": "Supprimer le message seulement",
+      "onlyWarn": "Avertir l'utilisateur seulement",
+      "warnAndDelete": "Avertir l'utilisateur & Supprimer le message",
       "notEnable": "Le système `{type}` **n'est pas activé !** Tapez `{prefix}{cmdName} enable` et **réessayez !**",
       "alrEnable": "Le système `{type}` **est déjà activé !**",
       "alrDisable": "Le système `{type}` **est déja désactivé !**",
@@ -15,6 +23,14 @@
   "en": {
     "usage": "Correct usage :",
     "configuration": {
+      "whiteL": "White list",
+      "enable": "Enable",
+      "reset": "```React with 🔄 to reset {type} settings```",
+      "afterReset": "```The settings have been reset```",
+      "logsThis": "Logs Enable",
+      "onlyDelete": "Just delete the message",
+      "onlyWarn": "Just warn the user",
+      "warnAndDelete": "Warn the user & Delete the message",
       "notEnable": "The `{type}` system **is not enable !** Type `{prefix}{cmdName} enable` and **retry !**",
       "alrEnable": "The `{type}` system **is already enable !**",
       "alrDisable": "The `{type}` system **is already disable !**",

@@ -6,14 +6,16 @@ const functions = require('./messageReactionAdd');
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {
     const message = messageReaction.message;
     const settings = await client.getGuild(message.guild)
-    
-    if (settings == undefined) client.createGuild({
+
+    if (settings == undefined) settings = await client.createGuild({
         guildID: message.guild.id
     });
+    const language = settings.general ? settings.general.language : 'en';
     //const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
     const member = message.guild.members.resolve(user.id);
     const emoji = messageReaction.emoji.name;
 
+    const strings = language == 'en' ? client.en : (language == 'fr' ? client.fr : client.es);
     const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
     //emoji number
     const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
@@ -115,7 +117,381 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     }
                     return;
                 }
+            };
+            if (message.embeds[0].title.startsWith("Anti-") || message.embeds[0].title.startsWith("Auto-")) {
+                if (user.tag !== message.embeds[0].footer.text) return;
+                const system = message.embeds[0].title.toLowerCase().replace("-", "");
+                const embed = new MessageEmbed()
+                    .setTitle(message.embeds[0].title)
+                    .setFooter(message.embeds[0].footer.text);
+                embed.setDescription(strings.configuration.reset);
+                switch (system) {
+                    case 'automoderation': {
+                        async function func() {
+                            switch (emoji) {
+                                case '🔄': {
+                                    for (const field of message.embeds[0].fields) {
+                                        embed.addField(field.name, field.name.includes("3️⃣") || field.name.includes("2️⃣") ? `🟢` : '\u200b')
+                                    }
+                                    embed.setDescription(strings.configuration.afterReset);
+                                    await client.updateGuild(message.guild, {
+                                        "automod.enable": false,
+                                        "automod.whiteList.bots": true,
+                                        "automod.whiteList.admin": true,
+                                        "automod.warnAndDelete": false,
+                                        "automod.logsThis": false
+                                    })
+                                    break;
+                                }
+                                case '1️⃣': {
+                                    if (settings.automod.antiLink.enable) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.enable": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.enable": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '2️⃣': {
+                                    if (settings.automod.antiLink.logsThis) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.logsThis": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.logsThis": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '3️⃣': {
+                                    if (settings.automod.antiLink.onlyDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("4️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": true,
+                                            "automod.antiLink.onlyWarn": false,
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '4️⃣': {
+                                    if (settings.automod.antiLink.onlyWarn) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyWarn": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                            "automod.antiLink.onlyWarn": true,
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '5️⃣': {
+                                    if (settings.automod.antiLink.warnAndDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🟢` : (field.name.includes("4️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                            "automod.antiLink.onlyWarn": false,
+                                            "automod.antiLink.warnAndDelete": true
+                                        })
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        await func()
+                        messageReaction.users.remove(user)
+                        await message.edit(embed);
+                        break;
+                    }
+                    case 'antiinvite': {
+                        embed.setDescription(embed.description.replace("{type}", 'Anti-Invite'));
+                        async function func() {
+                            switch (emoji) {
+                                case '🔄': {
+                                    for (const field of message.embeds[0].fields) {
+                                        embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : `🔴`)
+                                    }
+                                    embed.setDescription(strings.configuration.afterReset);
+                                    await client.updateGuild(message.guild, {
+                                        "automod.antiInvite.enable": false,
+                                        "automod.antiInvite.onlyWarn": false,
+                                        "automod.antiInvite.onlyDelete": true,
+                                        "automod.antiInvite.warnAndDelete": false,
+                                        "automod.antiInvite.logsThis": false
+                                    })
+                                    break;
+                                }
+                                case '1️⃣': {
+                                    if (settings.automod.antiInvite.enable) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.enable": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.enable": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '2️⃣': {
+                                    if (settings.automod.antiInvite.logsThis) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.logsThis": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.logsThis": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '3️⃣': {
+                                    if (settings.automod.antiInvite.onlyDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.onlyDelete": false,
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("4️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.onlyDelete": true,
+                                            "automod.antiInvite.onlyWarn": false,
+                                            "automod.antiInvite.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '4️⃣': {
+                                    if (settings.automod.antiInvite.onlyWarn) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.onlyWarn": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.onlyDelete": false,
+                                            "automod.antiInvite.onlyWarn": true,
+                                            "automod.antiInvite.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '5️⃣': {
+                                    if (settings.automod.antiInvite.warnAndDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.warnAndDelete": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🟢` : (field.name.includes("4️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiInvite.onlyDelete": false,
+                                            "automod.antiInvite.onlyWarn": false,
+                                            "automod.antiInvite.warnAndDelete": true
+                                        })
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        await func()
+                        messageReaction.users.remove(user)
+                        await message.edit(embed);
+                        break;
+                    }
+                    case 'antilink': {
+                        embed.setDescription(embed.description.replace("{type}", 'Anti-Link'));
+                        async function func() {
+                            switch (emoji) {
+                                case '🔄': {
+                                    for (const field of message.embeds[0].fields) {
+                                        embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : `🔴`)
+                                    }
+                                    embed.setDescription(strings.configuration.afterReset);
+                                    await client.updateGuild(message.guild, {
+                                        "automod.antiLink.enable": false,
+                                        "automod.antiLink.onlyWarn": false,
+                                        "automod.antiLink.onlyDelete": true,
+                                        "automod.antiLink.warnAndDelete": false,
+                                        "automod.antiLink.logsThis": false
+                                    })
+                                    break;
+                                }
+                                case '1️⃣': {
+                                    if (settings.automod.antiLink.enable) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.enable": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("1️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.enable": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '2️⃣': {
+                                    if (settings.automod.antiLink.logsThis) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.logsThis": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("2️⃣") ? `🟢` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.logsThis": true
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '3️⃣': {
+                                    if (settings.automod.antiLink.onlyDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("4️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": true,
+                                            "automod.antiLink.onlyWarn": false,
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '4️⃣': {
+                                    if (settings.automod.antiLink.onlyWarn) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyWarn": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                            "automod.antiLink.onlyWarn": true,
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    }
+                                    break;
+                                }
+                                case '5️⃣': {
+                                    if (settings.automod.antiLink.warnAndDelete) {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🔴` : field.value)
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.warnAndDelete": false
+                                        })
+                                    } else {
+                                        for (const field of message.embeds[0].fields) {
+                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🟢` : (field.name.includes("4️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        }
+                                        await client.updateGuild(message.guild, {
+                                            "automod.antiLink.onlyDelete": false,
+                                            "automod.antiLink.onlyWarn": false,
+                                            "automod.antiLink.warnAndDelete": true
+                                        })
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        await func()
+                        messageReaction.users.remove(user)
+                        await message.edit(embed);
+                        break;
+                    }
+                };
             }
+
+
             if (messageReaction.emoji == tada) {
                 if (!message.embeds[0].author.name.startsWith('🎉🎉Givea')) return;
                 if (message.embeds[0].author.name.includes('🎉🎉Giveaway🎉🎉')) {

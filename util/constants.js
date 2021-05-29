@@ -1458,7 +1458,7 @@ const MESSAGES = {
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
-        usage: "<enable | disable>",
+        usage: "",
         example: "No example for this command.",
         botPerm: true,
         botPermName: 'ADMINISTRATOR',
@@ -1466,7 +1466,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
-        args: true
+        args: false
       },
       ANTIINVITE: {
         name: "antiinvite",
@@ -1476,7 +1476,7 @@ const MESSAGES = {
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
-        usage: "<enable | disable>",
+        usage: "",
         example: "No example for this command.",
         botPerm: true,
         botPermName: 'MANAGE_MESSAGES',
@@ -1484,7 +1484,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
-        args: true
+        args: false
       },
       ANTILINK: {
         name: "antilink",
@@ -1494,7 +1494,7 @@ const MESSAGES = {
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
-        usage: "<enable | disable>",
+        usage: "",
         example: "No example for this command.",
         botPerm: true,
         botPermName: 'MANAGE_MESSAGES',
@@ -1502,7 +1502,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
-        args: true
+        args: false
       },
       AUTOMOD: {
         name: "automod",
@@ -1512,7 +1512,7 @@ const MESSAGES = {
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
-        usage: "<enable | disable>",
+        usage: "",
         example: "No example for this command.",
         botPerm: true,
         botPermName: 'ADMINISTRATOR',
@@ -1520,7 +1520,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
-        args: true
+        args: false
       },
       BOTSETTINGS: {
         name: "botsettings",

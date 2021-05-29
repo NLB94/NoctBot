@@ -69,49 +69,49 @@ const guildSchema = mongoose.Schema({
             antiLink: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiInvite: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiUpperCase: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiEmojis: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiSpam: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiZalgo: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },
             antiMentions: {
                 enable: false,
                 onlyWarn: false,
-                onlyDelete: false,
+                onlyDelete: true,
                 warnAndDelete: false,
                 logsThis: false
             },

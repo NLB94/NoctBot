@@ -5,7 +5,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-    const action = args[0].toLowerCase();
+    const action = args[0] ? args[0].toLowerCase() : '1';
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const err = strings.configuration.err;
@@ -76,7 +76,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             await client.updateGuild(message.guild, {
                 "automod.antiInvite.enable": false,
                 "automod.antiInvite.onlyWarn": false,
-                "automod.antiInvite.onlyDelete": false,
+                "automod.antiInvite.onlyDelete": true,
                 "automod.antiInvite.warnAndDelete": false,
                 "automod.antiInvite.logsThis": false
             })
