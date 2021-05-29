@@ -1,3 +1,4 @@
+const { Message } = require('discord.js')
 const {
     MESSAGES
 } = require('../../../util/constants');
@@ -7,6 +8,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const action = args[0].toLowerCase();
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    const err = strings.configuration.err;
 
     if (action == 'on') action.replace('on', 'enable');
     if (action == 'off') action.replace('off', 'disable');
@@ -15,22 +17,22 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case 'enable': {
             if (!settings.automod.enable) return message.channel.send({
                 embed: {
-                    description: `${x_mark} Auto-Moderation **is not enable** ! Type \`${settings.general.prefix}automod enable\` and **retry !**`,
-                    title: 'Error !'
+                    description: `${x_mark} ${await strings.configuration.notEnable.replace("{type}", 'Auto-Moderation').replace("{prefix}", settings.general.prefix).replace("{cmdName}", 'automod')}`,
+                    title: err
                 }
             })
             else {
                 if (settings.automod.antiLink.enable) return message.channel.send({
                     embed: {
-                        description: `${x_mark} Anti-Link **is already enable** !`,
-                        title: 'Error !'
+                        description: `${x_mark} ${await strings.configuration.alrEnable.replace("{type}", 'Anti-Link')}`,
+                        title: err
                     }
                 });
                 /**
                  * @param {Message} m 
                  */
                 const filter = m => m.author.id == message.author.id;
-                message.channel.send(`${message.author} What type of system you want with **anti-link** ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**CHOOSE A NUMBER**`)
+                message.channel.send(`${message.author} ${await strings.configuration.firstQ.replace("{type}", 'Anti-Link')}`)
                 const userE = await message.channel.awaitMessages(filter, {
                     max: 1, time: 15000, errors: ['time']
                 })
@@ -39,7 +41,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 else if (userE.first().toString() == '2') type = 2
                 else if (userE.first().toString() == '3') type = 3
 
-                await message.channel.send('Done ! Do you want to log this ? (yes or no)')
+                await message.channel.send(await strings.configuration.secondQ)
 
                 const userE2 = await message.channel.awaitMessages(filter, {
                     max: 1, time: 15000, errors: ['time']
@@ -50,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 else if (userE2.first().toString().toLowerCase().startsWith('n')) logs = false
                 message.channel.send({
                     embed: {
-                        description: `${check_mark}Successfully **enabled anti-link system** !`,
+                        description: `${check_mark}${await strings.configuration.successEnable.replace("{type}", 'Anti-Link')}`,
                         title: 'Auto-Moderation'
                     }
                 })
@@ -67,8 +69,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case 'disable': {
             if (!settings.automod.antiLink.enable) return message.channel.send({
                 embed: {
-                    description: `${x_mark} Anti-Link **is already disable** !`,
-                    title: 'Error !'
+                    description: `${x_mark} ${await strings.configuration.alrDisable.replace("{type}", 'Anti-Link')}`,
+                    title: err
                 }
             });
             await client.updateGuild(message.guild, {
@@ -80,7 +82,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
             message.channel.send({
                 embed: {
-                    description: `${check_mark}Successfully **disabled anti-link system** !`,
+                    description: `${check_mark}${await strings.configuration.successDisable.replace("{type}", 'Anti-Link')}`,
                     title: 'Auto-Moderation'
                 }
             })

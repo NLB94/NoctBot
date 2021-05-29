@@ -52,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 else if (userE2.first().toString().toLowerCase().startsWith('n')) logs = false
                 message.channel.send({
                     embed: {
-                        description: `${check_mark}Successfully **enabled anti-invite system** !`,
+                        description: `${check_mark}${await strings.configuration.successEnable.replace("{type}", 'Anti-Invite')}`,
                         title: 'Auto-Moderation'
                     }
                 })
@@ -69,7 +69,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case 'disable': {
             if (!settings.automod.antiInvite.enable) return message.channel.send({
                 embed: {
-                    description: `${x_mark} Anti-Invite **is already disable** !`,
+                    description: `${x_mark} ${await strings.configuration.alrDisable.replace("{type}", 'Anti-Invite')}`,
                     title: err
                 }
             });
@@ -82,7 +82,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             })
             message.channel.send({
                 embed: {
-                    description: `${check_mark}Successfully **disabled anti-invite system** !`,
+                    description: `${check_mark}${await strings.configuration.successDisable.replace("{type}", 'Anti-Invite')}`,
                     title: 'Auto-Moderation'
                 }
             })
