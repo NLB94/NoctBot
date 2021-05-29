@@ -11,6 +11,7 @@ const DBLApi = require('@top-gg/sdk');
 
 const botGuild = require('./.bot.json');
 const emojis = require('./emojis.json');
+const string = require('./string.json');
 
 const express = require('express');
 const app = express();
@@ -32,6 +33,8 @@ client.botGuild = botGuild;
 client.localEmojis = emojis;
 client.brawlManager = brawlManager;
 client.topAPI = topAPI;
+client.fr = string.fr;
+client.en = string.en;
 
 setInterval(() => {
     if (client.user.id !== client.botGuild.clientID) topAPI.postStats({

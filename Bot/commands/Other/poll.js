@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
 
     message.delete().catch(err => {})
     const query = args.join(" ").split("\"")

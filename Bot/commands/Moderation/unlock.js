@@ -3,7 +3,7 @@ const { Guild } = require('../../../models');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
 
     
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);

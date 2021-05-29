@@ -3,7 +3,7 @@ const { MESSAGES } = require("../../../util/constants");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
 
     
     const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);

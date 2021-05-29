@@ -64,7 +64,8 @@ export declare function run(
   message: Message,
   args: String[],
   settings: GuildData,
-  userInfo: GuildUserData
+  userInfo: GuildUserData,
+  strings: typeof import('../string.json').en
 );
 
 export declare function client(client: Client);

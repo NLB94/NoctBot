@@ -42,7 +42,8 @@ module.exports = async (client, options) => {
 
                     if (antiinvite.logsThis && logs !== undefined) logs.send(embed);
                 } else if (antiinvite.warnAndDelete) {
-                    message.delete().catch(err => {})
+                    console.log(4);
+                    message.delete().catch(err => {console.log(err)})
                     const newWarns = Math.floor(userInfo.warns + 1);
                     await options.client.updateGuildUI(options.message.guild, options.message.member, {
                         "users.$.warns": newWarns

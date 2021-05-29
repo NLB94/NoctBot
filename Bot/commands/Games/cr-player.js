@@ -19,7 +19,7 @@ const brawlClient = require('@statscell/brawl').Client;
  * @param {GuildData} settings 
  * @param {GuildUserData} userInfo 
  */
-module.exports.run = async (client, message, args, settings, userInfo) => {
+module.exports.run = async (client, message, args, settings, userInfo, strings) => {
     const tag = args[0];
     message.delete();
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);

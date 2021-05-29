@@ -3,7 +3,7 @@ const {
 } = require('../../../util/constants');
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
     const action = args[0].toLowerCase();
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
@@ -57,8 +57,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 await client.updateGuild(message.guild, {
                     "automod.antiLink.enable": true,
                     "automod.antiLink.logsThis": logs,
-                    "automod.antiLink.justWarn": type == 2 ? true : false,
-                    "automod.antiLink.justDelete": type == 1 ? true : false,
+                    "automod.antiLink.onlyWarn": type == 2 ? true : false,
+                    "automod.antiLink.onlyDelete": type == 1 ? true : false,
                     "automod.antiLink.warnAndDelete": type == 3 ? true : false
                 })
             }
@@ -73,8 +73,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             });
             await client.updateGuild(message.guild, {
                 "automod.antiLink.enable": false,
-                "automod.antiLink.justWarn": false,
-                "automod.antiLink.justDelete": false,
+                "automod.antiLink.onlyWarn": false,
+                "automod.antiLink.onlyDelete": false,
                 "automod.antiLink.warnAndDelete": false,
                 "automod.antiLink.logsThis": false
             })

@@ -3,7 +3,7 @@ const {
 } = require('../../../util/constants');
 const fnc = require('../../../util/functions');
 
-module.exports.run = fnc.run = async (client, message, args, settings, userInfo) => {
+module.exports.run = fnc.run = async (client, message, args, settings, userInfo, strings) => {
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
 

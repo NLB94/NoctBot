@@ -42,6 +42,7 @@ module.exports = async (client, message) => {
   const userInfo = await settings.users[position];
 
   if (message.guild && position === -1) await client.createGuildUser(message.guild, message.member);
+  const strings = (settings.general.language == 'en' ? client.en : (settings.general.language == 'fr' ? client.fr : client.en));
 
   if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({
     client,
@@ -160,6 +161,6 @@ module.exports = async (client, message) => {
         tStamps.delete(`${message.author.id} ${message.guild.id}`)
       }, cdAmount);
     }
-    command.run(client, message, args, settings, userInfo);
+    command.run(client, message, args, settings, userInfo, strings);
   };
 };

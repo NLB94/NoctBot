@@ -4,8 +4,11 @@
     "configuration": {
       "notEnable": "Le système `{type}` **n'est pas activé !** Tapez `{prefix}{cmdName} enable` et **réessayez !**",
       "alrEnable": "Le système `{type}` **est déjà activé !**",
+      "alrDisable": "Le système `{type}` **est déja désactivé !**",
+      "successEnable": "",
+      "successDisable": "",
       "err": "Erreur !",
-      "firstQ": "Quelle est le niveau de sécurité exigé pour le système `{type}` ? \n1 - **Seulement supprimer le message** \n2 - **Seulement avertir l'utilisateur** \n3 - **Supprimer le message & avertir l'utilisateur** \n**CHOISISSEZ UN NOMBRE SVP**",
+      "firstQ": "Quelle est le niveau de sécurité exigé pour le système `{type}` ? \n1 - **Seulement supprimer le message** \n2 - **Seulement avertir l'utilisateur** \n3 - **Supprimer le message & avertir l'utilisateur** \n**CHOISISSEZ UN NOMBRE**",
       "secondQ": "OK ! Voulez-vous ajouter les logs à ce système ?"
     }
   },
@@ -14,8 +17,11 @@
     "configuration": {
       "notEnable": "The `{type}` system **is not enable !** Type `{prefix}{cmdName} enable` and **retry !**",
       "alrEnable": "The `{type}` system **is already enable !**",
+      "alrDisable": "The `{type}` system **is already disable !**",
+      "successEnable": "",
+      "successDisable": "",
       "err": "Error !",
-      "firstQ": "How secure you want for the `{type}` system ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**PLEASE CHOOSE A NUMBER**",
+      "firstQ": "How secure you want for the `{type}` system ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**CHOOSE A NUMBER**",
       "secondQ": "OK ! Do you want to add logs to this system ?"
     }
   }

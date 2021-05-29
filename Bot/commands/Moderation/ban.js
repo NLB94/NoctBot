@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
 
   //RAJOUTER L'EMOJI BANNNNNNNNNNNNNNN
   let reason = args.splice(1).join(' ') || 'Unspecified';

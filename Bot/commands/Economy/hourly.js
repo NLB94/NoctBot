@@ -3,7 +3,7 @@ const { MESSAGES } = require('../../../util/constants');
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
   const hourlyCd = 4.32e+7;
 
   if (userInfo == undefined) await client.createGuildUser(message.guild, message.member);

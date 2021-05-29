@@ -6,7 +6,7 @@ const {
 } = require("../../../util/constants");
 const functions = require("../../../util/functions");
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo) => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
     const language = settings.general.language;
     try {
         const loading = client.emojis.resolve(client.localEmojis.loadingEmoji);

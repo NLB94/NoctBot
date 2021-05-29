@@ -7,7 +7,7 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
 
     const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
     const embed = new MessageEmbed()
