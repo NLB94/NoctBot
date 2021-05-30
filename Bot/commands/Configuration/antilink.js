@@ -29,6 +29,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             name: `2️⃣ \`\`\`${strings.configuration.logsThis}\`\`\``,
             value: `${settings.automod.antiLink.logsThis ? '🟢' : '🔴'}`
         }, {
+            name: strings.configuration.secuLvl,
+            value: '\u200b'
+        }, {
             name: `3️⃣ \`\`\`${strings.configuration.onlyDelete}\`\`\``,
             value: `${settings.automod.antiLink.onlyDelete ? '🟢' : '🔴'}`
         }, {
@@ -38,7 +41,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             name: `5️⃣ \`\`\`${strings.configuration.warnAndDelete}\`\`\``,
             value: `${settings.automod.antiLink.warnAndDelete ? '🟢' : '🔴'}`
         }, )
-        .setFooter(message.author.tag);
+        .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }));
     message.channel.send(embed).then(async msg => {
         msg.react('🔄');
         msg.react('1️⃣');

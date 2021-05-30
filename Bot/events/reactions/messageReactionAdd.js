@@ -118,124 +118,379 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     return;
                 }
             };
+            if (message.embeds[0].description.startsWith("```What do you want")) {
+                if (user.tag !== message.embeds[0].footer.text) return messageReaction.users.remove(user.id);
+                const msg = message.channel.messages.resolve(message.embeds[0].description.slice(message.embeds[0].description.length - 18));
+                if (message.embeds[0].description.toLowerCase().includes("role") || message.embeds[0].description.toLowerCase().includes("rôle")) {
+                    if (emoji == '🇦') {
+                        try {
+                            message.edit(strings.configuration.chooseRoleAdd);
+                            message.reactions.removeAll();
+                            const filter = m => m.author.id == user.id;
+                            const userE = await message.channel.awaitMessages(filter, {
+                                max: 1,
+                                errors: ['time'],
+                                time: 20000
+                            });
+                            let roles = userE.first().mentions.roles;
+                            if (!roles.size) throw new Error('test');
+                            else {
+                                roles.forEach(async r => {
+                                    if (settings.automod.whiteList.whiteRoles.map(ro => ro.id).includes(r.id)) roles = roles.filter(ro => ro.id !== r.id);
+                                    await client.updateGuild(message.guild, {
+                                        $push: {
+                                            "automod.whiteList.whiteRoles": {
+                                                id: r.id
+                                            }
+                                        }
+                                    })
+                                })
+                                userE.first().delete().catch((err) => {});
+                                message.delete();
+                                const embed = new MessageEmbed()
+                                    .setTitle(msg.embeds[0].title)
+                                    .setDescription(msg.embeds[0].description)
+                                    .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
+    
+                                for (const field of msg.embeds[0].fields) {
+                                    embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + roles.map(r => `<@&${r.id}>`).join(", ") : field.value)
+                                }
+                                msg.edit(embed)
+                            }
+                        } catch (e) {
+                            message.channel.send({
+                                embed: {
+                                    description: `${strings.cmdCancel}`,
+                                    title: strings.configuration.err
+                                }
+                            })
+                        }
+                    } else if (emoji == "🇧") {
+                        try {
+                            message.edit(strings.configuration.chooseRoleRem);
+                            message.reactions.removeAll();
+                            const filter = m => m.author.id == user.id;
+                            const userE = await message.channel.awaitMessages(filter, {
+                                max: 1,
+                                errors: ['time'],
+                                time: 20000
+                            });
+                            let roles = userE.first().mentions.roles;
+                            if (!roles.size) throw new Error('test');
+                            else {
+                                roles.forEach(async r => {
+                                    if (!settings.automod.whiteList.whiteRoles.map(ro => ro.id).includes(r.id)) roles = roles.filter(ro => ro.id !== r.id);
+                                    await client.updateGuild(message.guild, {
+                                        $pull: {
+                                            "automod.whiteList.whiteRoles": {
+                                                id: r.id
+                                            }
+                                        }
+                                    })
+                                })
+                                userE.first().delete().catch((err) => {});
+                                message.delete();
+                                const embed = new MessageEmbed()
+                                    .setTitle(msg.embeds[0].title)
+                                    .setDescription(msg.embeds[0].description)
+                                    .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
+    
+                                for (const field of msg.embeds[0].fields) {
+                                    embed.addField(field.name, field.name.includes("4️⃣") ? settings.automod.whiteList.whiteRoles.filter(r => !(roles.map(ro => ro.id).includes(r.id))).map(r => `<@&${r.id}>`).join(", ") : field.value)
+                                }
+                                msg.edit(embed)
+                            }
+                        } catch (e) {
+                            message.channel.send({
+                                embed: {
+                                    description: `${strings.cmdCancel}`,
+                                    title: strings.configuration.err
+                                }
+                            })
+                        }
+                    }
+                } else if (message.embeds[0].description.toLowerCase().includes("channel") || message.embeds[0].description.toLowerCase().includes("salon")) {
+                    if (emoji == '🇦') {
+                        try {
+                            message.edit(strings.configuration.chooseChannelAdd);
+                            message.reactions.removeAll();
+                            const filter = m => m.author.id == user.id;
+                            const userE = await message.channel.awaitMessages(filter, {
+                                max: 1,
+                                errors: ['time'],
+                                time: 20000
+                            });
+                            let channels = userE.first().mentions.channels;
+                            if (!channels.size) throw new Error('test');
+                            else {
+                                channels.forEach(async c => {
+                                    if (settings.automod.whiteList.channels.map(ch => ch.id).includes(c.id)) channels = channels.filter(ch => ch.id !== c.id);
+                                    await client.updateGuild(message.guild, {
+                                        $push: {
+                                            "automod.whiteList.channels": {
+                                                id: c.id
+                                            }
+                                        }
+                                    })
+                                })
+                                userE.first().delete().catch((err) => {});
+                                message.delete();
+                                const embed = new MessageEmbed()
+                                    .setTitle(msg.embeds[0].title)
+                                    .setDescription(msg.embeds[0].description)
+                                    .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
+    
+                                for (const field of msg.embeds[0].fields) {
+                                    embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + channels.map(c => `<@#${c.id}>`).join(", ") : field.value)
+                                }
+                                msg.edit(embed)
+                            }
+                        } catch (e) {
+                            message.channel.send({
+                                embed: {
+                                    description: `${strings.cmdCancel}`,
+                                    title: strings.configuration.err
+                                }
+                            })
+                        }
+                    } else if (emoji == "🇧") {
+                        try {
+                            message.edit(strings.configuration.chooseChannelRem);
+                            message.reactions.removeAll();
+                            const filter = m => m.author.id == user.id;
+                            const userE = await message.channel.awaitMessages(filter, {
+                                max: 1,
+                                errors: ['time'],
+                                time: 20000
+                            });
+                            let channels = userE.first().mentions.channels;
+                            if (!channels.size) throw new Error('test');
+                            else {
+                                channels.forEach(async c => {
+                                    if (!settings.automod.whiteList.channels.map(ch => ch.id).includes(c.id)) channels = channels.filter(ch => ch.id !== c.id);
+                                    await client.updateGuild(message.guild, {
+                                        $pull: {
+                                            "automod.whiteList.channels": {
+                                                id: c.id
+                                            }
+                                        }
+                                    })
+                                })
+                                userE.first().delete().catch((err) => {});
+                                message.delete();
+                                const embed = new MessageEmbed()
+                                    .setTitle(msg.embeds[0].title)
+                                    .setDescription(msg.embeds[0].description)
+                                    .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
+    
+                                for (const field of msg.embeds[0].fields) {
+                                    embed.addField(field.name, field.name.includes("4️⃣") ? settings.automod.whiteList.channels.filter(c => !(channels.map(ch => ch.id).includes(c.id))).map(c => `<@#${c.id}>`).join(", ") : field.value)
+                                }
+                                msg.edit(embed)
+                            }
+                        } catch (e) {
+                            message.channel.send({
+                                embed: {
+                                    description: `${strings.cmdCancel}`,
+                                    title: strings.configuration.err
+                                }
+                            })
+                        }
+                    }
+                }
+                return;
+            }
             if (message.embeds[0].title.startsWith("Anti-") || message.embeds[0].title.startsWith("Auto-")) {
                 if (user.tag !== message.embeds[0].footer.text) return;
                 const system = message.embeds[0].title.toLowerCase().replace("-", "");
                 const embed = new MessageEmbed()
                     .setTitle(message.embeds[0].title)
-                    .setFooter(message.embeds[0].footer.text);
+                    .setFooter(message.embeds[0].footer.text, message.embeds[0].footer.icon);
                 embed.setDescription(strings.configuration.reset);
                 switch (system) {
                     case 'automoderation': {
+                        embed.setDescription(embed.description.replace("{type}", 'Auto-Moderation'))
                         async function func() {
                             switch (emoji) {
                                 case '🔄': {
                                     for (const field of message.embeds[0].fields) {
-                                        embed.addField(field.name, field.name.includes("3️⃣") || field.name.includes("2️⃣") ? `🟢` : '\u200b')
+                                        embed.addField(field.name, field.name.includes("3️⃣") || field.name.includes("2️⃣") ? `🟢` : (field.name.includes("1️⃣") ? '🔴' : '\u200b'))
                                     }
                                     embed.setDescription(strings.configuration.afterReset);
                                     await client.updateGuild(message.guild, {
                                         "automod.enable": false,
                                         "automod.whiteList.bots": true,
                                         "automod.whiteList.admin": true,
-                                        "automod.warnAndDelete": false,
-                                        "automod.logsThis": false
+                                        "automod.whiteList.whiteRoles": [],
+                                        "automod.whiteList.channels": []
                                     })
                                     break;
                                 }
                                 case '1️⃣': {
-                                    if (settings.automod.antiLink.enable) {
+                                    if (settings.automod.enable) {
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.name.includes("1️⃣") ? `🔴` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.enable": false
+                                            "automod.enable": false
                                         })
                                     } else {
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.name.includes("1️⃣") ? `🟢` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.enable": true
+                                            "automod.enable": true
                                         })
                                     }
                                     break;
                                 }
                                 case '2️⃣': {
-                                    if (settings.automod.antiLink.logsThis) {
+                                    if (settings.automod.whiteList.admin) {
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.name.includes("2️⃣") ? `🔴` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.logsThis": false
+                                            "automod.whiteList.admin": false
                                         })
                                     } else {
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.name.includes("2️⃣") ? `🟢` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.logsThis": true
+                                            "automod.whiteList.admin": true
                                         })
                                     }
                                     break;
                                 }
                                 case '3️⃣': {
-                                    if (settings.automod.antiLink.onlyDelete) {
+                                    if (settings.automod.whiteList.bots) {
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.name.includes("3️⃣") ? `🔴` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.onlyDelete": false,
+                                            "automod.whiteList.bots": false,
                                         })
                                     } else {
                                         for (const field of message.embeds[0].fields) {
-                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("4️⃣") ? '🔴' : field.value))
+                                            embed.addField(field.name, field.name.includes("3️⃣") ? `🟢` : field.value)
                                         }
                                         await client.updateGuild(message.guild, {
-                                            "automod.antiLink.onlyDelete": true,
-                                            "automod.antiLink.onlyWarn": false,
-                                            "automod.antiLink.warnAndDelete": false
+                                            "automod.whiteList.bots": true
                                         })
                                     }
                                     break;
                                 }
                                 case '4️⃣': {
-                                    if (settings.automod.antiLink.onlyWarn) {
+                                    if (settings.automod.whiteList.whiteRoles.length > 0) {
                                         for (const field of message.embeds[0].fields) {
-                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🔴` : field.value)
-                                        }
-                                        await client.updateGuild(message.guild, {
-                                            "automod.antiLink.onlyWarn": false
+                                            embed.addField(field.name, field.value)
+                                        };
+                                        message.channel.send({embed: {
+                                            description: `${strings.configuration.remOrAddRole}\n\nMessage ID : ${message.id}`,
+                                            footer: {text: user.tag, icon: user.displayAvatarURL({ dynamic: true })}
+                                        }}).then(msg => {
+                                            msg.react("🇦");
+                                            msg.react("🇧")
                                         })
                                     } else {
-                                        for (const field of message.embeds[0].fields) {
-                                            embed.addField(field.name, field.name.includes("4️⃣") ? `🟢` : (field.name.includes("5️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        try {
+                                            const msg = message.channel.send(strings.configuration.chooseRoleAdd);
+                                            const filter = m => m.author.id == user.id;
+                                            const userE = await message.channel.awaitMessages(filter, {
+                                                max: 1,
+                                                errors: ['time'],
+                                                time: 20000
+                                            });
+                                            let roles = userE.first().mentions.roles;
+                                            if (!roles.size) throw new Error('test');
+                                            else {
+                                                roles.forEach(async r => {
+                                                    if (settings.automod.whiteList.whiteRoles.map(ro => ro.id).includes(r.id)) roles = roles.filter(ro => ro.id !== r.id);
+                                                    await client.updateGuild(message.guild, {
+                                                        $push: {
+                                                            "automod.whiteList.whiteRoles": {
+                                                                id: r.id
+                                                            }
+                                                        }
+                                                    })
+                                                })
+                                                userE.first().delete().catch((err) => {});
+                                                msg.delete();
+                                                const embed = new MessageEmbed()
+                                                    .setTitle(message.embeds[0].title)
+                                                    .setDescription(message.embeds[0].description)
+                                                    .setFooter(message.embeds[0].footer.text, message.embeds[0].footer.iconURL)
+                    
+                                                for (const field of message.embeds[0].fields) {
+                                                    embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + roles.map(r => `<@&${r.id}>`).join(", ") : field.value)
+                                                }
+                                                message.edit(embed)
+                                            }
+                                        } catch (e) {
+                                            message.channel.send({
+                                                embed: {
+                                                    description: `${strings.cmdCancel}`,
+                                                    title: strings.configuration.err
+                                                }
+                                            })
                                         }
-                                        await client.updateGuild(message.guild, {
-                                            "automod.antiLink.onlyDelete": false,
-                                            "automod.antiLink.onlyWarn": true,
-                                            "automod.antiLink.warnAndDelete": false
-                                        })
                                     }
                                     break;
                                 }
                                 case '5️⃣': {
-                                    if (settings.automod.antiLink.warnAndDelete) {
+                                    if (settings.automod.whiteList.channels.length > 0) {
                                         for (const field of message.embeds[0].fields) {
-                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🔴` : field.value)
-                                        }
-                                        await client.updateGuild(message.guild, {
-                                            "automod.antiLink.warnAndDelete": false
+                                            embed.addField(field.name, field.value)
+                                        };
+                                        message.channel.send({embed: {
+                                            description: `${strings.configuration.remOrAddChannel}\n\nMessage ID : ${message.id}`,
+                                            footer: {text: user.tag, icon: user.displayAvatarURL({ dynamic: true })}
+                                        }}).then(msg => {
+                                            msg.react("🇦");
+                                            msg.react("🇧")
                                         })
                                     } else {
-                                        for (const field of message.embeds[0].fields) {
-                                            embed.addField(field.name, field.name.includes("5️⃣") ? `🟢` : (field.name.includes("4️⃣") || field.name.includes("3️⃣") ? '🔴' : field.value))
+                                        try {
+                                            const msg = message.channel.send(strings.configuration.chooseChannelAdd);
+                                            const filter = m => m.author.id == user.id;
+                                            const userE = await message.channel.awaitMessages(filter, {
+                                                max: 1,
+                                                errors: ['time'],
+                                                time: 20000
+                                            });
+                                            let channels = userE.first().mentions.channels;
+                                            if (!channels.size) throw new Error('test');
+                                            else {
+                                                channels.forEach(async c => {
+                                                    if (settings.automod.whiteList.channels.map(ch => ch.id).includes(c.id)) channels = channels.filter(ch => ch.id !== c.id);
+                                                    await client.updateGuild(message.guild, {
+                                                        $push: {
+                                                            "automod.whiteList.channels": {
+                                                                id: c.id
+                                                            }
+                                                        }
+                                                    })
+                                                })
+                                                userE.first().delete().catch((err) => {});
+                                                msg.delete();
+                                                const embed = new MessageEmbed()
+                                                    .setTitle(message.embeds[0].title)
+                                                    .setDescription(message.embeds[0].description)
+                                                    .setFooter(message.embeds[0].footer.text, message.embeds[0].footer.iconURL)
+                    
+                                                for (const field of message.embeds[0].fields) {
+                                                    embed.addField(field.name, field.name.includes("5️⃣") ? field.value + ", " + channels.map(c => `<@#${c.id}>`).join(", ") : field.value)
+                                                }
+                                                message.edit(embed)
+                                            }
+                                        } catch (e) {
+                                            message.channel.send({
+                                                embed: {
+                                                    description: `${strings.cmdCancel}`,
+                                                    title: strings.configuration.err
+                                                }
+                                            })
                                         }
-                                        await client.updateGuild(message.guild, {
-                                            "automod.antiLink.onlyDelete": false,
-                                            "automod.antiLink.onlyWarn": false,
-                                            "automod.antiLink.warnAndDelete": true
-                                        })
                                     }
                                     break;
                                 }
