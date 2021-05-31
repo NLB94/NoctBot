@@ -18,7 +18,16 @@ module.exports = async (client, options) => {
     const message = options.message;
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const userInfo = options.userInfo;
-    if ((settings.automod.whiteList.admin && message.member.permissions.has('ADMINISTRATOR')) || (settings.automod.whiteList.bots && message.author.bot)) return;
+    if ((settings.automod.whiteList.admin && message.member.permissions.has('ADMINISTRATOR')) || (settings.automod.whiteList.bots && message.author.bot)) return
+    const checkRoles = false;
+
+    for (const role of settings.automod.whiteList.whiteRoles) {
+        if (message.member.roles.cache.has(role.id)) checkRoles = true;
+        else checkRoles = checkRoles;
+    }
+    if (checkRoles) return;
+
+    if(settings.automod.whiteList.channels.map(c => c.id).includes(message.channel.id)) return;
 
     switch (options.type) {
         case 'invite': {

@@ -49,9 +49,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             if (channel.type == 'text') {
                 const position = channel.position;
                 const name = channel.name;
-                channel.send('Nuking...');
+                await channel.send('Nuking...');
 
-                channel.clone({
+                await channel.clone({
                     name: 'Nuking...'
                 }).then(async (c) => {
                     await channel.delete('Nuked this channel');

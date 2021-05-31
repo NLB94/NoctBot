@@ -5,6 +5,7 @@ const functions = require('./messageReactionAdd');
 
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {
     const message = messageReaction.message;
+
     const settings = await client.getGuild(message.guild)
 
     if (settings == undefined) settings = await client.createGuild({
@@ -37,7 +38,47 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const eyesEmoji = client.emojis.resolve(client.localEmojis.alert);
     const alertEmoji = client.emojis.resolve(client.localEmojis.alert);
 
-
+    const categorys = [{
+        name: 'Configuration',
+        emoji: emoji1,
+        commandsCat: 'configuration',
+        position: 0
+    }, {
+        name: 'Moderation',
+        emoji: emoji2,
+        commandsCat: 'moderation',
+        position: 1
+    }, {
+        name: 'Level',
+        emoji: emoji3,
+        commandsCat: 'level',
+        position: 2
+    }, {
+        name: 'Info',
+        emoji: emoji4,
+        commandsCat: 'info',
+        position: 3
+    }, {
+        name: 'Economy',
+        emoji: emoji5,
+        commandsCat: 'economy',
+        position: 4
+    }, {
+        name: 'Giveaway',
+        emoji: emoji6,
+        commandsCat: 'giveaway',
+        position: 5
+    }, {
+        name: 'Other',
+        emoji: emoji7,
+        commandsCat: 'other',
+        position: 6
+    }, {
+        name: 'Counts',
+        emoji: emoji8,
+        commandsCat: 'counts',
+        position: 7
+    }, ]
     if (member.user.bot) return;
     if (messageReaction.partial) {
         await messageReaction.fetch();
@@ -57,7 +98,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         member.send({
                             embed: {
                                 title: 'Verification',
-                                description: `${check_mark}You have been verified by accepting the rules in **_${message.guild.name}_**`
+                                description: `${check_mark}${await (strings.reactAdd.supportS.verif.replace("{guild}", message.guild.name))}`
                             }
                         })
                     }).catch(err => console.log(err))
@@ -74,8 +115,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             member.roles.add(givRole.id).then(() => {
                                 member.send({
                                     embed: {
-                                        title: 'Role Added',
-                                        description: `${check_mark}You have successfully got **${givRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                        title: strings.reactAdd.supportS.roles.title,
+                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", givRole.name))}`
                                     }
                                 })
                             }).catch(() => {})
@@ -85,8 +126,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             member.roles.add(announRole.id).then(() => {
                                 member.send({
                                     embed: {
-                                        title: 'Role Added',
-                                        description: `${check_mark}You have successfully got **${announRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                        title: strings.reactAdd.supportS.roles.title,
+                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", announRole.name))}`
                                     }
                                 })
                             }).catch(() => {})
@@ -96,8 +137,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             member.roles.add(updateRole.id).then(() => {
                                 member.send({
                                     embed: {
-                                        title: 'Role Added',
-                                        description: `${check_mark}You have successfully got **${updateRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                        title: strings.reactAdd.supportS.roles.title,
+                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", updateRole.name))}`
                                     }
                                 })
                             }).catch(() => {})
@@ -107,8 +148,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             member.roles.add(spoilRole.id).then(() => {
                                 member.send({
                                     embed: {
-                                        title: 'Role Added',
-                                        description: `${check_mark}You have successfully got **${spoilRole.name}** role by reacting in **_${message.guild.name}_** !`
+                                        title: strings.reactAdd.supportS.roles.title,
+                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", spoilRole.name))}`
                                     }
                                 })
                             }).catch(() => {})
@@ -118,7 +159,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     return;
                 }
             };
-            if (message.embeds[0].description.startsWith("```What do you want")) {
+            if (message.embeds[0].description.startsWith("```What do you want") || message.embeds[0].description.startsWith("```Que voulez-vous")) {
                 if (user.tag !== message.embeds[0].footer.text) return messageReaction.users.remove(user.id);
                 const msg = message.channel.messages.resolve(message.embeds[0].description.slice(message.embeds[0].description.length - 18));
                 if (message.embeds[0].description.toLowerCase().includes("role") || message.embeds[0].description.toLowerCase().includes("rôle")) {
@@ -151,7 +192,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                     .setTitle(msg.embeds[0].title)
                                     .setDescription(msg.embeds[0].description)
                                     .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
-    
+
                                 for (const field of msg.embeds[0].fields) {
                                     embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + roles.map(r => `<@&${r.id}>`).join(", ") : field.value)
                                 }
@@ -194,7 +235,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                     .setTitle(msg.embeds[0].title)
                                     .setDescription(msg.embeds[0].description)
                                     .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
-    
+
                                 for (const field of msg.embeds[0].fields) {
                                     embed.addField(field.name, field.name.includes("4️⃣") ? settings.automod.whiteList.whiteRoles.filter(r => !(roles.map(ro => ro.id).includes(r.id))).map(r => `<@&${r.id}>`).join(", ") : field.value)
                                 }
@@ -239,7 +280,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                     .setTitle(msg.embeds[0].title)
                                     .setDescription(msg.embeds[0].description)
                                     .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
-    
+
                                 for (const field of msg.embeds[0].fields) {
                                     embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + channels.map(c => `<@#${c.id}>`).join(", ") : field.value)
                                 }
@@ -282,7 +323,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                     .setTitle(msg.embeds[0].title)
                                     .setDescription(msg.embeds[0].description)
                                     .setFooter(msg.embeds[0].footer.text, msg.embeds[0].footer.iconURL)
-    
+
                                 for (const field of msg.embeds[0].fields) {
                                     embed.addField(field.name, field.name.includes("4️⃣") ? settings.automod.whiteList.channels.filter(c => !(channels.map(ch => ch.id).includes(c.id))).map(c => `<@#${c.id}>`).join(", ") : field.value)
                                 }
@@ -385,10 +426,17 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.value)
                                         };
-                                        message.channel.send({embed: {
-                                            description: `${strings.configuration.remOrAddRole}\n\nMessage ID : ${message.id}`,
-                                            footer: {text: user.tag, icon: user.displayAvatarURL({ dynamic: true })}
-                                        }}).then(msg => {
+                                        message.channel.send({
+                                            embed: {
+                                                description: `${strings.configuration.remOrAddRole}\n\nMessage ID : ${message.id}`,
+                                                footer: {
+                                                    text: user.tag,
+                                                    icon: user.displayAvatarURL({
+                                                        dynamic: true
+                                                    })
+                                                }
+                                            }
+                                        }).then(msg => {
                                             msg.react("🇦");
                                             msg.react("🇧")
                                         })
@@ -420,7 +468,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                                     .setTitle(message.embeds[0].title)
                                                     .setDescription(message.embeds[0].description)
                                                     .setFooter(message.embeds[0].footer.text, message.embeds[0].footer.iconURL)
-                    
+
                                                 for (const field of message.embeds[0].fields) {
                                                     embed.addField(field.name, field.name.includes("4️⃣") ? field.value + ", " + roles.map(r => `<@&${r.id}>`).join(", ") : field.value)
                                                 }
@@ -442,10 +490,17 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                         for (const field of message.embeds[0].fields) {
                                             embed.addField(field.name, field.value)
                                         };
-                                        message.channel.send({embed: {
-                                            description: `${strings.configuration.remOrAddChannel}\n\nMessage ID : ${message.id}`,
-                                            footer: {text: user.tag, icon: user.displayAvatarURL({ dynamic: true })}
-                                        }}).then(msg => {
+                                        message.channel.send({
+                                            embed: {
+                                                description: `${strings.configuration.remOrAddChannel}\n\nMessage ID : ${message.id}`,
+                                                footer: {
+                                                    text: user.tag,
+                                                    icon: user.displayAvatarURL({
+                                                        dynamic: true
+                                                    })
+                                                }
+                                            }
+                                        }).then(msg => {
                                             msg.react("🇦");
                                             msg.react("🇧")
                                         })
@@ -477,7 +532,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                                                     .setTitle(message.embeds[0].title)
                                                     .setDescription(message.embeds[0].description)
                                                     .setFooter(message.embeds[0].footer.text, message.embeds[0].footer.iconURL)
-                    
+
                                                 for (const field of message.embeds[0].fields) {
                                                     embed.addField(field.name, field.name.includes("5️⃣") ? field.value + ", " + channels.map(c => `<@#${c.id}>`).join(", ") : field.value)
                                                 }
@@ -752,7 +807,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                 if (message.embeds[0].author.name.includes('🎉🎉Giveaway🎉🎉')) {
                     const giveaway = await client.getGiveaway(message.guild, message.id);
                     const embed = new MessageEmbed()
-                        .setDescription(`${tada}Giveaway entry accepted for \`${message.embeds[0].title}\`${tada}`)
+                        .setDescription(`${tada}${strings.reactAdd.giveaway.entryAccept.replace("{price}", message.embeds[0].title)}${tada}`)
                         .setAuthor(user.username, user.avatarURL(), `${client.botGuild.inviteLink}`)
                         .setTitle('Giveaway Entry')
                         .setFooter(message.guild.name, message.guild.iconURL())
@@ -766,137 +821,131 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     }
                 };
             }
-            if (message.content !== '') {
-                if (emoji == '❌' && (message.content.includes('React to get a category') || message.content.includes('Click ↩️ for return to home')) && message.content.startsWith(user.tag)) {
-                    if (message !== undefined) message.delete().catch(err => {})
-                }
-                if (message.content.includes('React to get a category') && emoji !== '❌' && message.content.startsWith(user.tag)) {
+            if (message.embeds[0]) {
+                if (message.embeds[0].title.startsWith(strings.help.bCommands) && message.embeds[0].description.startsWith(user.tag)) {
                     const embed = new MessageEmbed()
                         .setColor("#000000")
                         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                         .setURL(`${client.botGuild.supportInvite}`)
                         .setTimestamp()
-                        .setFooter(`Requested by ${user.tag}`)
-                        .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>! `);
+                        .setTitle(strings.help.bCommands)
+                        .setFooter(message.embeds[0].footer.text || user.tag)
+                        .setDescription(user.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)));
 
 
                     switch (messageReaction.emoji) {
                         case emoji1: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'configuration').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Server Settings");
+                            const category = categorys.find(c => c.emoji == emoji1);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji2: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'moderation').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Moderation");
+                            const category = categorys.find(c => c.emoji == emoji2);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji3: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'level').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Level");
+                            const category = categorys.find(c => c.emoji == emoji3);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji4: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'info').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Info");
+                            const category = categorys.find(c => c.emoji == emoji4);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji5: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'economy').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Economy");
+                            const category = categorys.find(c => c.emoji == emoji5);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji6: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'giveaway').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Giveaway");
+                            const category = categorys.find(c => c.emoji == emoji6);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji7: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'other').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Other");
+                            const category = categorys.find(c => c.emoji == emoji7);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                         case emoji8: {
-                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === 'counts').map(cmd => `${arrowRight}${cmd.help.name} - ${cmd.help.description}`).join('\n')}`);
-                            embed.setTitle("Count channels");
+                            const category = categorys.find(c => c.emoji == emoji8);
+                            embed.setDescription(`${embed.description} \n\n${client.commands.filter(cmd => cmd.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                            embed.setTitle(embed.title + "\n" + category.name);
                             break;
                         }
                     }
-                    if (message !== undefined) {
-                        if (message.guild.me.permissions.has('ADMINISTRATOR')) await message.reactions.removeAll();
-                        else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
-
-                        await message.edit(`${user.tag}, Click ↩️ for return to home!`, embed).then(async msg => {
-                            await msg.react('↩️');
-                            await msg.react('❌');
-                        })
+                    switch (emoji) {
+                        case '🏠': {
+                            if (message !== undefined) {
+                                if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id);
+                                for (const category of categorys) {
+                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
+                                }
+                            };
+                            break;
+                        }
+                        case '⬅️': {
+                            let isHome = false;
+                            let isLast = false;
+                            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
+                            if (catName.length == 0) isHome = true;
+                            if (catName && categorys.find(c => c.name == catName).position < 1) isLast = true;
+                            if (isHome) {
+                                const category = categorys[categorys.length - 1];
+                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                                embed.setTitle(embed.title + "\n" + category.name);
+                            } else if (isLast) {
+                                for (const category of categorys) {
+                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
+                                }
+                            } else {
+                                const exCat = categorys.find(c => c.name == catName);
+                                const newCat = categorys[exCat.position - 1]
+                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                                embed.setTitle(embed.title + "\n" + newCat.name);
+                            }
+                            break;
+                        }
+                        case '➡️': {
+                            let isHome = false;
+                            let isLast = false;
+                            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
+                            if (catName.length == 0) isHome = true;
+                            if (catName && categorys.map(c => c.name).indexOf(catName) == categorys.length - 1) isLast = true;
+                            if (isHome) {
+                                const category = categorys[0];
+                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                                embed.setTitle(embed.title + "\n" + category.name);
+                            } else if (isLast) {
+                                for (const category of categorys) {
+                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
+                                }
+                            } else {
+                                const exCat = categorys.find(c => c.name == catName);
+                                const newCat = categorys[exCat.position + 1]
+                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
+                                embed.setTitle(embed.title + "\n" + newCat.name);
+                            }
+                            break;
+                        }
+                        case '🗑️': {
+                            if (message !== undefined) return message.delete().catch(err => {});
+                            break;
+                        }
                     }
-                }
-
-                if (emoji === "↩️" && message.content.includes('Click ↩️ for return to home') && message.content.startsWith(user.tag)) {
-                    if (message !== undefined) {
-                        if (message.guild.me.permissions.has('ADMINISTRATOR')) await message.reactions.removeAll();
-                        else await message.reactions.cache.forEach(r => r.users.remove(client.user.id))
-                        const embed = new MessageEmbed()
-                            .setColor("#000000")
-                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-                            .setTitle("Bot Commands")
-                            .setURL(`${client.botGuild.supportInvite}`)
-                            .setDescription(`Loading commands${loadingEmoji}`)
-                            .setTimestamp()
-                            .setFooter(message.guild.name);
-                        const embed2 = new MessageEmbed()
-                            .setColor("#000000")
-                            .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-                            .setTitle("Bot Commands")
-                            .setURL(`${client.botGuild.supportInvite}`)
-                            .setDescription(`My prefix in this server is ***\`${settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings.general.prefix}help <command>!`)
-                            .setTimestamp()
-                            .setFooter(`React with ❌ to cancel command | Requested by ${user.tag}`)
-
-
-
-                        embed2.addFields({
-                            name: `${emoji1} Server settings :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji2} Moderation :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji3} Level :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji4} Info :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji5} Economy :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji6} Giveaway :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji7} Other :`,
-                            value: `\u200b`
-                        }, {
-                            name: `${emoji8} Count :`,
-                            value: `\u200b`
-                        });
-
-                        await message.edit(embed).then(async message => {
-                            await message.reactions.removeAll();
-                            await message.react(emoji1).catch(() => {});
-                            await message.react(emoji2).catch(() => {});
-                            await message.react(emoji3).catch(() => {});
-                            await message.react(emoji4).catch(() => {});
-                            await message.react(emoji5).catch(() => {});
-                            await message.react(emoji6).catch(() => {});
-                            await message.react(emoji7).catch(() => {});
-                            await message.react(emoji8).catch(() => {})
-                            await message.react('❌').catch(() => {})
-                        }).then(setTimeout(() => {
-                            message.edit(`${user.tag}, React to get a category's commands`, embed2)
-                        }, 10000))
-                    }; //pour la commande help jusqu'à ici
+                    if (message !== undefined && emoji !== '🗑️') {
+                        if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id).catch(() => {});
+                        await message.edit(embed).catch(() => {})
+                    }
                 }
             }
         } catch (e) {

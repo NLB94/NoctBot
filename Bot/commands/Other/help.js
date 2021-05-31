@@ -14,7 +14,7 @@ const categoryList = readdirSync('./Bot/commands');
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-  
+
   const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
   const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
   const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
@@ -28,6 +28,40 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const right = client.emojis.resolve(client.localEmojis.arrowRight);
+
+  const categorys = [{
+    name: 'Configuration',
+    emoji: emoji1,
+    commandsCat: 'configuration'
+  }, {
+    name: 'Moderation',
+    emoji: emoji2,
+    commandsCat: 'moderation'
+  }, {
+    name: 'Level',
+    emoji: emoji3,
+    commandsCat: 'level'
+  }, {
+    name: 'Info',
+    emoji: emoji4,
+    commandsCat: 'info'
+  }, {
+    name: 'Economy',
+    emoji: emoji5,
+    commandsCat: 'economy'
+  }, {
+    name: 'Giveaway',
+    emoji: emoji6,
+    commandsCat: 'giveaway'
+  }, {
+    name: 'Other',
+    emoji: emoji7,
+    commandsCat: 'other'
+  }, {
+    name: 'Counts',
+    emoji: emoji8,
+    commandsCat: 'counts'
+  }, ]
 
   if (!args.length) {
     if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
@@ -44,40 +78,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
+        .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
         .setTimestamp()
-        .setFooter('React with ❌ to cancel command')
+        .setFooter('React with 🗑️ to cancel command')
 
 
 
-      newEmbed.addFields({
-        name: `${emoji1} Server settings`,
-        value: '\u200b'
-      }, {
-        name: `${emoji2} Moderation`,
-        value: `\u200b`
-      }, {
-        name: `${emoji3} Level`,
-        value: `\u200b`
-      }, {
-        name: `${emoji4} Info`,
-        value: `\u200b`
-      }, {
-        name: `${emoji5} Economy`,
-        value: `\u200b`
-      }, {
-        name: `${emoji6} Giveaway`,
-        value: `\u200b`
-      }, {
-        name: `${emoji7} Other`,
-        value: `\u200b`
-      }, {
-        name: `${emoji8} Count`,
-        value: `\u200b`
-      }, /*{
-        name: `${emoji9} Other`,
-        value: `\u200b`
-      },*/ );
+      for (const category of categorys) {
+        newEmbed.addField(`${category.emoji}${category.name}`, '\u200b')
+      }
 
       return message.channel.send(embed).then(async msg => {
         await msg.react(emoji1).catch(() => {});
@@ -88,8 +97,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         await msg.react(emoji6).catch(() => {});
         await msg.react(emoji7).catch(() => {});
         await msg.react(emoji8).catch(() => {});
-        await msg.react('❌').catch(() => {});
-        await msg.edit(`${message.author.tag} React to get a category's commands!`, newEmbed).then(() => {}).catch(err => '');
+        await msg.react('⬅️').catch(() => {});
+        await msg.react('➡️').catch(() => {});
+        await msg.react('🏠').catch(() => {});
+        await msg.react('🗑️').catch(() => {});
+        await msg.edit(newEmbed).then(() => {}).catch(err => '');
       });
     } else {
       const embed = new MessageEmbed()
@@ -97,7 +109,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(`My prefix in this server is ***\`${settings == undefined ? '~' : settings.general.prefix}\`*** \nIf you need more informations about commands, type ${settings == undefined ? '~' : settings.general.prefix}help <command | category>!`)
+        .setDescription(strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix))
         .setTimestamp();
 
       for (const category of categoryList) {
@@ -139,7 +151,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setDescription(`Enable : ${command.help.enable ? check_mark : x_mark}`)
         .addField("Description :", `${command.help.description} \n**Cooldown** : ${command.help.cooldown} second(s)`)
         .addField("Usage :", command.help.usage ? `${settings == undefined ? '~' : settings.general.prefix}${command.help.name} ${command.help.usage}` : `${settings == undefined ? '~' : settings.general.prefix}${command.help.name}`, true)
-        .addField("Example :", command.help.example, false)
+        .addField("Example :", command.help.example ? command.help.example : strings.noExample, false)
 
       if (command.help.aliases.length > 1) embed.addField("Alias", `${command.help.aliases.join(', ')}`, false);
       embed.addField("Only Server Owner :", command.help.onlyServerOwner ? `${check_mark}` : `${x_mark}`)

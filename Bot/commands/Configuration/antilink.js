@@ -41,7 +41,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             name: `5️⃣ \`\`\`${strings.configuration.warnAndDelete}\`\`\``,
             value: `${settings.automod.antiLink.warnAndDelete ? '🟢' : '🔴'}`
         }, )
-        .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }));
+        .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+        .setTimestamp();
     message.channel.send(embed).then(async msg => {
         msg.react('🔄');
         msg.react('1️⃣');

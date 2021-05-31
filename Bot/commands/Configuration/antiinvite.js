@@ -31,7 +31,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         }, )
         .setFooter(message.author.tag, message.author.displayAvatarURL({
             dynamic: true
-        }));
+        }))
+        .setTimestamp();
     message.channel.send(embed).then(async msg => {
         msg.react('🔄');
         msg.react('1️⃣');

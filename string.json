@@ -2,6 +2,24 @@
   "fr": {
     "usage": "Usage correct :",
     "cmdCancel": "```La commande a été annulée !```",
+    "noExample": "```Il n'y a pas d'exemple pour cette commande.```",
+    "reactAdd": {
+      "supportS": {
+        "roles": {
+          "title": "Rôle ajouté",
+          "description": "Vous venez de recevoir le rôle **{roleName}** en réagissant dans **_{guild}_** !"
+        },
+        "verif": "Vous venez d'être vérifier en acceptant les règles dans **_{guild}_**"
+      },
+      "giveaway": {
+        "entryAccept": "La participation au giveaway `{price}` a été accepté !",
+        "givEntry": "Participation au giveaway"
+      }
+    },
+    "help": {
+      "bCommands": "Commandes du bot",
+      "myPrfx": "Mon préfixe dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```"
+    },
     "configuration": {
       "secuLvl":"**Niveau de sécurité**",
       "whiteL": "Liste blanche",
@@ -31,6 +49,24 @@
   "en": {
     "usage": "Correct usage :",
     "cmdCancel": "```The command have been canceled !```",
+    "noExample": "```There are no example for this command.```",
+    "reactAdd": {
+      "supportS": {
+        "roles": {
+          "title": "Role Added",
+          "description": "You have successfully got **{roleName}** role by reacting in **_{guild}_** !"
+        },
+        "verif": "You have been verified by accepting the rules in **_{guild}_**"
+      },
+      "giveaway": {
+        "entryAccept": "Giveaway entry accepted for `{price}` !",
+        "givEntry": "Giveaway entry"
+      }
+    },
+    "help": {
+      "bCommands": "Bot Commands",
+      "myPrfx": "My prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```"
+    },
     "configuration": {
       "secuLvl": "**Degree of Security**",
       "whiteL": "White list",
