@@ -1,3 +1,5 @@
+const { Client } = require("discord.js");
+
 const MESSAGES = {
   COMMANDS: {
     ADMIN: {
@@ -113,60 +115,60 @@ const MESSAGES = {
       },
     },
     BRAWL: {
-        CLUB: {
-          name: "club",
-          aliases: ["club"],
-          category: "brawl",
-          description: "Get a brawl-club informations.",
-          ownerCmd: false,
-          cooldown: 0.1,
-          enable: false,
-          usage: "<club_tag>",
-          example: "~save #AVGI2974K",
-          botPerm: false,
-          botPermName: '',
-          permissions: false,
-          onlyServerOwner: false,
-          reqPermName: "",
-          onlyPremium: false,
-          args: true
-        },
-        PLAYER: {
-          name: "player",
-          aliases: ["player"],
-          category: "brawl",
-          description: "Get a brawl-player informations.",
-          ownerCmd: false,
-          cooldown: 0.1,
-          enable: false,
-          usage: "<player_tag>",
-          example: "~save #AVGI2974K",
-          botPerm: false,
-          botPermName: '',
-          permissions: false,
-          onlyServerOwner: false,
-          reqPermName: "",
-          onlyPremium: false,
-          args: true
-        },
-        SAVE: {
-          name: "save",
-          aliases: ["save"],
-          category: "brawl",
-          description: "Save your brawl stars profile on the bot.",
-          ownerCmd: false,
-          cooldown: 0.1,
-          enable: false,
-          usage: "<player_tag>",
-          example: "~save #CVJCVPG0",
-          botPerm: false,
-          botPermName: '',
-          permissions: false,
-          onlyServerOwner: false,
-          reqPermName: "",
-          onlyPremium: false,
-          args: true
-        },
+      CLUB: {
+        name: "club",
+        aliases: ["club"],
+        category: "brawl",
+        description: "Get a brawl-club informations.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: false,
+        usage: "<club_tag>",
+        example: "~save #AVGI2974K",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true
+      },
+      PLAYER: {
+        name: "player",
+        aliases: ["player"],
+        category: "brawl",
+        description: "Get a brawl-player informations.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: false,
+        usage: "<player_tag>",
+        example: "~save #AVGI2974K",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true
+      },
+      SAVE: {
+        name: "save",
+        aliases: ["save"],
+        category: "brawl",
+        description: "Save your brawl stars profile on the bot.",
+        ownerCmd: false,
+        cooldown: 0.1,
+        enable: false,
+        usage: "<player_tag>",
+        example: "~save #CVJCVPG0",
+        botPerm: false,
+        botPermName: '',
+        permissions: false,
+        onlyServerOwner: false,
+        reqPermName: "",
+        onlyPremium: false,
+        args: true
+      },
     },
     COUNTS: {
       CREATE: {
@@ -198,7 +200,7 @@ const MESSAGES = {
         cooldown: 10,
         enable: true,
         usage: "[cash | bank] <member> <amount>",
-        example: "~addmoney bank @I2Z7 100",
+        example: "~addmoney bank @Noct 100",
         botPerm: false,
         botPermName: '',
         permissions: true,
@@ -211,8 +213,7 @@ const MESSAGES = {
         name: "addmoneyrole",
         aliases: ["addmoneyrole"],
         category: "economy",
-        description:
-          "Add money (cash or bank) balance of every members with a specific role.",
+        description: "Add money (cash or bank) balance of every members with a specific role.",
         ownerCmd: false,
         cooldown: 10,
         enable: true,
@@ -320,13 +321,12 @@ const MESSAGES = {
         name: "givemoney",
         aliases: ["gmoney"],
         category: "economy",
-        description:
-          "Give specific amount of your hand money (cash) to an user",
+        description: "Give specific amount of your hand money (cash) to an user",
         ownerCmd: false,
         cooldown: 10,
         enable: true,
         usage: "@user (amount | all)",
-        example: "~givemoney @I2Z7 700",
+        example: "~givemoney @Noct 700",
         botPerm: false,
         botPermName: '',
         permissions: false,
@@ -362,7 +362,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "{optional : @user}",
-        example: "~bal @I2Z7",
+        example: "",
         botPerm: false,
         botPermName: '',
         permissions: false,
@@ -380,7 +380,7 @@ const MESSAGES = {
         cooldown: 10,
         enable: true,
         usage: "[cash | bank] <user> <amount>",
-        example: "~rem-money cash @I2Z7 100",
+        example: "~rem-money cash @Noct 100",
         botPerm: false,
         botPermName: '',
         permissions: true,
@@ -393,8 +393,7 @@ const MESSAGES = {
         name: "remmoneyrole",
         aliases: ["removemoneyrole"],
         category: "economy",
-        description:
-          "Remove money (cash or bank) from all member's balance who have specific role.",
+        description: "Remove money (cash or bank) from all member's balance who have specific role.",
         ownerCmd: false,
         cooldown: 10,
         enable: false,
@@ -435,7 +434,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: false,
         usage: "<user>",
-        example: "~rob @I2Z7",
+        example: "~rob @Noct",
         botPerm: false,
         botPermName: '',
         permissions: false,
@@ -781,7 +780,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "",
-        example: "~ui @I2Z7",
+        example: "",
         botPerm: false,
         botPermName: '',
         permissions: false,
@@ -790,7 +789,7 @@ const MESSAGES = {
         onlyPremium: false,
         args: false,
       },
-      
+
     },
     INVITES: {
       INVITES: {
@@ -838,7 +837,7 @@ const MESSAGES = {
         cooldown: 30,
         enable: false,
         usage: "<nb> {@user}",
-        example: "~reminvites 10 @I2Z7",
+        example: "~reminvites 10 @Noct",
         botPerm: false,
         botPermName: '',
         permissions: true,
@@ -846,7 +845,7 @@ const MESSAGES = {
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
         args: true,
-      },    
+      },
       RESETINVITES: {
         name: "resetinvites",
         aliases: ['resetinvites'],
@@ -891,7 +890,7 @@ const MESSAGES = {
         category: "level",
         description: "Show Server's XP Leaderboard",
         ownerCmd: false,
-        cooldown:0.1,
+        cooldown: 0.1,
         enable: true,
         usage: "",
         example: null,
@@ -903,7 +902,7 @@ const MESSAGES = {
         onlyPremium: false,
         args: false,
       },
-      
+
       RANK: {
         name: "rank",
         aliases: ["xp"],
@@ -946,7 +945,7 @@ const MESSAGES = {
         category: "level",
         description: "Reset an user experience.",
         ownerCmd: false,
-        cooldown:0.1,
+        cooldown: 0.1,
         enable: false,
         usage: "{user}",
         example: null,
@@ -964,7 +963,7 @@ const MESSAGES = {
         category: "level",
         description: "Change level system settings",
         ownerCmd: false,
-        cooldown:0.1,
+        cooldown: 0.1,
         enable: true,
         usage: "<keys> {value}",
         example: "~level enable",
@@ -1005,7 +1004,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "@user {optional : reason}",
-        example: "~ban @I2Z7 spam",
+        example: "",
         botPerm: true,
         botPermName: 'BAN_MEMBERS',
         permissions: true,
@@ -1041,7 +1040,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "@user {optional : reason}",
-        example: "~kick @I2Z7#0000 dm ads",
+        example: "",
         botPerm: true,
         botPermName: 'KICK_MEMBERS',
         permissions: true,
@@ -1077,7 +1076,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "@user {time} <reason>",
-        example: "~mute @I2Z7 24H spam",
+        example: "~mute @Noct 24H spam",
         botPerm: true,
         botPermName: 'MANAGE_ROLES',
         permissions: true,
@@ -1185,7 +1184,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: false,
         usage: "@user {optional : time}",
-        example: "~tempban @I2Z7#0000 2d Not allowed content",
+        example: "~tempban @Noct#0000 2d Not allowed content",
         botPerm: true,
         botPermName: 'BAN_MEMBERS',
         permissions: true,
@@ -1239,7 +1238,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "@user",
-        example: "~unmute @I2Z7#0000",
+        example: "",
         botPerm: true,
         botPermName: 'MANAGE_ROLES',
         permissions: true,
@@ -1257,7 +1256,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "@user",
-        example: "~warn @I2Z7#1379 spam",
+        example: "",
         botPerm: true,
         botPermName: 'MANAGE_ROLES',
         permissions: true,
@@ -1331,7 +1330,7 @@ const MESSAGES = {
         cooldown: 0.1,
         enable: true,
         usage: "<new_nick> {@user}",
-        example: "~nick BestBot @I2Z7",
+        example: "~nick BestBot @Noct",
         botPerm: false,
         botPermName: '',
         permissions: false,
@@ -1418,7 +1417,7 @@ const MESSAGES = {
         category: "other",
         description: "Report a bug to bot's creator (DON'T SPAM !!!)",
         ownerCmd: false,
-        cooldown: 600,
+        cooldown: 3600,
         enable: true,
         usage: "<report>",
         example: "~report Ban command have some bugs (...).",
@@ -1558,7 +1557,7 @@ const MESSAGES = {
         onlyPremium: false,
         args: true
       },
-      CUSTOMCMD:{
+      CUSTOMCMD: {
         name: "newcmd",
         aliases: ["createcmd"],
         category: "configuration",
@@ -1616,4 +1615,65 @@ const MESSAGES = {
   },
 };
 
+const categorys = [{
+  name: 'Configuration',
+  emoji: '772418754583855134',
+  commandsCat: 'configuration',
+  position: 1
+}, {
+  name: 'Moderation',
+  emoji: "770976748082298891",
+  commandsCat: 'moderation',
+  position: 2
+}, {
+  name: 'Level',
+  emoji: "772419302133334046",
+  commandsCat: 'level',
+  position: 3
+}, {
+  name: 'Info',
+  emoji: "772418814594777099",
+  commandsCat: 'info',
+  position: 4
+}, {
+  name: 'Economy',
+  emoji: "772419197673930782",
+  commandsCat: 'economy',
+  position: 5
+}, {
+  name: 'Giveaway',
+  emoji: "772419404855902209",
+  commandsCat: 'giveaway',
+  position: 6
+}, {
+  name: 'Other',
+  emoji: "770976765219831811",
+  commandsCat: 'other',
+  position: 7
+}, {
+  name: 'Counts',
+  emoji: "772418662929924106",
+  commandsCat: 'counts',
+  position: 8
+}, {
+  name: 'test',
+  emoji: '772419459968532520',
+  commandsCat: 'counts',
+  position: 9
+}];
+
+const strings = require('../string.json').en;
+const getStrings = 
+/**
+ * 
+ * @param {Client} client 
+ * @param {String} lang 
+ * @returns {typeof strings}
+ */
+async function(client, lang) {
+  return client[lang];
+}
+
+exports.getStrings = getStrings;
 exports.MESSAGES = MESSAGES;
+exports.categorys = categorys;

@@ -1,6 +1,7 @@
 const {
     MessageEmbed
 } = require('discord.js');
+const { getStrings } = require('../../../util/constants');
 const functions = require('./messageReactionAdd');
 
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {
@@ -16,7 +17,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const member = message.guild.members.resolve(user.id);
     const emoji = messageReaction.emoji.name;
 
-    const strings = language == 'en' ? client.en : (language == 'fr' ? client.fr : client.es);
+    const strings = await getStrings(client, language);
     const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
     //emoji number
     const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
@@ -809,7 +810,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                     const embed = new MessageEmbed()
                         .setDescription(`${tada}${strings.reactAdd.giveaway.entryAccept.replace("{price}", message.embeds[0].title)}${tada}`)
                         .setAuthor(user.username, user.avatarURL(), `${client.botGuild.inviteLink}`)
-                        .setTitle('Giveaway Entry')
+                        .setTitle(strings.giveaway.givEntry)
                         .setFooter(message.guild.name, message.guild.iconURL())
                         .setTimestamp()
                         .setColor('#FFFFFF')
@@ -883,66 +884,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             break;
                         }
                     }
-                    switch (emoji) {
-                        case '🏠': {
-                            if (message !== undefined) {
-                                if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id);
-                                for (const category of categorys) {
-                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
-                                }
-                            };
-                            break;
-                        }
-                        case '⬅️': {
-                            let isHome = false;
-                            let isLast = false;
-                            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
-                            if (catName.length == 0) isHome = true;
-                            if (catName && categorys.find(c => c.name == catName).position < 1) isLast = true;
-                            if (isHome) {
-                                const category = categorys[categorys.length - 1];
-                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                                embed.setTitle(embed.title + "\n" + category.name);
-                            } else if (isLast) {
-                                for (const category of categorys) {
-                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
-                                }
-                            } else {
-                                const exCat = categorys.find(c => c.name == catName);
-                                const newCat = categorys[exCat.position - 1]
-                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                                embed.setTitle(embed.title + "\n" + newCat.name);
-                            }
-                            break;
-                        }
-                        case '➡️': {
-                            let isHome = false;
-                            let isLast = false;
-                            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
-                            if (catName.length == 0) isHome = true;
-                            if (catName && categorys.map(c => c.name).indexOf(catName) == categorys.length - 1) isLast = true;
-                            if (isHome) {
-                                const category = categorys[0];
-                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                                embed.setTitle(embed.title + "\n" + category.name);
-                            } else if (isLast) {
-                                for (const category of categorys) {
-                                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
-                                }
-                            } else {
-                                const exCat = categorys.find(c => c.name == catName);
-                                const newCat = categorys[exCat.position + 1]
-                                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                                embed.setTitle(embed.title + "\n" + newCat.name);
-                            }
-                            break;
-                        }
-                        case '🗑️': {
-                            if (message !== undefined) return message.delete().catch(err => {});
-                            break;
-                        }
-                    }
-                    if (message !== undefined && emoji !== '🗑️') {
+                    if (message !== undefined) {
                         if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id).catch(() => {});
                         await message.edit(embed).catch(() => {})
                     }

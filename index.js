@@ -36,6 +36,7 @@ client.topAPI = topAPI;
 client.fr = string.fr;
 client.en = string.en;
 
+require('./util/constants');
 setInterval(() => {
     if (client.user.id == client.botGuild.clientID) topAPI.postStats({
         serverCount: client.guilds.cache.size,

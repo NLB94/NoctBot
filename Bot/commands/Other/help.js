@@ -1,20 +1,29 @@
 const {
   MessageEmbed,
-  ClientUser
+  ClientUser,
+  MessageAttachment,
+  MessageActionRow,
+  MessageButton
 } = require('discord.js');
 const {
   readdirSync
 } = require("fs");
 const {
-  MESSAGES
+  createCanvas,
+  loadImage
+} = require("canvas")
+let {
+  MESSAGES, categorys
 } = require("../../../util/constants");
 const categoryList = readdirSync('./Bot/commands');
-
+categorys = categorys.slice(0, 8);
 
 const functions = require('../../../util/functions');
+const { bgBlack } = require('chalk');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-
+  const canvas = createCanvas(2000, 2000);
+  const ctx = canvas.getContext("2d");
   const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
   const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
   const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
@@ -28,80 +37,116 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const right = client.emojis.resolve(client.localEmojis.arrowRight);
-
-  const categorys = [{
-    name: 'Configuration',
-    emoji: emoji1,
-    commandsCat: 'configuration'
-  }, {
-    name: 'Moderation',
-    emoji: emoji2,
-    commandsCat: 'moderation'
-  }, {
-    name: 'Level',
-    emoji: emoji3,
-    commandsCat: 'level'
-  }, {
-    name: 'Info',
-    emoji: emoji4,
-    commandsCat: 'info'
-  }, {
-    name: 'Economy',
-    emoji: emoji5,
-    commandsCat: 'economy'
-  }, {
-    name: 'Giveaway',
-    emoji: emoji6,
-    commandsCat: 'giveaway'
-  }, {
-    name: 'Other',
-    emoji: emoji7,
-    commandsCat: 'other'
-  }, {
-    name: 'Counts',
-    emoji: emoji8,
-    commandsCat: 'counts'
-  }, ]
-
+  const img = await loadImage('./Bot/Assets/blanc.png');
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  
+  message.react(loadingEmoji).catch(err => {
+    message.react("⏰").catch(err => message.channel.send('Please wait...'))
+  });
+  
   if (!args.length) {
     if (message.guild && (message.guild.me.permissions.has(1074004032) || message.guild.me.permissions.has('ADMINISTRATOR'))) {
+      // const embed = new MessageEmbed()
+      //   .setColor("#000000")
+      //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+      //   .setTitle("Bot Commands")
+      //   .setURL(`${client.botGuild.supportInvite}`)
+      //   .setDescription(`Loading commands${loadingEmoji}`)
+      //   .setTimestamp()
+      //   .setFooter(message.guild == undefined ? '' : message.guild.name);
       const embed = new MessageEmbed()
         .setColor("#000000")
         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
         .setTitle("Bot Commands")
         .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(`Loading commands${loadingEmoji}`)
+        .setDescription(await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
         .setTimestamp()
-        .setFooter(message.guild == undefined ? '' : message.guild.name);
-      const newEmbed = new MessageEmbed()
-        .setColor("#000000")
-        .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-        .setTitle("Bot Commands")
-        .setURL(`${client.botGuild.supportInvite}`)
-        .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
-        .setTimestamp()
-        .setFooter('React with 🗑️ to cancel command')
-
-
-
+        .setFooter(message.author.tag, message.author.displayAvatarURL());
+      // const newEmbed = new MessageEmbed()
+      //   .setColor("#000000")
+      //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
+      //   .setTitle("Bot Commands")
+      //   .setURL(`${client.botGuild.supportInvite}`)
+      //   .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
+      //   .setTimestamp()
+      //   .setFooter('React with 🗑️ to cancel command')
+      let nextPos = 250;
+      ctx.beginPath();
+      // ctx.globalAlpha = 1;
+      // ctx.font = "100px Calibri";
+      // ctx.fillStyle = "#4169E1";
+      // ctx.fillText(client.user.tag, 250, 1900, 1000);
+      let catNb = 1;
+      let pagesNb = 0;
       for (const category of categorys) {
-        newEmbed.addField(`${category.emoji}${category.name}`, '\u200b')
-      }
+        if (category.position > 8) continue;
+        pagesNb++;
+        let nextPosCmd = 250;
+        ctx.font = "75px Calibri";
+        ctx.fillStyle = "#999999";
+        ctx.fillText(catNb + " - " + category.name, 250, nextPos, 500);
+        nextPos+=50;
+        catNb++
+        const commands = await client.commands.filter(cmd => cmd.help.category == category.commandsCat).map(cmd => cmd.help);
+        for (const command of commands) {
+          ctx.font = "50px Calibri";
+          ctx.fillStyle = "#000000";
+          ctx.fillText(command.name, nextPosCmd, nextPos, 200);
+          ((nextPosCmd + 200) > canvas.width) ? (nextPosCmd = 250, nextPos+=50) : nextPosCmd+=250
+        }
+        nextPos+=150
+      };
 
-      return message.channel.send(embed).then(async msg => {
+      ctx.font = "50px Calibri";
+      ctx.fillStyle = "#000000";
+      ctx.fillText('Page 1/' + (parseInt((pagesNb / 8).toString().split(".")[0]) + 1), 1800, 1970, 500);
+
+      ctx.arc(1000, 150, 100, 0, Math.PI * 2, true)
+      ctx.lineWidth = 6
+      ctx.strokeStyle = "#ffffff";
+      ctx.fillStyle = "#ffffff";
+      ctx.closePath()
+      ctx.clip();
+      const avatar = await loadImage(client.user.displayAvatarURL({
+        format: "jpg"
+      }))
+      ctx.drawImage(avatar, 900, 50, 200, 200)
+      ctx.restore();
+
+      // for (const category of categorys) {
+      //   newEmbed.addField(`${await client.emojis.resolve(category.emoji)}${category.name}`, '\u200b')
+      // }
+      const row = new MessageActionRow()
+			  .addComponents(
+          new MessageButton()
+					  .setCustomID('help-home')
+					  .setStyle('SECONDARY')
+            .setEmoji("🏠"),
+          new MessageButton()
+            .setCustomID('left-help')
+            .setStyle('PRIMARY')
+            .setEmoji("⬅️"),
+          new MessageButton()
+					  .setCustomID('right-help')
+					  .setStyle('PRIMARY')
+            .setEmoji("➡️"),
+				  new MessageButton()
+					  .setCustomID('delete')
+					  .setStyle('DANGER')
+            .setEmoji("🗑️"),
+			);
+      const file = new MessageAttachment(canvas.toBuffer(), "help.png");
+      embed.attachFiles(file);
+      
+      message.channel.send({embed, components: [row]}).then(async msg => {
         await msg.react(emoji1).catch(() => {});
         await msg.react(emoji2).catch(() => {});
         await msg.react(emoji3).catch(() => {});
         await msg.react(emoji4).catch(() => {});
         await msg.react(emoji5).catch(() => {});
         await msg.react(emoji6).catch(() => {});
-        await msg.react(emoji7).catch(() => {});
-        await msg.react(emoji8).catch(() => {});
-        await msg.react('⬅️').catch(() => {});
-        await msg.react('➡️').catch(() => {});
-        await msg.react('🏠').catch(() => {});
-        await msg.react('🗑️').catch(() => {});
-        await msg.edit(newEmbed).then(() => {}).catch(err => '');
+        msg.react(emoji7).catch(() => {});
+        msg.react(emoji8).catch(() => {});
       });
     } else {
       const embed = new MessageEmbed()
@@ -114,13 +159,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
       for (const category of categoryList) {
         if (category.toLowerCase() == 'admin') continue;
-        embed.addField(`${right}${category}`, client.commands.filter(cat => cat.help.category == category.toLowerCase()).map(cmd => `${cmd.help.name}`).join(", "));
+        embed.addField(`\`\`\`${category}\`\`\``, client.commands.filter(cat => cat.help.category == category.toLowerCase()).map(cmd => `\`${cmd.help.name}\``).join(", "));
       }
       message.channel.send(embed)
     }
-  } else if (isNaN(args[0])) {
-    const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]))
-    let cat = ''
+  } else {
+    const command = client.commands.get(args[0].toLowerCase()) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]))
+    let cat = '';
     if (!command) cat = categoryList.find(c => c.toLowerCase() == args[0].toLowerCase())
     if (!command && !cat) return message.channel.send({
       embed: {
@@ -133,7 +178,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const embed = new MessageEmbed()
           .setColor("#000000")
           .setTitle(cat)
-          .setFooter('Requested by ' + message.author.tag, message.author.displayAvatarURL());
+          .setFooter(message.author.tag, message.author.displayAvatarURL());
 
         for (const command of readdirSync(`./Bot/commands/${cat}`)) {
           const cmd = client.commands.get(command.slice(0, parseInt(command.length) - 3).toLowerCase());
@@ -160,33 +205,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       if (command.help.onlyPremium) embed.setAuthor("Premium command");
       return message.channel.send(embed);
     }
-  } else if (!isNaN(args[0])) {
-    if (parseInt(args[0]) > 9 || parseInt(args[0] < 1)) return message.channel.send({
-      embed: {
-        description: `Correct usage : ${settings == undefined ? '~' : settings.general.prefix}help ${module.exports.help.usage}`
-      }
-    });
-    else {
-      const categorys = []
-      for (const cat of categoryList) {
-        categorys.push(cat)
-      }
-      const category = categorys[args[0]]
-      if (category.toLowerCase() == 'admin') return message.channel.send({
-        embed: {
-          description: `Correct usage : ${settings == undefined ? '~' : settings.general.prefix}help ${module.exports.help.usage}`
-        }
-      });
-      const embed = new MessageEmbed()
-        .setTitle(category)
-        .setAuthor(client.user.tag, client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-        .setFooter(`Page ${args[0]} / 9`)
-        .setTimestamp()
-        .setDescription(client.commands.filter(cat => cat.help.category === category.toLowerCase()).map(cmd => `${right}${cmd.help.name} - ${cmd.help.description}`).join('\n'));
-
-      message.channel.send(embed);
-    }
-  }
+  };
 };
 
 

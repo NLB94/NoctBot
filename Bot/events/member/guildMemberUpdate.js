@@ -1,8 +1,10 @@
 const {
     GuildMember,
     PartialGuildMember,
-    Client
+    Client,
+    MessageEmbed
 } = require("discord.js");
+const { getStrings } = require("../../../util/constants");
 
 /**
  * 
@@ -11,6 +13,9 @@ const {
  * @param {GuildMember} newMember 
  */
 module.exports = async (client, oldMember, newMember) => {
+    const settings = await client.getGuild(newMember.guild);
+    if (!settings) settings.general.language == 'en';
+    const strings = await getStrings(client, settings.general.language);
     if (oldMember.pending) {
         if (!newMember.pending) {
             if (newMember.guild.id !== '727494941911154688') return;

@@ -20,6 +20,24 @@
       "bCommands": "Commandes du bot",
       "myPrfx": "Mon préfixe dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```"
     },
+    "message": {
+      "onDev": "```arm\nCette commande est en développement. \n# Patience...",
+      "onlyPremium": "```diff\n- Seulement pour les serveurs premium ! \n+ Obtenez le mode premium pour plus de fonctionnalités !```",
+      "onlyServerOwner": "```fix\nSeulement le propriétaire du serveur peut utiliser cette commande !```",
+      "permissions": "```arm\nVous n'avez pas les permissions nécessaires pour effectuer cette commande !```",
+      "missingPerms": "Permissions Manquantes",
+      "missingBotPerms": "Permissions du Bot manquantes",
+      "botPerm": "```arm\nJe n'ai pas les permissions nécessaires pour effectuer cette commande ! # Donnez moi les permissions d'administrateur !```",
+      "missingArgs": "Arguments Manquants",
+      "report": {
+        "title": "Rapport Invalide",
+        "description": "```arm\nLe rapport doit contenir 25 caractères ou plus ! \n# Pas de texte dupliqué !! ``` \nVous pouvez aussi rejoindre le [serveur de support](https://discord.gg/unRX2SUcvw) pour faire un rapport de bugs dans le bon salon !"
+      },
+      "cooldown": {
+        "title": "Temps d'attente",
+        "description": "```arm\nVous devez attendre {time} seconde(s) avant de réessayer cette commande !```"
+      }
+    },
     "configuration": {
       "secuLvl":"**Niveau de sécurité**",
       "whiteL": "Liste blanche",
@@ -66,6 +84,24 @@
     "help": {
       "bCommands": "Bot Commands",
       "myPrfx": "My prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```"
+    },
+    "message": {
+      "onDev": "```arm\nThis command is on devlopment. \n# Please wait...",
+      "onlyPremium": "```diff\n- Only for premium servers ! \n+ Upgrade to premium for more features !```",
+      "onlyServerOwner": "```fix\nOnly the server owner can use this command !```",
+      "permissions": "```arm\nYou don't have enough permissions to use this command !```",
+      "missingPerms": "Missing Permissions",
+      "missingBotPerms": "Missing Bot Permissions",
+      "botPerm": "```arm\nI don't have enough permissions to run this command ! # Give me admin permissions !```",
+      "missingArgs": "Missing Arguments",
+      "report": {
+        "title": "Invalid Report",
+        "description": "```arm\nReport must be 25 characters or more ! \n# No duplicated message !! ``` \nYou can also join [support server](https://discord.gg/unRX2SUcvw) to report the bug in the correct channel !"
+      },
+      "cooldown": {
+        "title": "Command cooldown",
+        "description": "```arm\nYou have to wait {time} second(s) to retry this command !```"
+      }
     },
     "configuration": {
       "secuLvl": "**Degree of Security**",

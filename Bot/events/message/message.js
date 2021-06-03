@@ -4,6 +4,7 @@ const {
   Message,
   Channel,
 } = require("discord.js");
+const { getStrings } = require("../../../util/constants");
 const func = require("../../../util/functions");
 const ownerID = "616547009750499358";
 const defaultPrefix = '~';
@@ -42,7 +43,7 @@ module.exports = async (client, message) => {
   const userInfo = await settings.users[position];
 
   if (message.guild && position === -1) await client.createGuildUser(message.guild, message.member);
-  const strings = (settings.general.language == 'en' ? client.en : (settings.general.language == 'fr' ? client.fr : client.en));
+  const strings = await getStrings(client, settings.general.language);
 
   if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({
     client,
@@ -73,58 +74,59 @@ module.exports = async (client, message) => {
 
     if (message.author.id !== ownerID) {
       const NoctCommu = await client.guilds.resolve('727494941911154688');
+      if (command.help.ownerCmd) return;
       if (!command.help.enable && (!NoctCommu.members.resolve(message.author) || !NoctCommu.members.resolve(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
         embed: {
-          description: `${x_mark}This command is on devlopment. Please wait...`
+          description: `${x_mark}${strings.message.onDev}`
         }
       });
 
       if (command.help.onlyPremium && !settings.general.premium) return message.channel.send({
         embed: {
-          description: `${x_mark}Only for premium server ! Upgrade to premium if you want more features !`
+          description: `${x_mark}${strings.message.onlyPremium}`
         }
       });
 
       if (command.help.onlyServerOwner && message.author.id !== message.guild.ownerID) return message.channel.send({
         embed: {
-          title: `Missing Permissions`,
-          description: `${x_mark} This command require \`Server Owner\` Permissions!`
+          title: `${strings.message.missingPerms}`,
+          description: `${x_mark} ${strings.message.onlyServerOwner}`
         }
       });
     }
     if (command.help.permissions && !message.member.permissions.has(command.help.reqPermName)) return message.reply({
       embed: {
-        title: `Missing Permissions`,
-        description: `${x_mark} You don't have enough permissions to use \`${command.help.name}\` command! \nNeeded permissions : \`${command.help.reqPermName}\``
+        title: `${strings.message.missingPerms}`,
+        description: `${x_mark} ${strings.message.permissions}`
       }
     });
 
     if (command.help.botPerm && !message.guild.me.permissions.has(command.help.botPermName)) return message.channel.send({
       embed: {
-        title: `Missing Bot Permissions`,
-        description: `${x_mark} I don't have enough permissions to run this command ! Give me \`${command.help.botPermName}\` permission(s)`
+        title: `${strings.message.missingBotPerms}`,
+        description: `${x_mark} ${strings.message.botPerm}`
       }
     })
 
     if (command.help.args && !args.length) {
-      let noArgsReply = `${arrowRight}${message.author} Correct usage :`;
+      let noArgsReply = `${arrowRight}${message.author} ${strings.usage} :`;
 
       if (command.help.usage)
         noArgsReply += `\`${settings.general.prefix}${command.help.name} ${command.help.usage}\``;
-      if (command.help.name === `config` || command.help.name == 'level' || command.help.name == 'captcha' || command.help.name == 'ticket' || command.help.name == 'welcome' || command.help.name == 'leave')
-        noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.prefix}${command.help.name} keys\``;
+      // if (command.help.name === `config` || command.help.name == 'level' || command.help.name == 'captcha' || command.help.name == 'ticket' || command.help.name == 'welcome' || command.help.name == 'leave')
+      //   noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.prefix}${command.help.name} keys\``;
 
       return message.channel.send({
         embed: {
-          title: `Missing Arguments`,
+          title: strings.message.missingArgs,
           description: noArgsReply
         }
       });
     }
     if (command.help.name == 'report' && args.join(` `).length < 25) return message.channel.send({
       embed: {
-        title: 'Invalid Report',
-        description: 'Report must be 25 characters or more! \nNo Duplicated Message, if you want to report a little thing, join [support server](https://discord.gg/unRX2SUcvw) and report the bug in the correct channel !'
+        title: strings.message.report.title,
+        description: strings.message.report.description
       }
     })
 
@@ -136,7 +138,7 @@ module.exports = async (client, message) => {
       const timeNow = Date.now();
       const tStamps = client.cooldowns.get(command.help.name);
       const cdAmount = (command.help.cooldown || 0) * 1000;
-      const userCd = tStamps.get(`${message.author.id} ${message.guild.id}`)
+      const userCd = tStamps.get(command.help.name == 'report' ? `${message.author.id}` : `${message.author.id} ${message.guild.id}`)
 
       if (userCd) {
         const cdExpirationTime = userCd.time + cdAmount;
@@ -146,19 +148,19 @@ module.exports = async (client, message) => {
 
           return message.reply({
             embed: {
-              title: 'Command Cooldown',
-              description: `${x_mark}You have to wait ${Math.round(timeLeft)} second(s) to retry \`${command.help.name}\` command!`
+              title: strings.message.cooldown.title,
+              description: `${x_mark}${strings.message.cooldown.description.replace("{time}", Math.round(timeLeft))}`
             }
           });
         }
       }
-      tStamps.set(message.author.id + ' ' + message.guild.id, {
+      tStamps.set(command.help.name == 'report' ? message.author.id  : message.author.id + ' ' + message.guild.id, {
         id: message.author.id,
         guildID: message.guild.id,
         time: timeNow
       });
       setTimeout(async () => {
-        tStamps.delete(`${message.author.id} ${message.guild.id}`)
+        tStamps.delete(command.help.name == 'report' ? message.author.id  : `${message.author.id} ${message.guild.id}`)
       }, cdAmount);
     }
     command.run(client, message, args, settings, userInfo, strings);
