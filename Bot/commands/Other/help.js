@@ -60,7 +60,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setURL(`${client.botGuild.supportInvite}`)
       .setDescription(await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
       .setTimestamp()
-      .setFooter(message.author.tag, message.author.displayAvatarURL());
+      .setFooter('Page 1 • ' + message.author.tag, message.author.displayAvatarURL());
     // const newEmbed = new MessageEmbed()
     //   .setColor("#000000")
     //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)

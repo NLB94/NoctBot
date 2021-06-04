@@ -8,8 +8,14 @@ const {
     MessageEmbed,
     MessageAttachment
 } = require('discord.js');
-const { getStrings, categorys } = require('../../../util/constants');
-const { createCanvas, loadImage } = require('canvas');
+const {
+    getStrings,
+    categorys
+} = require('../../../util/constants');
+const {
+    createCanvas,
+    loadImage
+} = require('canvas');
 /**
  * 
  * @param {Client} client 
@@ -53,7 +59,6 @@ module.exports = async (client, interaction) => {
         .setURL(`${client.botGuild.supportInvite}`)
         .setTimestamp()
         .setTitle(strings.help.bCommands)
-        .setFooter(user.tag)
         .setDescription(user.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)));
     switch (interaction.customID) {
         case "delete": {
@@ -61,7 +66,16 @@ module.exports = async (client, interaction) => {
             break;
         }
         case 'help-home': {
-            canvas = await client.drawHelpHome(canvas, ctx, { page: 1 });
+            let isHome = false;
+            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
+            if (catName.length == 0) isHome = true;
+            if (isHome) return interaction.update({
+                embeds: [message.embeds[0]]
+            });
+            canvas = await client.drawHelpHome(canvas, ctx, {
+                page: 1
+            });
+            embed.setFooter('Page 1');
             break;
         }
         case 'right-help': {
@@ -71,9 +85,16 @@ module.exports = async (client, interaction) => {
             if (catName.length == 0) isHome = true;
             if (catName && categorys.map(c => c.name).indexOf(catName) == categorys.length - 1) isLast = true;
             if (isHome) {
-                const category = categorys[0];
-                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                embed.setTitle(embed.title + "\n" + category.name);
+                const pageNb = parseInt(message.embeds[0].footer.text?.slice(5, 6));
+                const nxtPage = pageNb + 1;
+                if ((categorys.length / 8) == 1 || (categorys.length / 8) == 0 || ((categorys.length / 8) + 1) < nxtPage) return interaction.update({
+                    embeds: [message.embeds[0]]
+                })
+                canvas = await client.drawHelpHome(canvas, ctx, {
+                    page: nxtPage
+                });
+                embed.setFooter("Page " + nxtPage);
+
             } else if (isLast) {
                 for (const category of categorys) {
                     embed.addField(`${category.emoji}${category.name}`, '\u200b')
@@ -93,9 +114,16 @@ module.exports = async (client, interaction) => {
             if (catName.length == 0) isHome = true;
             if (catName && categorys.find(c => c.name == catName).position < 1) isLast = true;
             if (isHome) {
-                const category = categorys[categorys.length - 1];
-                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === category.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                embed.setTitle(embed.title + "\n" + category.name);
+                const pageNb = parseInt(message.embeds[0].footer.text?.slice(5, 6));
+                const nxtPage = pageNb - 1;
+                if ((categorys.length / 8) == 1 || (categorys.length / 8) == 0 || nxtPage == 0) return interaction.update({
+                    embeds: [message.embeds[0]]
+                })
+                canvas = await client.drawHelpHome(canvas, ctx, {
+                    page: nxtPage
+                });
+                embed.setFooter("Page " + nxtPage);
+
             } else if (isLast) {
                 for (const category of categorys) {
                     embed.addField(`${category.emoji}${category.name}`, '\u200b')
