@@ -1,6 +1,6 @@
 const {
     Client
-} = require('discord.js');
+} = require('./functions');
 const fetch = require('node-fetch')
 const functions = require('./brawlstars');
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6Ijg5NDQ2MGNiLTk3YzctNDM3Yi1iOWE0LWJiMWQ4ODk0NmI0ZCIsImlhdCI6MTYxODEyMDYwNywic3ViIjoiZGV2ZWxvcGVyL2ZkOGUwNWRiLTAzZGQtOTZjMC0xNTk2LTYyZGM1ZTY5MGExMCIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiOTIuOTAuMTE1LjIwIl0sInR5cGUiOiJjbGllbnQifV19.QDvhjm31bv9-TKbWTzRwFVEDN0FaMeMRswc5tMQvkMGoOqPkxhizL5Vk3hb_6Yfwy9VZs0ufYjnsquglCji7rg'

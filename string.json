@@ -3,6 +3,7 @@
     "usage": "Usage correct :",
     "cmdCancel": "```La commande a été annulée !```",
     "noExample": "```Il n'y a pas d'exemple pour cette commande.```",
+    "loading": "Chargement",
     "reactAdd": {
       "supportS": {
         "roles": {
@@ -18,6 +19,7 @@
     },
     "help": {
       "bCommands": "Commandes du bot",
+      "bCats": "Catégories de commandes",
       "myPrfx": "Mon préfixe dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```"
     },
     "message": {
@@ -68,6 +70,7 @@
     "usage": "Correct usage :",
     "cmdCancel": "```The command have been canceled !```",
     "noExample": "```There are no example for this command.```",
+    "loading": "Loading",
     "reactAdd": {
       "supportS": {
         "roles": {
@@ -83,6 +86,7 @@
     },
     "help": {
       "bCommands": "Bot Commands",
+      "bCats": "Commands Categorys",
       "myPrfx": "My prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```"
     },
     "message": {

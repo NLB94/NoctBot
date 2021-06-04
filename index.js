@@ -49,7 +49,7 @@ setInterval(() => {
 const {
     loadEvents,
     loadCommands,
-    loadBots
+    // loadBots
 } = require("./util/loader");
 const {
     readdirSync

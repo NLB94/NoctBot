@@ -1,8 +1,10 @@
 const {
     MessageEmbed,
-    GuildMember,
-    Client
+    GuildMember
 } = require('discord.js');
+const {
+    Client
+} = require('../../../util/functions');
 
 /**
  * 

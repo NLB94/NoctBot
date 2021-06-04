@@ -1,5 +1,4 @@
 const {
-    Client,
     Message,
     Collection
 } = require("discord.js");
@@ -9,7 +8,7 @@ const defaultPrefix = '~';
 
 /**
  * 
- * @param {Client} client 
+ * @param {func.Client} client 
  * @param {Message} oldMessage 
  * @param {Message} newMessage 
  */

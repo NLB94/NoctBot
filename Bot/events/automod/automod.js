@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const {
-    GuildData
+    GuildData,
+    Client
 } = require('../../../util/functions')
 const functions = require('./automod')
 const {
@@ -9,7 +10,7 @@ const {
 
 /**
  * 
- * @param {Discord.Client} client 
+ * @param {Client} client 
  * @param {functions.AutomodOpt} options 
  */
 module.exports = async (client, options) => {

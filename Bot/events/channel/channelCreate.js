@@ -1,8 +1,11 @@
 const {
     MessageEmbed,
-    Client,
     GuildChannel
 } = require('discord.js');
+
+const {
+    Client
+} = require('../../../util/functions');
 
 /**
  * @event Client#channelCreate 

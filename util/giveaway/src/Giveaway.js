@@ -3,7 +3,9 @@ const Discord = require('discord.js');
 const { EventEmitter } = require('events');
 const { GiveawayEditOptions, GiveawayData, GiveawayMessages, GiveawayRerollOptions } = require('./Constants.js');
 const GiveawaysManager = require('./Manager.js');
-
+const {
+    Client
+} = require('../../functions');
 /**
  * Represents a Giveaway
  */
@@ -21,7 +23,7 @@ class Giveaway extends EventEmitter {
         this.manager = manager;
         /**
          * The Discord Client
-         * @type {Discord.Client}
+         * @type {Client}
          */
         this.client = manager.client;
         /**

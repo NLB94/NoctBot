@@ -1,7 +1,9 @@
 "use strict";
 
 const {
-    Client,
+    Client
+} = require('../../../util/functions');
+const {
     Guild
 } = require('discord.js');
 

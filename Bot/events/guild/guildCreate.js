@@ -1,7 +1,9 @@
 const {
-    Client,
     Guild
 } = require('discord.js')
+const {
+    Client
+} = require('../../../util/functions');
 /**
  * @param {Client} client 
  * @param {Guild} guild 

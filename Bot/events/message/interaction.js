@@ -1,10 +1,15 @@
 "use strict";
 const {
+    Client
+} = require('../../../util/functions');
+const {
     Interaction,
-    Client,
     MessageComponentInteraction,
-    MessageEmbed
-} = require('discord.js')
+    MessageEmbed,
+    MessageAttachment
+} = require('discord.js');
+const { getStrings, categorys } = require('../../../util/constants');
+const { createCanvas, loadImage } = require('canvas');
 /**
  * 
  * @param {Client} client 
@@ -15,62 +20,33 @@ module.exports = async (client, interaction) => {
     const message = interaction.message;
     const settings = await client.getGuild(message.guild);
     const language = settings.general.language;
-    const strings = language == 'en' ? client.en : (language == 'fr' ? client.fr : client.es);
+    const strings = await getStrings(client, language);
 
-    const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
-    const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
-    const emoji3 = client.emojis.resolve(client.localEmojis.emoji3);
-    const emoji4 = client.emojis.resolve(client.localEmojis.emoji4);
-    const emoji5 = client.emojis.resolve(client.localEmojis.emoji5);
-    const emoji6 = client.emojis.resolve(client.localEmojis.emoji6);
-    const emoji7 = client.emojis.resolve(client.localEmojis.emoji7);
-    const emoji8 = client.emojis.resolve(client.localEmojis.emoji8);
-    const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
-    
+    const emojis = {
+        1: client.emojis.resolve(client.localEmojis.emoji1),
+        2: client.emojis.resolve(client.localEmojis.emoji2),
+        3: client.emojis.resolve(client.localEmojis.emoji3),
+        4: client.emojis.resolve(client.localEmojis.emoji4),
+        5: client.emojis.resolve(client.localEmojis.emoji5),
+        6: client.emojis.resolve(client.localEmojis.emoji6),
+        7: client.emojis.resolve(client.localEmojis.emoji7),
+        8: client.emojis.resolve(client.localEmojis.emoji8),
+        9: client.emojis.resolve(client.localEmojis.emoji9),
+        loadingEmoji: client.emojis.resolve(client.localEmojis.loadingEmoji)
+    }
+    let canvas = createCanvas(2000, 2000);
+    let ctx = canvas.getContext("2d");
+
+    const img = await loadImage("./Bot/Assets/blanc.png");
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
     const blackListedIDs = [{
         id: 'delete'
     }]
-    const categorys = [{
-        name: 'Configuration',
-        emoji: emoji1,
-        commandsCat: 'configuration',
-        position: 0
-    }, {
-        name: 'Moderation',
-        emoji: emoji2,
-        commandsCat: 'moderation',
-        position: 1
-    }, {
-        name: 'Level',
-        emoji: emoji3,
-        commandsCat: 'level',
-        position: 2
-    }, {
-        name: 'Info',
-        emoji: emoji4,
-        commandsCat: 'info',
-        position: 3
-    }, {
-        name: 'Economy',
-        emoji: emoji5,
-        commandsCat: 'economy',
-        position: 4
-    }, {
-        name: 'Giveaway',
-        emoji: emoji6,
-        commandsCat: 'giveaway',
-        position: 5
-    }, {
-        name: 'Other',
-        emoji: emoji7,
-        commandsCat: 'other',
-        position: 6
-    }, {
-        name: 'Counts',
-        emoji: emoji8,
-        commandsCat: 'counts',
-        position: 7
-    }, ];
+    const loadingEmbed = new MessageEmbed()
+        .setTitle(strings.help.bCommands)
+        .setDescription(`${strings.loading}${emojis.loadingEmoji}`)
     const embed = new MessageEmbed()
         .setColor("#000000")
         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
@@ -85,9 +61,7 @@ module.exports = async (client, interaction) => {
             break;
         }
         case 'help-home': {
-            for (const category of categorys) {
-                embed.addField(`${category.emoji}${category.name}`, '\u200b')
-            }
+            canvas = await client.drawHelpHome(canvas, ctx, { page: 1 });
             break;
         }
         case 'right-help': {
@@ -135,7 +109,14 @@ module.exports = async (client, interaction) => {
             break;
         }
     }
-    if (interaction !== undefined && !(blackListedIDs.map(b => b.id).includes(interaction.customID))) await interaction.update({
-        embeds: [embed]
+    const file = new MessageAttachment(canvas.toBuffer(), "help.png");
+    if (interaction && !(blackListedIDs.map(b => b.id).includes(interaction.customID))) await interaction.update({
+        embeds: [loadingEmbed]
+    }).then(async () => {
+        embed.attachFiles(file);
+        await message.removeAttachments();
+        interaction.editReply({
+            embeds: [embed]
+        })
     })
 }

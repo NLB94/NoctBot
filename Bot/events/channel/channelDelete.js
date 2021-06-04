@@ -1,12 +1,13 @@
 const {
     MessageEmbed,
-    Client,
     GuildChannel
 } = require('discord.js');
 const {
     Guild
 } = require('../../../models');
-
+const {
+    Client
+} = require('../../../util/functions');
 /**
  * 
  * @event Client#channelDelete 

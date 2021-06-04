@@ -1,14 +1,14 @@
 const {
     MessageEmbed,
-    Message,
-    Client
+    Message
 } = require("discord.js");
 const {
     MESSAGES
 } = require("../../../util/constants");
 const {
     GuildData,
-    GuildUserData
+    GuildUserData,
+    Client
 } = require('../../../util/functions');
 const brawlClient = require('@statscell/brawl').Client;
 

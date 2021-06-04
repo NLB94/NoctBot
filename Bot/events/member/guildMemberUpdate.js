@@ -1,9 +1,11 @@
 const {
     GuildMember,
     PartialGuildMember,
-    Client,
     MessageEmbed
 } = require("discord.js");
+const {
+    Client
+} = require('../../../util/functions');
 const { getStrings } = require("../../../util/constants");
 
 /**

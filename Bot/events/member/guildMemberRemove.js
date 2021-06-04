@@ -1,5 +1,8 @@
-const { MessageEmbed, Client, GuildMember } = require('discord.js')
+const { MessageEmbed, GuildMember } = require('discord.js')
 
+const {
+    Client
+} = require('../../../util/functions');
 /**
  * 
  * @param {Client} client 

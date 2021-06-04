@@ -1,15 +1,37 @@
+import { Canvas, CanvasRenderingContext2D } from "canvas";
 import {
-  Client,
+  BaseClient,
+  BaseGuildEmojiManager,
+  ChannelManager,
+  ClientApplication,
+  ClientEvents,
+  ClientOptions,
+  ClientUser,
+  ClientVoiceManager,
   Guild,
+  GuildManager,
+  GuildPreview,
+  GuildResolvable,
+  GuildTemplateResolvable,
+  Invite,
+  InviteGenerationOptions,
+  InviteResolvable,
   Message,
   MessageEmbedOptions,
   PermissionResolvable,
   Permissions,
   Role,
+  ShardClientUtil,
+  Snowflake,
   TextChannel,
   User,
+  UserManager,
   VoiceChannel,
+  VoiceRegion,
+  Webhook,
+  WebSocketManager,
 } from "discord.js";
+import { Collection } from "mongoose";
 import { Item } from "./economy";
 import { Giveaway } from "./giveaway";
 
@@ -86,6 +108,106 @@ export declare function createCount(
   channel: VoiceChannel,
   options: CountChannels
 );
+
+export declare function drawHelpCats(canvas: Canvas, ctx: CanvasRenderingContext2D, category: Object);
+
+export declare function drawHelpHome(canvas: Canvas, ctx: CanvasRenderingContext2D, options: Object);
+
+export declare interface Cooldown {
+  public id: String;
+  public guildID: String;
+  public time: Number;
+}
+export declare interface Command {
+  run: Function;
+  help: {
+    name: String;
+    aliases?: String[];
+    category: String;
+    categoryName: String;
+    description: String;
+    ownerCmd: Boolean;
+    cooldown: Number;
+    enable: Boolean;
+    usage?: String;
+    example?: String;
+    botPerm: Boolean;
+    botPermName: String;
+    permissions: Boolean;
+    onlyServerOwner: Boolean;
+    reqPermName?: String;
+    onlyPremium: Boolean;
+    args: Boolean;
+  }  
+}
+import * as botGuild from "../.bot.json";
+import * as localEmojis from "../emojis.json";
+
+export declare class Client extends BaseClient {
+  constructor(options: ClientOptions);
+  private actions: object;
+  private _eval(script: string): any;
+  private _validateOptions(options: ClientOptions): void;
+
+  public application: ClientApplication | null;
+  public channels: ChannelManager;
+  public readonly emojis: BaseGuildEmojiManager;
+  public guilds: GuildManager;
+  public options: ClientOptions;
+  public readyAt: Date | null;
+  public readonly readyTimestamp: number | null;
+  public shard: ShardClientUtil | null;
+  public token: string | null;
+  public readonly uptime: number | null;
+  public user: ClientUser | null;
+  public users: UserManager;
+  public voice: ClientVoiceManager;
+  public ws: WebSocketManager;
+  public commands: Command[];
+  public cooldowns: Cooldown[];
+  public categories: String[];
+  public botGuild: typeof botGuild;
+  public localEmojis: typeof localEmojis;
+  public brawlManager: import("@statscell/brawl").Client
+  public topAPI: import("@top-gg/sdk").Api;
+  public fr: typeof import("../string.json").fr
+  public en: typeof import("../string.json").en
+  public es: typeof import("../string.json").es
+  public destroy(): void;
+  public fetchGuildPreview(guild: GuildResolvable): Promise<GuildPreview>;
+  public fetchInvite(invite: InviteResolvable): Promise<Invite>;
+  public fetchGuildTemplate(template: GuildTemplateResolvable): Promise<GuildTemplate>;
+  public fetchVoiceRegions(): Promise<Collection<string, VoiceRegion>>;
+  public fetchWebhook(id: Snowflake, token?: string): Promise<Webhook>;
+  public generateInvite(options?: InviteGenerationOptions): string;
+  public login(token?: string): Promise<string>;
+  public sweepMessages(lifetime?: number): number;
+  public toJSON(): object;
+
+  public on<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => Awaited<void>): this;
+  public on<S extends string | symbol>(
+    event: Exclude<S, keyof ClientEvents>,
+    listener: (...args: any[]) => Awaited<void>,
+  ): this;
+
+  public once<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => Awaited<void>): this;
+  public once<S extends string | symbol>(
+    event: Exclude<S, keyof ClientEvents>,
+    listener: (...args: any[]) => Awaited<void>,
+  ): this;
+
+  public emit<K extends keyof ClientEvents>(event: K, ...args: ClientEvents[K]): boolean;
+  public emit<S extends string | symbol>(event: Exclude<S, keyof ClientEvents>, ...args: any[]): boolean;
+
+  public off<K extends keyof ClientEvents>(event: K, listener: (...args: ClientEvents[K]) => Awaited<void>): this;
+  public off<S extends string | symbol>(
+    event: Exclude<S, keyof ClientEvents>,
+    listener: (...args: any[]) => Awaited<void>,
+  ): this;
+
+  public removeAllListeners<K extends keyof ClientEvents>(event?: K): this;
+  public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof ClientEvents>): this;
+}
 
 export declare class GuildData {
   constructor(any: any);

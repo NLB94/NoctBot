@@ -1,6 +1,5 @@
 const {
   Collection,
-  Client,
   Message,
   Channel,
 } = require("discord.js");
@@ -13,7 +12,7 @@ const {
 } = require('../../../util/functions')
 
 /**
- * @param {Client} client 
+ * @param {func.Client} client 
  * @param {Message} message 
  */
 module.exports = async (client, message) => {
@@ -109,7 +108,7 @@ module.exports = async (client, message) => {
     })
 
     if (command.help.args && !args.length) {
-      let noArgsReply = `${arrowRight}${message.author} ${strings.usage} :`;
+      let noArgsReply = `${x_mark}${message.author} ${strings.usage}`;
 
       if (command.help.usage)
         noArgsReply += `\`${settings.general.prefix}${command.help.name} ${command.help.usage}\``;
@@ -149,7 +148,7 @@ module.exports = async (client, message) => {
           return message.reply({
             embed: {
               title: strings.message.cooldown.title,
-              description: `${x_mark}${strings.message.cooldown.description.replace("{time}", Math.round(timeLeft))}`
+              description: `${x_mark}${await strings.message.cooldown.description.replace("{time}", Math.round(timeLeft))}`
             }
           });
         }

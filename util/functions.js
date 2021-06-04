@@ -6,6 +6,12 @@ const {
 } = require("../models");
 const mongoose = require('mongoose');
 const functions = require('./functions');
+const {
+  categorys
+} = require('./constants');
+const {
+  loadImage
+} = require('canvas');
 
 module.exports = functions.client = client => {
   //random String
@@ -161,4 +167,102 @@ module.exports = functions.client = client => {
     const changeVoteMonth = await new Votes(merged);
     changeVoteMonth.save();
   };
+  client.drawHelpCats = functions.drawHelpCats = async (canvas, ctx, cat) => {
+    ctx.beginPath();
+    // ctx.globalAlpha = 1;
+    // ctx.font = "100px Calibri";
+    // ctx.fillStyle = "#4169E1";
+    // ctx.fillText(client.user.tag, 250, 1900, 1000);
+    let catPos = {
+      x: 150,
+      y: 150
+    };
+    let catNb = 1;
+    // let pagesNb = 0;
+    // let pageNb = 0;
+    for (const category of categorys) {
+      if (category.position > 8) continue;
+      // pagesNb++;
+      let nextPosCmd = {
+        x: 250,
+        y: 300
+      };
+      ctx.font = "75px Calibri";
+      ctx.fillStyle = "#999999";
+      category.name == cat.name ? ctx.fillText(catNb + " - " + category.name, catPos.x, catPos.y, 500) : '';
+      catNb++;
+
+      const commands = category.name == cat.name ? await client.commands.filter(cmd => cmd.help.category == category.commandsCat).map(cmd => cmd.help) : [];
+      for (const command of commands) {
+        ctx.font = "50px Calibri";
+        ctx.fillStyle = "#000000";
+        category.name == cat.name ? ctx.fillText(`${command.name} - ${command.description}`, nextPosCmd.x, nextPosCmd.y, 1750) : '';
+        ((nextPosCmd + 200) > canvas.width) ? (nextPosCmd = 250) : nextPosCmd.y += 100
+      }
+    };
+
+    // ctx.font = "50px Calibri";
+    // ctx.fillStyle = "#000000";
+    // ctx.fillText('1/' + (parseInt((pagesNb / 8).toString().split(".")[0]) + 1), 1800, 1970, 500);
+
+    ctx.arc(1000, 150, 100, 0, Math.PI * 2, true)
+    ctx.lineWidth = 6
+    ctx.strokeStyle = "#ffffff";
+    ctx.fillStyle = "#ffffff";
+    ctx.closePath()
+    ctx.clip();
+    const avatar = await loadImage(client.user.displayAvatarURL({
+      format: "png"
+    }))
+    ctx.drawImage(avatar, 900, 50, 200, 200)
+    ctx.restore();
+
+    return canvas;
+  };
+  client.drawHelpHome = functions.drawHelpHome = async (canvas, ctx, options) => {
+    let nextPos = 250;
+    ctx.beginPath();
+    // ctx.globalAlpha = 1;
+    // ctx.font = "100px Calibri";
+    // ctx.fillStyle = "#4169E1";
+    // ctx.fillText(client.user.tag, 250, 1900, 1000);
+    let catNb = 1;
+    let pagesNb = 0;
+    for (const category of categorys) {
+      pagesNb++;
+      if (!(category.position > (options.page * 8) || category.position < ((8 * options.page) - 7))) {
+        let nextPosCmd = 250;
+        ctx.font = "75px Calibri";
+        ctx.fillStyle = "#999999";
+        ctx.fillText(catNb + " - " + category.name, 150, nextPos, 500);
+        nextPos += 50;
+        catNb++
+        const commands = await client.commands.filter(cmd => cmd.help.category == category.commandsCat).map(cmd => cmd.help);
+        for (const command of commands) {
+          ctx.font = "50px Calibri";
+          ctx.fillStyle = "#000000";
+          ctx.fillText(command.name, nextPosCmd, nextPos, 200);
+          ((nextPosCmd + 200) > canvas.width) ? (nextPosCmd = 250, nextPos += 50) : nextPosCmd += 250
+        }
+        nextPos += 150
+      }
+    };
+
+    ctx.font = "50px Calibri";
+    ctx.fillStyle = "#000000";
+    ctx.fillText(options.page + '/' + (parseInt((pagesNb / 8).toString().split(".")[0]) + 1), 1800, 1970, 500);
+
+    ctx.arc(1000, 150, 100, 0, Math.PI * 2, true)
+    ctx.lineWidth = 6
+    ctx.strokeStyle = "#ffffff";
+    ctx.fillStyle = "#ffffff";
+    ctx.closePath()
+    ctx.clip();
+    const avatar = await loadImage(client.user.displayAvatarURL({
+      format: "png"
+    }))
+    ctx.drawImage(avatar, 900, 50, 200, 200)
+    ctx.restore();
+    return canvas;
+  }
 };
