@@ -30,7 +30,7 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
   const x_mark = client.emojis.resolve('806440609127596032');
   const check_mark = client.emojis.resolve('770980790242377739');
-  const arrowRight = client.emojis.resolve('770976808899444776');
+  const arrowRight = client.emojis.resolve('851021323962023957');
 
   const settings = await client.getGuild(message.guild);
 

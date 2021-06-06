@@ -6,7 +6,7 @@ const functions = require('./guild');
 const func = require('./functions')
 
 module.exports = func.client = async (client) => {
-    client.createGuild = functions.createGuild = async guild => {
+    client.createGuild = async guild => {
         if (!guild) return;
         const merged = Object.assign({
             _id: mongoose.Types.ObjectId()
@@ -18,7 +18,7 @@ module.exports = func.client = async (client) => {
         });
         if (data) return data;
     };
-    client.getGuild = functions.getGuild = async guild => {
+    client.getGuild = async guild => {
         if (!guild) return;
         let data = await Guild.findOne({
             guildID: guild.id
@@ -27,21 +27,21 @@ module.exports = func.client = async (client) => {
         return data;
     };
 
-    client.updateGuild = functions.updateGuild = async (guild, settings) => {
+    client.updateGuild = async (guild, settings) => {
         if (!guild) return;
         let data = await client.getGuild(guild);
-        if (typeof data !== "object") data = {};
+        if (typeof data !== "object") data;
         for (const key in settings) {
             if (data[key] !== settings[key]) data[key] = settings[key];
         }
         return data.updateOne(settings);
     };
-    client.getGuildUsers = functions.getGuildUsers = async (guild) => {
+    client.getGuildUsers = async (guild) => {
         if (!guild) return;
         const data = await client.getGuild(guild);
         return data.users;
     };
-    client.createGuildUser = functions.createGuildUser = async (guild, user) => {
+    client.createGuildUser = async (guild, user) => {
         if (!guild || !user) return;
         const dailyCd = Date.now() - 8.64e+7;
         const daily = new Date(dailyCd);
@@ -90,13 +90,13 @@ module.exports = func.client = async (client) => {
             },
         }).then();
     };
-    client.getGuildUser = functions.getGuildUser = async (guild, user) => {
+    client.getGuildUser = async (guild, user) => {
         if (!user) return;
         const data = await client.getGuild(guild);
         const position = data.users.map((e) => e.id).indexOf(user.id);
         return data.users[position];
     };
-    client.updateGuildUI = functions.updateGuildUI = (guild, member, options = {}) => {
+    client.updateGuildUI = (guild, member, options) => {
         Guild.updateOne({
             guildID: guild.id,
             "users.id": member.id
@@ -104,7 +104,7 @@ module.exports = func.client = async (client) => {
             $set: options
         }).then();
     };
-    client.resetAllGuilds = functions.resetAllGuilds = async () => {
+    client.resetAllGuilds = async () => {
         await Guild.deleteOne({
             guildID: 727494941911154688
         }).then()
@@ -120,7 +120,7 @@ module.exports = func.client = async (client) => {
             })
         });
     }
-    client.updateAllGuildsUsers = functions.updateAllGuildsUsers = async (options = {}) => {
+    client.updateAllGuildsUsers = async (options) => {
         await client.guilds.cache.forEach(async g => {
             const guild = await Guild.findOne({
                 guildID: g.id
@@ -135,9 +135,15 @@ module.exports = func.client = async (client) => {
             })
         })
     }
-    client.updateAllGuilds = functions.updateAllGuilds = async function (query, options) {
-        await Guild.updateMany(query, {
-            $set: options
-        }).then()
+    client.updateAllGuilds = async function (query) {
+        await Guild.updateMany({}, {
+            $set: query
+        }).then((err, res) => {
+            if (err) {
+                console.error(err)
+            } else {
+                console.log(res)
+            }
+        });
     }
 }

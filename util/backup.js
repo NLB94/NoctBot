@@ -7,14 +7,14 @@ const functions = require('./backup');
 const func = require('./functions')
 
 module.exports = func.client = client => {
-  client.createBackup = functions.createBackup = async backup => {
+  client.createBackup = async backup => {
     const merged = Object.assign({
       _id: mongoose.Types.ObjectId()
     }, backup);
     const createBackup = await new Backup(merged);
     createBackup.save().then();
   }
-  client.newBackup = functions.newBackup = async backup => {
+  client.newBackup = async backup => {
     Guild.updateOne({
       guildID: `${backup.guildID}`
     }, {
@@ -108,7 +108,7 @@ module.exports = func.client = client => {
       }).then()
     });
   }
-  client.getBackup = functions.getBackup = async code => {
+  client.getBackup = async code => {
     if (!code) return;
     const data = await Backup.findOne({
       backupID: code
@@ -116,7 +116,7 @@ module.exports = func.client = client => {
     if (data) return data;
     return null
   }
-  client.deleteBackup = functions.deleteBackup = async (code) => {
+  client.deleteBackup = async (code) => {
     if (!code) return;
     Backup.deleteOne({
       backupID: code
@@ -126,7 +126,7 @@ module.exports = func.client = client => {
 
     });
   }
-  client.fetchCategorys = functions.fetchCategorys = async guild => {
+  client.fetchCategorys = async guild => {
     const categorys = [];
     guild.channels.cache.sort((a, b) => (a.position > b.position) ? 1 : -1).forEach(c => {
       if (c.type !== 'category') return;
@@ -185,9 +185,9 @@ module.exports = func.client = client => {
         voiceChannels: voiceChildren
       })
     });
-    return categorys
+    return categorys;
   }
-  client.fetchRoles = functions.fetchRoles = async guild => {
+  client.fetchRoles = async guild => {
     const roles = []
     guild.roles.cache.sort((a, b) => (a.position < b.position) ? 1 : -1).forEach(role => {
       if (role.id == guild.id) return;
@@ -202,7 +202,7 @@ module.exports = func.client = client => {
     })
     return roles;
   }
-  client.fetchEmojis = functions.fetchEmojis = async guild => {
+  client.fetchEmojis = async guild => {
     const emojis = []
     guild.emojis.cache.forEach(e => {
       const list = {
@@ -213,7 +213,7 @@ module.exports = func.client = client => {
     })
     return emojis;
   }
-  client.fetchTextChannels = functions.fetchTextChannels = async guild => {
+  client.fetchTextChannels = async guild => {
     const channels = []
     guild.channels.cache.sort((a, b) => (a.position > b.position) ? 1 : -1).forEach(c => {
       if (c.parent) return;
@@ -238,7 +238,7 @@ module.exports = func.client = client => {
     })
     return channels
   };
-  client.fetchVoiceChannels = functions.fetchVoiceChannels = async guild => {
+  client.fetchVoiceChannels = async guild => {
     const channels = []
     guild.channels.cache.sort((a, b) => (a.position > b.position) ? 1 : -1).forEach(c => {
       if (c.parent) return;
@@ -263,7 +263,7 @@ module.exports = func.client = client => {
     return channels;
   };
   //load
-  client.clearGuild = functions.clearGuild = async guild => {
+  client.clearGuild = async guild => {
     await guild.setName('Loading...');
     guild.setIcon(null);
     guild.setAFKChannel(null);
@@ -282,12 +282,12 @@ module.exports = func.client = client => {
       r.delete();
     });
   };
-  client.loadEmojis = functions.loadEmojis = async (guild, backup) => {
+  client.loadEmojis = async (guild, backup) => {
     await backup.emojis.forEach(e => {
       guild.emojis.create(e.url, e.name)
     });
   }
-  client.loadRoles = functions.loadRoles = async (guild, backup) => {
+  client.loadRoles = async (guild, backup) => {
     await backup.roles.forEach(r => {
       guild.roles.create().then(role => {
         role.edit({
@@ -300,7 +300,7 @@ module.exports = func.client = client => {
       })
     })
   };
-  client.loadCategorys = functions.loadCategorys = async (guild, backup) => {
+  client.loadCategorys = async (guild, backup) => {
     await backup.categorys.forEach(c => {
       const finalPermsCat = []
       c.permissions.forEach(r => {
@@ -360,7 +360,7 @@ module.exports = func.client = client => {
       })
     })
   };
-  client.loadOthersChannels = functions.loadOthersChannels = async (guild, backup) => {
+  client.loadOthersChannels = async (guild, backup) => {
     await backup.others.text.forEach(t => {
       const finalPermsText = []
       t.permissions.forEach(r => {

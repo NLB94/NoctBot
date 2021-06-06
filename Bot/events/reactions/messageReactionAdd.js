@@ -1,7 +1,7 @@
 const {
     MessageEmbed
 } = require('discord.js');
-const { getStrings } = require('../../../util/constants');
+const { getStrings, categorys } = require('../../../util/constants');
 const functions = require('./messageReactionAdd');
 
 module.exports = functions.reactionAdd = async (client, messageReaction, user) => {
@@ -39,47 +39,6 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const eyesEmoji = client.emojis.resolve(client.localEmojis.alert);
     const alertEmoji = client.emojis.resolve(client.localEmojis.alert);
 
-    const categorys = [{
-        name: 'Configuration',
-        emoji: emoji1,
-        commandsCat: 'configuration',
-        position: 0
-    }, {
-        name: 'Moderation',
-        emoji: emoji2,
-        commandsCat: 'moderation',
-        position: 1
-    }, {
-        name: 'Level',
-        emoji: emoji3,
-        commandsCat: 'level',
-        position: 2
-    }, {
-        name: 'Info',
-        emoji: emoji4,
-        commandsCat: 'info',
-        position: 3
-    }, {
-        name: 'Economy',
-        emoji: emoji5,
-        commandsCat: 'economy',
-        position: 4
-    }, {
-        name: 'Giveaway',
-        emoji: emoji6,
-        commandsCat: 'giveaway',
-        position: 5
-    }, {
-        name: 'Other',
-        emoji: emoji7,
-        commandsCat: 'other',
-        position: 6
-    }, {
-        name: 'Counts',
-        emoji: emoji8,
-        commandsCat: 'counts',
-        position: 7
-    }, ]
     if (member.user.bot) return;
     if (messageReaction.partial) {
         await messageReaction.fetch();
@@ -93,72 +52,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     if (message.author.id == client.user.id) {
         try {
             if (message.guild.id == '727494941911154688') {
-                const verifyRole = message.guild.roles.resolve('770658615752261682');
-                if (message.id == '823174979608248381') {
-                    member.roles.remove(verifyRole.id).then(() => {
-                        member.send({
-                            embed: {
-                                title: 'Verification',
-                                description: `${check_mark}${await (strings.reactAdd.supportS.verif.replace("{guild}", message.guild.name))}`
-                            }
-                        })
-                    }).catch(err => console.log(err))
-                }
-                if (message.id == '823203954833227806') {
-                    const givRole = message.guild.roles.resolve('822213564752330792');
-                    const announRole = message.guild.roles.resolve('822500136176451684');
-                    const updateRole = message.guild.roles.resolve('822500107973820466');
-                    const spoilRole = message.guild.roles.resolve('822500061736337428');
-
-
-                    switch (messageReaction.emoji) {
-                        case tada: {
-                            member.roles.add(givRole.id).then(() => {
-                                member.send({
-                                    embed: {
-                                        title: strings.reactAdd.supportS.roles.title,
-                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", givRole.name))}`
-                                    }
-                                })
-                            }).catch(() => {})
-                            break;
-                        }
-                        case announcEmoji: {
-                            member.roles.add(announRole.id).then(() => {
-                                member.send({
-                                    embed: {
-                                        title: strings.reactAdd.supportS.roles.title,
-                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", announRole.name))}`
-                                    }
-                                })
-                            }).catch(() => {})
-                            break;
-                        }
-                        case alertEmoji: {
-                            member.roles.add(updateRole.id).then(() => {
-                                member.send({
-                                    embed: {
-                                        title: strings.reactAdd.supportS.roles.title,
-                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", updateRole.name))}`
-                                    }
-                                })
-                            }).catch(() => {})
-                            break;
-                        }
-                        case eyesEmoji: {
-                            member.roles.add(spoilRole.id).then(() => {
-                                member.send({
-                                    embed: {
-                                        title: strings.reactAdd.supportS.roles.title,
-                                        description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", spoilRole.name))}`
-                                    }
-                                })
-                            }).catch(() => {})
-                            break;
-                        }
-                    }
-                    return;
-                }
+                require("./reactionAdd/supportGuild")(client, messageReaction, user);
             };
             if (message.embeds[0].description.startsWith("```What do you want") || message.embeds[0].description.startsWith("```Que voulez-vous")) {
                 if (user.tag !== message.embeds[0].footer.text) return messageReaction.users.remove(user.id);

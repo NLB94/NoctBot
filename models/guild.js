@@ -13,7 +13,8 @@ const guildSchema = mongoose.Schema({
             giveawayPrefix: 'g~',
             protectPrefix: 'p~',
             utilPrefix: 'g~',
-            ticketPrefix: 't~'
+            ticketPrefix: 't~',
+            apparence: 'light'
         }
     },
     moderation: {

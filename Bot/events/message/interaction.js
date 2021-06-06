@@ -6,7 +6,9 @@ const {
     Interaction,
     MessageComponentInteraction,
     MessageEmbed,
-    MessageAttachment
+    MessageAttachment,
+    MessageActionRow,
+    MessageButton
 } = require('discord.js');
 const {
     getStrings,
@@ -40,16 +42,21 @@ module.exports = async (client, interaction) => {
         9: client.emojis.resolve(client.localEmojis.emoji9),
         loadingEmoji: client.emojis.resolve(client.localEmojis.loadingEmoji)
     }
+    const txtColor1 = settings.general.apparence == "light" ? "#000000" : "#ffffff";
+    const txtColor2 =  settings.general.apparence == "light" ? "darkblue" : "darkblue";
     let canvas = createCanvas(2000, 2000);
     let ctx = canvas.getContext("2d");
 
-    const img = await loadImage("./Bot/Assets/blanc.png");
+    const img = await loadImage(`./Bot/Assets/${settings.general.apparence}.png`);
 
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
     const blackListedIDs = [{
         id: 'delete'
-    }]
+    }];
+    const IDs = [
+        'help-home-en', 'help-home-di', 'delete', 'right-help-home1', 'left-help-home1', 'left-help-home2'
+    ];
     const loadingEmbed = new MessageEmbed()
         .setTitle(strings.help.bCommands)
         .setDescription(`${strings.loading}${emojis.loadingEmoji}`)
@@ -60,91 +67,114 @@ module.exports = async (client, interaction) => {
         .setTimestamp()
         .setTitle(strings.help.bCommands)
         .setDescription(user.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)));
+
+    const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+            .setCustomID('help-home-en')
+            .setStyle('SUCCESS')
+            .setEmoji("🏠"),
+        );
+    embed.setDescription((embed.description ? embed.description + '\n\n' : '') + `${strings.help.sommaire}`)
+    console.log(interaction.customID);
     switch (interaction.customID) {
         case "delete": {
             message.delete();
             break;
         }
-        case 'help-home': {
-            let isHome = false;
-            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
-            if (catName.length == 0) isHome = true;
-            if (isHome) return interaction.update({
-                embeds: [message.embeds[0]]
-            });
+        case 'help-home-en': {
             canvas = await client.drawHelpHome(canvas, ctx, {
-                page: 1
+                page: 1, txtColor1, txtColor2
             });
             embed.setFooter('Page 1');
+            row.components[0].setCustomID('help-home-di');
+            row.components[0].setStyle("SECONDARY")
+            row.addComponents(
+                new MessageButton()
+                .setCustomID('left-help-home1')
+                .setStyle('PRIMARY')
+                .setEmoji("⬅️"),
+                new MessageButton()
+                .setCustomID('right-help-home1')
+                .setStyle('PRIMARY')
+                .setEmoji("➡️"),
+            )
             break;
         }
-        case 'right-help': {
-            let isHome = false;
-            let isLast = false;
-            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
-            if (catName.length == 0) isHome = true;
-            if (catName && categorys.map(c => c.name).indexOf(catName) == categorys.length - 1) isLast = true;
-            if (isHome) {
-                const pageNb = parseInt(message.embeds[0].footer.text?.slice(5, 6));
-                const nxtPage = pageNb + 1;
-                if ((categorys.length / 8) == 1 || (categorys.length / 8) == 0 || ((categorys.length / 8) + 1) < nxtPage) return interaction.update({
-                    embeds: [message.embeds[0]]
-                })
-                canvas = await client.drawHelpHome(canvas, ctx, {
-                    page: nxtPage
-                });
-                embed.setFooter("Page " + nxtPage);
-
-            } else if (isLast) {
-                for (const category of categorys) {
-                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
-                }
-            } else {
-                const exCat = categorys.find(c => c.name == catName);
-                const newCat = categorys[exCat.position + 1]
-                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                embed.setTitle(embed.title + "\n" + newCat.name);
-            }
+        case 'help-home-di': {
+            return interaction.update({
+                embeds: [message.embeds[0]]
+            })
             break;
         }
-        case 'left-help': {
-            let isHome = false;
-            let isLast = false;
-            const catName = message.embeds[0].title.slice(strings.help.bCommands.length + "\n".length);
-            if (catName.length == 0) isHome = true;
-            if (catName && categorys.find(c => c.name == catName).position < 1) isLast = true;
-            if (isHome) {
-                const pageNb = parseInt(message.embeds[0].footer.text?.slice(5, 6));
-                const nxtPage = pageNb - 1;
-                if ((categorys.length / 8) == 1 || (categorys.length / 8) == 0 || nxtPage == 0) return interaction.update({
-                    embeds: [message.embeds[0]]
-                })
-                canvas = await client.drawHelpHome(canvas, ctx, {
-                    page: nxtPage
-                });
-                embed.setFooter("Page " + nxtPage);
-
-            } else if (isLast) {
-                for (const category of categorys) {
-                    embed.addField(`${category.emoji}${category.name}`, '\u200b')
-                }
-            } else {
-                const exCat = categorys.find(c => c.name == catName);
-                const newCat = categorys[exCat.position - 1]
-                embed.setDescription(`${embed.description} \n\n${client.commands.filter(cat => cat.help.category === newCat.commandsCat).map(cmd => `\`${cmd.help.name}\` - ${cmd.help.description}`).join('\n')}`);
-                embed.setTitle(embed.title + "\n" + newCat.name);
-            }
+        case 'right-help-home1': {
+            const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
+            const nxtPage = page + 1;
+            if ((categorys.length / 8) == 1 || (categorys.length / 8) == 0 || ((categorys.length / 8) + 1) < nxtPage) return interaction.update({
+                embeds: [message.embeds[0]]
+            })
+            row.addComponents(
+                new MessageButton()
+                .setCustomID('left-help-home2')
+                .setStyle('PRIMARY')
+                .setEmoji("⬅️"),
+                new MessageButton()
+                .setCustomID('right-help-home2')
+                .setStyle('PRIMARY')
+                .setEmoji("➡️"),
+            )
+            canvas = await client.drawHelpHome(canvas, ctx, {
+                page: nxtPage, txtColor1, txtColor2
+            });
+            embed.setFooter("Page " + nxtPage);
+            row.components[0].setCustomID('help-home-en').setStyle("SUCCESS");
+            if (nxtPage >= (categorys.length / 8)) row.components[2].setStyle("SECONDARY");
+            break;
+        }
+        case 'left-help-home1': {
+            return interaction.update({
+                embeds: [message.embeds[0]]
+            })
+            break;
+        }
+        case 'left-help-home2': {
+            const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
+            const nxtPage = page - 1;
+            row.addComponents(
+                new MessageButton()
+                .setCustomID('left-help-home1')
+                .setStyle('PRIMARY')
+                .setEmoji("⬅️"),
+                new MessageButton()
+                .setCustomID('right-help-home1')
+                .setStyle('PRIMARY')
+                .setEmoji("➡️"),
+            )
+            canvas = await client.drawHelpHome(canvas, ctx, {
+                page: nxtPage, txtColor1, txtColor2
+            });
+            embed.setFooter("Page " + nxtPage);
+            row.components[0].setCustomID('help-home-di').setStyle("SECONDARY"), row.components[1].setStyle("SECONDARY");
             break;
         }
     }
+    row.addComponents(
+        new MessageButton()
+        .setCustomID('delete')
+        .setStyle('DANGER')
+        .setEmoji("🗑️"), )
     const file = new MessageAttachment(canvas.toBuffer(), "help.png");
+    if (!IDs.includes(interaction.customID)) return interaction.update({
+        embeds: [message.embeds[0]]
+    })
     if (interaction && !(blackListedIDs.map(b => b.id).includes(interaction.customID))) await interaction.update({
         embeds: [loadingEmbed]
     }).then(async () => {
         embed.attachFiles(file);
         await message.removeAttachments();
         interaction.editReply({
-            embeds: [embed]
-        })
+            embeds: [embed],
+            components: [row]
+        });
     })
 }

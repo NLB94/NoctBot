@@ -2,7 +2,7 @@ const functions = require('./level');
 const func = require('./functions')
 
 module.exports = func.client = client => {
-    client.levelUp = functions.levelUp = async (guild, member, userInfo) => {
+    client.levelUp = async (guild, member, userInfo) => {
         const oldLvl = userInfo.level;
         const xp = userInfo.XP;
         const xpreq = userInfo.XPRequire;
@@ -26,7 +26,7 @@ module.exports = func.client = client => {
             "users.$.XPtoAddReq": newAddReq
         });
     }
-    client.replaceLevelText = functions.replaceLevelText = async (text, message, options) => {
+    client.replaceLevelText = async (text, message, options) => {
         if (!text) return 'test';
         text = text.includes("{user}") ? await text.replace("{user}", message.member) : text;
         text = text.includes("{level}") ? await text.replace("{level}", options.newLvl) : text;

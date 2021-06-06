@@ -1,6 +1,6 @@
 {
   "fr": {
-    "usage": "Usage correct :",
+    "usage": "Utilisation correcte de la commande :",
     "cmdCancel": "```La commande a été annulée !```",
     "noExample": "```Il n'y a pas d'exemple pour cette commande.```",
     "loading": "Chargement",
@@ -19,8 +19,8 @@
     },
     "help": {
       "bCommands": "Commandes du bot",
-      "bCats": "Catégories de commandes",
-      "myPrfx": "Mon préfixe dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```"
+      "myPrfx": "Le préfixe utilisé dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```",
+      "sommaire": "```md\nSommaire : \n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
     },
     "message": {
       "onDev": "```arm\nCette commande est en développement. \n# Patience...",
@@ -67,7 +67,7 @@
     }
   },
   "en": {
-    "usage": "Correct usage :",
+    "usage": "Correct usage of the command :",
     "cmdCancel": "```The command have been canceled !```",
     "noExample": "```There are no example for this command.```",
     "loading": "Loading",
@@ -86,8 +86,8 @@
     },
     "help": {
       "bCommands": "Bot Commands",
-      "bCats": "Commands Categorys",
-      "myPrfx": "My prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```"
+      "myPrfx": "The prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```",
+      "sommaire": "```md\nSummary : \n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ page \n# 🗑️ Delete message```"
     },
     "message": {
       "onDev": "```arm\nThis command is on devlopment. \n# Please wait...",

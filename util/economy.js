@@ -4,7 +4,7 @@ const functions = require("./economy");
 const func = require('./functions')
 
 module.exports = func.client = client => {
-    client.createItem = functions.createItem = async (guild, item) => {
+    client.createItem = async (guild, item) => {
         Guild.updateOne({
             guildID: guild.id
         }, {

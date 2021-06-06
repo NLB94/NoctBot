@@ -2,11 +2,10 @@ const ms = require('ms');
 const {
   Guild,
 } = require("../models");
-const functions = require('./giveaway');
 const func = require('./functions')
 
 module.exports = func.client = client => {
-  client.createGiveaway = functions.createGiveaway = async (guild, giveaway) => {
+  client.createGiveaway = async (guild, giveaway) => {
     const settings = await client.getGuild(guild);
     await Guild.updateOne({
       guildID: guild.id
@@ -33,7 +32,7 @@ module.exports = func.client = client => {
     const giveawayData = await client.getGiveaway(guild, giveaway.id)
     return await giveawayData;
   };
-  client.getGiveaway = functions.getGiveaway = async (guild, id) => {
+  client.getGiveaway = async (guild, id) => {
     const data = await Guild.findOne({
       guildID: guild.id
     });
@@ -41,7 +40,7 @@ module.exports = func.client = client => {
     const giveawayInfo = await data.giveaways[position];
     return await giveawayInfo;
   };
-  client.editGiveaway = functions.editGiveaway = async (guild, giveaway, options) => {
+  client.editGiveaway = async (guild, giveaway, options) => {
     Guild.updateOne({ 
       guildID: guild.id,
       "giveaways.id": giveaway.id 
@@ -49,19 +48,19 @@ module.exports = func.client = client => {
        $set: options
      }).then()
   }
-  client.endGiveaway = functions.endGiveaway = async (guild, giveaway) => {
+  client.endGiveaway = async (guild, giveaway) => {
     const giveData = await client.getGiveaway(guild, giveaway.id);
     if (giveData.status !== 'en-cours') return;
     client.editGiveaway(guild, giveData, { "giveaways.$.status": 'fini', "giveaways.$.winners": giveaway.winners, "giveaways.$.endedAt": Date.now() })
   };
-  client.restartGiveaway = functions.restartGiveaway = async (guild, giveaway) => {};
-  client.deleteGiveaway = functions.deleteGiveaway = async (guild, ID) => {
+  client.restartGiveaway = async (guild, giveaway) => {};
+  client.deleteGiveaway = async (guild, id) => {
     Guild.updateOne({
       guildID: guild.id
     }, {
       $pull: {
         giveaways: {
-          id: ID
+          id
         }
       }
     }).then()

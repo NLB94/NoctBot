@@ -61,4 +61,4 @@ import { GuildData, GuildUserData } from "./functions";
      * Update all guilds with missing informations
      * @param {Object} options 
      */
-    export declare function updateAllGuilds(query: Object, options: Object);
+    export declare function updateAllGuilds(query: Object);

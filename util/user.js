@@ -7,7 +7,7 @@ const {
 const Discord = require("discord.js");
 
 module.exports = func.client = async (client) => {
-    client.createUser = functions.createUser = async (userInfo) => {
+    client.createUser = async (userInfo) => {
         const dbUser = await User.findOne({ userID: userInfo.userID });
         if (dbUser) return dbUser;
         const merged = Object.assign({
@@ -16,7 +16,7 @@ module.exports = func.client = async (client) => {
         const createUser = await new User(merged);
         return (await createUser.save());
     };
-    client.findAndUpdateUser = functions.findAndUpdateUser = async (userID, options) => {
+    client.findAndUpdateUser = async (userID, options) => {
         const user = await User.findOneAndUpdate({
             userID: userID
         }, options, {

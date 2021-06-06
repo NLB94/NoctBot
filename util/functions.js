@@ -15,7 +15,7 @@ const {
 
 module.exports = functions.client = client => {
   //random String
-  client.randomString = functions.randomString = query => {
+  client.randomString = query => {
     var a = 10,
       b = 'abcdefghijklmnopqrstuvwxyz',
       c = '',
@@ -42,7 +42,7 @@ module.exports = functions.client = client => {
     return c;
   };
   //custom command
-  client.newCustomCommand = functions.newCustomCommand = async (guild, options) => {
+  client.newCustomCommand = async (guild, options) => {
     if (!guild) return;
     const settings = await functions.getGuild(guild);
     Guild.updateOne({
@@ -58,7 +58,7 @@ module.exports = functions.client = client => {
     }).then();
   };
   //lock functions
-  client.lockChannel = functions.lockChannel = async (guild, channel) => {
+  client.lockChannel = async (guild, channel) => {
     if (!guild || !channel) return;
     channel.name = channel.name.replace('🔒_', '');
     Guild.updateOne({
@@ -72,7 +72,7 @@ module.exports = functions.client = client => {
       }
     }).then();
   };
-  client.unlockChannel = functions.unlockChannel = (guild, channel) => {
+  client.unlockChannel = (guild, channel) => {
     Guild.updateOne({
       guildID: guild.id,
     }, {
@@ -90,7 +90,7 @@ module.exports = functions.client = client => {
 
   };
 
-  client.translate = functions.translate = async (string, from, to) => {
+  client.translate = async (string, from, to) => {
     const traduction = await client.trad(string, {
       from: from,
       to: to
@@ -99,7 +99,7 @@ module.exports = functions.client = client => {
     });
     return traduction;
   }
-  client.createCount = functions.createCount = async (guild, channel, options) => {
+  client.createCount = async (guild, channel, options) => {
     await Guild.updateOne({
       guildID: guild.id
     }, {
@@ -112,12 +112,6 @@ module.exports = functions.client = client => {
       }
     }).then()
   };
-  /**
-   * 
-   * @param {Discord.Guild} guild 
-   * @param {functions.ModCase} options
-   * @param {functions.GuildData} settings
-   */
   client.createCase = async (guild, options, settings) => {
     await Guild.updateOne({
       guildID: guild.id
@@ -127,11 +121,6 @@ module.exports = functions.client = client => {
       }
     }).then()
   };
-  /**
-   * 
-   * @param {functions.VoteData} vote 
-   * @param {Number} timeS 
-   */
   client.newVote = async (vote, timeS) => {
     let data = {
       user: vote.user,
@@ -153,7 +142,7 @@ module.exports = functions.client = client => {
         $push: {
           votes: data
         }
-      })
+      }).then();
     }, 3000);
   };
   client.changeVoteMonth = async () => {
@@ -167,7 +156,7 @@ module.exports = functions.client = client => {
     const changeVoteMonth = await new Votes(merged);
     changeVoteMonth.save();
   };
-  client.drawHelpCats = functions.drawHelpCats = async (canvas, ctx, cat) => {
+  client.drawHelpCats = async (canvas, ctx, cat) => {
     ctx.beginPath();
     // ctx.globalAlpha = 1;
     // ctx.font = "100px Calibri";
@@ -195,14 +184,14 @@ module.exports = functions.client = client => {
       const commands = category.name == cat.name ? await client.commands.filter(cmd => cmd.help.category == category.commandsCat).map(cmd => cmd.help) : [];
       for (const command of commands) {
         ctx.font = "50px Calibri";
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = options.txtColor1;
         category.name == cat.name ? ctx.fillText(`${command.name} - ${command.description}`, nextPosCmd.x, nextPosCmd.y, 1750) : '';
         ((nextPosCmd + 200) > canvas.width) ? (nextPosCmd = 250) : nextPosCmd.y += 100
       }
     };
 
     // ctx.font = "50px Calibri";
-    // ctx.fillStyle = "#000000";
+    // ctx.fillStyle = options.txtColor1;
     // ctx.fillText('1/' + (parseInt((pagesNb / 8).toString().split(".")[0]) + 1), 1800, 1970, 500);
 
     ctx.arc(1000, 150, 100, 0, Math.PI * 2, true)
@@ -219,7 +208,7 @@ module.exports = functions.client = client => {
 
     return canvas;
   };
-  client.drawHelpHome = functions.drawHelpHome = async (canvas, ctx, options) => {
+  client.drawHelpHome = async (canvas, ctx, options) => {
     let nextPos = 250;
     ctx.beginPath();
     // ctx.globalAlpha = 1;
@@ -233,14 +222,14 @@ module.exports = functions.client = client => {
       if (!(category.position > (options.page * 8) || category.position < ((8 * options.page) - 7))) {
         let nextPosCmd = 250;
         ctx.font = "75px Calibri";
-        ctx.fillStyle = "#999999";
+        ctx.fillStyle = options.txtColor2;
         ctx.fillText(catNb + " - " + category.name, 150, nextPos, 500);
         nextPos += 50;
         catNb++
         const commands = await client.commands.filter(cmd => cmd.help.category == category.commandsCat).map(cmd => cmd.help);
         for (const command of commands) {
           ctx.font = "50px Calibri";
-          ctx.fillStyle = "#000000";
+          ctx.fillStyle = options.txtColor1;
           ctx.fillText(command.name, nextPosCmd, nextPos, 200);
           ((nextPosCmd + 200) > canvas.width) ? (nextPosCmd = 250, nextPos += 50) : nextPosCmd += 250
         }
@@ -249,7 +238,7 @@ module.exports = functions.client = client => {
     };
 
     ctx.font = "50px Calibri";
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = options.txtColor1;
     ctx.fillText(options.page + '/' + (parseInt((pagesNb / 8).toString().split(".")[0]) + 1), 1800, 1970, 500);
 
     ctx.arc(1000, 150, 100, 0, Math.PI * 2, true)

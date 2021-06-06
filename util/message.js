@@ -8,8 +8,8 @@ const func = require('./functions');
 module.exports = func.client = async client => {
     const x_mark = client.emojis.resolve('806440609127596032');
 
-    client.notStartByPrefix = functions.notStartByPrefix = async (message, settings, userInfo) => {
-        const arrowRight = client.emojis.resolve('770976808899444776');
+    client.notStartByPrefix = async (message, settings, userInfo) => {
+        const arrowRight = client.emojis.resolve('851021323962023957');
         if (message.content.startsWith('~help') && settings.general.prefix !== '~') await message.channel.send({
             embed: {
                 description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``

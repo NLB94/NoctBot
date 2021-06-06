@@ -45,19 +45,19 @@ import {
 
   export declare class Giveaway {
     constructor (GiveawayData: GiveawayData);
-    readonly id: Snowflake;
-    readonly author: Snowflake;
-    readonly startedAt: Number;
-    readonly endedAt: Number;
+    public id: Snowflake;
+    public author: Snowflake;
+    public startedAt: Number;
+    public endedAt: Number;
     public time: Number;
     public remaining: Number;
     public winnerCount: Number;
     public winners: User[];
-    readonly channel: Channel;
+    public channel: Channel;
     public price: String;
     public status: String;
-    readonly blackListRoles: Role[];
-    readonly whiteListRoles: Role[];
+    public blackListRoles: Role[];
+    public whiteListRoles: Role[];
   }
   
   export interface GiveawayData {

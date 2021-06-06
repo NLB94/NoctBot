@@ -37,9 +37,20 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const right = client.emojis.resolve(client.localEmojis.arrowRight);
-  const img = await loadImage('./Bot/Assets/blanc.png');
+  const img = await loadImage(`./Bot/Assets/${settings.general.apparence}.png`);
+  const txtColor1 = settings.general.apparence == "light" ? "#000000" : "#ffffff";
+  const txtColor2 =  settings.general.apparence == "light" ? "darkblue" : "darkblue";
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
+  /:invert color/ // var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  // // invert colors
+  // var i;
+  // for (i = 0; i < imgData.data.length; i += 4) {
+  //   imgData.data[i] = 255 - imgData.data[i];
+  //   imgData.data[i + 1] = 255 - imgData.data[i + 1];
+  //   imgData.data[i + 2] = 255 - imgData.data[i + 2];
+  //   imgData.data[i + 3] = 255;
+  // }
+  // ctx.putImageData(imgData, 0, 0);
   message.react(loadingEmoji).catch(err => {
     message.react("⏰").catch(err => message.channel.send('Please wait...'))
   });
@@ -61,6 +72,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setDescription(await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
       .setTimestamp()
       .setFooter('Page 1 • ' + message.author.tag, message.author.displayAvatarURL());
+
+    embed.setDescription((embed.description ? embed.description + '\n\n' : '') + `${strings.help.sommaire}`)
     // const newEmbed = new MessageEmbed()
     //   .setColor("#000000")
     //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
@@ -69,7 +82,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //   .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
     //   .setTimestamp()
     //   .setFooter('React with 🗑️ to cancel command')
-    canvas = await client.drawHelpHome(canvas, ctx, { page: 1 });
+    canvas = await client.drawHelpHome(canvas, ctx, {
+      page: 1, txtColor1, txtColor2
+    });
 
     // for (const category of categorys) {
     //   newEmbed.addField(`${await client.emojis.resolve(category.emoji)}${category.name}`, '\u200b')
@@ -77,15 +92,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-        .setCustomID('help-home')
+        .setCustomID('help-home-di')
         .setStyle('SECONDARY')
         .setEmoji("🏠"),
         new MessageButton()
-        .setCustomID('left-help')
+        .setCustomID('left-help-home1')
         .setStyle('PRIMARY')
         .setEmoji("⬅️"),
         new MessageButton()
-        .setCustomID('right-help')
+        .setCustomID('right-help-home1')
         .setStyle('PRIMARY')
         .setEmoji("➡️"),
         new MessageButton()
@@ -121,9 +136,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (cat) {
       const embed = new MessageEmbed()
         .setColor("#000000")
-        .setTitle(strings.help.bCats + "\n" + cat.name)
+        .setTitle(strings.help.bCommands + "\n" + cat.name)
         .setFooter(message.author.tag, message.author.displayAvatarURL())
         .setDescription(strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix));
+
+      embed.setDescription((embed.description ? embed.description + '\n\n' : '') +
+ `${strings.help.sommaire}`)
 
       canvas = await client.drawHelpCats(canvas, ctx, cat)
       // for (const command of readdirSync(`./Bot/commands/${cat}`)) {
@@ -198,7 +216,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       pos.y += 75;
 
       ctx.font = "50px Calibri";
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = txtColor1;
       ctx.fillText(command.help.name.replace(command.help.name[0], command.help.name[0].toUpperCase()), pos.x, pos.y, 1000);
       pos.y += 100;
 
@@ -208,7 +226,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       pos.y += 75;
 
       ctx.font = "50px Calibri";
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = txtColor1;
       ctx.fillText(command.help.enable ? '🟢' : '🔴', pos.x, pos.y, 500);
       pos.y += 100
 
@@ -218,7 +236,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       pos.y += 75;
 
       ctx.font = "50px Calibri";
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = txtColor1;
       ctx.fillText(command.help.description, pos.x, pos.y, 1750);
       pos.y += 100
       if (command.help.cooldown > 1) {
@@ -228,7 +246,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         pos.y += 75;
 
         ctx.font = "50px Calibri";
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = txtColor1;
         ctx.fillText(command.help.cooldown + ' second(s)', pos.x, pos.y, 1750);
         pos.y += 100
       }
@@ -240,7 +258,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         pos.y += 75;
 
         ctx.font = "50px Calibri";
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = txtColor1;
         ctx.fillText(command.help.aliases.join(", "), pos.x, pos.y, 1750);
         pos.y += 100
       }
@@ -252,7 +270,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         pos.y += 75;
 
         ctx.font = "50px Calibri";
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = txtColor1;
         ctx.fillText(command.help.usage, pos.x, pos.y, 1750);
         pos.y += 100
       }
@@ -263,7 +281,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       pos.y += 75;
 
       ctx.font = "50px Calibri";
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = txtColor1;
       ctx.fillText(command.help.onlyServerOwner ? '🟢' : '🔴', pos.x, pos.y, 1750);
       pos.y += 100
 

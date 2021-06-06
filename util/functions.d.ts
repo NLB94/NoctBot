@@ -10,6 +10,7 @@ import {
   ClientVoiceManager,
   Guild,
   GuildManager,
+  GuildMember,
   GuildPreview,
   GuildResolvable,
   GuildTemplateResolvable,
@@ -142,6 +143,7 @@ export declare interface Command {
 }
 import * as botGuild from "../.bot.json";
 import * as localEmojis from "../emojis.json";
+import { Brawlers, Player } from "./brawlstars";
 
 export declare class Client extends BaseClient {
   constructor(options: ClientOptions);
@@ -173,6 +175,70 @@ export declare class Client extends BaseClient {
   public fr: typeof import("../string.json").fr
   public en: typeof import("../string.json").en
   public es: typeof import("../string.json").es
+  public randomString(query: Object): String;
+  public newCustomCommand(guild: Guild, options: Object): void;
+  public translate(string: String, from: String, to: String): String;
+  public createCount(guild: Guild, channel: VoiceChannel, options: CountChannels): void;
+  //moderation
+  public lockChannel(guild: Guild, channel: TextChannel): void;
+  public unlockChannel(guild: Guild, channel: TextChannel): void;
+  public createCase(guild: Guild, options: ModCase, settings: GuildData): void;
+  //Votes
+  public newVote(vote: VoteData, timeS: Number);
+  public changeVoteMonth(): void;
+  //Help
+  public drawHelpCats(canvas: Canvas, ctx: CanvasRenderingContext2D, cat: Object): Canvas;
+  public drawHelpHome(canvas: Canvas, ctx: CanvasRenderingContext2D, options: Object): Canvas;
+  //Users
+  public createUser(userInfo: Object): UserData;
+  public findAndUpdateUser(userID: String, options: Object): ?UserData;
+  public getUser(user: User): ?UserData;
+  public updateUser(user: User, options: Object): void;
+  //Guilds
+  public createGuild(guild: Object): ?GuildData
+  public getGuild(guild: Guild): ?GuildData
+  public updateGuild(guild: Guild, settings: Object): void;
+  public getGuildUsers(guild: Object): ?UserData[]
+  public createGuildUser(guild: Guild, user: User): void;
+  public getGuildUser(guild: Guild, user: User): GuildUserData;
+  public updateGuildUI(guild: Guild, member: GuildMember, options: Object): void;
+  public resetAllGuilds(): void;
+  public updateAllGuildsUsers(options: Object): void;
+  public updateAllGuilds(options: Object): void;
+  //games
+  private fetchBrawlURL(url: String): ?JSON;
+  public getBrawlPlayer(tag: String): Player;
+  public getBrawlBrawlers(): Brawlers;
+  //level
+  public levelUp(guild: Guild, member: GuildMember, userInfo: GuildUserData): void;
+  public replaceLevelText(text: String, message: Message, options: Object): String;
+  //backups
+  public createBackup(backup: Object): void;
+  public newBackup(backup: Object): void;
+  public getBackup(code: String): ?Object;
+  public deleteBackup(code: String): void;
+  public fetchCategorys(guild: Guild): any[];
+  public fetchRoles(guild: Guild): any[];
+  public fetchEmojis(guild: Guild): any[];
+  public fetchTextChannels(guild: Guild): any[];
+  public fetchVoiceChannels(guild: Guild): any[];
+  public clearGuild(guild: Guild): void;
+  public loadEmojis(guild: Guild, backup: Object): void;
+  public loadRoles(guild: Guild, backup: Object): void;
+  public loadCategorys(guild: Guild, backup: Object): void;
+  public loadOthersChannels(guild: Guild, backup: Object): void;
+  //message
+  public notStartByPrefix(message: Message, settings: GuildData, userInfo: GuildUserData): void;
+  //economy
+  public createItem(guild: Guild, item: Item): void;
+  //giveaway
+  public createGiveaway(guild: Guild, giveaway: Giveaway): ?Giveaway;
+  public getGiveaway(guild: Guild, id: String): Giveaway;
+  public editGiveaway(guild: Guild, giveaway: Giveaway, options: Object): void;
+  public endGiveaway(guild: Guild, giveaway: Giveaway): void;
+  public restartGiveaway(guild: Guild, giveaway: Giveaway): ?Giveaway;
+  public deleteGiveaway(guild: Guild, id: String): void;
+  /*END HEEEEEEEERE*/
   public destroy(): void;
   public fetchGuildPreview(guild: GuildResolvable): Promise<GuildPreview>;
   public fetchInvite(invite: InviteResolvable): Promise<Invite>;
@@ -217,6 +283,7 @@ export declare class GuildData {
     prefix: String;
     logs: String;
     premium: Boolean;
+    apparence: "light" | "dark";
   };
   moderation: {
     case: ModCase[];
