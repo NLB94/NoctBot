@@ -127,5 +127,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         command.run(client, message, args, settings, userInfo, strings)
     }
 };
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.CLEAR;

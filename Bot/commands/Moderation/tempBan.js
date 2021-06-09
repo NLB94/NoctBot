@@ -78,5 +78,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   }
   else return message.channel.send({embed: { description: `${x_mark}User not found!`}});
 };
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.TEMPBAN;

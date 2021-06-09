@@ -31,8 +31,8 @@ import {
   VoiceRegion,
   Webhook,
   WebSocketManager,
+  Collection
 } from "discord.js";
-import { Collection } from "mongoose";
 import { Item } from "./economy";
 import { Giveaway } from "./giveaway";
 
@@ -119,26 +119,29 @@ export declare interface Cooldown {
   public guildID: String;
   public time: Number;
 }
+export class Commands {
+  public get(name: String): Command;
+};
 export declare interface Command {
-  run: Function;
-  help: {
-    name: String;
-    aliases?: String[];
-    category: String;
-    categoryName: String;
-    description: String;
-    ownerCmd: Boolean;
-    cooldown: Number;
-    enable: Boolean;
-    usage?: String;
-    example?: String;
-    botPerm: Boolean;
-    botPermName: String;
-    permissions: Boolean;
-    onlyServerOwner: Boolean;
-    reqPermName?: String;
-    onlyPremium: Boolean;
-    args: Boolean;
+  private run: Function;
+  public help: {
+    public name: String;
+    public aliases?: String[];
+    public category: String;
+    public categoryName: String;
+    public description: String;
+    public ownerCmd: Boolean;
+    public cooldown: Number;
+    public enable: Boolean;
+    public usage?: String;
+    public example?: String;
+    public botPerm: Boolean;
+    public botPermName: String;
+    public permissions: Boolean;
+    public onlyServerOwner: Boolean;
+    public reqPermName?: String;
+    public onlyPremium: Boolean;
+    public args: Boolean;
   }  
 }
 import * as botGuild from "../.bot.json";
@@ -165,8 +168,8 @@ export declare class Client extends BaseClient {
   public users: UserManager;
   public voice: ClientVoiceManager;
   public ws: WebSocketManager;
-  public commands: Command[];
-  public cooldowns: Cooldown[];
+  public commands: Collection<string, Command>;
+  public cooldowns: Collection<string, Cooldown>;
   public categories: String[];
   public botGuild: typeof botGuild;
   public localEmojis: typeof localEmojis;
@@ -187,7 +190,7 @@ export declare class Client extends BaseClient {
   public newVote(vote: VoteData, timeS: Number);
   public changeVoteMonth(): void;
   //Help
-  public drawHelpCats(canvas: Canvas, ctx: CanvasRenderingContext2D, cat: Object): Canvas;
+  public drawHelpCats(canvas: Canvas, ctx: CanvasRenderingContext2D, cat: Object, options: Object): Canvas;
   public drawHelpHome(canvas: Canvas, ctx: CanvasRenderingContext2D, options: Object): Canvas;
   //Users
   public createUser(userInfo: Object): UserData;

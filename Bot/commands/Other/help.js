@@ -17,7 +17,7 @@ let {
   categorys
 } = require("../../../util/constants");
 const categoryList = readdirSync('./Bot/commands');
-categorys = categorys.slice(0, 8);
+const cats = categorys.slice(0, 8);
 
 const functions = require('../../../util/functions');
 
@@ -59,7 +59,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     // const embed = new MessageEmbed()
     //   .setColor("#000000")
     //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-    //   .setTitle("Bot Commands")
+    //   .setTitle(strings.help.bCommands)
     //   .setURL(`${client.botGuild.supportInvite}`)
     //   .setDescription(`Loading commands${loadingEmoji}`)
     //   .setTimestamp()
@@ -67,9 +67,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const embed = new MessageEmbed()
       .setColor("#000000")
       .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-      .setTitle("Bot Commands")
+      .setTitle(strings.help.bCommands)
       .setURL(`${client.botGuild.supportInvite}`)
-      .setDescription(await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
+      .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
       .setTimestamp()
       .setFooter('Page 1 • ' + message.author.tag, message.author.displayAvatarURL());
 
@@ -77,7 +77,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     // const newEmbed = new MessageEmbed()
     //   .setColor("#000000")
     //   .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
-    //   .setTitle("Bot Commands")
+    //   .setTitle(strings.help.bCommands)
     //   .setURL(`${client.botGuild.supportInvite}`)
     //   .setDescription(message.author.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)))
     //   .setTimestamp()
@@ -92,16 +92,18 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-        .setCustomID('help-home-di')
+        .setDisabled(true)
+        .setCustomID('NONE')
         .setStyle('SECONDARY')
         .setEmoji("🏠"),
         new MessageButton()
-        .setCustomID('left-help-home1')
-        .setStyle('PRIMARY')
+        .setDisabled(true)
+        .setCustomID('NONE')
+        .setStyle('SECONDARY')
         .setEmoji("⬅️"),
         new MessageButton()
-        .setCustomID('right-help-home1')
-        .setStyle('PRIMARY')
+        .setCustomID(((categorys.length / 8) > 1) ? 'right-help-home1' : 'NONE')
+        .setStyle(((categorys.length / 8) > 1) ? 'PRIMARY' : 'SECONDARY')
         .setEmoji("➡️"),
         new MessageButton()
         .setCustomID('delete')
@@ -137,13 +139,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const embed = new MessageEmbed()
         .setColor("#000000")
         .setTitle(strings.help.bCommands + "\n" + cat.name)
+        .setURL(client.botGuild.supportInvite)
         .setFooter(message.author.tag, message.author.displayAvatarURL())
         .setDescription(strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix));
 
-      embed.setDescription((embed.description ? embed.description + '\n\n' : '') +
- `${strings.help.sommaire}`)
+      embed.setDescription((embed.description ? embed.description + '\n\n' : '') + `${strings.help.sommaire}`)
 
-      canvas = await client.drawHelpCats(canvas, ctx, cat)
+      canvas = await client.drawHelpCats(canvas, ctx, cat, {
+        txtColor1, txtColor2
+      })
       // for (const command of readdirSync(`./Bot/commands/${cat}`)) {
       //   const cmd = client.commands.get(command.slice(0, parseInt(command.length) - 3).toLowerCase());
       //   if (cmd !== undefined) {
@@ -307,5 +311,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
+module.exports.underCat = MESSAGES.COMMANDS.OTHER.HELP;
 
 module.exports.help = MESSAGES.COMMANDS.OTHER.HELP;

@@ -23,5 +23,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         client.unlockChannel(message.guild, message.channel)
         message.channel.send({ embed: { description: '🔓 - Channel unlocked' } })
 }
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.UNLOCK;

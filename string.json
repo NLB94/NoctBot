@@ -22,6 +22,20 @@
       "myPrfx": "Le préfixe utilisé dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```",
       "sommaire": "```md\nSommaire : \n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
     },
+    "constants": {
+      "manage": "Gérer",
+      "admin": "Administrateur",
+      "inventory": "Inventaire",
+      "counts": {
+        "description": "Créer et modifier des salons de comptes de membres, salons ou bien boosts !"
+      },
+      "economy": {
+        "admin": "Créer des objets personnalisés pour la boutique du serveur, et récompensez vos membres en leur ajoutant de l'argent !",
+        "items": "Achetez des objets dans la boutique du serveur afin de recevoir des rôles ou plus encore !",
+        "managemoney": "Gérer votre argent en déposant de l'argent à votre banque, en retirer et transférer à d'autres membres !",
+        "getmoney": "Voici les différentes commandes pour gagner de l'argent du serveur :"
+      }
+    },
     "message": {
       "onDev": "```arm\nCette commande est en développement. \n# Patience...",
       "onlyPremium": "```diff\n- Seulement pour les serveurs premium ! \n+ Obtenez le mode premium pour plus de fonctionnalités !```",

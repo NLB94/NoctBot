@@ -110,5 +110,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         message.channel.send(language == 'fr' ? '**Commande annulée !**' : '**Command canceled !**')
     }
 }
+module.exports.underCat = MESSAGES.COMMANDS;
 
-module.exports.help = MESSAGES.COMMANDS.COUNTS.CREATE;
+module.exports.help = MESSAGES.COMMANDS.COUNTS.MANAGE.CREATE;

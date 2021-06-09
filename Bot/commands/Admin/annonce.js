@@ -21,5 +21,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   channel.send(embed)
 };
+module.exports.underCat = MESSAGES.COMMANDS.ADMIN.ANNONCE;
 
 module.exports.help = MESSAGES.COMMANDS.ADMIN.ANNONCE;

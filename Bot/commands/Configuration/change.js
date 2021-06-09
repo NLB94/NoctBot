@@ -115,5 +115,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         }
     }
 };
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.CHANGE;

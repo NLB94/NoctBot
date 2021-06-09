@@ -22,5 +22,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   }
   else if (cleanCode) message.channel.send(cleanCode, { code: "js" });
 };
- 
+ module.exports.underCat = MESSAGES.COMMANDS.ADMIN.EVAL;
+
 module.exports.help = MESSAGES.COMMANDS.ADMIN.EVAL;

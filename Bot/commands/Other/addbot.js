@@ -15,5 +15,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setTitle('Bot Links🔗')
     message.channel.send(embed);
 };
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.OTHER.ADDBOT;

@@ -35,8 +35,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
+module.exports.underCat = MESSAGES.COMMANDS.ECONOMY.ITEMS;
 
-module.exports.help = MESSAGES.COMMANDS.ECONOMY.SHOP;
+module.exports.help = module.exports.underCat.SHOP;
   // try {
     //   message.channel.send(`Do you want to buy \`${item.name.toLowerCase()}\` for $${item.prix} ? (yes or cancel)`);
     //   const filter = m => (message.author.id === m.author.id);

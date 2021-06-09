@@ -83,5 +83,6 @@ module.exports.run = async (client, message, args, settings, userInfo, strings) 
         }
     func(client);
 }
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.BRAWL.PLAYER;

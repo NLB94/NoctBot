@@ -156,7 +156,7 @@ module.exports = functions.client = client => {
     const changeVoteMonth = await new Votes(merged);
     changeVoteMonth.save();
   };
-  client.drawHelpCats = async (canvas, ctx, cat) => {
+  client.drawHelpCats = async (canvas, ctx, cat, options) => {
     ctx.beginPath();
     // ctx.globalAlpha = 1;
     // ctx.font = "100px Calibri";
@@ -177,7 +177,7 @@ module.exports = functions.client = client => {
         y: 300
       };
       ctx.font = "75px Calibri";
-      ctx.fillStyle = "#999999";
+      ctx.fillStyle = options.txtColor2;
       category.name == cat.name ? ctx.fillText(catNb + " - " + category.name, catPos.x, catPos.y, 500) : '';
       catNb++;
 
@@ -205,7 +205,6 @@ module.exports = functions.client = client => {
     }))
     ctx.drawImage(avatar, 900, 50, 200, 200)
     ctx.restore();
-
     return canvas;
   };
   client.drawHelpHome = async (canvas, ctx, options) => {

@@ -17,5 +17,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         m.ban() 
     }})
 }
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.ADMIN.RAID;

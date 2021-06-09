@@ -4,14 +4,13 @@ const {
 } = require("discord.js");
 const {
     Client
-} = require("../../../util/functions");
+} = require("../../../../util/functions");
 
 /**
  * 
  * @param {Client} client 
  * @param {MessageReaction} messageReaction 
  * @param {User} user 
- * @returns 
  */
 module.exports = async (client, messageReaction, user) => {
     const message = messageReaction.message;

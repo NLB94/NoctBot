@@ -50,5 +50,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     message.channel.send(embed);
   };
 };
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.INFO.USERINFO;

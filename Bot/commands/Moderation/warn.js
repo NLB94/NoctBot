@@ -54,5 +54,6 @@ module.exports.run = fnc.run = async (client, message, args, settings, userInfo,
         })
     }
 }
+module.exports.underCat = MESSAGES.COMMANDS;
 
 module.exports.help = MESSAGES.COMMANDS.MODERATION.WARN;
