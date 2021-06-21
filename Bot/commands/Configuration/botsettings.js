@@ -8,7 +8,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-
+  // A FAIRE ICIIIIIIIIIIIi
   const embed = new MessageEmbed()
     .setColor("#000000")
     .setTitle(`Bot Settings in ${message.guild} :`)

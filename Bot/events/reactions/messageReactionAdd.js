@@ -34,16 +34,21 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const strings = await getStrings(client, language);
     const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
     //emoji number
-    const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
-    const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
-    const emoji3 = client.emojis.resolve(client.localEmojis.emoji3);
-    const emoji4 = client.emojis.resolve(client.localEmojis.emoji4);
-    const emoji5 = client.emojis.resolve(client.localEmojis.emoji5);
-    const emoji6 = client.emojis.resolve(client.localEmojis.emoji6);
-    const emoji7 = client.emojis.resolve(client.localEmojis.emoji7);
-    const emoji8 = client.emojis.resolve(client.localEmojis.emoji8);
-    const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
-    const emojiArr = [emoji1.id, emoji2.id, emoji3.id, emoji4.id, emoji5.id, emoji6.id, emoji7.id, emoji8.id];
+    // const emoji1 = client.emojis.resolve(client.localEmojis.emoji1);
+    // const emoji2 = client.emojis.resolve(client.localEmojis.emoji2);
+    // const emoji3 = client.emojis.resolve(client.localEmojis.emoji3);
+    // const emoji4 = client.emojis.resolve(client.localEmojis.emoji4);
+    // const emoji5 = client.emojis.resolve(client.localEmojis.emoji5);
+    // const emoji6 = client.emojis.resolve(client.localEmojis.emoji6);
+    // const emoji7 = client.emojis.resolve(client.localEmojis.emoji7);
+    // const emoji8 = client.emojis.resolve(client.localEmojis.emoji8);
+    // const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
+    const emojiArr = [];
+
+    for (const cat of categorys) {
+        const emj = client.emojis.resolve(cat.emoji);
+        emojiArr.push(emj)
+    }
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
@@ -69,8 +74,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
-            .setCustomID('help-home-di')
-            .setStyle('SECONDARY')
+            .setCustomID('help-home')
+            .setStyle('SUCCESS')
             .setEmoji("🏠"),
         );
 
@@ -84,7 +89,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
             }
 
 
-            if (messageReaction.emoji == tada) {
+            if (messageReaction.emoji == tada && !message.embeds[0].title.startsWith(strings.help.bCommands)) {
                 if (!message.embeds[0].author.name.startsWith('🎉🎉Givea')) return;
                 if (message.embeds[0].author.name.includes('🎉🎉Giveaway🎉🎉')) {
                     const giveaway = await client.getGiveaway(message.guild, message.id);
@@ -105,7 +110,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
             }
             if (message.embeds[0]) {
                 if (message.embeds[0].title.startsWith(strings.help.bCommands) && message.embeds[0].description.startsWith(user.tag)) {
-                    const embed = new MessageEmbed()
+                    const embed = await new MessageEmbed()
                         .setColor("#000000")
                         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                         .setURL(`${client.botGuild.supportInvite}`)
@@ -114,7 +119,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         .setFooter('Page 1 • ' + user.tag, user.displayAvatarURL())
                         .setDescription(user.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)));
 
-                    if (emojiArr.includes(messageReaction.emoji.id)) {
+                    if (emojiArr.includes(messageReaction.emoji)) {
                         const cat = categorys.find(e => e.emoji == messageReaction.emoji.id)
                         // canvas = await client.drawHelpCats(canvas, ctx, cat, {
                         //     txtColor1, txtColor2
@@ -126,39 +131,59 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             leftCmds.push(cmd);
                         }
                         leftPage = Math.round((leftCmds.length / 25) + 0.50)
-                        embed.setDescription(`${embed.description} \n\n${leftCmds.slice(0, 24).map(cmd => `\`${cmd[1].help.name}\` - ${cmd[1].help.description}`).join('\n')}`)
-                            .setTitle(embed.title + "\n" + cat.name)
+                        embed.setTitle(embed.title + "\n" + cat.name[language])
                             .setFooter(embed.footer.text.replace("1", (leftPage) + "/" + leftPage))
+                            .setDescription((embed.description ? embed.description + '\n\n' : '') + `${strings.help.sommaire}`)
+                        for (const underCat of cat.underCat) {
+                            const emj = client.emojis.resolve(underCat.emoji);
+                            const strs = underCat.description[settings.general.language];
+                            embed.addField(`${emj} • ${underCat.name[settings.general.language]}`, `\`\`\`yaml\n${strs}\`\`\``)
+                        }
+                        // canvas = await client.drawHelpCats(canvas, ctx, cat, {
+                        //   txtColor1, txtColor2
+                        // })
+                        for (let cmd of cmds) {
+                            cmd = cmd[1];
+                            if (cmd !== undefined && cmd.help.enable) {
+                                if (cmd.underCat) {
+                                    const field = embed.fields.find(f => f.name.toString().toLowerCase().includes(cmd.underCat.emoji))
+                                    if (field) field.value = field.value + '\n' + `\`${cmd.help.name}\` - ${cmd.help.description[language]}`;
+                                    else embed.setDescription((embed.description == null ? '' : `${embed.description} \n`) + `\`${cmd.help.name}\` - ${cmd.help.description[language]}`)
+                                } else embed.setDescription((embed.description == null ? '' : `${embed.description} \n`) + `\`${cmd.help.name}\` - ${cmd.help.description[language]}`)
+                            }
+                        }
+                        embed.fields = embed.fields.filter(f => !f.value.endsWith("`"))
                         row.addComponents(
                             new MessageButton()
-                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'left-help-cats' + cat.position + '-' + leftPage)
-                            .setStyle(cat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
-                            .setEmoji("⬅️"),
+                            .setCustomID(cat.position <= 1 ? 'NONE' : 'help-left-cats' + cat.position + '-' + leftPage)
+                            .setStyle(cat.position <= 1 ? 'SECONDARY' : 'PRIMARY')
+                            .setEmoji("⬅️")
+                            .setDisabled(cat.position <= 1 ? true : false),
                             new MessageButton()
-                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'right-help-cats' + cat.position + '-' + leftPage)
+                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'help-right-cats' + cat.position + '-' + leftPage)
                             .setStyle(cat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
-                            .setEmoji("➡️"),
+                            .setEmoji("➡️")
+                            .setDisabled(cat.position == categorys.length ? true : false),
                         )
-
+                        row.addComponents(
+                            new MessageButton()
+                            .setCustomID('delete')
+                            .setStyle('DANGER')
+                            .setEmoji("🗑️"),
+                        )
+                        if (embed.description.endsWith("```") && embed.fields.length < 1) embed.setDescription(embed.description + `\n\n` + strings.help.noCmd)
+                        if (message !== undefined) {
+                            if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id).catch(() => {});
+                            await message.edit('\u200b', {
+                                embed,
+                                components: [row]
+                            }).catch(ee => {
+                                console.log(ee)
+                            })
+                        }
                     }
                     // const file = new MessageAttachment(canvas.toBuffer(), 'help.png');
                     // await embed.attachFiles(file);
-                    row.addComponents(
-                        new MessageButton()
-                        .setCustomID('delete')
-                        .setStyle('DANGER')
-                        .setEmoji("🗑️"),
-                    )
-                    if (message !== undefined) {
-                        if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id).catch(() => {});
-                        await message.removeAttachments().then(async () => {
-                            await message.edit('', {
-                                embed, components: [row]
-                            })
-                        }).catch(ee => {
-                            console.log(ee)
-                        })
-                    }
                 }
             }
         } catch (e) {

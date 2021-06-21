@@ -129,7 +129,10 @@ export declare interface Command {
     public aliases?: String[];
     public category: String;
     public categoryName: String;
-    public description: String;
+    public description: {
+      en: string;
+      fr: string;
+    }
     public ownerCmd: Boolean;
     public cooldown: Number;
     public enable: Boolean;
@@ -141,8 +144,14 @@ export declare interface Command {
     public onlyServerOwner: Boolean;
     public reqPermName?: String;
     public onlyPremium: Boolean;
+    public onlyInServer: Boolean;
     public args: Boolean;
-  }  
+    public underCat: {
+    public name: string;
+    public emoji: string;
+    public description: string;
+    };
+  }
 }
 import * as botGuild from "../.bot.json";
 import * as localEmojis from "../emojis.json";

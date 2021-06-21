@@ -1,5 +1,6 @@
 import { Client } from '../../../util/functions';
 import { GuildData, GuildUserData } from '../../../util/functions'
+import Discord from 'discord.js'
 
 export declare interface AutomodOpt {
   client: Client;

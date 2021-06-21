@@ -33,6 +33,6 @@ module.exports.run = fnc.run = async (client, message, args, settings, userInfo,
 
     message.channel.send(embed)
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.WARNINGS;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER.WARNINGS;

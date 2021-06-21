@@ -21,6 +21,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     message.channel.send({embed: {description: `${checkMark}<@${message.author.id}> removed ${expToRem} XP from ${user}`}})
 };
   
+
+module.exports.underCat = MESSAGES.COMMANDS.LEVEL.MANAGE;
   
-  
-  module.exports.help = MESSAGES.COMMANDS.LEVEL.REMXP;
+module.exports.help = MESSAGES.COMMANDS.LEVEL.MANAGE.REMXP;

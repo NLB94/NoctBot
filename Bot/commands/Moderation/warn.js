@@ -27,7 +27,7 @@ module.exports.run = fnc.run = async (client, message, args, settings, userInfo,
 
     let reason = args.slice(1).join(" ");
 
-    if (member.permissions.has('ADMINISTRATOR')) return message.channel.send({ 
+    if (member.permissions.has('ADMINISTRATOR')) return message.channel.send({
         embed: {
             description: `${x_mark}You can't warn a moderator !`
         }
@@ -54,6 +54,6 @@ module.exports.run = fnc.run = async (client, message, args, settings, userInfo,
         })
     }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.WARN;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER.WARN;

@@ -48,6 +48,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     await message.channel.send(embed)
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.SLOWMODE;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER.SLOWMODE;

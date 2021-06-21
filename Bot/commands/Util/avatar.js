@@ -15,8 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
   });
   const embed = new MessageEmbed()
-    .setTitle('User Avatar')
-    .setDescription(`${message.author}, this is ${user}'s avatar :`)
+    .setDescription(`${message.author}, ${user} avatar :`)
     .setImage(user.displayAvatarURL({ dynamic: true }));
 
   message.channel.send(embed);
@@ -25,4 +24,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
 module.exports.underCat = MESSAGES.COMMANDS;
 
-module.exports.help = MESSAGES.COMMANDS.OTHER.AVATAR;
+module.exports.help = MESSAGES.COMMANDS.UTIL.AVATAR;

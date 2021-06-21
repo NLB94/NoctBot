@@ -26,6 +26,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;
 
-module.exports.help = MESSAGES.COMMANDS.INFO.MESSAGES;
+module.exports.help = MESSAGES.COMMANDS.INFO.GUILD.MESSAGES;

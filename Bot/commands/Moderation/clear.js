@@ -8,7 +8,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-    ;
+    //A FAIRE ICIIIIIIIIIIIIII
 
     const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
@@ -127,6 +127,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         command.run(client, message, args, settings, userInfo, strings)
     }
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.CLEAR;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER.CLEAR;

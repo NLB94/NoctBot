@@ -20,20 +20,57 @@
     "help": {
       "bCommands": "Commandes du bot",
       "myPrfx": "Le préfixe utilisé dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```",
-      "sommaire": "```md\nSommaire : \n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
+      "noCmd": "**Il n'y a pas de commandes à visualiser ici !**\n_Les commandes de cette catégorie doivent être en développement, ou bien elles contiennent certaines erreurs._",
+      "sommaire": "**Sommaire : **\n```md\n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
     },
     "constants": {
       "manage": "Gérer",
       "admin": "Administrateur",
       "inventory": "Inventaire",
-      "counts": {
-        "description": "Créer et modifier des salons de comptes de membres, salons ou bien boosts !"
+      "items": "Objets",
+      "get money": "Gagner de l'argent",
+      "server": "Serveur",
+      "configuration": {
+        "description": "Gérer les paramètres du bot comme vous le souhaitez afin de construire le meilleur serveur Discord !",
+        "underCats": {
+
+        }
       },
-      "economy": {
-        "admin": "Créer des objets personnalisés pour la boutique du serveur, et récompensez vos membres en leur ajoutant de l'argent !",
-        "items": "Achetez des objets dans la boutique du serveur afin de recevoir des rôles ou plus encore !",
-        "managemoney": "Gérer votre argent en déposant de l'argent à votre banque, en retirer et transférer à d'autres membres !",
-        "getmoney": "Voici les différentes commandes pour gagner de l'argent du serveur :"
+      "moderation": {
+        "description": "Gérer vos membres l'aide d'un système de modération fiable, rapide & complet !",
+        "underCats": {
+
+        }
+      },
+      "level": {
+        "description": "Voyez qui sont les membres actifs sur votre serveur et récompensez-les avec des rôles ou de l'argent virtuel du bot (en développement)",
+        "underCats": {
+
+        }
+      },
+      "info": {
+        "description": "Recevez les informations du serveur, d'un membre ou bien même un rôle !",
+        "underCats": {
+
+        }
+      },
+      "other": {
+        "description": "Toutes les commandes sans catégories spéciales",
+        "underCats": {
+
+        }
+      },
+      "backups": {
+        "description": "Créez des sauvegardes de votre serveur pour les charger dans d'autres serveurs !",
+        "underCats": {
+
+        }
+      },
+      "counts": {
+        "description": "Créer et modifier des salons de comptes de membres, salons ou bien de boosts !",
+        "underCats": {
+          "manage": "Gérer vos salons-systèmes de comptes personnalisés"
+        }
       }
     },
     "message": {
@@ -55,7 +92,7 @@
       }
     },
     "configuration": {
-      "secuLvl":"**Niveau de sécurité**",
+      "secuLvl": "**Niveau de sécurité**",
       "whiteL": "Liste blanche",
       "enable": "Activé",
       "reset": "```Réagissez à 🔄 pour réinitialiser les paramètres du système {type}```",
@@ -101,7 +138,37 @@
     "help": {
       "bCommands": "Bot Commands",
       "myPrfx": "The prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```",
-      "sommaire": "```md\nSummary : \n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ page \n# 🗑️ Delete message```"
+      "noCmd": "**There are no commands to visualize here !**\n_This category's commands may be on development, or they contain some errors._",
+      "sommaire": "**Summary :** \n```md\n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ page \n# 🗑️ Delete message```"
+    },
+    "constants": {
+      "manage": "Manage",
+      "admin": "Administrator",
+      "inventory": "Inventory",
+      "items": "Items",
+      "get money": "Get Money",
+      "server": "Server",
+      "configuration": {
+        "description": "Configure the bot as you wish to build the best Discord server !"
+      },
+      "moderation": {
+        "description": "Manage your members with a fast, trustworthy & complete moderation system !"
+      },
+      "level": {
+        "description": "Show active members of your server and reward them with some roles or virtual bot money (always on dev...)"
+      },
+      "info": {
+        "description": "Show informations about server, member or even some role !"
+      },
+      "other": {
+        "description": "All not categorised commands"
+      },    
+      "giveaway": {
+        "description": "Give some gifts to your members by using this giveaway system that create, reroll and manage your giveaways !"
+      },
+      "backups": {
+        "description": "Create backups from your server to load it in other servers !"
+      }
     },
     "message": {
       "onDev": "```arm\nThis command is on devlopment. \n# Please wait...",

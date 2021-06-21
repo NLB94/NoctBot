@@ -33,6 +33,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         });
     }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.LOCK;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER.LOCK;

@@ -20,8 +20,14 @@ module.exports = async (client, options) => {
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
     const userInfo = options.userInfo;
     if ((settings.automod.whiteList.admin && message.member.permissions.has('ADMINISTRATOR')) || (settings.automod.whiteList.bots && message.author.bot)) return
-    const checkRoles = false;
-
+    let checkRoles = false;
+    if (options.message.member.permissions.has('ADMINISTRATOR')) return;
+    let checkPerms = false;
+    for (const perms of settings.automod.whiteList.permissions) {
+        if (message.member.permissions.has(perms)) checkPerms = true;
+        else checkPerms = checkPerms;
+    }
+    if (checkPerms) return;
     for (const role of settings.automod.whiteList.whiteRoles) {
         if (message.member.roles.cache.has(role.id)) checkRoles = true;
         else checkRoles = checkRoles;

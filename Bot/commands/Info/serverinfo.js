@@ -152,10 +152,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         message.channel.send(embed);
     });
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;
 
-module.exports.help = MESSAGES.COMMANDS.INFO.SERVERINFO;
-
-function newFunction(client) {
-    return client.emojis;
-}
+module.exports.help = MESSAGES.COMMANDS.INFO.GUILD.SERVERINFO;

@@ -129,6 +129,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     // }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.CONFIGURATION.AUTOMODERATION;
 
-module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.ANTILINK;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.AUTOMODERATION.ANTILINK;

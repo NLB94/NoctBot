@@ -17,7 +17,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const countArray = ['channels', 'members', 'boosts'];
         let i = 1;
 
-        const m1 = language == 'fr' ? `**Quelle type de catégorie de compte voulez-vous ?** \nCatégories disponibles : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`
+        const m1 = language == 'fr' ? `**Quelle type de catégorie de compteur voulez-vous ?** \nCatégories disponibles : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `**What is the category of count you want ?** \nAvailable categorys : \n**${countArray.map(c => `${i++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`
 
         await message.channel.send(m1);
         /**
@@ -39,7 +39,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         else {
             const array = cat == 'channels' ? ['all', 'categorys', 'text', 'voice'] : (cat == 'members' ? ['all', 'humans', 'bots'] : ['boosts', 'level']);
             let j = 1;
-            message.channel.send(language == 'fr' ? `Le type de catégorie est \`${cat}\`. Quelle est le **type de compte** que vous voulez ? \nTypes disponibles pour la catégorie \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `The category type is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`)
+            message.channel.send(language == 'fr' ? `Le type de catégorie est \`${cat}\`. Quelle est le **type de compteur** que vous voulez ? \nTypes disponibles pour la catégorie \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOISISSEZ UN NOMBRE !!**` : `The category type is \`${cat}\`. Now, what is the **type of count** you want ? \nAvailable types for \`${cat}\` : \n**${array.map(c => `${j++} - ${c}`).join("\n")}\nCHOOSE A NUMBER !!**`)
             const userE2 = await message.channel.awaitMessages(filter, {
                 time: '10000',
                 errors: ['time'],
@@ -110,6 +110,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         message.channel.send(language == 'fr' ? '**Commande annulée !**' : '**Command canceled !**')
     }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.COUNTS.MANAGE;
 
 module.exports.help = MESSAGES.COMMANDS.COUNTS.MANAGE.CREATE;

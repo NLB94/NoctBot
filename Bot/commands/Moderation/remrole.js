@@ -41,6 +41,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     await message.channel.send(embed)
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.ROLES;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.REMROLE;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.ROLES.REMROLE;

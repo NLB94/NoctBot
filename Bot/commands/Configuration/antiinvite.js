@@ -1,5 +1,5 @@
 const {
-    MessageEmbed
+    MessageEmbed, MessageActionRow, MessageButton
 } = require('discord.js');
 const {
     MESSAGES
@@ -7,6 +7,13 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
+    const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomID("reset-antiinvite")
+                .setEmoji("🔄")
+                .setStyle("DANGER")
+        )
     const embed = new MessageEmbed()
         .setTitle('Anti-Invite')
         .setDescription(`${await strings.configuration.reset.replace("{type}", 'Anti-Invite')}`)
@@ -33,8 +40,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             dynamic: true
         }))
         .setTimestamp();
-    message.channel.send(embed).then(async msg => {
-        msg.react('🔄');
+    message.channel.send(embed, {
+        components: [row]
+    }).then(async msg => {
         msg.react('1️⃣');
         msg.react('2️⃣');
         msg.react('3️⃣');
@@ -126,6 +134,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     // }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.CONFIGURATION.AUTOMODERATION;
 
-module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.ANTIINVITE;
+module.exports.help = MESSAGES.COMMANDS.CONFIGURATION.AUTOMODERATION.ANTIINVITE;

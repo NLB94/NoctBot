@@ -12,6 +12,7 @@ const loadCommands = functions.loadCommands = (client, dir = "./Bot/commands/") 
         console.log(chalk.green(dirs))
         for (const file of commands) {
             const getFileName = require(`../${dir}/${dirs}/${file}`);
+            if (!getFileName.help) console.log(file);
             client.commands.set(getFileName.help.name, getFileName);
             console.log(`${chalk.blue(getFileName.help.name)}`);
         };

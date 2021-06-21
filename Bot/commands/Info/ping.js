@@ -9,6 +9,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.INFO.BOT;
 
-module.exports.help = MESSAGES.COMMANDS.OTHER.PING;
+module.exports.help = MESSAGES.COMMANDS.INFO.BOT.PING;

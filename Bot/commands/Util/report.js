@@ -26,4 +26,4 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
 module.exports.underCat = MESSAGES.COMMANDS;
 
-module.exports.help = MESSAGES.COMMANDS.OTHER.REPORT;
+module.exports.help = MESSAGES.COMMANDS.UTIL.REPORT;

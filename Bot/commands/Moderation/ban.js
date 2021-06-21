@@ -74,6 +74,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     }
   });
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.BAN;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER.BAN;

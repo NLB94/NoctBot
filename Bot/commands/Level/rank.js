@@ -122,6 +122,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.LEVEL.INFO;
 
-module.exports.help = MESSAGES.COMMANDS.LEVEL.RANK;
+module.exports.help = MESSAGES.COMMANDS.LEVEL.INFO.RANK;

@@ -66,6 +66,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.ECONOMY.ADMIN;
 
 module.exports.help = MESSAGES.COMMANDS.ECONOMY.ADMIN.ADDMONEYROLE;

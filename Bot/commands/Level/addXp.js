@@ -29,6 +29,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 };
 
 
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.LEVEL.MANAGE;
 
-module.exports.help = MESSAGES.COMMANDS.LEVEL.ADDXP;
+module.exports.help = MESSAGES.COMMANDS.LEVEL.MANAGE.ADDXP;

@@ -178,6 +178,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         message.channel.send(cancelEmbed);
     }
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.ECONOMY.ADMIN;
 
 module.exports.help = MESSAGES.COMMANDS.ECONOMY.ADMIN.CREATEITEM;

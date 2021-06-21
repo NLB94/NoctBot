@@ -10,7 +10,10 @@ const MESSAGES = {
         aliases: ["eval"],
         category: "admin",
         categoryName: "Admin",
-        description: "Only for bot owner",
+        description: {
+          en: 'Only for bot owner',
+          fr: 'Seulement pour le créateur du bot'
+        },
         ownerCmd: true,
         cooldown: 0.1,
         enable: true,
@@ -22,13 +25,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
       RAID: {
         name: "secret",
         aliases: ["deleteall"],
         category: "admin",
-        description: "Only for bot owner",
+        description: {
+          en: "Only for bot owner",
+          fr: 'Seulement pour le créateur du bot'
+        },
         ownerCmd: true,
         cooldown: 0.1,
         enable: true,
@@ -40,13 +47,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: false
       },
       ANNONCE: {
         name: "annonce",
         aliases: ["annonce"],
         category: "admin",
-        description: "Only for bot owner",
+        description: {
+          en: "Only for bot owner",
+          fr: 'Seulement pour le créateur du bot'
+        },
         ownerCmd: true,
         cooldown: 0.1,
         enable: true,
@@ -58,13 +69,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
       SPOIL: {
         name: "spoil",
         aliases: ["spoil"],
         category: "admin",
-        description: "Only for bot owner",
+        description: {
+          en: "Only for bot owner",
+          fr: 'Seulement pour le créateur du bot'
+        },
         ownerCmd: true,
         cooldown: 0.1,
         enable: true,
@@ -76,13 +91,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
       UPDATE: {
         name: "update",
         aliases: ["update"],
         category: "admin",
-        description: "Only for bot owner",
+        description: {
+          en: "Only for bot owner",
+          fr: 'Seulement pour le créateur du bot'
+        },
         ownerCmd: true,
         cooldown: 0.1,
         enable: true,
@@ -94,6 +113,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
     },
@@ -103,18 +123,22 @@ const MESSAGES = {
         aliases: ["backup"],
         category: "backup",
         categoryName: "Backup",
-        description: "Create or manage servers backups.",
+        description: {
+          en: "Create and manage servers backups.",
+          fr: "Créer et gérer les sauvegardes de serveurs."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
-        usage: "<create | edit | load | delete> (backupID)",
-        example: "~backup load 1èAdp08Y",
+        usage: "<action> (backupID)",
+        example: null,
         botPerm: true,
         botPermName: 'ADMINISTRATOR',
         permissions: true,
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
     },
@@ -124,7 +148,10 @@ const MESSAGES = {
         aliases: ["club"],
         category: "brawl",
         categoryName: "Brawl-Stars",
-        description: "Get a brawl-club informations.",
+        description: {
+          en: "Get a brawl-club informations.",
+          fr: "Voir les informations d'un brawl club."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
@@ -136,6 +163,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       PLAYER: {
@@ -143,7 +171,10 @@ const MESSAGES = {
         aliases: ["player"],
         category: "brawl",
         categoryName: "Brawl-Stars",
-        description: "Get a brawl-player informations.",
+        description: {
+          en: "Get a brawl-player informations.",
+          fr: "Voir les informations d'un joueur brawl."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
@@ -155,6 +186,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       SAVE: {
@@ -162,7 +194,10 @@ const MESSAGES = {
         aliases: ["save"],
         category: "brawl",
         categoryName: "Brawl-Stars",
-        description: "Save your brawl stars profile on the bot.",
+        description: {
+          en: "Save your brawl stars profile on the bot.",
+          fr: "Sauvegarder votre profile brawl-stars sur le bot."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
@@ -174,23 +209,29 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
     },
     COUNTS: {
       MANAGE: {
-        emoji: '🛠️',
-        name: '{manage}',
-        description: '',
+        emoji: '806440887365795870',
+        name: {
+          en: 'Manage',
+          fr: 'Gérer'
+        },
         CREATE: {
           name: "createcount",
           aliases: ["createcount"],
           category: "counts",
           categoryName: "Counts",
-          description: "Create a count channel.",
+          description: {
+            en: "Create a count channel.",
+            fr: "Créer un salon-compteur."
+          },
           ownerCmd: false,
           cooldown: 0.1,
-          enable: false,
+          enable: true,
           usage: "",
           example: null,
           botPerm: true,
@@ -199,13 +240,14 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "MANAGE_CHANNELS",
           onlyPremium: false,
+          onlyInServer: true,
           args: false
         }
       },
     },
     ECONOMY: {
       ADMIN: {
-        emoji: '🛡️',
+        emoji: '852246257560453122',
         name: 'Admin',
         description: '{economy.admin}',
         ADDMONEY: {
@@ -213,7 +255,10 @@ const MESSAGES = {
           aliases: ["addmoney"],
           category: "economy",
           categoryName: "Economy",
-          description: "Add money (cash or bank) to a member's balance.",
+          description: {
+            en: "Add money (cash or bank) to a member's balance.",
+            fr: "Ajouter de la monnaie (cash ou banque) à un membre."
+          },
           ownerCmd: false,
           cooldown: 10,
           enable: true,
@@ -225,6 +270,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "MANAGE_ROLES",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         ADDMONEYROLE: {
@@ -232,7 +278,10 @@ const MESSAGES = {
           aliases: ["addmoneyrole"],
           category: "economy",
           categoryName: "Economy",
-          description: "Add money (cash or bank) balance of every members with a specific role.",
+          description: {
+            en: "Add money (cash or bank) balance of every members with a specific role.",
+            fr: "Ajouter de la monnaie (cash ou banque) à tous les membres possédant un rôle spécifique."
+          },
           ownerCmd: false,
           cooldown: 10,
           enable: true,
@@ -244,6 +293,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "MANAGE_ROLES",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         CREATEITEM: {
@@ -251,7 +301,10 @@ const MESSAGES = {
           aliases: ["createitem"],
           category: "economy",
           categoryName: "Economy",
-          description: "Create an item for the server's shop.",
+          description: {
+            en: "Create an item for the server's shop.",
+            fr: "Créer un objet dans la boutique du serveur."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -263,6 +316,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "ADMINISTRATOR",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         SETMONEY: {
@@ -270,7 +324,10 @@ const MESSAGES = {
           aliases: ["setmoney"],
           category: "economy",
           categoryName: "Economy",
-          description: "Set the money prefix (default is $). It can be an emoji or other.",
+          description: {
+            en: "Set the money (default is $). It can be an emoji or other.",
+            fr: "Changer la monnaie du serveur (par défault $). Cela peut être par un émoji ou autre."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -282,6 +339,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "ADMINISTRATOR",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         REMMONEY: {
@@ -289,7 +347,10 @@ const MESSAGES = {
           aliases: ["removemoney"],
           category: "economy",
           categoryName: "Economy",
-          description: "Remove money (cash or bank) from a member's balance.",
+          description: {
+            en: "Remove money (cash or bank) from a member's balance.",
+            fr: "Retirer de la monnaie (cash ou banque) d'un membre."
+          },
           ownerCmd: false,
           cooldown: 10,
           enable: true,
@@ -301,6 +362,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "MANAGE_ROLES",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         REMMONEYROLE: {
@@ -308,7 +370,10 @@ const MESSAGES = {
           aliases: ["removemoneyrole"],
           category: "economy",
           categoryName: "Economy",
-          description: "Remove money (cash or bank) from all member's balance who have specific role.",
+          description: {
+            en: "Remove money (cash or bank) from all member's balance who have specific role.",
+            fr: "Retirer de la monnaie (cash ou banque) de tout les membres possédant un rôle spécifique.",
+          },
           ownerCmd: false,
           cooldown: 10,
           enable: false,
@@ -320,19 +385,23 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "MANAGE_ROLES",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
       },
       ITEMS: {
-        name: '{inventory}',
-        emoji: '⚔️',
+        name: 'Items',
+        emoji: '830692404088537138',
         description: '{economy.items}',
         SELLITEM: {
           name: "sellitem",
           aliases: ["sellitem"],
           category: "economy",
           categoryName: "Economy",
-          description: "Sell an item from your inventory.",
+          description: {
+            en: "Sell an item from your inventory.",
+            fr: "Vendre un objet de votre inventaire."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -344,6 +413,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         SHOP: {
@@ -351,7 +421,10 @@ const MESSAGES = {
           aliases: ["store"],
           category: "economy",
           categoryName: "Economy",
-          description: "View the list of server items available to buy.",
+          description: {
+            en: "View the list of server items available.",
+            fr: "Voir la liste des objets disponible dans la boutique du serveur."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -363,6 +436,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         VIEWITEM: {
@@ -370,7 +444,10 @@ const MESSAGES = {
           aliases: ["viewitem"],
           category: "economy",
           categoryName: "Economy",
-          description: "View an item in the shop.",
+          description: {
+            en: "View an item in the shop.",
+            fr: "Voir un objet de la boutique."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -382,6 +459,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         GIVEITEM: {
@@ -389,7 +467,10 @@ const MESSAGES = {
           aliases: ["giveitem"],
           category: "economy",
           categoryName: "Economy",
-          description: "Give an item from your inventory to a member.",
+          description: {
+            en: "Give an item from your inventory to a member.",
+            fr: "Donner un objet de votre inventaire à un autre membre."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -401,6 +482,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         BUY: {
@@ -408,7 +490,10 @@ const MESSAGES = {
           aliases: ["buyitem"],
           category: "economy",
           categoryName: "Economy",
-          description: "Buy an item from the server's shop.",
+          description: {
+            en: "Buy an item from the server's shop.",
+            fr: "Acheter un objet de la boutique."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -420,19 +505,23 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
       },
       GETMONEY: {
-        name: 'Get Money',
-        emoji: '',
+        name: 'Receive',
+        emoji: '852423090831228958',
         description: '{economy.getmoney}',
         DAILY: {
-          name: "spin",
+          name: "daily",
           aliases: ["daily"],
           category: "economy",
           categoryName: "Economy",
-          description: "Spin to get daily money.",
+          description: {
+            en: "Get your daily rewards, money & credits !",
+            fr: "Obtiens ta récompense journalière, argent & crédits !"
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: true,
@@ -444,6 +533,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         HOURLY: {
@@ -451,7 +541,10 @@ const MESSAGES = {
           aliases: ["hourly"],
           category: "economy",
           categoryName: "Economy",
-          description: "Claim hourly rewards",
+          description: {
+            en: "Claim hourly rewards",
+            fr: "Obtiens ta récompense toute les heures."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: true,
@@ -463,6 +556,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         ROB: {
@@ -470,7 +564,10 @@ const MESSAGES = {
           aliases: ["rob"],
           category: "economy",
           categoryName: "Economy",
-          description: "Rob money from an user.",
+          description: {
+            en: "Rob money from an user.",
+            fr: "Voler de la monnaie à un membre."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: false,
@@ -482,6 +579,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         WORK: {
@@ -489,7 +587,10 @@ const MESSAGES = {
           aliases: ["work"],
           category: "economy",
           categoryName: "Economy",
-          description: "Work to get server money.",
+          description: {
+            en: "Work to get server money.",
+            fr: "Travailler pour avoir de l'argent du serveur."
+          },
           ownerCmd: false,
           cooldown: 300,
           enable: false,
@@ -501,11 +602,12 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
       },
       MANAGE: {
-        emoji: '',
+        emoji: '852246257543020685',
         name: 'Manage',
         description: '{economy.managemoney}',
         DEPOSIT: {
@@ -513,7 +615,10 @@ const MESSAGES = {
           aliases: ["dep"],
           category: "economy",
           categoryName: "Economy",
-          description: "Deposit money from your hand(cash) to bank",
+          description: {
+            en: "Deposit money from your hand(cash) to bank",
+            fr: "Déposer de l'argent de votre poche (cash) à la banque."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: true,
@@ -525,6 +630,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
         MONEY: {
@@ -532,7 +638,10 @@ const MESSAGES = {
           aliases: ["bal", "balance"],
           category: "economy",
           categoryName: "Economy",
-          description: "Show an user money balance",
+          description: {
+            en: "Show an user money balance",
+            fr: "Voir la balance d'un utilisateur."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: true,
@@ -544,6 +653,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         RESETMONEY: {
@@ -551,9 +661,12 @@ const MESSAGES = {
           aliases: ["resetmoney"],
           category: "economy",
           categoryName: "Economy",
-          description: "Reset all your money (cash and bank).",
+          description: {
+            en: "Reset all your money (cash and bank) (1/week).",
+            fr: "Remet à 0 votre monnaie (1/semaine)"
+          },
           ownerCmd: false,
-          cooldown: 0.1,
+          cooldown: 6.048e+8,
           enable: false,
           usage: "",
           example: null,
@@ -563,6 +676,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: false,
         },
         GIVEMONEY: {
@@ -570,7 +684,10 @@ const MESSAGES = {
           aliases: ["gmoney"],
           category: "economy",
           categoryName: "Economy",
-          description: "Give specific amount of your hand money (cash) to an user",
+          description: {
+            en: "Give specific amount of your hand money (cash) to an user",
+            fr: "Donner un montant spécifique à un membre."
+          },
           ownerCmd: false,
           cooldown: 10,
           enable: true,
@@ -582,6 +699,7 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true
         },
         WITHDRAW: {
@@ -589,7 +707,10 @@ const MESSAGES = {
           aliases: ["with"],
           category: "economy",
           categoryName: "Economy",
-          description: "Withdraw money from bank to your hand(cash)",
+          description: {
+            en: "Withdraw money from bank to your hand(cash)",
+            fr: "Retirer de l'argent de votre banque."
+          },
           ownerCmd: false,
           cooldown: 0.1,
           enable: true,
@@ -601,261 +722,400 @@ const MESSAGES = {
           onlyServerOwner: false,
           reqPermName: "",
           onlyPremium: false,
+          onlyInServer: true,
           args: true,
         },
       },
     },
     GIVEAWAY: {
-      GCREATE: {
-        name: "gcreate",
-        aliases: ['gcreate'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "Create a giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: '<nb_winners> <time (s | m | h | d | w)> <price> {#channel}',
-        example: "~gcreate 3 3d Nitro #giveaway-channel",
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: true
+      MANAGE: {
+        name: 'Manage',
+        emoji: '806440887365795870',
+        description: '',
+        GCREATE: {
+          name: "gcreate",
+          aliases: ['gcreate'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "Create a giveaway",
+            fr: "Créer un cadeau"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: '<nb_winners> <time> <price> {#channel}',
+          example: "~gcreate 3 3d Nitro #giveaway-channel",
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        GEDIT: {
+          name: "gedit",
+          aliases: ['gedit'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "Edit a giveaway",
+            fr: "Modifier un cadeau"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: '<message_id> <time | winnerCount | price | blackRoles | whiteRoles> {newSettings}',
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        GEND: {
+          name: "gend",
+          aliases: ['gend'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "End a giveaway",
+            fr: "Mettre fin au cadeau"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: '{message_id}',
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        GDELETE: {
+          name: "gdelete",
+          aliases: ['gdelete'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "Delete a giveaway",
+            fr: "Supprimer un cadeau"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: '<message_id>',
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        GREROLL: {
+          name: "greroll",
+          aliases: ['greroll'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "Reroll a giveaway",
+            fr: "Relancer le tirage du gagnant du cadeau."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: '{message_id} {new_winners_nb}',
+          example: "~greroll 190736281479101979 3",
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        GRESTART: {
+          name: "grestart",
+          aliases: ['grestart'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "Restart an ended giveaway",
+            fr: "Relancer un cadeau terminé"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: '<message_id>',
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        }
       },
-      GEDIT: {
-        name: "gedit",
-        aliases: ['gedit'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "Edit a giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: '<message_id> <time | winnerCount | price | blackRoles | whiteRoles> {newSettings}',
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: true
+      INFO: {
+        name: 'Info',
+        description: '',
+        emoji: '852254746155941938',
+        GLIST: {
+          name: "glist",
+          aliases: ['glist'],
+          category: 'giveaway',
+          categoryName: "Giveaway",
+          description: {
+            en: "List of running giveaways in the server.",
+            fr: "Liste des cadeaux en cours sur le serveur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: '',
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
       },
-      GEND: {
-        name: "gend",
-        aliases: ['gend'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "End a giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: '{message_id}',
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: false
-      },
-      GDELETE: {
-        name: "gdelete",
-        aliases: ['gdelete'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "Delete a giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: '<message_id>',
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: true
-      },
-      GLIST: {
-        name: "glist",
-        aliases: ['glist'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "List of running giveaways in the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: '',
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: false
-      },
-      GREROLL: {
-        name: "greroll",
-        aliases: ['greroll'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "Reroll an ended giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: '{message_id} {new_winners_nb}',
-        example: "~greroll 190736281479101979 3",
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: false
-      },
-      GRESTART: {
-        name: "grestart",
-        aliases: ['grestart'],
-        category: 'giveaway',
-        categoryName: "Giveaway",
-        description: "Restart a giveaway",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: '<message_id>',
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: true
-      }
     },
     INFO: {
-      BOTINFO: {
-        name: "botinfo",
-        aliases: ["bi", "botstats"],
-        category: "info",
-        categoryName: "Info",
-        description: "Get the bot info",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
+      GUILD: {
+        name: 'Guild',
+        emoji: '806440886682648597',
+        CHANNELINFO: {
+          name: "channelinfo",
+          aliases: ["ci"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get a channel informations",
+            fr: "Voir les informations d'un salon"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "{#channel}",
+          example: "~channelinfo #chat",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        ROLEINFO: {
+          name: "roleinfo",
+          aliases: ["ri"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get a role informations",
+            fr: "Voir les informations d'un rôle"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "{@role}",
+          example: "~roleinfo @everyone",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        MESSAGES: {
+          name: "messages",
+          aliases: ["msgs", "msg"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Show amount of an user messages sent.",
+            fr: "Voir le nombre de messages envoyés par l'utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "{#role}",
+          example: "~roleinfo @everyone",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        SERVERINFO: {
+          name: "serverinfo",
+          aliases: ["si"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get the server informations",
+            fr: "Obtenir les informations du serveur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        USERINFO: {
+          name: "userinfo",
+          aliases: ["ui", "whois", "userinfos"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get an user informations",
+            fr: "Voir les informations d'un utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: "",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        MEMBERINFO: {
+          name: "memberinfo",
+          aliases: ["mi", "memberinfos"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get a member informations",
+            fr: "Voir les informations d'un utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: "",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
       },
-      CHANNELINFO: {
-        name: "channelinfo",
-        aliases: ["ci"],
-        category: "info",
-        categoryName: "Info",
-        description: "Get a channel informations",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "{#channel}",
-        example: "~channelinfo #chat",
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
+      BOT: {
+        name: 'Bot',
+        emoji: '806440887332372482',
+        BOTINFO: {
+          name: "botinfo",
+          aliases: ["bi", "botstats"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get the bot info",
+            fr: "Avoir les infos du bot"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        ADDBOT: {
+          name: "links",
+          aliases: ["invite", "botinvite", "invitebot", "addbot", "support", "supportserver", "vote"],
+          category: "info",
+          categoryName: "Info",
+          description: {
+            en: "Get bot's important links",
+            fr: "Obtenir les liens importants du bot"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        PING: {
+          name: "ping",
+          aliases: ["ping"],
+          category: "util",
+          categoryName: "Util",
+          description: {
+            en: "Get the latence of the API",
+            fr: "Avoir la latence de l'API"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
       },
-      ROLEINFO: {
-        name: "roleinfo",
-        aliases: ["ri"],
-        category: "info",
-        categoryName: "Info",
-        description: "Get a role informations",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "{#role}",
-        example: "~roleinfo @everyone",
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-      MESSAGES: {
-        name: "messages",
-        aliases: ["msgs", "msg"],
-        category: "info",
-        categoryName: "Info",
-        description: "Show amount of an user messages sent.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "{#role}",
-        example: "~roleinfo @everyone",
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-      SERVERINFO: {
-        name: "serverinfo",
-        aliases: ["si"],
-        category: "info",
-        categoryName: "Info",
-        description: "Get the server informations",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-      USERINFO: {
-        name: "userinfo",
-        aliases: ["ui", "whois", "userinfos"],
-        category: "info",
-        categoryName: "Info",
-        description: "Get an user informations",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: "",
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-
     },
     INVITES: {
       INVITES: {
@@ -863,7 +1123,10 @@ const MESSAGES = {
         aliases: ['invites'],
         category: "invites",
         categoryName: "Invites",
-        description: "Get the amount of an user's invites",
+        description: {
+          en: "Get the amount of an user's invites",
+          fr: "Voir le nombre d'invitations obtenus par l'utilisateur."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -875,6 +1138,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: false,
       },
       ADDINVITES: {
@@ -882,7 +1146,10 @@ const MESSAGES = {
         aliases: ['addinvites'],
         category: "invites",
         categoryName: "Invites",
-        description: "Add an amount to an user's invites",
+        description: {
+          en: "Add an amount to an user's invites",
+          fr: "Ajouter un montant au total d'invitations d'un utilisateur."
+        },
         ownerCmd: false,
         cooldown: 30,
         enable: false,
@@ -894,6 +1161,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
       REMINVITES: {
@@ -901,7 +1169,10 @@ const MESSAGES = {
         aliases: ['removeinvites'],
         category: "invites",
         categoryName: "Invites",
-        description: "Remove an amount from an user's invites",
+        description: {
+          en: "Remove an amount from an user's invites",
+          fr: "Retirer un montant du total d'invitations d'un utilisateur."
+        },
         ownerCmd: false,
         cooldown: 30,
         enable: false,
@@ -913,6 +1184,7 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
       RESETINVITES: {
@@ -920,7 +1192,10 @@ const MESSAGES = {
         aliases: ['resetinvites'],
         category: "invites",
         categoryName: "Invites",
-        description: "Reset an user's invites",
+        description: {
+          en: "Reset an user's invites",
+          fr: "Remettre à 0 le total d'invitations d'un utilisateur"
+        },
         ownerCmd: false,
         cooldown: 30,
         enable: false,
@@ -932,477 +1207,575 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: true,
       },
     },
     LEVEL: {
-      ADDXP: {
-        name: "addxp",
-        aliases: ["addxp"],
-        category: "level",
-        categoryName: "Level",
-        description: "Add xp to an user",
-        ownerCmd: false,
-        cooldown: 30,
-        enable: true,
-        usage: "<xp_to_add> {optional: @user}",
-        example: "~addxp 1.7K",
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_ROLES",
-        onlyPremium: true,
-        args: true,
+      MANAGE: {
+        name: 'Manage',
+        emoji: '852246257543020685',
+        ADDXP: {
+          name: "addxp",
+          aliases: ["addxp"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Add xp to an user",
+            fr: "Ajouter de l'XP à un utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 30,
+          enable: true,
+          usage: "<xp_to_add> {optional: @user}",
+          example: "~addxp 1.7K",
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_ROLES",
+          onlyPremium: true,
+          onlyInServer: true,
+          args: true,
+        },
+        REMXP: {
+          name: "removexp",
+          aliases: ["remxp", "deletexp"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Remove xp from an user ",
+            fr: "Retirer de l'XP d'un utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 30,
+          enable: false,
+          usage: "<xp_to_rem> {optional: @user}",
+          example: "~remxp 700",
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_ROLES",
+          onlyPremium: true,
+          onlyInServer: true,
+          args: true,
+        },
+        RESETXP: {
+          name: "resetxp",
+          aliases: ["resetxp"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Reset an user experience.",
+            fr: "Remettre à 0 l'XP d'un utilisateur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: "{user}",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: true,
+          onlyInServer: true,
+          args: false,
+        },
+        SETTINGS: {
+          name: "level",
+          aliases: ["setlevel"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Configure level system",
+            fr: "Configurer le système de niveau"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "<keys> {value}",
+          example: "~level enable",
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true,
+        },
       },
-      LEADERBOARD: {
-        name: "leaderboard",
-        aliases: ["lb", "lbxp", "levels"],
-        category: "level",
-        categoryName: "Level",
-        description: "Show Server's XP Leaderboard",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-
-      RANK: {
-        name: "rank",
-        aliases: ["xp"],
-        category: "level",
-        categoryName: "Level",
-        description: "Show an user rank",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "{optional: @user}",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false,
-      },
-      REMXP: {
-        name: "removexp",
-        aliases: ["remxp", "deletexp"],
-        category: "level",
-        categoryName: "Level",
-        description: "Remove xp from an user ",
-        ownerCmd: false,
-        cooldown: 30,
-        enable: false,
-        usage: "<xp_to_rem> {optional: @user}",
-        example: "~remxp 700",
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_ROLES",
-        onlyPremium: true,
-        args: true,
-      },
-      RESETXP: {
-        name: "resetxp",
-        aliases: ["resetxp"],
-        category: "level",
-        categoryName: "Level",
-        description: "Reset an user experience.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "{user}",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: true,
-        args: false,
-      },
-      SETTINGS: {
-        name: "level",
-        aliases: ["setlevel"],
-        category: "level",
-        categoryName: "Level",
-        description: "Change level system settings",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "<keys> {value}",
-        example: "~level enable",
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: true,
+      INFO: {
+        name: 'Info',
+        emoji: '852254746155941938',
+        LEADERBOARD: {
+          name: "leaderboard",
+          aliases: ["lb", "lbxp", "levels"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Show server's level leaderboard",
+            fr: "Voir le classement de niveau du serveur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
+        RANK: {
+          name: "rank",
+          aliases: ["xp"],
+          category: "level",
+          categoryName: "Level",
+          description: {
+            en: "Show an user rank",
+            fr: "Voir le rang d'un utilisateur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "{optional: @user}",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: false,
+          onlyServerOwner: false,
+          reqPermName: "",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false,
+        },
       },
     },
     MODERATION: {
-      ADDROLE: {
-        name: "addrole",
-        aliases: ["role", "addroles"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Add role(s) to user(s).",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@role(s) @user(s)",
-        example: "~addrole @role1 @user1 @user2 @role2",
-        botPerm: true,
-        botPermName: 'MANAGE_ROLES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_ROLES",
-        onlyPremium: false,
-        args: true
+      ROLES: {
+        name: 'Roles',
+        emoji: '853985510967345223',
+        ADDROLE: {
+          name: "addrole",
+          aliases: ["role", "addroles"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Add role(s) to user(s).",
+            fr: "Ajouter un(des) rôle(s) à un(des) utilisateur(s)."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@role(s) @user(s)",
+          example: "~addrole @role1 @user1 @user2 @role2",
+          botPerm: true,
+          botPermName: 'MANAGE_ROLES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_ROLES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        REMROLE: {
+          name: "remrole",
+          aliases: ["remroles"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Remove role(s) from user(s).",
+            fr: "Retirer un(des) rôle(s) d'un(des) utilisateur(s)."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@role(s) @user(s)",
+          example: "~remroles @user1 @role1 @user2",
+          botPerm: true,
+          botPermName: 'MANAGE_ROLES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_ROLES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
       },
-      BAN: {
-        name: "ban",
-        aliases: ["ban"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Ban an user from the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user {optional : reason}",
-        example: "",
-        botPerm: true,
-        botPermName: 'BAN_MEMBERS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "BAN_MEMBERS",
-        onlyPremium: false,
-        args: true,
+      MEMBERMANAGER: {
+        name: 'Members',
+        emoji: '806440887332372482',
+        BAN: {
+          name: "ban",
+          aliases: ["ban"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Ban an user from the server.",
+            fr: "Bannir un utilisateur du serveur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user {optional : reason}",
+          example: "",
+          botPerm: true,
+          botPermName: 'BAN_MEMBERS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "BAN_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true,
+        },
+        KICK: {
+          name: "kick",
+          aliases: ["kick"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Kick an user from the server",
+            fr: "Expulser un utilisateur du serveur"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user {optional : reason}",
+          example: "",
+          botPerm: true,
+          botPermName: 'KICK_MEMBERS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "KICK_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true,
+        },
+        MUTE: {
+          name: "mute",
+          aliases: ["mute"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Mute an user (write, speak and react).",
+            fr: "Rendre muet un utilisateur (écrit/vocal & réagir)."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user {time} <reason>",
+          example: "~mute @Noct 24H spam",
+          botPerm: true,
+          botPermName: 'MANAGE_ROLES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MUTE_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        PRUNE: {
+          name: "prune",
+          aliases: ["prune"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Kick inactive members.",
+            fr: "Expulser les membres ayant une certaine inactivité."
+          },
+          ownerCmd: false,
+          cooldown: 10,
+          enable: false,
+          usage: "<nb_of_day>",
+          example: null,
+          botPerm: true,
+          botPermName: 'ADMINISTRATOR',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "ADMINISTRATOR",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        TEMPBAN: {
+          name: "tempban",
+          aliases: ["tempban"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Ban an user from the server temporary.",
+            fr: "Bannir un utilisateur du serveur pour une durée déterminée."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: "@user {optional : time}",
+          example: "~tempban @Noct#0000 2d Not allowed content",
+          botPerm: true,
+          botPermName: 'BAN_MEMBERS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "BAN_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        UNBAN: {
+          name: "unban",
+          aliases: ["unban"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Unban a banned user from the server.",
+            fr: "Débannir un utilisateur qui fût banni du serveur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "<user_id>",
+          example: "~unban 735824367698837555",
+          botPerm: true,
+          botPermName: 'BAN_MEMBERS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "BAN_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        UNMUTE: {
+          name: "unmute",
+          aliases: ["unmute"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Unmute a muted user (see mute command)",
+            fr: "Démutez un membre étant muet (voir commande mute)"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user",
+          example: "",
+          botPerm: true,
+          botPermName: 'MANAGE_ROLES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MUTE_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        WARN: {
+          name: "warn",
+          aliases: ["warn"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Warn an user.",
+            fr: "Avertir un membre."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user",
+          example: "",
+          botPerm: true,
+          botPermName: 'MANAGE_ROLES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MUTE_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
+        WARNINGS: {
+          name: "warnings",
+          aliases: ["warnings"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Show an user warnings.",
+            fr: "Voir la liste d'avertissement d'un membre."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "@user",
+          example: null,
+          botPerm: false,
+          botPermName: '',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MUTE_MEMBERS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true
+        },
       },
-      CLEAR: {
-        name: "clear",
-        aliases: ["purge"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Clear messages in channel (or an user messages).",
-        ownerCmd: false,
-        cooldown: 1,
-        enable: true,
-        usage: "<nb> {@user}",
-        example: "~clear 100",
-        botPerm: true,
-        botPermName: 'MANAGE_MESSAGES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_MESSAGES",
-        onlyPremium: false,
-        args: true,
-      },
-      KICK: {
-        name: "kick",
-        aliases: ["kick"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Kick an user from the server",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user {optional : reason}",
-        example: "",
-        botPerm: true,
-        botPermName: 'KICK_MEMBERS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "KICK_MEMBERS",
-        onlyPremium: false,
-        args: true,
-      },
-      LOCK: {
-        name: "lock",
-        aliases: ["lockdown"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Lock a channel for members without administrator permission.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: ['MANAGE_CHANNELS', 'MANAGE_ROLES'],
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_CHANNELS",
-        onlyPremium: false,
-        args: false
-      },
-      MUTE: {
-        name: "mute",
-        aliases: ["mute"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Mute an user in the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user {time} <reason>",
-        example: "~mute @Noct 24H spam",
-        botPerm: true,
-        botPermName: 'MANAGE_ROLES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MUTE_MEMBERS",
-        onlyPremium: false,
-        args: true
-      },
-      NUKE: {
-        name: "nuke",
-        aliases: ["nuke"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Nuke the channel.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: ['MANAGE_CHANNELS', 'MANAGE_MESSAGES'],
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_CHANNELS",
-        onlyPremium: false,
-        args: false
-      },
-      PRUNE: {
-        name: "prune",
-        aliases: ["prune"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Kick inactive members.",
-        ownerCmd: false,
-        cooldown: 10,
-        enable: false,
-        usage: "<nb_of_day>",
-        example: null,
-        botPerm: true,
-        botPermName: 'ADMINISTRATOR',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "ADMINISTRATOR",
-        onlyPremium: false,
-        args: true
-      },
-      REMROLE: {
-        name: "remrole",
-        aliases: ["remroles"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Remove role(s) from user(s).",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "@role(s) @user(s)",
-        example: "~remroles @user1 @role1 @user2",
-        botPerm: true,
-        botPermName: 'MANAGE_ROLES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_ROLES",
-        onlyPremium: false,
-        args: true
-      },
-      RESETSLOW: {
-        name: "resetslowmode",
-        aliases: ["resetslow"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Reset the slowmode in the channel.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "{time | 5s} {#channel}",
-        example: "~slowmode 5m",
-        botPerm: true,
-        botPermName: 'MANAGE_CHANNELS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_CHANNELS",
-        onlyPremium: false,
-        args: false
-      },
-      SLOWMODE: {
-        name: "slowmode",
-        aliases: ["setslowmode"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Set slowmode in a channel.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "<time> {#channel}",
-        example: "~slowmode 5m",
-        botPerm: true,
-        botPermName: 'MANAGE_CHANNELS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_CHANNELS",
-        onlyPremium: false,
-        args: false
-      },
-      TEMPBAN: {
-        name: "tempban",
-        aliases: ["tempban"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Ban an user from the server temporary.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "@user {optional : time}",
-        example: "~tempban @Noct#0000 2d Not allowed content",
-        botPerm: true,
-        botPermName: 'BAN_MEMBERS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "BAN_MEMBERS",
-        onlyPremium: false,
-        args: true
-      },
-      UNBAN: {
-        name: "unban",
-        aliases: ["unban"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Unban a banned user from the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "<user_id>",
-        example: "~unban 735824367698837555",
-        botPerm: true,
-        botPermName: 'BAN_MEMBERS',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "BAN_MEMBERS",
-        onlyPremium: false,
-        args: true
-      },
-      UNLOCK: {
-        name: "unlock",
-        aliases: ["unlockdown"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Unlock a locked channel.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: ['MANAGE_CHANNELS', 'MANAGE_ROLES'],
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MANAGE_CHANNELS",
-        onlyPremium: false,
-        args: false
-      },
-      UNMUTE: {
-        name: "unmute",
-        aliases: ["unmute"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Unmute a muted user in the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user",
-        example: "",
-        botPerm: true,
-        botPermName: 'MANAGE_ROLES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MUTE_MEMBERS",
-        onlyPremium: false,
-        args: true
-      },
-      WARN: {
-        name: "warn",
-        aliases: ["warn"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Warn an user in the server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user",
-        example: "",
-        botPerm: true,
-        botPermName: 'MANAGE_ROLES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MUTE_MEMBERS",
-        onlyPremium: false,
-        args: true
-      },
-      WARNINGS: {
-        name: "warnings",
-        aliases: ["warnings"],
-        category: "moderation",
-        categoryName: "Moderation",
-        description: "Show an user warnings.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "@user",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "MUTE_MEMBERS",
-        onlyPremium: false,
-        args: true
+      CHANNELMANAGER: {
+        name: 'Channels',
+        emoji: '806440888590008360',
+        CLEAR: {
+          name: "clear",
+          aliases: ["purge"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Clear a specific amount of messages in channel.",
+            fr: "Supprimer un nombre spécifique de messages dans le salon."
+          },
+          ownerCmd: false,
+          cooldown: 1,
+          enable: true,
+          usage: "<nb> {@user}",
+          example: null,
+          botPerm: true,
+          botPermName: 'MANAGE_MESSAGES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_MESSAGES",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: true,
+        },
+        LOCK: {
+          name: "lock",
+          aliases: ["lockdown"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Lock a channel for members without administrator permission.",
+            fr: "Blocker un salon afin d'empêcher les membres n'étant pas admin d'envoyer des messages."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: ['MANAGE_CHANNELS', 'MANAGE_ROLES'],
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        NUKE: {
+          name: "nuke",
+          aliases: ["nuke"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Delete all messages in the channel.",
+            fr: "Supprimer tout les messages du salon."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: ['MANAGE_CHANNELS', 'MANAGE_MESSAGES'],
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        RESETSLOW: {
+          name: "resetslowmode",
+          aliases: ["resetslow"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Reset the slowmode in the channel.",
+            fr: "Retirer le mode-lent dans le salon."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "{time | 5s} {#channel}",
+          example: "~slowmode 5m",
+          botPerm: true,
+          botPermName: 'MANAGE_CHANNELS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        SLOWMODE: {
+          name: "slowmode",
+          aliases: ["setslowmode"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Set slowmode in a channel.",
+            fr: "Modifier le mode-lent dans le salon."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "<time> {#channel}",
+          example: "~slowmode 5m",
+          botPerm: true,
+          botPermName: 'MANAGE_CHANNELS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        UNLOCK: {
+          name: "unlock",
+          aliases: ["unlockdown"],
+          category: "moderation",
+          categoryName: "Moderation",
+          description: {
+            en: "Unlock a locked channel (see lock command)",
+            fr: "Débloquer un salon bloqué (voir commande lock)"
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: ['MANAGE_CHANNELS', 'MANAGE_ROLES'],
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
       },
     },
-    OTHER: {
-      ADDBOT: {
-        name: "addbot",
-        aliases: ["invite", "botinvite", "invitebot", "links", "support", "supportserver", "vote"],
-        category: "other",
-        categoryName: "Other",
-        description: "Add bot to your server",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false
-      },
+    //A FAIRE ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII 
+    //changer la desc des cmds en en et fr a partir de la
+    UTIL: {
       HELP: {
         name: "help",
         aliases: ["help"],
-        category: "other",
-        categoryName: "Other",
-        description: "All bot's commands",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "List of bot's commands",
+          fr: "Liste des commandes du bot"
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1414,14 +1787,18 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: false
       },
       NICK: {
         name: "nick",
         aliases: ["nick"],
-        category: "other",
-        categoryName: "Other",
-        description: "Change an user nickname",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "Change an user nickname",
+          fr: "Changer le surnom d'un membre"
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1433,33 +1810,18 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
-      },
-      PING: {
-        name: "ping",
-        aliases: ["ping"],
-        category: "other",
-        categoryName: "Other",
-        description: "Gets the ping of bot",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: false,
-        botPermName: '',
-        permissions: false,
-        onlyServerOwner: false,
-        reqPermName: "",
-        onlyPremium: false,
-        args: false
       },
       AVATAR: {
         name: "avatar",
         aliases: ["pp"],
-        category: "other",
-        categoryName: "Other",
-        description: "Show an user profile picture.",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "Show an user profile picture.",
+          fr: "Voir la photo de profil d'un utilisateur."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1471,52 +1833,64 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: false
       },
       POLL: {
         name: "poll",
         aliases: ["poll"],
-        category: "other",
-        categoryName: "Other",
-        description: "Make a simple poll",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "Make a simple poll",
+          fr: "Créer un simple sondage"
+        },
         ownerCmd: false,
         cooldown: 1,
         enable: true,
         usage: '\"poll\" \"Answer(s)\"',
-        example: '~poll "Do you like I2Z7 ?" "Yes" "No" "Maybe"',
+        example: '~poll "Is Noct a good bot ?" "Yes" "No" "Maybe"',
         botPerm: true,
         botPermName: 'MANAGE_MESSAGES',
         permissions: true,
         onlyServerOwner: false,
         reqPermName: "MANAGE_ROLES",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       REACT: {
         name: "react",
         aliases: ["react"],
-        category: "other",
-        categoryName: "Other",
-        description: "React to a message with a normal/custom emoji ID",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          fr: "React to a message with an emoji ID/name",
+          fr: "Réagis à un message avec l'ID/le nom d'un émoji"
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
-        usage: "<message_id | ^ (react_last_msg)> <reaction_id>",
-        example: "~react 806440609127596032 826870663569997884",
+        usage: "<message_id> <reaction_id>",
+        example: "~react ^ 826870663569997884",
         botPerm: true,
         botPermName: 'ADD_REACTIONS',
         permissions: true,
         onlyServerOwner: false,
         reqPermName: "ADD_REACTIONS",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       REPORT: {
         name: "report",
         aliases: ["rp"],
-        category: "other",
-        categoryName: "Other",
-        description: "Report a bug to bot's creator (DON'T SPAM !!!)",
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "Report a bug to bot's creator.",
+          fr: "Faire un rapport d'erreurs au créateur du bot."
+        },
         ownerCmd: false,
         cooldown: 3600,
         enable: true,
@@ -1528,14 +1902,18 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       SAY: {
         name: "say",
-        aliases: ["rep", "repeat"],
-        category: "other",
-        categoryName: "Other",
-        description: "Repeat a message",
+        aliases: ["rep"],
+        category: "util",
+        categoryName: "Util",
+        description: {
+          en: "Bot will repeat the message",
+          fr: "Faire répeter un message au bot"
+        },
         ownerCmd: false,
         cooldown: 1,
         enable: true,
@@ -1547,87 +1925,111 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "MANAGE_MESSAGES",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
     },
     CONFIGURATION: {
-      ANTIRAID: {
-        name: "antiraid",
-        aliases: ["antiraid"],
-        category: "configuration",
-        description: "Set anti raid mode in server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: false,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: 'ADMINISTRATOR',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "ADMINISTRATOR",
-        onlyPremium: false,
-        args: false
-      },
-      ANTIINVITE: {
-        name: "antiinvite",
-        aliases: ["antiinvite"],
-        category: "configuration",
-        description: "Set anti invite mode in server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: 'MANAGE_MESSAGES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "ADMINISTRATOR",
-        onlyPremium: false,
-        args: false
-      },
-      ANTILINK: {
-        name: "antilink",
-        aliases: ["antilink"],
-        category: "configuration",
-        description: "Set anti link mode in server.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: 'MANAGE_MESSAGES',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "ADMINISTRATOR",
-        onlyPremium: false,
-        args: false
-      },
-      AUTOMOD: {
-        name: "automod",
-        aliases: ["automod"],
-        category: "configuration",
-        description: "Configure auto-moderation system.",
-        ownerCmd: false,
-        cooldown: 0.1,
-        enable: true,
-        usage: "",
-        example: null,
-        botPerm: true,
-        botPermName: 'ADMINISTRATOR',
-        permissions: true,
-        onlyServerOwner: false,
-        reqPermName: "ADMINISTRATOR",
-        onlyPremium: false,
-        args: false
+      AUTOMODERATION: {
+        name: 'Auto-Moderation',
+        emoji: '853707412229849098',
+        ANTIRAID: {
+          name: "antiraid",
+          aliases: ["antiraid"],
+          category: "configuration",
+          description: {
+            en: "Configure anti-raid mode.",
+            fr: "Configurer le mode anti-raid."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: false,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'ADMINISTRATOR',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "ADMINISTRATOR",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        ANTIINVITE: {
+          name: "antiinvite",
+          aliases: ["antiinvite"],
+          category: "configuration",
+          description: {
+            en: "Configure anti-invite mode.",
+            fr: "Configurer le mode anti-invite."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'MANAGE_MESSAGES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "ADMINISTRATOR",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        ANTILINK: {
+          name: "antilink",
+          aliases: ["antilink"],
+          category: "configuration",
+          description: {
+            en: "Configure anti-link mode.",
+            fr: "Configurer le mode anti-link."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'MANAGE_MESSAGES',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "ADMINISTRATOR",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        AUTOMOD: {
+          name: "automod",
+          aliases: ["automod"],
+          category: "configuration",
+          description: {
+            en: "Configure auto-moderation system.",
+            fr: "Configurer le système auto-moderation."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'ADMINISTRATOR',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "ADMINISTRATOR",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
       },
       BOTSETTINGS: {
         name: "botsettings",
         aliases: ["botconfig"],
         category: "configuration",
-        description: "Show bot's settings in server.",
+        description: {
+          en: "Show bot's settings in server.",
+          fr: "Voir les réglages du bot dans le serveur."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1639,13 +2041,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "MANAGE_GUILD",
         onlyPremium: false,
+        onlyInServer: true,
         args: false
       },
       CHANGE: {
         name: "config",
         aliases: ["change", "setup"],
         category: "configuration",
-        description: "Config bot's general settings in the server.",
+        description: {
+          en: "Config bot's general settings.",
+          fr: "Configurer les réglages principaux du bot."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1657,13 +2063,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       CUSTOMCMD: {
         name: "newcmd",
         aliases: ["createcmd"],
         category: "configuration",
-        description: "Create a new custom command for the server.",
+        description: {
+          en: "Create a new custom command for the server.",
+          fr: "Créer une commande personnalisée pour le serveur."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: false,
@@ -1675,13 +2085,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "ADMINISTRATOR",
         onlyPremium: false,
+        onlyInServer: true,
         args: false
       },
       ENABLE: {
         name: "enable",
         aliases: ["enable"],
         category: "configuration",
-        description: "Enable some bot's features.",
+        description: {
+          en: "Enable some bot's features.",
+          fr: "Activer certaines fonctionnalités."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1693,13 +2107,17 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "MANAGE_GUILD",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       },
       DISABLE: {
         name: "disable",
         aliases: ["disable"],
         category: "configuration",
-        description: "Disable some bot's features.",
+        description: {
+          en: "Disable some bot's features.",
+          fr: "Désactiver certaines fonctionnalités."
+        },
         ownerCmd: false,
         cooldown: 0.1,
         enable: true,
@@ -1711,58 +2129,308 @@ const MESSAGES = {
         onlyServerOwner: false,
         reqPermName: "MANAGE_GUILD",
         onlyPremium: false,
+        onlyInServer: true,
         args: true
       }
     },
   },
 };
 
-const categorys = [{
-  name: 'Configuration',
-  emoji: '772418754583855134',
-  commandsCat: 'configuration',
-  position: 1
-}, {
-  name: 'Moderation',
-  emoji: "770976748082298891",
-  commandsCat: 'moderation',
-  position: 2
-}, {
-  name: 'Level',
-  emoji: "772419302133334046",
-  commandsCat: 'level',
-  position: 3
-}, {
-  name: 'Info',
-  emoji: "772418814594777099",
-  commandsCat: 'info',
-  position: 4
-}, {
-  name: 'Economy',
-  emoji: "772419197673930782",
-  commandsCat: 'economy',
-  position: 5
-}, {
-  name: 'Giveaway',
-  emoji: "772419404855902209",
-  commandsCat: 'giveaway',
-  position: 6
-}, {
-  name: 'Other',
-  emoji: "770976765219831811",
-  commandsCat: 'other',
-  position: 7
-}, {
-  name: 'Counts',
-  emoji: "772418662929924106",
-  commandsCat: 'counts',
-  position: 8
-}, {
-  name: 'test',
-  emoji: '772419459968532520',
-  commandsCat: 'counts',
-  position: 9
-}];
+const categorys = [
+  /*CONFIGURATION*/
+  {
+    name: {
+      en: 'Configuration',
+      fr: 'Configuration'
+    },
+    description: {
+      en: "Configure the bot as you wish to build the best Discord server !",
+      fr: "Gérer les paramètres du bot comme vous le souhaitez afin de construire le meilleur serveur Discord !"
+    },
+    emoji: '852246257543020685',
+    commandsCat: 'configuration',
+    position: 1,
+    underCat: [{
+      name: {
+        en: 'Auto-Moderation',
+        fr: 'Auto-Modération'
+      },
+      description: {
+        en: 'Auto-moderation help admins to moderate the server when they are offline.',
+        fr: 'L\'auto-modération aide les admins à modérer le serveur lorsqu\'ils sont hors ligne.'
+      },
+      emoji: '853707412229849098'
+    }]
+  },
+  /* MODERATION */
+  {
+    name: {
+      en: 'Moderation',
+      fr: 'Modération'
+    },
+    description: {
+      en: "Manage your members with a fast, trustworthy & complete moderation system !",
+      fr: "Gérer vos membres l'aide d'un système de modération fiable, rapide & complet !"
+    },
+    emoji: '852246257560453122',
+    commandsCat: 'moderation',
+    position: 2,
+    underCat: [{
+      name: {
+        en: 'Roles',
+        fr: 'Rôles'
+      },
+      description: {
+        en: 'Manage roles & your members\'s roles',
+        fr: 'Gérer les rôles & les rôles de vos membres'
+      },
+      emoji: '853985510967345223'
+    }, {
+      name: {
+        en: 'Members',
+        fr: 'Membres'
+      },
+      description: {
+        en: 'Manage your members with these simple commands !',
+        fr: 'Gérer vos membres avec ces simples commandes !'
+      },
+      emoji: '806440887332372482'
+    }, {
+      name: {
+        en: 'Channels',
+        fr: 'Salons'
+      },
+      description: {
+        en: 'Manage channels by deleting messages, set slow-mode, and much more',
+        fr: 'Gérer les salons en supprimant les messages, activant le mode-lent, et bien plus !'
+      },
+      emoji: '806440888590008360'
+    }]
+  }, /*LEVEL*/ {
+    name: {
+      en: 'Level',
+      fr: 'Niveau'
+    },
+    description: {
+      en: "Show active members of your server and reward them with some roles or virtual bot money (always on dev...)",
+      fr: "Voyez qui sont les membres actifs sur votre serveur et récompensez-les avec des rôles ou de l'argent virtuel du bot (en développement)"
+    },
+    emoji: '809429129178251334',
+    commandsCat: 'level',
+    position: 3,
+    underCat: [{
+      name: {
+        en: 'Manage',
+        fr: 'Gérer'
+      },
+      description: {
+        en: 'Manage members\'s XPs & level',
+        fr: 'Gérer l\'XP et le niveau des membres.'
+      },
+      emoji: '852246257543020685'
+    }, {
+      name: {
+        en: 'Info',
+        fr: 'Info'
+      },
+      description: {
+        en: 'Show members\'s level informations.',
+        fr: 'Voir les informations sur le niveau des membres.'
+      },
+      emoji: '852254746155941938'
+    }, ]
+  }, /*INFO */ {
+    name: {
+      en: 'Info',
+      fr: 'Info'
+    },
+    description: {
+      en: "Show informations about server, member or even some role !",
+      fr: "Recevez les informations du serveur, d'un membre ou bien même un rôle !"
+    },
+    emoji: '852254746155941938',
+    commandsCat: 'info',
+    position: 4,
+    underCat: [{
+      name: {
+        en: 'Guild',
+        fr: 'Serveur'
+      },
+      description: {
+        en: 'Show informations about guild components.',
+        fr: 'Voir les informations sur les composants d\'un serveur.'
+      },
+      emoji: '806440886682648597'
+    }, {
+      name: {
+        en: 'Bot',
+        fr: 'Robot'
+      },
+      description: {
+        en: 'Show informations about the bot.',
+        fr: 'Voir les informations sur le robot.'
+      },
+      emoji: '806440887332372482'
+    }]
+  }, /*ECONOMY*/ {
+    name: {
+      en: 'Economy',
+      fr: 'Economie'
+    },
+    description: {
+      en: "A very simple & easy-to-use virtual money system with a lot of commands (always on dev...), and a credits system !",
+      fr: "Un système d'argent virtuel très simple & facile d'utilisation avec une multitude de commandes (en développement), ainsi qu'un système de crédits !"
+    },
+    emoji: '836629693608230912',
+    commandsCat: 'economy',
+    position: 5,
+    underCat: [{
+      name: {
+        en: 'Admin',
+        fr: 'Admin'
+      },
+      description: {
+        en: 'Configure economy system in your server, by creating custom items for example',
+        fr: 'Configurer le système économique de votre serveur, en créant des objets personnalisés par exemple'
+      },
+      emoji: '852246257560453122'
+    }, {
+      name: {
+        en: 'Items',
+        fr: 'Objets'
+      },
+      description: {
+        en: 'Buy and sell items from server\'s shop !',
+        fr: 'Achetez et vendez des objets de la boutique du serveur'
+      },
+      emoji: '830692404088537138'
+    }, {
+      name: {
+        en: 'Receive',
+        fr: 'Recevoir'
+      },
+      description: {
+        en: 'Here\'s differents ways using commands to get virtual server\'s money.',
+        fr: 'Voici les différents moyens utilisant des commandes pour gagner de l\'argent du serveur'
+      },
+      emoji: '852423090831228958'
+    }, {
+      name: {
+        en: 'Manage',
+        fr: 'Gérer'
+      },
+      description: {
+        en: 'Manage your money by depositing to uour bank, withdrawing and transfering to other members !',
+        fr: 'Gérer votre argent en le déposant à votre banque, en retirant et transférez-en à d\'autres membres !'
+      },
+      emoji: '852246257543020685'
+    }]
+  }, /*GIVEAWAYS*/ {
+    name: {
+      en: 'Giveaway',
+      fr: 'Cadeaux'
+    },
+    description: {
+      en: "Give some gifts to your members by using this giveaway system that create, reroll and manage your giveaways !",
+      fr: "Donnez des cadeaux à vos membres à l'aide de ce système qui permet de créer, relancer et gérer !"
+    },
+    emoji: '770980801411678229',
+    commandsCat: 'giveaway',
+    position: 6,
+    underCat: [{
+      name: {
+        en: 'Manage',
+        fr: 'Gérer'
+      },
+      description: {
+        en: 'Manage your giveaways with these commands.',
+        fr: 'Gérer vos cadeaux avec ces commandes.'
+      },
+      emoji: '806440887365795870'
+    }, {
+      name: {
+        en: 'Info',
+        fr: 'Info'
+      },
+      description: {
+        en: 'Show informations about giveaways in the server.',
+        fr: 'Voir les informations sur les cadeaux présents sur le serveur.'
+      },
+      emoji: '852254746155941938'
+    }]
+  }, /*UTIL*/ {
+    name: {
+      en: 'Util',
+      fr: 'Divers'
+    },
+    description: {
+      en: "All not categorised commands",
+      fr: "Toutes les commandes sans catégories spéciales"
+    },
+    emoji: '852246257366990878',
+    commandsCat: 'util',
+    position: 7,
+    underCat: [{
+      name: {
+        en: '',
+        fr: ''
+      },
+      description: {
+        en: 'Admin',
+        fr: 'Admin'
+      },
+      emoji: ''
+    }]
+  }, /*COUNTS */ {
+    name: {
+      en: 'Counts',
+      fr: 'Compteurs'
+    },
+    description: {
+      en: "Create and manage counts channels of members, channels or boosts !",
+      fr: "Créer et modifier des salons-compteurs de membres, salons ou bien de boosts !"
+    },
+    emoji: '772418424889409566',
+    commandsCat: 'counts',
+    position: 8,
+    underCat: [{
+      name: {
+        en: 'Manage',
+        fr: 'Gérer'
+      },
+      description: {
+        en: 'Manage your customs counts channels',
+        fr: 'Gérer vos salons-systèmes de compteurs personnalisés'
+      },
+      emoji: '806440887365795870'
+    }]
+  }, /*BACKUPS */ {
+    name: {
+      en: 'Backups',
+      fr: 'Sauvegardes'
+    },
+    description: {
+      en: "Create backups from your server to load it in other servers !",
+      fr: "Créez des sauvegardes de votre serveur pour les charger dans d'autres serveurs !"
+    },
+    emoji: '852867180072140830',
+    commandsCat: 'backups',
+    position: 9,
+    underCat: [
+      /*{
+          name: {
+            en: '',
+            fr: ''
+          },
+          description: {
+            en: 'Admin',
+            fr: 'Admin'
+          },
+          emoji: ''
+        }*/
+    ]
+  }
+];
 
 const strings = require('../string.json').en;
 const getStrings =

@@ -185,6 +185,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   };
 };
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.ECONOMY.GETMONEY;
 
-module.exports.help = MESSAGES.COMMANDS.ECONOMY.DAILY;
+module.exports.help = MESSAGES.COMMANDS.ECONOMY.GETMONEY.DAILY;

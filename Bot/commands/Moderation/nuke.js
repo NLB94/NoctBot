@@ -5,7 +5,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
-
+    // A FAIRE ICIIIIIIIIIIIIII
     const channel = message.channel;
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
@@ -72,6 +72,6 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         };
     };
 }
-module.exports.underCat = MESSAGES.COMMANDS;
+module.exports.underCat = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER;
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.NUKE;
+module.exports.help = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER.NUKE;

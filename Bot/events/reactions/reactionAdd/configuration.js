@@ -1,5 +1,18 @@
+const { MessageReaction, User } = require("discord.js");
+const { getStrings } = require("../../../../util/constants");
+const { Client } = require("../../../../util/functions");
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {MessageReaction} messageReaction 
+ * @param {User} user 
+ * @returns 
+ */
 module.exports = async (client, messageReaction, user) => {
     const message = messageReaction.message;
+    const settings = client.getGuild(message.guild);
+    const strings = getStrings(client, settings.general.language)
     if (user.tag !== message.embeds[0].footer.text) return messageReaction.users.remove(user.id);
     const msg = message.channel.messages.resolve(message.embeds[0].description.slice(message.embeds[0].description.length - 18));
     if (message.embeds[0].description.toLowerCase().includes("role") || message.embeds[0].description.toLowerCase().includes("rôle")) {
