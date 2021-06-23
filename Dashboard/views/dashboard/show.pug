@@ -1,0 +1,62 @@
+doctype
+html(lang='en')
+  head
+    include ../includes/header.pug
+    include ../includes/mixins.pug
+
+    //- script(defer).
+      //- const commandsLog = [!{savedLog.commands}];
+      //- const messagesLog = [!{savedLog.messages}];
+      //- const punishmentsLog = [!{savedLog.punishments}];
+      //- const joinsLog = [!{savedLog.joins}];
+      //- const leavesLog = [!{savedLog.leaves}];
+      //- const guildId = '#{savedGuild.id}';
+      const key = '#{key}';
+
+    script(src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js', defer)
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js', defer)
+    script(src='/js/charts.js', defer)
+    script(src='/js/sidebar.js', defer)
+    script(src='/js/guild.js', defer)
+
+
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/ascetic.min.css')
+    link(rel='stylesheet', href='/css/sidebar.css')
+    link(rel='stylesheet', href='/css/charts.css')
+  include ../includes/sidebar.pug
+  include ../includes/navbar.pug
+  body  
+  
+    #sidebarExtension
+      header.text-center.pt-4
+        .large-icon.bg-white.round
+          if guild.icon
+            img.round(src=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`, alt=guild.name.split(/ +/).slice(0, 3).map(g => g.slice(0, 1)).join(""))
+          else
+            p.abbr #{guild.name.split(/ +/).slice(0, 3).map(g => g.slice(0, 1)).join("")}
+        h4#overview.pt-2 #{guild.name}
+      .tabs.navbar-nav
+        .category #[i.fas.fa-mouse] 
+          |  Modules
+        a#autoMod.cursor-pointer #[i.fas.fa-gavel.pr-1.text-muted] Auto-moderation
+        a#economy.cursor-pointer #[i.fas.fa-coins.pr-1.text-muted] Economy
+        a#general.cursor-pointer #[i.fas.fa-plug.pr-1.text-muted] General
+
+        .category Level
+        a#level-settings.cursor-pointer #[i.fas.fa-cogs.pr-1.text-muted] Settings
+
+        .category Economy 
+        a#economy-settings.cursor-pointer #[i.fas.fa-cogs.pr-1.text-muted] Settings 
+
+        .category #[i.fas.fa-trophy] 
+          |  Leaderboards 
+        a#level-lead.cursor-pointer(href='/leaderboard/' + guild.id + '/level') #[i.fas.fa-level-up-alt.pr-1.text-muted] Levels
+        a#money-lead.cursor-pointer(href='/leaderboard/' + guild.id + '/money') #[i.fas.fa-coins.pr-1.text-muted] Money
+
+    include modules/overview
+    include modules/auto-mod
+    include modules/economy
+    include modules/general
+
+    //- script(src='//code.tidio.co/jhxg9ox4aqwxbctufg0ehyv1dqhktlhj.js', async)

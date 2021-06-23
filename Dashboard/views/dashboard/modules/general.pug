@@ -1,0 +1,32 @@
+section#generalModule.module.container.px-5
+  form(action='/dashboard/' + guild.id + '/general', method='POST')
+    .jumbotron.bg-transparent.pb-0
+      h1.display-4.text-center General
+    .form-group.my-5
+      .row
+        .col-4
+          label Prefix
+          input.form-control(type='text', name='prefix', value=settings.general.prefix,
+            maxlength='5', required)
+          label Theme
+          input.form-control(type='label', name='apparence', value=settings.general.apparence,
+            maxlength='5', required)
+          label Language 
+          input.form-control(type='label', name='language', value=settings.general.language,
+            maxlength='2', required)
+          label Logs
+          input.form-control(type='label', name='logs', value=settings.general.logs,
+            maxlength='18', required)
+        //- .col-4
+          label Blacklisted Channels
+          input(name='blacklistedChannelIds', type='hidden', value='')
+          select.form-control(name='blacklistedChannelIds[]', multiple)
+            option(value="heyhey", selected) #nomdusalon
+            each channel of Array.from(guild.channels.cache.filter(c => c.type === 'text').values())
+              if savedGuild.general.blacklistedChannelIds.includes(channel.id)
+                option(value=channel.id, selected) ##{channel.name}
+              else
+                option(value=channel.id) ##{channel.name}
+        .col-4
+    .d-flex.justify-content-center
+      button.btn.btn-success #[i.fas.fa-rocket] Save

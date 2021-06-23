@@ -1,0 +1,15 @@
+{
+    "plugins": [
+        "react-pug"
+    ],
+    "rules": {
+        "comma-spacing": "off",
+        "no-unused-vars": "off",
+        "no-spaced-func": "off",
+        "no-undefined": "off",
+        "react-pug/eslint": "off"
+    },
+    "extends": [
+        "plugin:react-pug/all"
+    ]
+}
