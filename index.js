@@ -59,9 +59,7 @@ const {
 require('./util/user')(client);
 
 setTimeout(() => {
-    require('./website/Dashboard');
-    // require('./website/Home');
-    // require('./website/Docs');
+    require('./Dashboard/server')(client);
 }, 3000)
 require('./util/brawlstars')(client);
 require("./util/guild")(client);
