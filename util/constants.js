@@ -2143,6 +2143,7 @@ const categorys = [
       en: 'Configuration',
       fr: 'Configuration'
     },
+    icon: "tools",
     description: {
       en: "Configure the bot as you wish to build the best Discord server !",
       fr: "Gérer les paramètres du bot comme vous le souhaitez afin de construire le meilleur serveur Discord !"
@@ -2168,6 +2169,7 @@ const categorys = [
       en: 'Moderation',
       fr: 'Modération'
     },
+    icon: "hammer",
     description: {
       en: "Manage your members with a fast, trustworthy & complete moderation system !",
       fr: "Gérer vos membres l'aide d'un système de modération fiable, rapide & complet !"
@@ -2211,6 +2213,7 @@ const categorys = [
       en: 'Level',
       fr: 'Niveau'
     },
+    icon: "caret-up",
     description: {
       en: "Show active members of your server and reward them with some roles or virtual bot money (always on dev...)",
       fr: "Voyez qui sont les membres actifs sur votre serveur et récompensez-les avec des rôles ou de l'argent virtuel du bot (en développement)"
@@ -2244,6 +2247,7 @@ const categorys = [
       en: 'Info',
       fr: 'Info'
     },
+    icon: "info-circle",
     description: {
       en: "Show informations about server, member or even some role !",
       fr: "Recevez les informations du serveur, d'un membre ou bien même un rôle !"
@@ -2277,6 +2281,7 @@ const categorys = [
       en: 'Economy',
       fr: 'Economie'
     },
+    icon: "money-check-alt",
     description: {
       en: "A very simple & easy-to-use virtual money system with a lot of commands (always on dev...), and a credits system !",
       fr: "Un système d'argent virtuel très simple & facile d'utilisation avec une multitude de commandes (en développement), ainsi qu'un système de crédits !"
@@ -2330,6 +2335,7 @@ const categorys = [
       en: 'Giveaway',
       fr: 'Cadeaux'
     },
+    icon: "gifts",
     description: {
       en: "Give some gifts to your members by using this giveaway system that create, reroll and manage your giveaways !",
       fr: "Donnez des cadeaux à vos membres à l'aide de ce système qui permet de créer, relancer et gérer !"
@@ -2363,6 +2369,7 @@ const categorys = [
       en: 'Util',
       fr: 'Divers'
     },
+    icon: "plus",
     description: {
       en: "All not categorised commands",
       fr: "Toutes les commandes sans catégories spéciales"
@@ -2386,6 +2393,7 @@ const categorys = [
       en: 'Counts',
       fr: 'Compteurs'
     },
+    icon: "list-ol",
     description: {
       en: "Create and manage counts channels of members, channels or boosts !",
       fr: "Créer et modifier des salons-compteurs de membres, salons ou bien de boosts !"
@@ -2409,6 +2417,7 @@ const categorys = [
       en: 'Backups',
       fr: 'Sauvegardes'
     },
+    icon: "server",
     description: {
       en: "Create backups from your server to load it in other servers !",
       fr: "Créez des sauvegardes de votre serveur pour les charger dans d'autres serveurs !"

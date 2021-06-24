@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const chalk = require('chalk');
+// const chalk = require('chalk');
 
 module.exports = {
     init: () => {
@@ -17,6 +17,6 @@ module.exports = {
 
         mongoose.connect(process.env.DBCONNECTION, mongOptions);
         mongoose.Promise = global.Promise;
-        mongoose.connection.on("connected", () => console.log(chalk.green("Mongoose is connect")));
+        mongoose.connection.on("connected", () => console.log("Mongoose is connect"));
     }
 }

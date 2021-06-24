@@ -22,6 +22,7 @@ const {
 const {
     validateGuild
 } = require('../util/utils');
+const { categorys } = require('../../util/constants');
 
 router.use('/api', api);
 router.get('/', async (req, res) => {
@@ -63,12 +64,11 @@ router.get('/commands', async (req, res) => {
         //     }
         // ],
         commands: await client.commands.map(cmd => cmd.help).filter(cmd => cmd.category !== 'admin').filter(cmd => cmd.enable),
-        categories: client.categories.map(c => ({
+        categories: categorys.map(c => ({
             name: c,
-            icon: 'fas fa-coins'
+            icon: `fas fa-${c.icon}`
         })),
-        user: (await client.users.resolve(req.user ? req.user.userID : null)),
-        console
+        user: (await client.users.resolve(req.user ? req.user.userID : null))
     })
 })
 router.get('/leaderboard', async (req, res) => {

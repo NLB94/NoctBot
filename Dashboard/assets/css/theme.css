@@ -3,7 +3,7 @@
   --primary: black;
 
   --heading: black;
-  --font: black;
+  --font: #1478eb;
 
   --background-primary: white;
   --background-secondary: #F8F9FA;
@@ -11,6 +11,17 @@
 }
 
 :root[theme='DISCORD'] {
+  --primary: #7289DA;
+
+  --heading: white;
+  --font: #99AAB5;
+
+  --background-primary: #36393F;
+  --background-secondary: #2F3136;
+  --background-tertiary: #202225;
+}
+
+:root[theme='WHITE'] {
   --primary: #7289DA;
 
   --heading: white;

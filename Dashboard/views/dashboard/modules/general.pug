@@ -8,9 +8,10 @@ section#generalModule.module.container.px-5
           label Prefix
           input.form-control(type='text', name='prefix', value=settings.general.prefix,
             maxlength='5', required)
-          label Theme
-          input.form-control(type='label', name='apparence', value=settings.general.apparence,
-            maxlength='5', required)
+          label Theme 
+          select#themeSelect.form-control(name="apparence")
+            option(value='light', selected) Light 
+            option(value='dark') Dark
           label Language 
           input.form-control(type='label', name='language', value=settings.general.language,
             maxlength='2', required)

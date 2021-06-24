@@ -1,5 +1,5 @@
 mixin category(category)
-  li.list-group-item(id=category.name) #[i(class=category.icon)] #{category.name}
+  li.list-group-item(id=category.name.en.toLowerCase()) #[i(class=category.icon)] #{category.name.name.en}
 
 mixin command(command)
   li.list-group-item(id=command.name + 'Command', class=command.category) #{command.name}

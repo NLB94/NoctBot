@@ -1,26 +1,19 @@
-// import  from "node-fetch";
-
 $('.categories li').on('click', setCategory);
-console.log('g')
+
 function setCategory() {
   blank();
 
   const selected = $(this);
-  selected.addClass('active');
+  selected.addClass('active');  
 
-  const categoryCommands = commands.map(cmd => cmd.name);
+  const categoryCommands = $(`.commands .${selected.id}`);
   categoryCommands.show();
-  // let cmds = fetch('http://206.217.221.202:4000/commands').then(res => res.json());
-  // cmds.show();
-
-  // updateResultsText(categoryCommands);
+  
+  updateResultsText(categoryCommands);
 }
-/**
- * Reset category
- */
 function blank() {
   $('.categories li').removeClass('active');
-  // $('.commands li').hide();
+  $('.commands li').hide();
 }
 
 $('#search + button').on('click', () => {
@@ -38,7 +31,7 @@ $('#search + button').on('click', () => {
       ]
     })
     .search(query)
-    .map(r => r.name);
+    .map(r => r.item);
 
   blank(); 
   

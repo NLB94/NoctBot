@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+// const chalk = require("chalk");
 const {
   MessageEmbed,
   APIMessage,
@@ -21,7 +21,7 @@ module.exports = functions.client = async client => {
   });
 
   console.log(
-    chalk.bgWhite.black(`${client.user.tag} est prêt alhamduliLlah ! ${guilds.length} serveurs, ${client.users.cache.size} membres!`)
+    /*chalk.bgWhite.black(*/`${client.user.tag} est prêt alhamduliLlah ! ${guilds.length} serveurs, ${client.users.cache.size} membres!`//)
   );
 
   let i = 0,

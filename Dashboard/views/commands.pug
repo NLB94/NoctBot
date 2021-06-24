@@ -8,7 +8,7 @@ html(lang='en')
     script(src='https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js', defer)
     script(src='/js/commands.js', defer)
     script(defer).
-      commands = #{JSON.stringify(commands)}.
+      commands = #{commands}.
       console = #{console}
 
     link(rel='stylesheet', href='/css/commands.css')
@@ -17,7 +17,9 @@ html(lang='en')
     .container
       .jumbotron.text-center.bg-transparent
         h1.display-3 Commands
-        p.lead View the commands for Noct.
+        p.lead List of 
+          img(src="/img/logo.png", alt="Noct") 
+          | 's commands 
         hr
 
       section#commands
@@ -33,7 +35,7 @@ html(lang='en')
                 +category(category)
           .col-sm-9.commands
             ul.list-group.mb-2
-              //- each command in commands
+              each command in commands
                 +command(command)
               p#commandError
 
