@@ -28,7 +28,7 @@
     "disco-oauth": "^5.0.1",
     "discord-backup": "^2.2.5",
     "discord-giveaways": "^4.4.3",
-    "discord.js": "github:monbrey/discord.js#message-components",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "env": "^0.0.2",
