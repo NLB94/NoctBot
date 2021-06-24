@@ -1,5 +1,5 @@
 {
-  "name": "i2z7",
+  "name": "noct",
   "version": "1.5",
   "description": "A very powerful Discord Bot",
   "main": "index.js",
@@ -26,7 +26,6 @@
     "cors": "^2.8.5",
     "dblapi.js": "^2.4.0",
     "disco-oauth": "^5.0.1",
-    "discord-backup": "^2.2.5",
     "discord-giveaways": "^4.4.3",
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
