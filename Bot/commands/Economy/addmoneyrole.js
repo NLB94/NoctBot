@@ -7,9 +7,9 @@ const {
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
 
-  
+
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
 
@@ -20,15 +20,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const correctUsage = `${x_mark}${'Correct usage'} : \`${settings.general.prefix}addmoneyrole ${module.exports.help.usage}\``
 
   if (!role) return message.channel.send({
-    embed: {
+    embeds: [{
       description: correctUsage
-    }
+    }]
   });
   const toAdd = isNaN(args[1]) ? parseInt(args[2]) : parseInt(args[1]);
   if (isNaN(toAdd)) return message.channel.send({
-    embed: {
+    embeds: [{
       description: correctUsage
-    }
+    }]
   });
   message.guild.members.cache.map(m => users.push(m));
   users.forEach(async user => {
@@ -62,7 +62,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     .setFooter(message.guild, message.guild.iconURL())
     .setTimestamp();
 
-  message.channel.send(embed);
+  message.channel.send({embeds: [embed]});
 };
 
 

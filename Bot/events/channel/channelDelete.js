@@ -57,7 +57,7 @@ module.exports = async (client, channel) => {
             //     .setFooter(channel.guild.name, channel.guild.iconURL());
 
 
-            // logs == undefined || !logs || logs == 'None' ? (channel.isText() ? channel.send(embed) : '') : logs.send(embed);
+            // logs == undefined || !logs || logs == 'None' ? (channel.isText() ? channel.send({embeds: [embed]}) : '') : logs.send({embeds: [embed]});
 
         // }).catch((err) => {
         //     console.log(err);

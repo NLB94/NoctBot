@@ -13,10 +13,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const logs = settings.general.logs == 'logs' ? message.guild.channels.cache.find(c => c.name == 'logs') : message.guild.channels.cache.find(c => c.id == settings.general.logs);
     const user = args[0].startsWith('<@') && args[0].endsWith('>') ? message.guild.members.resolve(message.mentions.users.first()) : (isNaN(args[0]) ? (message.guild.members.cache.find(m => m.tag == args[0])) : message.guild.members.resolve(args[0]));
     if (!user) return message.channel.send({
-        embed: {
+        embeds: [{
             title: 'Invalid Usage',
             description: `${arrowRight}Correct usage : \`${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}\``
-        }
+        }]
     });
     let muteRole = settings.moderation.muteRole.toLowerCase() == 'muted' ? message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted') : message.guild.roles.cache.find(r => r.id === settings.moderation.muteRole);
 
@@ -58,7 +58,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             .setAuthor(`${user.user.username} is now unmuted`)
             .setColor("#000000");
 
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed]});
         if (logs !== undefined) {
             logs.send(embedLogs);
         }

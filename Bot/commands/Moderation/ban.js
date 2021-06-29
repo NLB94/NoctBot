@@ -34,7 +34,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           .setTimestamp()
           .setFooter(message.author.username, message.author.avatarURL());
           
-        await message.channel.send(embed)
+        await message.channel.send({embeds: [embed]})
         if (logs !== undefined) logs.send(logsEmbed);
         
       });
@@ -65,13 +65,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         if (logs !== undefined) {
           logs.send(logsEmbed);
         }
-        message.channel.send(embed)
+        message.channel.send({embeds: [embed]})
       });
     }
   } else return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}User not found!`
-    }
+    }]
   });
 };
 module.exports.underCat = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER;

@@ -46,5 +46,5 @@ const embed = new MessageEmbed()
 .setDescription(`${msg}`) 
 .setTimestamp();
 
-client.channels.cache.get('789919985307746304').send(embed);
+client.channels.cache.get('789919985307746304').send({embeds: [embed]});
 }

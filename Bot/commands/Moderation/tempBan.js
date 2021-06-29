@@ -33,7 +33,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           .setFooter(message.author.username, message.author.avatarURL());
 
         if (logs !== undefined) { logs.send(logsEmbed); }
-        message.channel.send(embed)
+        message.channel.send({embeds: [embed]})
 
         setTimeout(async () => {
           message.guild.members.unban(user)
@@ -41,7 +41,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       });
     }
     else {
-      if (message.guild.me.roles.highest.position <= member.roles.highest.position) return message.channel.send({embed: {description: `${x_mark}I can't ban an user who have a role highest than mine!`}});
+      if (message.guild.me.roles.highest.position <= member.roles.highest.position) return message.channel.send({embeds: [{description: `${x_mark}I can't ban an user who have a role highest than mine!`}]});
       member.ban({ days: 7, reason: reason }).then(() => {
         user.createDM().then(() => {
           user.send(`You have been banned from ${message.guild.name} by ${message.author.tag} for reason : ${reason}.\n You will be unban in ${ms(time)}`)
@@ -61,7 +61,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
           .setFooter(message.author.username, message.author.avatarURL());
 
         if (logs !== undefined) { logs.send(logsEmbed); }
-        message.channel.send(embed)
+        message.channel.send({embeds: [embed]})
 
         setTimeout(async () => {
           message.guild.members.unban(user);
@@ -76,7 +76,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       });
     }
   }
-  else return message.channel.send({embed: { description: `${x_mark}User not found!`}});
+  else return message.channel.send({embeds: [{ description: `${x_mark}User not found!`}]});
 };
 module.exports.underCat = MESSAGES.COMMANDS.MODERATION.MEMBERMANAGER;
 

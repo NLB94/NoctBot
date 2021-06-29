@@ -107,7 +107,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     // embed.attachFiles(file);
 
     message.channel.send({
-      embed,
+      embeds: [embed],
       components: [row]
     }).then(async msg => {
       for (const cat of cats) {
@@ -118,9 +118,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const command = client.commands.get(args[0].toLowerCase()) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]))
     let cat = categorys.find(c => c.name.en.toLowerCase() == args[0].toLowerCase());
     if (!command && (!cat || (cat && cat.name[settings.general.language].toLowerCase() == 'admin'))) return message.channel.send({
-      embed: {
+      embeds: [{
         description: `${x_mark}Nothing found !`
-      }
+      }]
     });
     if (cat) {
       const embed = new MessageEmbed()
@@ -172,7 +172,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       // embed.attachFiles(file);
 
       message.channel.send({
-        embed,
+        embeds: [embed],
         components: [row]
       }).then(async msg => {
         for (const cat of cats) {
@@ -295,7 +295,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       // embed.attachFiles(file);
 
       if (command.help.onlyPremium) embed.setAuthor("🌟 Premium command 🌟");
-      return message.channel.send(embed);
+      return message.channel.send({embeds: [embed]});
     }
   };
 };

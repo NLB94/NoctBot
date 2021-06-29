@@ -18,9 +18,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   const toAdd = isNaN(args[0]) ? (isNaN(args[1]) ? parseInt(args[2]) : parseInt(args[1])) : parseInt(args[0]);
   if (isNaN(toAdd)) return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}${language == 'fr' ? 'Utilisation de la commande' : 'Correct usage'} : \`${settings.general.prefix}addmoney ${module.exports.help.usage}\``
-    }
+    }]
   })
   userInfo = user.id == message.author.id ? userInfo : await client.getGuildUser(message.guild, user);
   if (!userInfo) await client.createGuildUser(message.guild, user);
@@ -33,7 +33,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setColor('#000000')
-    .setTitle(language == 'fr'? 'Monnaie ajouté' : 'Money Added')
+    .setTitle(language == 'fr' ? 'Monnaie ajouté' : 'Money Added')
     .setDescription(msg)
     .setFooter(message.guild, message.guild.iconURL())
     .setTimestamp();
@@ -42,7 +42,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     "users.$.moneyCash": support == 'bank' ? userInfo.moneyCash : newB,
     "users.$.moneyBank": support == 'bank' ? newB : userInfo.moneyBank,
   })
-  message.channel.send(embed);
+  message.channel.send({embeds: [embed]});
 };
 
 

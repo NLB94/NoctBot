@@ -11,7 +11,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[0].toLowerCase()) == undefined ? client.users.cache.find(m => m.username.toLowerCase() == args[0].toLowerCase()) : message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[0].toLowerCase()).user)) : client.users.cache.get(args[0]))) : message.author;
   const member = message.guild.members.resolve(user);
 
-  if (!user || user === '\u200b') return message.channel.send({embed: {description: `${x_mark}User not found!`}});
+  if (!user || user === '\u200b') return message.channel.send({embeds: [{description: `${x_mark}User not found!`}]});
 
   if (user && user !== '\u200b') {
     if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
@@ -47,7 +47,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       if (member.permissions.has('BAN_MEMBERS', true)) embed.addField('Administrator :', `${check_mark}`)
       else if (member.permissions.has('SEND_MESSAGES', false)) embed.addField('Administrator :', `${x_mark}`);
     }
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
   };
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;

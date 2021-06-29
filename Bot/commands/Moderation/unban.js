@@ -13,9 +13,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
   if (isNaN(args[0])) return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}Correct usage : \`${settings.general.prefix}unban <user_id>\``
-    }
+    }]
   });
   await client.users.fetch(args[0]).then(async (user) => {
     if (user) {
@@ -28,7 +28,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
       message.guild.members.unban(user.id)
         .then(() => {
-          message.channel.send(embed);
+          message.channel.send({embeds: [embed]});
         })
     }
   }).catch((err) => {

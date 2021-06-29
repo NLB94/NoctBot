@@ -15,11 +15,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const image = await loadImage("./Bot/Assets/rank.png");
 
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
-  if (user == undefined) return message.channel.send({embed: { description: `${x_mark}User not found !`}})
+  if (user == undefined) return message.channel.send({embeds: [{ description: `${x_mark}User not found !`}]})
   if (user.bot) return message.channel.send("Bots can't receive experience!");
 
   const member = message.guild.members.resolve(user);
-  if (!member) return message.channel.send({embed: { description: `${x_mark}User not in this server!`}});
+  if (!member) return message.channel.send({embeds: [{ description: `${x_mark}User not in this server!`}]});
 
   if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
   if (userInfo == undefined) await client.createGuildUser(message.guild, user);

@@ -149,7 +149,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             )
             .setFooter(`Requested by ${author.tag}`, author.avatarURL());
 
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed]});
     });
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;

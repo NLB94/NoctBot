@@ -45,7 +45,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             if (logs !== undefined) {
               logs.send(logsEmbed);
             }
-            message.channel.send(embed)
+            message.channel.send({embeds: [embed]})
           })
           .catch(err => {
             message.reply("Can't kick!");

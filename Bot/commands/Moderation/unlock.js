@@ -10,7 +10,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     const position = settings.lockChannels.map((c) => c.channelID).indexOf(message.channel.id);
     let channelName = message.channel.name;
-    if (position == -1) return message.channel.send({embed: { description: `${x_mark}This channel is not lock !`}});
+    if (position == -1) return message.channel.send({embeds: [{ description: `${x_mark}This channel is not lock !`}]});
 
         if (channelName.includes('🔒_')) channelName = channelName.replace('🔒_', '')
         message.channel.edit({ name: channelName });
@@ -21,7 +21,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         }
         });
         client.unlockChannel(message.guild, message.channel)
-        message.channel.send({ embed: { description: '🔓 - Channel unlocked' } })
+        message.channel.send({ embeds: [{ description: '🔓 - Channel unlocked' }] })
 }
 module.exports.underCat = MESSAGES.COMMANDS.MODERATION.CHANNELMANAGER;
 

@@ -11,15 +11,15 @@ module.exports = func.client = async client => {
     client.notStartByPrefix = async (message, settings, userInfo) => {
         const arrowRight = client.emojis.resolve('851021323962023957');
         if (message.content.startsWith('~help') && settings.general.prefix !== '~') await message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
-            }
+            }]
         });
         if (message.content.startsWith("<@")) {
             if (message.content.startsWith("<@!735824367698837555>") || message.content.startsWith("<@735824367698837555>")) message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${arrowRight}My prefix in this server is \`${settings.general.prefix}\``
-                }
+                }]
             })
         };
         client.updateGuildUI(message.guild, message.member, {

@@ -10,27 +10,27 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
     if (channel.id == message.guild.rulesChannelID) return message.channel.send({
-        embed: {
+        embeds: [{
             description: `${x_mark}I can't nuke the rules channel.`
-        }
+        }]
     });
     else if (channel.id == message.guild.systemChannelID) return message.channel.send({
-        embed: {
+        embeds: [{
             description: `${x_mark}I can't nuke a system channel.`
-        }
+        }]
     });
     else if (channel.id == message.guild.publicUpdatesChannelID) return message.channel.send({
-        embed: {
+        embeds: [{
             description: `${x_mark}I can't nuke an update channel.`
-        }
+        }]
     });
     switch (channel.type) {
         case 'news': {
             if (channel.type == 'news') {
                 return message.channel.send({
-                    embed: {
+                    embeds: [{
                         description: `${x_mark}I can't nuke a news channel.`
-                    }
+                    }]
                 });
             }
             break;
@@ -38,9 +38,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case 'store': {
             if (channel.type == 'store') {
                 return message.channel.send({
-                    embed: {
+                    embeds: [{
                         description: `${x_mark}I can't nuke a store channel.`
-                    }
+                    }]
                 });
             }
             break;

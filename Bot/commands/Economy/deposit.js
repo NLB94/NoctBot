@@ -13,17 +13,17 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
   if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({
-    embed: {
+    embeds: [{
       description: language == 'fr' ? `${x_mark}Usage correct : \`${settings.general.prefix}dep ${module.exports.help.usage}\`` : `${x_mark}Correct usage : \`${settings.general.prefix}dep ${module.exports.help.usage}\``
-    }
+    }]
   });
 
   const toDep = args[0].toLowerCase().startsWith('al') ? parseInt(userInfo.moneyCash) : parseInt(args[0]);
 
   if (toDep > userInfo.moneyCash) return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}You have only ${userInfo.moneyCash} on your hand!`
-    }
+    }]
   });
 
   const embed = new MessageEmbed()
@@ -43,7 +43,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   client.updateGuildUI(message.guild, message.member, {
     "users.$.moneyCash": newB
   });
-  message.channel.send(embed);
+  message.channel.send({embeds: [embed]});
 };
 
 

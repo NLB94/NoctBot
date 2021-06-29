@@ -19,8 +19,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     .setFooter(message.guild.name, message.guild.iconURL())
     .setColor('#000000');
 
-    channel.send(embed);
-    message.channel.send({embed: {description: `${checkMark}Successfully reported : \`${msg}\` by ${message.author}`, title: message.author.tag, footer: message.guild.name}});
+    channel.send({embeds: [embed]});
+    message.channel.send({embeds: [{description: `${checkMark}Successfully reported : \`${msg}\` by ${message.author}`, title: message.author.tag, footer: message.guild.name}]});
 };
 
 

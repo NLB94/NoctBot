@@ -9,12 +9,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
 
-  if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({embed: { description: `${x_mark}Correct usage : \`${settings.general.prefix}deposit ${module.exports.help.usage}\``}});
+  if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({embeds: [{ description: `${x_mark}Correct usage : \`${settings.general.prefix}deposit ${module.exports.help.usage}\``}]});
 
 
     const toWith = args[0].toLowerCase().startsWith('al') ? parseInt(userInfo.moneyBank) : parseInt(args[0]);
 
-    if (toWith > userInfo.moneyBank) return message.channel.send({embed: { description: `${x_mark}You have only ${userInfo.moneyBank} in your bank!`}});
+    if (toWith > userInfo.moneyBank) return message.channel.send({embeds: [{ description: `${x_mark}You have only ${userInfo.moneyBank} in your bank!`}]});
     
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
@@ -34,7 +34,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         "users.$.moneyBank": newBank
       });
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
 };
 
 

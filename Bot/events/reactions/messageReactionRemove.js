@@ -35,10 +35,10 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                     case tada: {
                         member.roles.remove(givRole.id).then(() => {
                             member.send({
-                                embed: {
+                                embeds: [{
                                     title: 'Role Removed',
                                     description: `${check_mark}You have successfully got **${givRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
-                                }
+                                }]
                             })
                         }).catch((err) => {})
                         break;
@@ -46,10 +46,10 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                     case announcEmoji: {
                         member.roles.remove(announRole.id).then(() => {
                             member.send({
-                                embed: {
+                                embeds: [{
                                     title: 'Role Removed',
                                     description: `${check_mark}You have successfully got **${announRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
-                                }
+                                }]
                             })
                         }).catch(() => {})
                         break;
@@ -57,10 +57,10 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                     case alertEmoji: {
                         member.roles.remove(updateRole.id).then(() => {
                             member.send({
-                                embed: {
+                                embeds: [{
                                     title: 'Role Removed',
                                     description: `${check_mark}You have successfully got **${updateRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
-                                }
+                                }]
                             })
                         }).catch(() => {})
                         break;
@@ -68,10 +68,10 @@ module.exports = functions.reactionRem = async (client, messageReaction, user) =
                     case eyesEmoji: {
                         member.roles.remove(spoilRole.id).then(() => {
                             member.send({
-                                embed: {
+                                embeds: [{
                                     title: 'Role Removed',
                                     description: `${check_mark}You have successfully got **${spoilRole.name}** role removed by unreacting in **_${message.guild.name}_** !`
-                                }
+                                }]
                             })
                         }).catch(() => {})
                         break;

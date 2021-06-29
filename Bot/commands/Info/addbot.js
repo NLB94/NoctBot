@@ -13,7 +13,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const embed = new MessageEmbed()
         .setDescription(`${arrowRight}[Add Me](${client.botGuild.inviteLink}) • [Support server](${client.botGuild.supportInvite}) • [Top.gg](https://top.gg/bot/${client.user.id}/vote) • [DiscoBots](http://discobots-botlist.glitch.me/bots/${client.user.id}/vote)`)
         .setTitle('Bot Links🔗')
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.BOT;
 

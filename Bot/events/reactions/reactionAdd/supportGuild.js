@@ -40,7 +40,7 @@ module.exports = async (client, messageReaction, user) => {
     if (message.id == '823174979608248381') {
         member.roles.remove(verifyRole.id).then(() => {
             member.send({
-                embed: {
+                embeds: [{
                     title: 'Verification',
                     description: `${check_mark}${await (strings.reactAdd.supportS.verif.replace("{guild}", message.guild.name))}`
                 }
@@ -58,7 +58,7 @@ module.exports = async (client, messageReaction, user) => {
             case tada: {
                 member.roles.add(givRole.id).then(() => {
                     member.send({
-                        embed: {
+                        embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", givRole.name))}`
                         }
@@ -69,7 +69,7 @@ module.exports = async (client, messageReaction, user) => {
             case announcEmoji: {
                 member.roles.add(announRole.id).then(() => {
                     member.send({
-                        embed: {
+                        embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", announRole.name))}`
                         }
@@ -80,7 +80,7 @@ module.exports = async (client, messageReaction, user) => {
             case alertEmoji: {
                 member.roles.add(updateRole.id).then(() => {
                     member.send({
-                        embed: {
+                        embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", updateRole.name))}`
                         }
@@ -91,7 +91,7 @@ module.exports = async (client, messageReaction, user) => {
             case eyesEmoji: {
                 member.roles.add(spoilRole.id).then(() => {
                     member.send({
-                        embed: {
+                        embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", spoilRole.name))}`
                         }

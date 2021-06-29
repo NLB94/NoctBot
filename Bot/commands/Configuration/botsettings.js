@@ -49,7 +49,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   //   if (settings.lMessage) embed.addField('• Leave Message :', `${settings.lMessage}`, true)
   //   else embed.addField('• Leave Message :', '\u200b', true);
 
-  message.channel.send(embed);
+  message.channel.send({embeds: [embed]});
 };
 module.exports.underCat = MESSAGES.COMMANDS;
 

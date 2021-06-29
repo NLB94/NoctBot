@@ -1,4 +1,5 @@
 import { Canvas, CanvasRenderingContext2D } from "canvas";
+import { en } from '../string.json'
 import {
   BaseClient,
   BaseGuildEmojiManager,
@@ -35,6 +36,9 @@ import {
 } from "discord.js";
 import { Item } from "./economy";
 import { Giveaway } from "./giveaway";
+import * as Models from '../models/index'
+
+const MGuild = Models.Guild;
 
 /**
  * Return a random string for password or backup id
@@ -123,7 +127,7 @@ export class Commands {
   public get(name: String): Command;
 };
 export declare interface Command {
-  private run: Function;
+  private run(client: Client, message: Message, args: String[], settings: GuildData, userInfo: GuildUserData, strings: typeof en): Promise<any>;
   public help: {
     public name: String;
     public aliases?: String[];
@@ -156,6 +160,7 @@ export declare interface Command {
 import * as botGuild from "../.bot.json";
 import * as localEmojis from "../emojis.json";
 import { Brawlers, Player } from "./brawlstars";
+import { Document, Schema } from "mongoose";
 
 export declare class Client extends BaseClient {
   constructor(options: ClientOptions);
@@ -207,8 +212,8 @@ export declare class Client extends BaseClient {
   public getUser(user: User): ?UserData;
   public updateUser(user: User, options: Object): void;
   //Guilds
-  public createGuild(guild: Object): ?GuildData
-  public getGuild(guild: Guild): ?GuildData
+  public createGuild(guild: Object): ?GuildData;
+  public getGuild(guild: Guild): ?GuildData;
   public updateGuild(guild: Guild, settings: Object): void;
   public getGuildUsers(guild: Object): ?UserData[]
   public createGuildUser(guild: Guild, user: User): void;

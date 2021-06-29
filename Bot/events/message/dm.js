@@ -29,22 +29,22 @@ module.exports = func.run = async (client, message, args) => {
 
     if (cmd.help.name == 'suggest') {
         user.send({
-            embed: {
+            embeds: [{
                 description: `${check_mark}You're suggestion has been saved!`
-            }
+            }]
         });
         await embed.setTitle('Suggestion')
-        await suggestChannel.send(embed);
+        await suggestChannel.send({embeds: [embed]});
     }
 
     if (cmd.help.name == 'report') {
         user.send({
-            embed: {
+            embeds: [{
                 description: `${check_mark}You're report has been saved!`
-            }
+            }]
         });
         await embed.setTitle('Report')
-        await reportChannel.send(embed);
+        await reportChannel.send({embeds: [embed]});
     };
     if (cmd.help.onlyInServer) return;
     else cmd.run(client, message, args, { general: { prefix: '~' }}, {}, strings)

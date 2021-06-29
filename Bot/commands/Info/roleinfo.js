@@ -8,16 +8,16 @@ const moment = require("moment");
 
 const functions = require('../../../util/functions');
 
-module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings)  => {
+module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
 
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const role = args[0] ? (args[0].startsWith('<@&') && args[0].endsWith('>') ? message.mentions.roles.first() : (isNaN(args[0]) ? message.guild.roles.cache.find(r => args[0].toLowerCase() == r.name.toLowerCase()) : message.guild.roles.resolve(args[0]))) : null;
 
   if (!role || role == '\u200b') return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}Role not found!`
-    }
+    }]
   });
 
   if (role && role !== '\u200b') {
@@ -39,7 +39,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setTimestamp()
       .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
   };
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;

@@ -97,7 +97,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       rdm2 = emojis[Math.round(Math.random() * 19)],
       rdm3 = emojis[Math.round(Math.random() * 19)];
 
-    message.channel.send(embed).then(async msg => {
+    message.channel.send({embeds: [embed]}).then(async msg => {
       await embed.setDescription('')
       await embed.addField(rdm1.name, rdm1.prix, true)
       await msg.edit(embed)

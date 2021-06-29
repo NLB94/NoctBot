@@ -33,33 +33,33 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const correctUsage = `Correct usage : \`${settings.general.prefix}gcreate ${module.exports.help.usage}\``
 
         if (!giveaway.time || !giveaway.price || !giveaway.winnerCount || giveaway.time == undefined || giveaway.price == undefined || giveaway.winnerCount == undefined) return message.channel.send({
-            embed: {
+            embeds: [{
                 description: correctUsage
-            }
+            }]
         })
         if (isNaN(giveaway.winnerCount) || giveaway.winnerCount > 20) return message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${correctUsage} \n${x_mark} Number of winners have to be lower than 20`,
                 title: "Invalid number of winners !"
-            }
+            }]
         })
         if (isNaN(ms(giveaway.time))) return message.channel.send({
-            embed: {
+            embeds: [{
                 description: correctUsage,
                 title: 'Invalid duration !'
-            }
+            }]
         })
         if (ms(giveaway.time) < 10000 || ms(giveaway.time) > 1.21e+9) return message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${x_mark}Duration must be upper than 10 seconds and lower than 2 weeks!`
-            }
+            }]
         })
         if (giveaway.price.includes(giveaway.channel.toString())) giveaway.price = giveaway.price.replace(giveaway.channel.toString(), '');
         if (giveaway.channel.id !== message.channel.id) {
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${checkMark}Successfully created giveaway : \nTime : ${ms(ms(giveaway.time))} \nWinners : ${giveaway.winnerCount} \nprice : ${giveaway.price} \nChannel : ${giveaway.channel}`
-                }
+                }]
             });
         }
         message.delete().catch(err => {})
@@ -70,7 +70,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             .setTimestamp(Date.now() + ms(giveaway.time))
             .setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`);
 
-        giveaway.channel.send(embed).then(async msg => {
+        giveaway.channel.send({embeds: [embed]}).then(async msg => {
             msg.react(client.localEmojis.tada);
             giveaway.id = msg.id;
             client.createGiveaway(msg.guild, giveaway)

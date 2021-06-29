@@ -32,7 +32,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
         const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
         message.channel.send({
-            embed: {
+            embeds: [{
                 description: 'What is the command to run (15 characters max) ? You can cancel at any moment.',
                 title: 'Custom Command'
             }
@@ -52,7 +52,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         else command.name = userE.first().toString().slice(0, 15);
 
         await message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${checkMark}Alright, command name is \`${command.name}\`. What should be the description of the command ? (50 characters max)`,
                 title: 'Custom Command'
             }
@@ -68,7 +68,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         else command.description = userE2.first().toString().slice(0, 50);
 
         await message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${checkMark}Good ! Description is \`${description}\` ! Finnaly, what the bot have to reply ? (1000 characters max) `,
                 title: 'Custom Command'
             }
@@ -85,7 +85,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
         client.newCustomCommand(message.guild, command).then(() => {
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${checkMark}Successfully created command : \nName : \`${command.name}\` \nDescription : \`${command.description}\` \nReply : \`${command.code}\``,
                     title: 'Custom Command'
                 }

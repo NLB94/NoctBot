@@ -19,7 +19,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
 
     const pageNbs = parseInt(((shop.length % 100) - (shop.length % 10)).toString().slice(0, 1)) + 1;
-    if (isNaN(qNb) || qNb > pageNbs) return message.channel.send({ embed: { description: "Incorrect page number ! Please give a number between 1 and " + pageNbs}});
+    if (isNaN(qNb) || qNb > pageNbs) return message.channel.send({ embeds: [{ description: "Incorrect page number ! Please give a number between 1 and " + pageNbs}]});
     
     shop = await shop.slice((qNb - 1) * 10, ((qNb - 1) * 10) + 10)
 
@@ -31,7 +31,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       })
     };
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
 };
 
 

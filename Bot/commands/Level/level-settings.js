@@ -58,38 +58,38 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 const key = keys[i]
                 embed.addField(key.name, key.description, true);
             }
-            message.channel.send(embed)
+            message.channel.send({embeds: [embed]})
             break;
         }
         case "enable": {
             if (settings.levelSystem.enable) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${x_mark}Level system is already enable !`
-                }
+                }]
             });
             await client.updateGuild(message.guild, {
                 "levelSystem.enable": true
             });
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${check_mark}Successfully enabled level system !`
-                }
+                }]
             });
             break;
         }
         case "disable": {
             if (!settings.levelSystem.enable) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${x_mark}Level system is not enable !`
-                }
+                }]
             });
             await client.updateGuild(message.guild, {
                 "levelSystem.enable": false
             });
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${check_mark}Successfully disabled level system !`
-                }
+                }]
             });
             break;
         }
@@ -98,14 +98,14 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             const role = message.mentions.roles.first() == undefined ? (isNaN(args[1]) ? (message.guild.roles.cache.find(r => r.name.toLowerCase() == args[1].toLowerCase())) : message.guild.roles.resolve(args[1])) : message.mentions.roles.first()
             const level = parseInt(args[2] == undefined ? 10 : (isNaN(args[2])) ? 10 : args[2]);
             if (!role) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${x_mark}Role not found !`
-                }
+                }]
             });
             else message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${check_mark}Success ! \nWhen an user will reach level ${level}, he will get ${role} role.`
-                }
+                }]
             })
             break;
         }
@@ -119,18 +119,18 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         }
         case "color": {
             if (!settings.levelSystem.enable) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${x_mark}Level system is not enable !`
-                }
+                }]
             });
             await client.updateGuild(message.guild, {
                 "levelSystem.enable": false
             });
             ColorResolvable
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${check_mark}Successfully disabled level system !`
-                }
+                }]
             });
             break;
         }

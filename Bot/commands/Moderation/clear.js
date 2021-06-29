@@ -15,9 +15,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     const user = args[1] ? (args[1].startsWith('<@') && args[1].endsWith('>') ? message.mentions.users.first() : (isNaN(args[1]) ? (args[1].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[1].toLowerCase()) : (message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[1].toLowerCase()) == undefined ? client.users.cache.find(m => m.username.toLowerCase() == args[1].toLowerCase()) : message.guild.members.cache.find(m => m.user.username.toLowerCase() == args[1].toLowerCase()).user)) : client.users.cache.get(args[1]))) : null;
     if (isNaN(args[0]) && args[0] !== 'all') return message.channel.send({
-        embed: {
+        embeds: [{
             description: `${x_mark}Correct usage : \`${settings.general.prefix}clear ${module.exports.help.usage}\``
-        }
+        }]
     });
     if (!isNaN(args[0]) && args[0] > 1) {
         const nb = args[0] - 100;
@@ -96,7 +96,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                         .setAuthor(message.author.username, message.author.avatarURL())
                         .setColor("#ef0f0f")
                         .setDescription(mesg);
-                    message.channel.send(embed).then(msg => {
+                    message.channel.send({embeds: [embed]}).then(msg => {
                         setTimeout(() => {
                             msg.delete().catch(err => {})
                         }, 3000);
@@ -115,7 +115,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 .setAuthor(message.author.username, message.author.avatarURL())
                 .setColor("#ef0f0f")
                 .setDescription(mesg);
-            message.channel.send(embed).then(msg => {
+            message.channel.send({embeds: [embed]}).then(msg => {
                 setTimeout(() => {
                     msg.delete().catch(err => {})
                 }, 5000);

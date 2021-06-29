@@ -199,7 +199,7 @@ const guildSchema = mongoose.Schema({
                 enable: false,
                 channel: '',
                 isEmbed: false,
-                embed: {
+                embeds: [{
                     data: {
                         title: '',
                         author: {

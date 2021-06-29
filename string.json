@@ -17,61 +17,20 @@
         "givEntry": "Participation au giveaway"
       }
     },
+    "counts": {
+      "catType": "**Quelle type de catégorie de compteur voulez-vous ?** \nCatégories disponibles :",
+      "chooseNb": "CHOISISSEZ UN NOMBRE !!",
+      "NaN": "",
+      "countType": "",
+      "chnlInMmt": "",
+      "success": "",
+      "warningBoost": ""
+    },
     "help": {
       "bCommands": "Commandes du bot",
       "myPrfx": "Le préfixe utilisé dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```",
-      "noCmd": "**Il n'y a pas de commandes à visualiser ici !**\n_Les commandes de cette catégorie doivent être en développement, ou bien elles contiennent certaines erreurs._",
+      "noCmd": "**Il n'y a pas de commandes à visualiser ici !**\n_Les commandes de cette catégorie doivent être en développement, ou bien elles sont maintenues temporairement._",
       "sommaire": "**Sommaire : **\n```md\n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
-    },
-    "constants": {
-      "manage": "Gérer",
-      "admin": "Administrateur",
-      "inventory": "Inventaire",
-      "items": "Objets",
-      "get money": "Gagner de l'argent",
-      "server": "Serveur",
-      "configuration": {
-        "description": "Gérer les paramètres du bot comme vous le souhaitez afin de construire le meilleur serveur Discord !",
-        "underCats": {
-
-        }
-      },
-      "moderation": {
-        "description": "Gérer vos membres l'aide d'un système de modération fiable, rapide & complet !",
-        "underCats": {
-
-        }
-      },
-      "level": {
-        "description": "Voyez qui sont les membres actifs sur votre serveur et récompensez-les avec des rôles ou de l'argent virtuel du bot (en développement)",
-        "underCats": {
-
-        }
-      },
-      "info": {
-        "description": "Recevez les informations du serveur, d'un membre ou bien même un rôle !",
-        "underCats": {
-
-        }
-      },
-      "other": {
-        "description": "Toutes les commandes sans catégories spéciales",
-        "underCats": {
-
-        }
-      },
-      "backups": {
-        "description": "Créez des sauvegardes de votre serveur pour les charger dans d'autres serveurs !",
-        "underCats": {
-
-        }
-      },
-      "counts": {
-        "description": "Créer et modifier des salons de comptes de membres, salons ou bien de boosts !",
-        "underCats": {
-          "manage": "Gérer vos salons-systèmes de comptes personnalisés"
-        }
-      }
     },
     "message": {
       "onDev": "```arm\nCette commande est en développement. \n# Patience...",
@@ -135,40 +94,20 @@
         "givEntry": "Giveaway entry"
       }
     },
+    "counts": {
+      "catType": "**What is the category of count you want ?** \nAvailable categorys :",
+      "chooseNb": "CHOOSE A NUMBER !!",
+      "NaN": "",
+      "countType": "",
+      "chnlInMmt": "",
+      "success": "",
+      "warningBoost": ""
+    },
     "help": {
       "bCommands": "Bot Commands",
       "myPrfx": "The prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```",
-      "noCmd": "**There are no commands to visualize here !**\n_This category's commands may be on development, or they contain some errors._",
-      "sommaire": "**Summary :** \n```md\n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ page \n# 🗑️ Delete message```"
-    },
-    "constants": {
-      "manage": "Manage",
-      "admin": "Administrator",
-      "inventory": "Inventory",
-      "items": "Items",
-      "get money": "Get Money",
-      "server": "Server",
-      "configuration": {
-        "description": "Configure the bot as you wish to build the best Discord server !"
-      },
-      "moderation": {
-        "description": "Manage your members with a fast, trustworthy & complete moderation system !"
-      },
-      "level": {
-        "description": "Show active members of your server and reward them with some roles or virtual bot money (always on dev...)"
-      },
-      "info": {
-        "description": "Show informations about server, member or even some role !"
-      },
-      "other": {
-        "description": "All not categorised commands"
-      },    
-      "giveaway": {
-        "description": "Give some gifts to your members by using this giveaway system that create, reroll and manage your giveaways !"
-      },
-      "backups": {
-        "description": "Create backups from your server to load it in other servers !"
-      }
+      "noCmd": "**There are no commands to visualize here !**\n_This category's commands may be on development, or they are maintained temporarily._",
+      "sommaire": "**Summary :** \n```md\n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ Previous page \n# 🗑️ Delete message```"
     },
     "message": {
       "onDev": "```arm\nThis command is on devlopment. \n# Please wait...",

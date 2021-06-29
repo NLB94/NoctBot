@@ -14,9 +14,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark)
 
   if (user == undefined) return message.channel.send({
-    embed: {
+    embeds: [{
       description: `${x_mark}**User not found !**`
-    }
+    }]
   })
   userInfo = user.id == message.author.id ? userInfo : await client.getGuildUser(message.guild, message.guild.members.resolve(user))
   if (!userInfo) return;
@@ -27,7 +27,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setDescription(`${user.tag} have : \n💵Cash : ${userInfo.moneyCash} \n🏦Bank : ${userInfo.moneyBank} \n💹Net Worth : ${Math.floor(userInfo.moneyCash + userInfo.moneyBank)}`)
       .setFooter(message.guild, message.guild.iconURL());
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
   };
 };
 

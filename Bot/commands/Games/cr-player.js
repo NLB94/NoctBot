@@ -33,9 +33,9 @@ module.exports.run = async (client, message, args, settings, userInfo, strings) 
             if (!brawlManager) return;
             const player = await brawlManager.getBrawlPlayer(tag, 'v1');
             if (!player) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: `${x_mark}Player not found !`
-                }
+                }]
             });
             const trophyA = ['SHELLY', 'NITA', 'COLT', 'BULL', 'BROCK', 'DYNAMIKE', '8-BIT' /*Arkad*/ , 'TICK', 'BO', 'JESSIE', 'STU', 'EMZ' /*Eliza*/ ];
             const chromaticA = ['SURGE', 'COLETTE', 'LOU', 'GALE' /*Gaël*/ , 'BELLE', 'COLONEL RUFFS'];
@@ -79,7 +79,7 @@ module.exports.run = async (client, message, args, settings, userInfo, strings) 
 
             embed.addField(`Trophy Road ${trophyB.length}/${trophyNb}`, trophyB.map(t => t), false)
 
-            message.channel.send(embed);
+            message.channel.send({embeds: [embed]});
         }
     func(client);
 }

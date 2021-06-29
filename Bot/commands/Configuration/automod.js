@@ -31,7 +31,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setTimestamp();
     if (!embed.fields[4].value) embed.fields[4].value = '\u200b';
     if (!embed.fields[5].value) embed.fields[5].value = '\u200b';
-    message.channel.send(embed).then(async msg => {
+    message.channel.send({embeds: [embed]}).then(async msg => {
         msg.react('🔄');
         msg.react('1️⃣');
         msg.react('2️⃣');
@@ -50,7 +50,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     // switch (action) {
     //     case 'enable': {
     //         if (settings.automod.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} Auto-Moderation **is already enable** !`,
     //                 title: 'Error !'
     //             }
@@ -60,7 +60,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //                 "automod.enable": true
     //             })
     //             message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${check_mark}Successfully **enabled auto-moderation system** !`,
     //                     title: 'Auto-Moderation'
     //                 }
@@ -70,7 +70,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     //     case 'disable': {
     //         if (!settings.automod.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} Auto-Moderation **is already disable** !`,
     //                 title: 'Error !'
     //             }
@@ -80,7 +80,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //                 "automod.enable": false
     //             })
     //             message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${check_mark}Successfully **disabled auto-moderation system** !`,
     //                     title: 'Auto-Moderation'
     //                 }

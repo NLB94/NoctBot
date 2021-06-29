@@ -13,12 +13,12 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
 
-    if (isNaN(expToRem)) return message.channel.send({embed: {description: `${x_mark}Correct usage : \`${settings.general.prefix}remxp <number>\``}})
+    if (isNaN(expToRem)) return message.channel.send({embeds: [{description: `${x_mark}Correct usage : \`${settings.general.prefix}remxp <number>\``}]})
     const newExp = userInfo.XP - expToRem
     client.updateGuildUI(message.guild, user, {
       "users.$.XP": newExp
     });
-    message.channel.send({embed: {description: `${checkMark}<@${message.author.id}> removed ${expToRem} XP from ${user}`}})
+    message.channel.send({embeds: [{description: `${checkMark}<@${message.author.id}> removed ${expToRem} XP from ${user}`}]})
 };
   
 

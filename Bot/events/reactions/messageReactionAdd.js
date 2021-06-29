@@ -84,7 +84,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
             if (message.guild.id == '727494941911154688') {
                 require("./reactionAdd/supportGuild")(client, messageReaction, user);
             };
-            if (message.embeds[0].description.startsWith("```What do you want") || message.embeds[0].description.startsWith("```Que voulez-vous")) {
+            if (message.embeds[0].description.startsWith(strings.configuration.reset.split("{")[0]) || message.embeds[0].description.startsWith(strings.configuration.afterReset.split("{")[0])) {
                 require("./reactionAdd/configuration")(client, messageReaction, user);
             }
 
@@ -102,7 +102,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         .setColor('#FFFFFF')
                         .setURL('https://discord.gg/unRX2SUcvw');
                     try {
-                        user.send(embed)
+                        user.send({embeds: [embed]})
                     } catch (e) {
                         console.log(e);
                     }
@@ -110,7 +110,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
             }
             if (message.embeds[0]) {
                 if (message.embeds[0].title.startsWith(strings.help.bCommands) && message.embeds[0].description.startsWith(user.tag)) {
-                    const embed = await new MessageEmbed()
+                    const embed = new MessageEmbed()
                         .setColor("#000000")
                         .setAuthor("Noct", client.user.avatarURL(), `${client.botGuild.inviteLink}`)
                         .setURL(`${client.botGuild.supportInvite}`)
@@ -155,12 +155,12 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         embed.fields = embed.fields.filter(f => !f.value.endsWith("`"))
                         row.addComponents(
                             new MessageButton()
-                            .setCustomID(cat.position <= 1 ? 'NONE' : 'help-left-cats' + cat.position + '-' + leftPage)
+                            .setCustomID(cat.position <= 1 ? 'NONE' : 'help-left-cats' + cat.position)
                             .setStyle(cat.position <= 1 ? 'SECONDARY' : 'PRIMARY')
                             .setEmoji("⬅️")
                             .setDisabled(cat.position <= 1 ? true : false),
                             new MessageButton()
-                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'help-right-cats' + cat.position + '-' + leftPage)
+                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'help-right-cats' + cat.position)
                             .setStyle(cat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
                             .setEmoji("➡️")
                             .setDisabled(cat.position == categorys.length ? true : false),
@@ -174,8 +174,8 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         if (embed.description.endsWith("```") && embed.fields.length < 1) embed.setDescription(embed.description + `\n\n` + strings.help.noCmd)
                         if (message !== undefined) {
                             if (message.guild.me.permissions.has('ADMINISTRATOR')) await messageReaction.users.remove(user.id).catch(() => {});
-                            await message.edit('\u200b', {
-                                embed,
+                            await message.edit({
+                                embeds: [embed],
                                 components: [row]
                             }).catch(ee => {
                                 console.log(ee)

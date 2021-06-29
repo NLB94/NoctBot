@@ -8,9 +8,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const position = settings.lockChannels.map(c => c.channelID).indexOf(message.channel.id)
     if (position !== -1) return message.channel.send({
-        embed: {
+        embeds: [{
             description: `${x_mark}This channel is already lock !`
-        }
+        }]
     });
     else {
         message.guild.roles.cache.forEach(async role => {
@@ -27,9 +27,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         })
         client.lockChannel(message.guild, message.channel);
         message.channel.send({
-            embed: {
+            embeds: [{
                 description: '🔒 - Locked Channel'
-            }
+            }]
         });
     }
 }

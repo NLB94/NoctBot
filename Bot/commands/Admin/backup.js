@@ -21,10 +21,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     switch (action) {
         case "create": {
             if (settings.backups.Nb > 10 && !settings.general.premium) return message.channel.send({
-                embed: {
+                embeds: [{
                     title: await client.translate('Backup Limit', 'en', language),
                     description: await client.translate("This server has reached backups limit (10) ! If you want to create more backups, upgrade to premium (premium is not available yet).", 'en', language)
-                }
+                }]
             });
             let backup = {
                 id: client.randomString({
@@ -83,7 +83,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                 .setDescription(await client.translate(`${checkMark}Successfully created backup with id : \`${backup.id}\``, 'en', language))
                 .setFooter(message.author.tag, message.author.avatarURL());
 
-            message.channel.send(embed).then(msg => {
+            message.channel.send({embeds: [embed]}).then(msg => {
                 setTimeout(() => {
                     msg.edit(embed2)
                 }, 4000);
@@ -107,19 +107,19 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     description: `${x_mark}${await client.translate('Command canceled', 'en', language)} !`
                 }
                 if (backup == undefined) return message.channel.send({
-                    embed: {
+                    embeds: [{
                         description: await client.translate(`No Backup found with the id \`${code}\`!`, 'en', language)
-                    }
+                    }]
                 });
                 if (message.author.id !== guild.ownerID && backup.onlyServerOwner && !backup.admins) return message.channel.send({
-                    embed: {
+                    embeds: [{
                         description: `${x_mark}${await client.translate('Only server owner can load backup !', 'en', language)}`
-                    }
+                    }]
                 });
                 message.channel.send({
-                    embed: {
+                    embeds: [{
                         description: await client.translate(`${arrowRigth}Warning ! Do you want to load the backup with id \`${args[1]}\` ? (yes or no)`)
-                    }
+                    }]
                 });
                 const filter = msg => msg.author.id == message.author.id;
                 const userE = await message.channel.awaitMessages(filter, {
@@ -133,7 +133,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                         .setFooter(guild.name, guild.iconURL())
                         .setTitle(await client.translate('Loading Backup', 'en', language))
                         .setDescription(await client.translate(`Please wait${loadingEmoji}`, 'en', language));
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
 
                     setTimeout(async () => {
                         client.clearGuild(guild);
@@ -155,15 +155,15 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         case "delete": {
             const backup = client.getBackup(args[1])
             if (!backup) return message.channel.send({
-                embed: {
+                embeds: [{
                     description: await client.translate(`${x_mark}Invalid backup ID \`${args[1]}\``, 'en', language)
-                }
+                }]
             })
             client.deleteBackup(args[1])
             message.channel.send({
-                embed: {
+                embeds: [{
                     description: await client.translate(`${checkMark}Successfully deleted backup with ID \`${args[1]}\``, 'en', language)
-                }
+                }]
             })
             break;
         }

@@ -22,39 +22,39 @@ module.exports.run = functions.run = async (client, message, args, settings, use
            .setDescription(`If you need help, join [support server](https://discord.gg/unRX2SUcvw). \n\nAvailable Keys : \n${keys.join("\n")}`)
            .setFooter(`Requested by ${message.author.tag} in ${message.guild.name}`, message.guild.iconURL());
 
-           message.channel.send(embed);
+           message.channel.send({embeds: [embed]});
            break;
         }
         case "captcha": {
-            message.channel.send({embed: {description: `${x_mark}Captcha system is not ready yet...`}})
+            message.channel.send({embeds: [{description: `${x_mark}Captcha system is not ready yet...`}]})
             // if (!settings.captcha.cEnable) return message.channel.send('Captcha is already disable !');
             //     await client.updateGuild(message.guild, { "captcha.cEnable": false });
             // message.channel.send(`Captcha System Disabled Successfully !`);
             break;
         }
         case "ticket": {
-            message.channel.send({embed: {description: `${x_mark}Ticket system is not ready yet...`}})
+            message.channel.send({embeds: [{description: `${x_mark}Ticket system is not ready yet...`}]})
             // if (!settings.ticket.tEnable) return message.channel.send('Ticket is already disable !');
             //     await client.updateGuild(message.guild, { "ticket.tEnable": false });
             // message.channel.send(`Ticket System Disabled Successfully !`);
             break;
         }
         case "welcome": {
-            if (!settings.welcomeAndLeave.welcome.enable) return message.channel.send({embed: {title: 'Server Settings', description: `${x_mark} Welcome system is already disable !`}});
+            if (!settings.welcomeAndLeave.welcome.enable) return message.channel.send({embeds: [{title: 'Server Settings', description: `${x_mark} Welcome system is already disable !`}]});
                 await client.updateGuild(message.guild, { "welcomeAndLeave.welcome.enable": false });
-                message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully disabled welcome system !`}});
+                message.channel.send({embeds: [{title: 'Server Settings', description: `${check_mark}Successfully disabled welcome system !`}]});
             break;
         }
         case "leave": {
-            if (!settings.welcomeAndLeave.leave.enable) return message.channel.send({embed: {title: 'Server Settings', description: `${x_mark} Leave system is already disable !`}});
+            if (!settings.welcomeAndLeave.leave.enable) return message.channel.send({embeds: [{title: 'Server Settings', description: `${x_mark} Leave system is already disable !`}]});
                 await client.updateGuild(message.guild, { "welcomeAndLeave.leave.enable": false });
-                message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully disabled leave system !`}});
+                message.channel.send({embeds: [{title: 'Server Settings', description: `${check_mark}Successfully disabled leave system !`}]});
             break;
         }
         case "level": {
-        if (!settings.levelSystem.enable) return message.channel.send({embed: {title: 'Server Settings', description: `${x_mark} Level system is already disable !`}});
+        if (!settings.levelSystem.enable) return message.channel.send({embeds: [{title: 'Server Settings', description: `${x_mark} Level system is already disable !`}]});
             await client.updateGuild(message.guild, { "levelSystem.enable": false });
-            message.channel.send({embed: {title: 'Server Settings', description: `${check_mark}Successfully disabled level system !`}});
+            message.channel.send({embeds: [{title: 'Server Settings', description: `${check_mark}Successfully disabled level system !`}]});
         break;
         }
     }

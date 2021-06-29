@@ -10,9 +10,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
   const channel = args[0] ? (args[0].startsWith('<#') && args[0].endsWith('>') ? message.mentions.channels.first() : (isNaN(args[0]) ? message.guild.channels.cache.find(c => args[0].toLowerCase() == c.name.toLowerCase()) : message.guild.channels.resolve(args[0]))) : message.channel;
 
-  if (!channel || channel == '\u200b' || channel.type == 'dm') return message.channel.send({embed: {description: `${x_mark}Channel not found!`}});
+  if (!channel || channel == '\u200b' || channel.type == 'dm') return message.channel.send({embeds: [{description: `${x_mark}Channel not found!`}]});
 
-  if (!channel.isText()) return message.channel.send({embed: {description: `${x_mark}Channel not found!`}});;
+  if (!channel.isText()) return message.channel.send({embeds: [{description: `${x_mark}Channel not found!`}]});;
 
   if (channel && channel !== '\u200b') {
     const embed = new MessageEmbed()
@@ -28,7 +28,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setTimestamp()
       .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
   };
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.GUILD;

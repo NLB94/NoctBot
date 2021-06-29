@@ -19,9 +19,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     if (!user || user == '')  user = message.author;
 
     if (user !== message.author) userInfo = await client.getGuildUser(message.guild, user)
-    if (userInfo == undefined || !userInfo) return client.createGuildUser(message.guild, user), message.channel.send({ embed: { description: `${arrowRight}${user} sent **0 messages** in this server.` } });
+    if (userInfo == undefined || !userInfo) return client.createGuildUser(message.guild, user), message.channel.send({ embeds: [{ description: `${arrowRight}${user} sent **0 messages** in this server.` }] });
 
-    message.channel.send({ embed: { description: `${arrowRight}${user} sent **${userInfo.messageSent} messages** in this server.` } })
+    message.channel.send({ embeds: [{ description: `${arrowRight}${user} sent **${userInfo.messageSent} messages** in this server.` }] })
 
 };
 

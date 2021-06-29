@@ -10,9 +10,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomID("reset-antiinvite")
+                .setCustomID("reset-antiInvite")
                 .setEmoji("🔄")
-                .setStyle("DANGER")
+                .setStyle("PRIMARY")
         )
     const embed = new MessageEmbed()
         .setTitle('Anti-Invite')
@@ -40,7 +40,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             dynamic: true
         }))
         .setTimestamp();
-    message.channel.send(embed, {
+    message.channel.send({
+        embeds: [embed],
         components: [row]
     }).then(async msg => {
         msg.react('1️⃣');
@@ -60,14 +61,14 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     // switch (action) {
     //     case 'enable': {
     //         if (!settings.automod.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} ${await strings.configuration.notEnable.replace("{type}", 'Auto-Moderation').replace("{prefix}", settings.general.prefix).replace("{cmdName}", 'automod')}`,
     //                 title: err
     //             }
     //         })
     //         else {
     //             if (settings.automod.antiInvite.enable) return message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${x_mark} ${await strings.configuration.alrEnable.replace("{type}", 'Anti-Invite')}`,
     //                     title: err
     //                 }
@@ -95,7 +96,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //             if (userE2.first().toString().toLowerCase().startsWith('y')) logs = true;
     //             else if (userE2.first().toString().toLowerCase().startsWith('n')) logs = false
     //             message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${check_mark}${await strings.configuration.successEnable.replace("{type}", 'Anti-Invite')}`,
     //                     title: 'Auto-Moderation'
     //                 }
@@ -112,7 +113,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     //     case 'disable': {
     //         if (!settings.automod.antiInvite.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} ${await strings.configuration.alrDisable.replace("{type}", 'Anti-Invite')}`,
     //                 title: err
     //             }
@@ -125,7 +126,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //             "automod.antiInvite.logsThis": false
     //         })
     //         message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${check_mark}${await strings.configuration.successDisable.replace("{type}", 'Anti-Invite')}`,
     //                 title: 'Auto-Moderation'
     //             }

@@ -19,6 +19,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     // switch (action) {
     //     case '1': {
+        const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomID("reset-antiLink")
+                .setEmoji("🔄")
+                .setStyle("PRIMARY")
+        )
     const embed = new MessageEmbed()
         .setTitle('Anti-Link')
         .setDescription(`${await strings.configuration.reset.replace("{type}", 'Anti-Link')}`)
@@ -41,10 +48,14 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             name: `5️⃣ \`\`\`${strings.configuration.warnAndDelete}\`\`\``,
             value: `${settings.automod.antiLink.warnAndDelete ? '🟢' : '🔴'}`
         }, )
-        .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+        .setFooter(message.author.tag, message.author.displayAvatarURL({
+            dynamic: true
+        }))
         .setTimestamp();
-    message.channel.send(embed).then(async msg => {
-        msg.react('🔄');
+    message.channel.send({
+        embeds: [embed],
+        components: [row]
+    }).then(async msg => {
         msg.react('1️⃣');
         msg.react('2️⃣');
         msg.react('3️⃣');
@@ -55,14 +66,14 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     //     case 'enable': {
     //         if (!settings.automod.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} ${await strings.configuration.notEnable.replace("{type}", 'Auto-Moderation').replace("{prefix}", settings.general.prefix).replace("{cmdName}", 'automod')}`,
     //                 title: err
     //             }
     //         })
     //         else {
     //             if (settings.automod.antiLink.enable) return message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${x_mark} ${await strings.configuration.alrEnable.replace("{type}", 'Anti-Link')}`,
     //                     title: err
     //                 }
@@ -90,7 +101,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //             if (userE2.first().toString().toLowerCase().startsWith('y')) logs = true;
     //             else if (userE2.first().toString().toLowerCase().startsWith('n')) logs = false
     //             message.channel.send({
-    //                 embed: {
+    //                 embeds: [{
     //                     description: `${check_mark}${await strings.configuration.successEnable.replace("{type}", 'Anti-Link')}`,
     //                     title: 'Auto-Moderation'
     //                 }
@@ -107,7 +118,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //     }
     //     case 'disable': {
     //         if (!settings.automod.antiLink.enable) return message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${x_mark} ${await strings.configuration.alrDisable.replace("{type}", 'Anti-Link')}`,
     //                 title: err
     //             }
@@ -120,7 +131,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     //             "automod.antiLink.logsThis": false
     //         })
     //         message.channel.send({
-    //             embed: {
+    //             embeds: [{
     //                 description: `${check_mark}${await strings.configuration.successDisable.replace("{type}", 'Anti-Link')}`,
     //                 title: 'Auto-Moderation'
     //             }

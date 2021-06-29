@@ -10,9 +10,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const support = args[0] == 'bank' || args[0] == 'cash' ? args[0].toLowerCase() : 'cash';
       const users = [];
       const role = args[0].startsWith('<@&') && args[0].endsWith('>') || args[1].startsWith('<@&') && args[1].endsWith('>') ? message.guild.roles.cache.find(r => r.id == message.mentions.roles.first().id) : (args[0] == 'bank' || args[0] == 'cash' ? (isNaN(args[1]) ? message.guild.roles.cache.find(r => r.name == args[1]) : message.guild.roles.cache.find(r => r.id == args[1])) : (isNaN(args[0]) ? message.guild.roles.cache.find(r => r.name == args[0]) : message.guild.roles.cache.find(r => r.id == args[0])));
-      if (!role) return message.channel.send({embed: {description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}});
+      if (!role) return message.channel.send({embeds: [{description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}]});
       const toRem = isNaN(args[1]) ? parseInt(args[2]) : parseInt(args[1]);
-      if (isNaN(toRem)) return message.channel.send({embed: {description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}});
+      if (isNaN(toRem)) return message.channel.send({embeds: [{description: `Correct usage : \`${settings.general.prefix}remmoneyrole ${module.exports.help.usage}\``}]});
       message.guild.members.cache.map(m => users.push(m));
       users.forEach(async user => {
         if (!user.roles.cache.find(r => r.id == role)) return;
@@ -46,7 +46,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setFooter(message.guild, message.guild.iconURL())
         .setTimestamp();
 
-      message.channel.send(embed);
+      message.channel.send({embeds: [embed]});
     }
  };
 

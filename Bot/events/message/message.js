@@ -3,7 +3,9 @@ const {
   Message,
   Channel,
 } = require("discord.js");
-const { getStrings } = require("../../../util/constants");
+const {
+  getStrings
+} = require("../../../util/constants");
 const func = require("../../../util/functions");
 const ownerID = "616547009750499358";
 const defaultPrefix = '~';
@@ -75,37 +77,37 @@ module.exports = async (client, message) => {
       const NoctCommu = await client.guilds.resolve('727494941911154688');
       if (command.help.ownerCmd) return;
       if (!command.help.enable && (!NoctCommu.members.resolve(message.author) || !NoctCommu.members.resolve(message.author).roles.cache.has('802959353921536021'))) return message.channel.send({
-        embed: {
+        embeds: [{
           description: `${x_mark}${strings.message.onDev}`
-        }
+        }]
       });
 
       if (command.help.onlyPremium && !settings.general.premium) return message.channel.send({
-        embed: {
+        embeds: [{
           description: `${x_mark}${strings.message.onlyPremium}`
-        }
+        }]
       });
 
       if (command.help.onlyServerOwner && message.author.id !== message.guild.ownerID) return message.channel.send({
-        embed: {
+        embeds: [{
           title: `${strings.message.missingPerms}`,
           description: `${x_mark} ${strings.message.onlyServerOwner}`
-        }
+        }]
       });
     }
     if (command.help.permissions && !message.member.permissions.has(command.help.reqPermName)) return message.reply({
-      embed: {
+      embeds: [{
         title: `${strings.message.missingPerms}`,
         description: `${x_mark} ${strings.message.permissions}`
-      }
+      }]
     });
 
     if (command.help.botPerm && !message.guild.me.permissions.has(command.help.botPermName)) return message.channel.send({
-      embed: {
+      embeds: [{
         title: `${strings.message.missingBotPerms}`,
         description: `${x_mark} ${strings.message.botPerm}`
-      }
-    })
+      }]
+    });
 
     if (command.help.args && !args.length) {
       let noArgsReply = `${x_mark}${message.author} ${strings.usage}`;
@@ -116,17 +118,17 @@ module.exports = async (client, message) => {
       //   noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.prefix}${command.help.name} keys\``;
 
       return message.channel.send({
-        embed: {
+        embeds: [{
           title: strings.message.missingArgs,
           description: noArgsReply
-        }
+        }]
       });
     }
     if (command.help.name == 'report' && args.join(` `).length < 25) return message.channel.send({
-      embed: {
+      embeds: [{
         title: strings.message.report.title,
         description: strings.message.report.description
-      }
+      }]
     })
 
     if ((command.help.args && args.length || !command.help.args) && (command.help.permissions && message.member.permissions.has(command.help.reqPermName) || !command.help.permissions) && !command.help.ownerCmd && (command.help.name == 'report' && args.join(` `).length >= 25 || command.help.name !== 'report')) {
@@ -146,22 +148,42 @@ module.exports = async (client, message) => {
           timeLeft = (cdExpirationTime - timeNow) / 1000;
 
           return message.reply({
-            embed: {
+            embeds: [{
               title: strings.message.cooldown.title,
               description: `${x_mark}${await strings.message.cooldown.description.replace("{time}", Math.round(timeLeft))}`
-            }
+            }]
           });
         }
       }
-      tStamps.set(command.help.name == 'report' ? message.author.id  : message.author.id + ' ' + message.guild.id, {
+      tStamps.set(command.help.name == 'report' ? message.author.id : message.author.id + ' ' + message.guild.id, {
         id: message.author.id,
         guildID: message.guild.id,
         time: timeNow
       });
       setTimeout(async () => {
-        tStamps.delete(command.help.name == 'report' ? message.author.id  : `${message.author.id} ${message.guild.id}`)
+        tStamps.delete(command.help.name == 'report' ? message.author.id : `${message.author.id} ${message.guild.id}`)
       }, cdAmount);
     }
-    command.run(client, message, args, settings, userInfo, strings);
+    command.run(client, message, args, settings, userInfo, strings)//.catch(async err => {
+      // message.channel.send({
+      //   embeds: [{
+      //     title: 'Oops !',
+      //     description: `**An error occured** : \`\`\`diff\n- ${err}\`\`\`\n\n**Successfully reported the error to the developer,** _[${(await client.users.resolve(ownerID)).tag}](${client.botGuild.supportInvite})_`,
+      //   }]
+      // })
+      // const channel = await client.channels.resolve(client.botGuild.dmReportID);
+      // await channel.send({
+      //   embeds: [{
+      //     title: "Erreur Commande " + commandName,
+      //     description: `Voici l'erreur : \n\`\`\`diff\n- ${err}\`\`\``,
+      //     footer: {
+      //       text: message.author.tag,
+      //       iconURL: message.author.avatarURL({
+      //         dynamic: true
+      //       })
+      //     }
+      //   }]
+      // })
+    // });
   };
 };

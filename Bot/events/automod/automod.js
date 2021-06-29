@@ -54,9 +54,9 @@ module.exports = async (client, options) => {
                         .setDescription(`${check_mark}${message.author} has been warned !\nReason : Posted an invite`)
                         .setTimestamp();
 
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
 
-                    if (antiinvite.logsThis && logs !== undefined) logs.send(embed);
+                    if (antiinvite.logsThis && logs !== undefined) logs.send({embeds: [embed]});
                 } else if (antiinvite.warnAndDelete) {
                     console.log(4);
                     message.delete().catch(err => {console.log(err)})
@@ -70,9 +70,9 @@ module.exports = async (client, options) => {
                         .setTimestamp()
                         .setFooter('Auto Moderation');
 
-                    message.channel.send(embed).catch(() => {})
+                    message.channel.send({embeds: [embed]}).catch(() => {})
 
-                    if (antiinvite.logsThis && logs !== undefined) logs.send(embed).catch(() => {});
+                    if (antiinvite.logsThis && logs !== undefined) logs.send({embeds: [embed]}).catch(() => {});
                 }
             }
             break;
@@ -94,9 +94,9 @@ module.exports = async (client, options) => {
                         .setDescription(`${check_mark}${message.author} has been warned !\nReason : Posted a link`)
                         .setTimestamp();
 
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
 
-                    if (antilink.logsThis && logs !== undefined) logs.send(embed);
+                    if (antilink.logsThis && logs !== undefined) logs.send({embeds: [embed]});
                 } else if (antilink.warnAndDelete) {
                     message.delete().catch(err => {})
                     const newWarns = Math.floor(userInfo.warns + 1);
@@ -109,9 +109,9 @@ module.exports = async (client, options) => {
                         .setTimestamp()
                         .setFooter('Auto Moderation');
 
-                    message.channel.send(embed).catch(() => {})
+                    message.channel.send({embeds: [embed]}).catch(() => {})
 
-                    if (antilink.logsThis && logs !== undefined) logs.send(embed).catch(() => {});
+                    if (antilink.logsThis && logs !== undefined) logs.send({embeds: [embed]}).catch(() => {});
                 }
             }
             break;

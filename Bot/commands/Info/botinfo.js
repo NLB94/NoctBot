@@ -66,7 +66,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setTimestamp()
         .setFooter(message.author.username, message.author.avatarURL());
 
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
 };
 module.exports.underCat = MESSAGES.COMMANDS.INFO.BOT;
 

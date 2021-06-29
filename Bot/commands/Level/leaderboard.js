@@ -28,7 +28,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     });
     if (embed.fields.length < 1) embed.setDescription(`${await client.translate("Don't have users in leaderboard! Check if level system is enable in your server with", 'en', language)} \`${settings.general.prefix}enable level\``);
-    message.channel.send(embed);
+    message.channel.send({embeds: [embed]});
 };
 
 

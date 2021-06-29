@@ -27,10 +27,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     mentionsUsers.forEach(m => users.push({ id: m.id }))
 
     if (roles.length < 1 || users.length < 1) return message.channel.send({
-        embed: {
+        embeds: [{
             title: 'Invalid Usage',
             description: `Correct usage : ${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}`
-        }
+        }]
     })
     const embed = new MessageEmbed()
         .setTitle('Roles')
@@ -39,7 +39,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setFooter(message.guild.name, message.guild.iconURL())
         .setTimestamp();
 
-    await message.channel.send(embed)
+    await message.channel.send({embeds: [embed]})
 };
 module.exports.underCat = MESSAGES.COMMANDS.MODERATION.ROLES;
 

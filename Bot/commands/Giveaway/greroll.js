@@ -16,9 +16,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         let position = !args[0] ? (parseInt(settings.giveaways.length) - 1) : settings.giveaways.map(g => g.id).indexOf(args[0]);
         const giveaway = settings.giveaways[position];
         if (position == -1 || giveaway.status == 'en-cours') return message.channel.send({
-            embed: {
+            embeds: [{
                 description: `${x_mark}${await client.translate(`The giveaway not ended or doesn't exists.`, 'en', settings.general.language)}`
-            }
+            }]
         })
 
         const msg = await (await message.channel.messages.fetch()).get(giveaway.id);
