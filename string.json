@@ -1,7 +1,8 @@
 {
   "fr": {
     "usage": "Utilisation correcte de la commande :",
-    "cmdCancel": "```La commande a été annulée !```",
+    "cmdCancel": "```diff\n- La commande a été annulée !```",
+    "cmdError": "**Une erreur s'est produite :**\n\n```javascript\n{err}```\n\n**Le développeur du bot a été averti**, _nous nous excusons de la gêne occasionnée_, le problème sera bientôt pris en main.",
     "noExample": "```Il n'y a pas d'exemple pour cette commande.```",
     "loading": "Chargement",
     "reactAdd": {
@@ -17,14 +18,17 @@
         "givEntry": "Participation au giveaway"
       }
     },
-    "counts": {
+    "counters": {
       "catType": "**Quelle type de catégorie de compteur voulez-vous ?** \nCatégories disponibles :",
-      "chooseNb": "CHOISISSEZ UN NOMBRE !!",
-      "NaN": "",
-      "countType": "",
-      "chnlInMmt": "",
-      "success": "",
-      "warningBoost": ""
+      "chooseNb": "Merci de choisir un nombre valide !!",
+      "chooseTypeChannel": "#️⃣**Quelle type de salon voulez-vous utiliser pour ce compteur (choisissez un nombre) ?** \n```md\n# 1・vocal\n# 2・textuel\n# 3・catégorie\nou tapez cancel pour annuler la commande.```",
+      "NaN": "**Donnez un nombre correct la prochaine fois !**",
+      "counterType": "Le type de catégorie est `{cat}`. Quelle est le **type de compteur** que vous voulez ? \nTypes disponibles pour la catégorie `{cat}`",
+      "chnlInMmt": "Le salon apparaitra dans un moment",
+      "success": "**Le salon a été crée !**",
+      "warningBoost": "Vous n'avez pas activé **la fonction du serveur `BOOST_MESSAGE`**.",
+      "successEnabled": "Noct **a activé le système pour vous** !",
+      "warning": "ATTENTION"
     },
     "help": {
       "bCommands": "Commandes du bot",
@@ -78,7 +82,8 @@
   },
   "en": {
     "usage": "Correct usage of the command :",
-    "cmdCancel": "```The command have been canceled !```",
+    "cmdCancel": "```diff\n- The command have been canceled !```",
+    "cmdError": "**An error occured :**\n\n```javascript\n{err}```\n\n**Reported the bug to the developer**, _we apologize for the inconvenience_, the problem will be taken care of soon.",
     "noExample": "```There are no example for this command.```",
     "loading": "Loading",
     "reactAdd": {
@@ -94,14 +99,17 @@
         "givEntry": "Giveaway entry"
       }
     },
-    "counts": {
-      "catType": "**What is the category of count you want ?** \nAvailable categorys :",
-      "chooseNb": "CHOOSE A NUMBER !!",
-      "NaN": "",
-      "countType": "",
-      "chnlInMmt": "",
-      "success": "",
-      "warningBoost": ""
+    "counters": {
+      "catType": "**What is the category of counter you want ?** \nAvailable categories :",
+      "chooseNb": "Please choose a valid number !!",
+      "chooseTypeChannel": "#️⃣**Which type of channel do you want to use for this counter (choose a number) ?** \n```md\n# 1・voice\n# 2・text\n# 3・category\nor type cancel to cancel the command.```",
+      "NaN": "**Please provide a correct number next time !**",
+      "counterType": "The category type is `{cat}`. Now, what is the **type of counter** you want ? \nAvailable types for `{cat}` ",
+      "chnlInMmt": "Done, the channel will be appear in few time",
+      "success": "**Channel created !**",
+      "warningBoost": "You didn't enable **server feature `BOOST_MESSAGE`**. ",
+      "successEnabled": "Noct **enabled it for you** !",
+      "warning": "WARNING"
     },
     "help": {
       "bCommands": "Bot Commands",

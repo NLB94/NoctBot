@@ -12,9 +12,9 @@ const {
 } = require('discord.js');
 const {
     getStrings,
-    categorys
+    categories
 } = require('../../../util/constants');
-const cats = categorys.slice(0, 25);
+const cats = categories.slice(0, 25);
 const {
     createCanvas,
     loadImage
@@ -104,16 +104,16 @@ module.exports = async (client, interaction) => {
                         .setStyle('SECONDARY')
                         .setEmoji("⬅️"),
                         new MessageButton()
-                        .setCustomID(((categorys.length / 25) > 1) ? 'help-right-home1' : 'NONE')
-                        .setStyle(((categorys.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
+                        .setCustomID(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
+                        .setStyle(((categories.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
                         .setEmoji("➡️")
-                        .setDisabled(((categorys.length / 25) > 1) ? false : true),
+                        .setDisabled(((categories.length / 25) > 1) ? false : true),
                     )
                 } else {
                     if (interaction.customID.startsWith("help-right-home")) {
                         const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
                         const nxtPage = page + 1;
-                        if ((categorys.length / 25) == 1 || (categorys.length / 25) == 0 || ((categorys.length / 25) + 1) < nxtPage) return interaction.update({
+                        if ((categories.length / 25) == 1 || (categories.length / 25) == 0 || ((categories.length / 25) + 1) < nxtPage) return interaction.update({
                             embeds: [beforeEmbed]
                         })
                         row.addComponents(
@@ -131,15 +131,15 @@ module.exports = async (client, interaction) => {
                         //     txtColor1,
                         //     txtColor2
                         // });
-                        for (const cat of categorys.slice((25 * (nxtPage - 1)), (25 * (nxtPage)))) {
+                        for (const cat of categories.slice((25 * (nxtPage - 1)), (25 * (nxtPage)))) {
                             embed.addField(`${await client.emojis.resolve(cat.emoji)} • ${cat.name[language]}`, `\`\`\`md\n# ${cat.description[language]}\`\`\``);
                         }
                         embed.setFooter("Page " + nxtPage);
-                        if (nxtPage >= (categorys.length / 25)) row.components[2].setStyle("SECONDARY").setCustomID('NONE').setDisabled(true);
+                        if (nxtPage >= (categories.length / 25)) row.components[2].setStyle("SECONDARY").setCustomID('NONE').setDisabled(true);
                     } else if (interaction.customID.startsWith("help-left-home")) {
                         const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
                         const nxtPage = page - 1;
-                        if ((categorys.length / 25) == 1 || (categorys.length / 25) == 0 || ((categorys.length / 25)) < nxtPage) return interaction.update({
+                        if ((categories.length / 25) == 1 || (categories.length / 25) == 0 || ((categories.length / 25)) < nxtPage) return interaction.update({
                             embeds: [beforeEmbed]
                         })
                         row.addComponents(
@@ -152,7 +152,7 @@ module.exports = async (client, interaction) => {
                             .setStyle("PRIMARY")
                             .setEmoji("➡️"),
                         )
-                        for (const cat of categorys.slice((25 * (nxtPage - 1)), (25 * nxtPage))) {
+                        for (const cat of categories.slice((25 * (nxtPage - 1)), (25 * nxtPage))) {
                             embed.addField(`${await client.emojis.resolve(cat.emoji)} • ${cat.name[language]}`, `\`\`\`md\n# ${cat.description[language]}\`\`\``);
                         }
                         // canvas = await client.drawHelpHome(canvas, ctx, {
@@ -162,11 +162,11 @@ module.exports = async (client, interaction) => {
                         // });
                         if (nxtPage == 1) row.components[0].setStyle("SECONDARY").setDisabled(true).setCustomID("NONE"), row.components[1].setStyle("SECONDARY").setDisabled(true).setCustomID("NONE");
                         embed.setFooter("Page " + nxtPage);
-                        // if (nxtPage >= (categorys.length / 25)) row.components[2].setStyle("SECONDARY");
+                        // if (nxtPage >= (categories.length / 25)) row.components[2].setStyle("SECONDARY");
                     } else {
                         if (interaction.customID.startsWith('help-left-cats')) {
                             const pos = interaction.customID.slice('help-left-cats'.length);
-                            const newCat = categorys.find(e => e.position == (parseInt(pos) - 1))
+                            const newCat = categories.find(e => e.position == (parseInt(pos) - 1))
                             // canvas = await client.drawHelpCats(canvas, ctx, newCat, {
                             //     txtColor1, txtColor2
                             // })
@@ -208,15 +208,15 @@ module.exports = async (client, interaction) => {
                                 .setEmoji("⬅️")
                                 .setDisabled(newCat.position <= 1 ? true : false),
                                 new MessageButton()
-                                .setCustomID(newCat.position == categorys.length ? 'NONE' : 'help-right-cats' + newCat.position)
-                                .setStyle(newCat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
+                                .setCustomID(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
+                                .setStyle(newCat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                                 .setEmoji("➡️")
-                                .setDisabled(newCat.position == categorys.length ? true : false),
+                                .setDisabled(newCat.position == categories.length ? true : false),
                             )
                             if (embed.description.endsWith("```") && embed.fields.length < 1) embed.setDescription(embed.description + `\n\n` + strings.help.noCmd)
                         } else if (interaction.customID.startsWith('help-right-cats')) {
                             const pos = interaction.customID.slice('help-right-cats'.length);
-                            const newCat = categorys.find(e => e.position == (parseInt(pos) + 1))
+                            const newCat = categories.find(e => e.position == (parseInt(pos) + 1))
                             // canvas = await client.drawHelpCats(canvas, ctx, newCat, {
                             //     txtColor1, txtColor2
                             // })
@@ -258,10 +258,10 @@ module.exports = async (client, interaction) => {
                                 .setEmoji("⬅️")
                                 .setDisabled(newCat.position <= 1 ? true : false),
                                 new MessageButton()
-                                .setCustomID(newCat.position == categorys.length ? 'NONE' : 'help-right-cats' + newCat.position)
-                                .setStyle(newCat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
+                                .setCustomID(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
+                                .setStyle(newCat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                                 .setEmoji("➡️")
-                                .setDisabled(newCat.position == categorys.length ? true : false),
+                                .setDisabled(newCat.position == categories.length ? true : false),
                             )
                             if (embed.description.endsWith("```") && embed.fields.length < 1) embed.setDescription(embed.description + `\n\n` + strings.help.noCmd)
                         }

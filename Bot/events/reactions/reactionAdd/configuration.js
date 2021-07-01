@@ -1,6 +1,6 @@
 const {
     getStrings,
-    categorys
+    categories
 } = require("../../../../util/constants");
 const {
     Client
@@ -49,7 +49,7 @@ module.exports = async (client, messageReaction, user) => {
     // const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
     const emojiArr = [];
 
-    for (const cat of categorys) {
+    for (const cat of categories) {
         const emj = client.emojis.resolve(cat.emoji);
         emojiArr.push(emj)
     }

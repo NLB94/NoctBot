@@ -10,7 +10,7 @@ const func = require("../../../util/functions");
 const ownerID = "616547009750499358";
 const defaultPrefix = '~';
 const {
-  CountChannels
+  CounterChannels
 } = require('../../../util/functions')
 
 /**

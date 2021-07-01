@@ -93,12 +93,12 @@ module.exports = func.client = client => {
         }
       }).then()
     })
-    backup.categorys.forEach(channel => {
+    backup.categories.forEach(channel => {
       Backup.updateOne({
         backupID: backup.id
       }, {
         $push: {
-          categorys: {
+          categories: {
             name: channel.name,
             textChannels: channel.textChannels,
             voiceChannels: channel.voiceChannels,
@@ -126,8 +126,8 @@ module.exports = func.client = client => {
 
     });
   }
-  client.fetchCategorys = functions.fetchCategorys = async guild => {
-    const categorys = [];
+  client.fetchcategories = functions.fetchcategories = async guild => {
+    const categories = [];
     guild.channels.cache.sort((a, b) => (a.position > b.position) ? 1 : -1).forEach(c => {
       if (c.type !== 'category') return;
       var permissions = [];
@@ -178,14 +178,14 @@ module.exports = func.client = client => {
           })
         }
       })
-      categorys.push({
+      categories.push({
         name: c.name,
         permissions: permissions,
         textChannels: textChildren,
         voiceChannels: voiceChildren
       })
     });
-    return categorys
+    return categories
   }
   client.fetchRoles = functions.fetchRoles = async guild => {
     const roles = []
@@ -300,8 +300,8 @@ module.exports = func.client = client => {
       })
     })
   };
-  client.loadCategorys = functions.loadCategorys = async (guild, backup) => {
-    await backup.categorys.forEach(c => {
+  client.loadcategories = functions.loadcategories = async (guild, backup) => {
+    await backup.categories.forEach(c => {
       const finalPermsCat = []
       c.permissions.forEach(r => {
         const role = guild.roles.cache.find(a => a.name == r.roleName)

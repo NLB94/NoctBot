@@ -104,14 +104,14 @@ export declare function client(client: Client);
  */
 export declare function translate(string: String, from: String, to: String);
 /**
- * Push a count channel settings in database
+ * Push a counter channel settings in database
  * @param guild
  * @param channel
  */
-export declare function createCount(
+export declare function createCounter(
   guild: Guild,
   channel: VoiceChannel,
-  options: CountChannels
+  options: CounterChannels
 );
 
 export declare function drawHelpCats(canvas: Canvas, ctx: CanvasRenderingContext2D, category: Object);
@@ -195,7 +195,7 @@ export declare class Client extends BaseClient {
   public randomString(query: Object): String;
   public newCustomCommand(guild: Guild, options: Object): void;
   public translate(string: String, from: String, to: String): String;
-  public createCount(guild: Guild, channel: VoiceChannel, options: CountChannels): void;
+  public createCounter(guild: Guild, channel: VoiceChannel, options: CounterChannels): void;
   //moderation
   public lockChannel(guild: Guild, channel: TextChannel): void;
   public unlockChannel(guild: Guild, channel: TextChannel): void;
@@ -234,7 +234,7 @@ export declare class Client extends BaseClient {
   public newBackup(backup: Object): void;
   public getBackup(code: String): ?Object;
   public deleteBackup(code: String): void;
-  public fetchCategorys(guild: Guild): any[];
+  public fetchcategories(guild: Guild): any[];
   public fetchRoles(guild: Guild): any[];
   public fetchEmojis(guild: Guild): any[];
   public fetchTextChannels(guild: Guild): any[];
@@ -242,7 +242,7 @@ export declare class Client extends BaseClient {
   public clearGuild(guild: Guild): void;
   public loadEmojis(guild: Guild, backup: Object): void;
   public loadRoles(guild: Guild, backup: Object): void;
-  public loadCategorys(guild: Guild, backup: Object): void;
+  public loadcategories(guild: Guild, backup: Object): void;
   public loadOthersChannels(guild: Guild, backup: Object): void;
   //message
   public notStartByPrefix(message: Message, settings: GuildData, userInfo: GuildUserData): void;
@@ -484,7 +484,7 @@ export declare class GuildData {
   countChannels: {
     enable: Boolean;
     category: String;
-    list: CountChannels[];
+    list: CounterChannels[];
   };
 }
 
@@ -583,8 +583,8 @@ export interface ReactRoles {
   roleID: String;
 }
 
-export interface CountChannels {
-  category: CategoryCount;
+export interface CounterChannels {
+  category: CategoryCounter;
   type: String;
   id: String;
 }
@@ -604,7 +604,7 @@ export class CustomCmds {
   public msg: String | MessageEmbedOptions;
 }
 
-type CategoryCount = "channels" | "members" | "boosts";
+type CategoryCounter = "channels" | "members" | "boosts";
 export type ColorResolvable =
   | "DEFAULT"
   | "WHITE"

@@ -131,7 +131,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     inline: false
                 }, {
                     name: `• Channels **${channels.size}** :`,
-                    value: `Categorys : ${channels.filter(c => c.type === "category").size} \n${emojis.resolve(client.localEmojis.textChannels)} Text : ${channels.filter(c => c.type === "text", c => c.type == 'news').size} \n${emojis.resolve(client.localEmojis.voiceChannels)} Voice : ${channels.filter(c => c.type === "voice").size}`,
+                    value: `categories : ${channels.filter(c => c.type === "category").size} \n${emojis.resolve(client.localEmojis.textChannels)} Text : ${channels.filter(c => c.type === "text", c => c.type == 'news').size} \n${emojis.resolve(client.localEmojis.voiceChannels)} Voice : ${channels.filter(c => c.type === "voice").size}`,
                     inline: true
                 }, {
                     name: '• Roles :',

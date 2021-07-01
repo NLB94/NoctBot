@@ -35,11 +35,11 @@ import {
    */
   export declare function fetchRoles(guild: Guild): RoleResolvable[];
   /**
-   * Fetch categorys from a guild with their children
+   * Fetch categories from a guild with their children
    * @param {Guild} guild 
    * @returns {Array}
    */
-  export declare function fetchCategorys(guild: Guild): CategoryChannel[];
+  export declare function fetchcategories(guild: Guild): CategoryChannel[];
   /**
    * Fetch emojis from a guild
    * @param guild
@@ -48,13 +48,13 @@ import {
   export declare function fetchEmojis(guild: Guild): EmojiResolvable[];
   
   /**
-   * Fetch the text channels without categorys
+   * Fetch the text channels without categories
    * @param guild
    * @returns {Array}
    */
   export declare function fetchTextChannels(guild: Guild): TextChannel[];
   /**
-   * Fetch the voice channels without categorys
+   * Fetch the voice channels without categories
    * @param guild
    * @returns {Array}
    */
@@ -77,13 +77,13 @@ import {
    */
   export declare function loadRoles(guild: Guild, backup: any);
   /**
-   * Load categorys from a backup
+   * Load categories from a backup
    * @param guild 
    * @param backup 
    */
-  export declare function loadCategorys(guild: Guild, backup: any);
+  export declare function loadcategories(guild: Guild, backup: any);
   /**
-   * Load channels without categorys from a backup
+   * Load channels without categories from a backup
    * @param guild 
    * @param backup 
    */

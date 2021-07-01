@@ -20,7 +20,7 @@ const backupSchema = mongoose.Schema({
     },
     authorID: String,
     roles: [],
-    categorys: [],
+    categories: [],
     others: {
         text: [],
         voice: []

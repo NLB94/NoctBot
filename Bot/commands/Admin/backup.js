@@ -38,7 +38,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     text: [],
                     voice: []
                 },
-                categorys: [],
+                categories: [],
                 emojis: [],
                 guildID: guild.id,
                 guildInfo: {
@@ -70,8 +70,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             const voiceChannels = await client.fetchVoiceChannels(guild)
             backup.others.voice = voiceChannels;
 
-            const categorys = await client.fetchCategorys(guild)
-            backup.categorys = categorys;
+            const categories = await client.fetchcategories(guild)
+            backup.categories = categories;
 
             const embed = new MessageEmbed()
                 .setTitle(await client.translate('Creating Backup', 'en', language))
@@ -141,7 +141,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                         client.loadRoles(guild, backup);
                         client.loadEmojis(guild, backup);
 
-                        client.loadCategorys(guild, backup);
+                        client.loadcategories(guild, backup);
                         client.loadOthersChannels(guild, backup);
 
                         await guild.setName(backup.guildName)

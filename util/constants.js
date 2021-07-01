@@ -213,7 +213,7 @@ const MESSAGES = {
         args: true
       },
     },
-    COUNTS: {
+    COUNTERS: {
       MANAGE: {
         emoji: '806440887365795870',
         name: {
@@ -221,13 +221,59 @@ const MESSAGES = {
           fr: 'Gérer'
         },
         CREATE: {
-          name: "createcount",
-          aliases: ["createcount"],
-          category: "counts",
-          categoryName: "Counts",
+          name: "counter create",
+          aliases: ["counter"],
+          category: "counters",
+          categoryName: "Counters",
           description: {
-            en: "Create a count channel.",
+            en: "Create a counter channel.",
             fr: "Créer un salon-compteur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'MANAGE_CHANNELS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        EDIT: {
+          name: "counter edit",
+          aliases: [""],
+          category: "counters",
+          categoryName: "Counters",
+          description: {
+            en: "Edit a counter channel.",
+            fr: "Modifier un salon-compteur."
+          },
+          ownerCmd: false,
+          cooldown: 0.1,
+          enable: true,
+          usage: "",
+          example: null,
+          botPerm: true,
+          botPermName: 'MANAGE_CHANNELS',
+          permissions: true,
+          onlyServerOwner: false,
+          reqPermName: "MANAGE_CHANNELS",
+          onlyPremium: false,
+          onlyInServer: true,
+          args: false
+        },
+        DELETE: {
+          name: "counter delete",
+          aliases: [""],
+          category: "counters",
+          categoryName: "Counters",
+          description: {
+            en: "Delete a counter channel.",
+            fr: "Supprimer un salon-compteur."
           },
           ownerCmd: false,
           cooldown: 0.1,
@@ -2136,7 +2182,7 @@ const MESSAGES = {
   },
 };
 
-const categorys = [
+const categories = [
   /*CONFIGURATION*/
   {
     name: {
@@ -2388,18 +2434,18 @@ const categorys = [
       },
       emoji: ''
     }]
-  }, /*COUNTS */ {
+  }, /*COUNTERS */ {
     name: {
-      en: 'Counts',
+      en: 'Counters',
       fr: 'Compteurs'
     },
     icon: "list-ol",
     description: {
-      en: "Create and manage counts channels of members, channels or boosts !",
+      en: "Create and manage counters channels of members, channels or boosts !",
       fr: "Créer et modifier des salons-compteurs de membres, salons ou bien de boosts !"
     },
     emoji: '772418424889409566',
-    commandsCat: 'counts',
+    commandsCat: 'counters',
     position: 8,
     underCat: [{
       name: {
@@ -2407,8 +2453,8 @@ const categorys = [
         fr: 'Gérer'
       },
       description: {
-        en: 'Manage your customs counts channels',
-        fr: 'Gérer vos salons-systèmes de compteurs personnalisés'
+        en: 'Manage your customs counters channels',
+        fr: 'Gérer vos salons de compteurs personnalisés'
       },
       emoji: '806440887365795870'
     }]
@@ -2440,7 +2486,166 @@ const categorys = [
     ]
   }
 ];
+const counterArray = [{
+  emoji: '806440888590008360',
+  position: 2,
+  name: {
+    en: 'Channels & categories',
+    fr: 'Salons & catégories'
+  },
+  id: 'channels',
+  types: [{
+    id: 1,
+    type: 'all',
+    name: {
+      en: 'All channels',
+      fr: 'Salons'
+    }
+  }, {
+    id: 2,
+    type: 'text',
+    name: {
+      en: 'Text',
+      fr: 'Textuels'
+    }
+  }, {
+    id: 3,
+    type: 'voice',
+    name: {
+      en: 'Voice',
+      fr: 'Vocaux'
+    }
+  }, {
+    id: 4,
+    type: 'announcement',
+    name: {
+      en: 'Announcements',
+      fr: 'Annonces'
+    }
+  }, {
+    id: 5,
+    type: 'stage',
+    name: {
+      en: 'Stage',
+      fr: 'Stage'
+    }
+  }, {
+    id: 6,
+    type: 'category',
+    name: {
+      en: 'Categories',
+      fr: 'Catégories'
+    }
+  }]
+}, {
+  emoji: '806440887332372482',
+  position: 1,
+  name: {
+    en: 'Members counters',
+    fr: 'Compteurs de membres'
+  },
+  id: 'members',
+  types: [{
+    id: 7,
+    type: 'all',
+    name: {
+      en: 'All members',
+      fr: 'Tout les membres'
+    }
+  }, {
+    id: 8,
+    type: 'members',
+    name: {
+      en: 'Members',
+      fr: 'Membres'
+    }
+  }, {
+    id: 9,
+    type: 'bots',
+    name: {
+      en: 'Bots',
+      fr: 'Bots'
+    }
+  }]
+}, {
+  emoji: '853985510967345223',
+  position: 3,
+  name: {
+    en: 'Roles counters',
+    fr: 'Compteurs de rôles'
+  },
+  id: 'roles',
+  types: [{
+    id: 10,
+    type: 'all',
+    name: {
+      en: 'Roles',
+      fr: 'Rôles'
+    }
+  }, /*{
+    id: 11,
+    type: 'role',
+    name: {
+      en: '{role}',
+      fr: '{role}'
+    }
+  }*/]
+}, {
+  emoji: '806440885483077662',
+  position: 4,
+  name: {
+    en: 'Emojis counters',
+    fr: 'Compteurs d\'emojis'
+  },
+  id: 'emojis',
+  types: [{
+    id: 9,
+    type: 'all',
+    name: {
+      en: 'All emojis',
+      fr: 'Tout les emojis'
+    }
+  }, {
+    id: 12,
+    type: 'normal',
+    name: {
+      en: 'Normal server emojis',
+      fr: 'Emojis normal du serveur'
+    }
+  }, {
+    id: 13,
+    type: 'animated',
+    name: {
+      en: 'Animated server emojis',
+      fr: 'Emojis animés du serveur'
+    }
+  }]
+}, {
+  emoji: '806440887332372482',
+  position: 5,
+  name: {
+    en: 'Boosts counters',
+    fr: 'Compteurs de boosts'
+  },
+  id: 'boosts',
+  types: [{
+    id: 14,
+    type: 'boosts',
+    name: {
+      en: 'Boosts',
+      fr: 'Boosts'
+    }
+  }, {
+    id: 15,
+    type: 'level',
+    name: {
+      en: 'Boosts level',
+      fr: 'Niveau de boosts'
+    }
+  }]
+}];
 
+const channelTypes = ['voice', 'text', 'category'];
 const strings = require('../string.json').en;
 const getStrings =
   /**
@@ -2455,4 +2660,6 @@ const getStrings =
 
 exports.getStrings = getStrings;
 exports.MESSAGES = MESSAGES;
-exports.categorys = categorys;
+exports.channelTypes = channelTypes;
+exports.categories = categories;
+exports.counterArray = counterArray;

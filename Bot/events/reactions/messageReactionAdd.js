@@ -10,7 +10,7 @@ const {
 } = require('discord.js');
 const {
     getStrings,
-    categorys
+    categories
 } = require('../../../util/constants');
 const functions = require('./messageReactionAdd');
 
@@ -45,7 +45,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     // const emoji9 = client.emojis.resolve(client.localEmojis.emoji9);
     const emojiArr = [];
 
-    for (const cat of categorys) {
+    for (const cat of categories) {
         const emj = client.emojis.resolve(cat.emoji);
         emojiArr.push(emj)
     }
@@ -120,7 +120,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         .setDescription(user.tag + ", " + await (strings.help.myPrfx.replaceAll("{prefix}", settings.general.prefix)));
 
                     if (emojiArr.includes(messageReaction.emoji)) {
-                        const cat = categorys.find(e => e.emoji == messageReaction.emoji.id)
+                        const cat = categories.find(e => e.emoji == messageReaction.emoji.id)
                         // canvas = await client.drawHelpCats(canvas, ctx, cat, {
                         //     txtColor1, txtColor2
                         // })
@@ -160,10 +160,10 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                             .setEmoji("⬅️")
                             .setDisabled(cat.position <= 1 ? true : false),
                             new MessageButton()
-                            .setCustomID(cat.position == categorys.length ? 'NONE' : 'help-right-cats' + cat.position)
-                            .setStyle(cat.position == categorys.length ? 'SECONDARY' : 'PRIMARY')
+                            .setCustomID(cat.position == categories.length ? 'NONE' : 'help-right-cats' + cat.position)
+                            .setStyle(cat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                             .setEmoji("➡️")
-                            .setDisabled(cat.position == categorys.length ? true : false),
+                            .setDisabled(cat.position == categories.length ? true : false),
                         )
                         row.addComponents(
                             new MessageButton()

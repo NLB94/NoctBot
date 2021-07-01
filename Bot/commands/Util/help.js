@@ -14,10 +14,10 @@ const {
 } = require("canvas")
 let {
   MESSAGES,
-  categorys
+  categories
 } = require("../../../util/constants");
 const categoryList = readdirSync('./Bot/commands');
-const cats = categorys.slice(0, 25);
+const cats = categories.slice(0, 25);
 
 const functions = require('../../../util/functions');
 
@@ -94,9 +94,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         .setStyle('SECONDARY')
         .setEmoji("⬅️"),
         new MessageButton()
-        .setCustomID(((categorys.length / 25) > 1) ? 'help-right-home1' : 'NONE')
-        .setStyle(((categorys.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
-        .setDisabled(((categorys.length / 25) > 1) ? false : true)
+        .setCustomID(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
+        .setStyle(((categories.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
+        .setDisabled(((categories.length / 25) > 1) ? false : true)
         .setEmoji("➡️"),
         new MessageButton()
         .setCustomID('delete')
@@ -116,7 +116,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     });
   } else {
     const command = client.commands.get(args[0].toLowerCase()) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]))
-    let cat = categorys.find(c => c.name.en.toLowerCase() == args[0].toLowerCase());
+    let cat = categories.find(c => c.name.en.toLowerCase() == args[0].toLowerCase());
     if (!command && (!cat || (cat && cat.name[settings.general.language].toLowerCase() == 'admin'))) return message.channel.send({
       embeds: [{
         description: `${x_mark}Nothing found !`
@@ -138,7 +138,13 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       // canvas = await client.drawHelpCats(canvas, ctx, cat, {
       //   txtColor1, txtColor2
       // })
-      for (const command of readdirSync(`./Bot/commands/${cat.name.en}`)) {
+      let files = [];
+      try {
+        files = readdirSync(`./Bot/commands/${cat.name.en}`)
+      } catch (e) {
+        files = []
+      }
+      for (const command of files) {
         const cmd = client.commands.get(command.slice(0, parseInt(command.length) - 3).toLowerCase());
         if (cmd !== undefined && cmd.help.enable) {
           if (cmd.underCat) {
@@ -194,7 +200,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       //   y: 300
       // };
       // let catNb = 1;
-      // for (const category of categorys) {
+      // for (const category of categories) {
 
       //   ctx.font = "75px Calibri";
       //   ctx.fillStyle = "#999999";

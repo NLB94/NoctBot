@@ -7,7 +7,7 @@ const {
 const mongoose = require('mongoose');
 const functions = require('./functions');
 const {
-  categorys
+  categories
 } = require('./constants');
 const {
   loadImage
@@ -99,15 +99,15 @@ module.exports = functions.client = client => {
     });
     return traduction;
   }
-  client.createCount = async (guild, channel, options) => {
+  client.createCounter = async (guild, channel, options) => {
     await Guild.updateOne({
       guildID: guild.id
     }, {
       $push: {
         "countChannels.list": {
           id: channel.id,
-          category: options.category,
-          type: options.type
+          category: options.category.id,
+          type: options.type.type
         }
       }
     }).then()
@@ -169,7 +169,7 @@ module.exports = functions.client = client => {
     let catNb = 1;
     // let pagesNb = 0;
     // let pageNb = 0;
-    for (const category of categorys) {
+    for (const category of categories) {
       if (category.position > 8) continue;
       // pagesNb++;
       let nextPosCmd = {
@@ -216,7 +216,7 @@ module.exports = functions.client = client => {
     // ctx.fillText(client.user.tag, 250, 1900, 1000);
     let catNb = 1;
     let pagesNb = 0;
-    for (const category of categorys) {
+    for (const category of categories) {
       pagesNb++;
       if (!(category.position > (options.page * 8) || category.position < ((8 * options.page) - 7))) {
         let nextPosCmd = 250;

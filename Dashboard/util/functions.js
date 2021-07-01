@@ -90,7 +90,7 @@ module.exports = functions.client = client => {
     });
     return traduction;
   }
-  client.createCount = functions.createCount = async (guild, channel, options) => {
+  client.createCounter = functions.createCounter = async (guild, channel, options) => {
     await Guild.updateOne({
       guildID: guild.id
     }, {
