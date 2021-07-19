@@ -30,7 +30,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             args: false
         }
 
-        const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
+        const checkMark = client.emojis.resolve(client.localEmojis.checkMark;
         message.channel.send({
             embeds: [{
                 description: 'What is the command to run (15 characters max) ? You can cancel at any moment.',

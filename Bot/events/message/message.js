@@ -30,20 +30,20 @@ module.exports = async (client, message) => {
   }
 
   if (message.author.bot) return;
-  const x_mark = client.emojis.resolve('806440609127596032');
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
   const check_mark = client.emojis.resolve('770980790242377739');
   const arrowRight = client.emojis.resolve('851021323962023957');
 
   const settings = await client.getGuild(message.guild);
-
-  if (!settings || settings == undefined) await client.createGuild({
+  if (!settings || settings == null) await client.createGuild({
     guildID: message.guild.id
   })
-
+  
   const position = await settings.users.map((e) => e.id).indexOf(message.author.id);
-  const userInfo = await settings.users[position];
-
-  if (message.guild && position === -1) await client.createGuildUser(message.guild, message.member);
+  let userInfo = await settings.users[position];
+  
+  if (message.guild && position === -1) userInfo = await client.createGuildUser(message.guild, message.member);
+  if (!userInfo) userInfo = await client.createGuildUser(message.guild, message.author)
   const strings = await getStrings(client, settings.general.language);
 
   if (message.content.includes("discord.gg") || message.content.includes("discord.com/invite")) await client.emit('automod', ({
@@ -68,9 +68,9 @@ module.exports = async (client, message) => {
 
     let command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
 
-    let pos = settings.customCommands.map(e => e.help.name).indexOf(commandName),
-      customCommand = settings.customCommands[pos];
-    if (!command && customCommand) command = customCommand;
+    // let pos = settings.customCommands.map(e => e.help.name).indexOf(commandName),
+      // customCommand = settings.customCommands[pos];
+    // if (!command && customCommand) command = customCommand;
     if (!command) return;
 
     if (message.author.id !== ownerID) {
@@ -164,26 +164,26 @@ module.exports = async (client, message) => {
         tStamps.delete(command.help.name == 'report' ? message.author.id : `${message.author.id} ${message.guild.id}`)
       }, cdAmount);
     }
-    command.run(client, message, args, settings, userInfo, strings)//.catch(async err => {
-      // message.channel.send({
-      //   embeds: [{
-      //     title: 'Oops !',
-      //     description: `**An error occured** : \`\`\`diff\n- ${err}\`\`\`\n\n**Successfully reported the error to the developer,** _[${(await client.users.resolve(ownerID)).tag}](${client.botGuild.supportInvite})_`,
-      //   }]
-      // })
-      // const channel = await client.channels.resolve(client.botGuild.dmReportID);
-      // await channel.send({
-      //   embeds: [{
-      //     title: "Erreur Commande " + commandName,
-      //     description: `Voici l'erreur : \n\`\`\`diff\n- ${err}\`\`\``,
-      //     footer: {
-      //       text: message.author.tag,
-      //       iconURL: message.author.avatarURL({
-      //         dynamic: true
-      //       })
-      //     }
-      //   }]
-      // })
+    command.run(client, message, args, settings, userInfo, strings) //.catch(async err => {
+    // message.channel.send({
+    //   embeds: [{
+    //     title: 'Oops !',
+    //     description: `**An error occured** : \`\`\`diff\n- ${err}\`\`\`\n\n**Successfully reported the error to the developer,** _[${(await client.users.resolve(ownerID)).tag}](${client.botGuild.supportInvite})_`,
+    //   }]
+    // })
+    // const channel = await client.channels.resolve(client.botGuild.dmReportID);
+    // await channel.send({
+    //   embeds: [{
+    //     title: "Erreur Commande " + commandName,
+    //     description: `Voici l'erreur : \n\`\`\`diff\n- ${err}\`\`\``,
+    //     footer: {
+    //       text: message.author.tag,
+    //       iconURL: message.author.avatarURL({
+    //         dynamic: true
+    //       })
+    //     }
+    //   }]
+    // })
     // });
   };
 };

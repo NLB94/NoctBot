@@ -1,5 +1,5 @@
 import { Canvas, CanvasRenderingContext2D } from "canvas";
-import { en } from '../string.json'
+import * as en from '../string/en.json'
 import {
   BaseClient,
   BaseGuildEmojiManager,
@@ -92,7 +92,7 @@ export declare function run(
   args: String[],
   settings: GuildData,
   userInfo: GuildUserData,
-  strings: typeof import('../string.json').en
+  strings: typeof import('../string/en.json')
 );
 
 export declare function client(client: Client);
@@ -189,9 +189,9 @@ export declare class Client extends BaseClient {
   public localEmojis: typeof localEmojis;
   public brawlManager: import("@statscell/brawl").Client
   public topAPI: import("@top-gg/sdk").Api;
-  public fr: typeof import("../string.json").fr
-  public en: typeof import("../string.json").en
-  public es: typeof import("../string.json").es
+  public fr: typeof import("../string/fr.json")
+  public en: typeof import("../string/en.json")
+  public es: typeof import("../string/es.json")
   public randomString(query: Object): String;
   public newCustomCommand(guild: Guild, options: Object): void;
   public translate(string: String, from: String, to: String): String;
@@ -513,6 +513,9 @@ export interface GuildUserData {
     daily: Number;
     hourly: Number;
     rob: Number;
+    work: Number;
+    treasure: Number;
+    other: Number;
   };
   invites: {
     total: Number;
@@ -604,7 +607,24 @@ export class CustomCmds {
   public msg: String | MessageEmbedOptions;
 }
 
-type CategoryCounter = "channels" | "members" | "boosts";
+interface CategoryCounter {
+  public emoji: string;
+  position: number;
+  name: {
+    en: string;
+    fr: string;
+  };
+  id: string;
+  types: CounterTypes[]
+};
+interface CounterTypes {
+  id: number;
+  type: string;
+  name: {
+    en: string;
+    fr: string;
+  }
+}
 export type ColorResolvable =
   | "DEFAULT"
   | "WHITE"

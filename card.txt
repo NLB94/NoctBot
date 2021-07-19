@@ -1,17 +1,18 @@
 const { MESSAGES } = require("../../../util/constants");
 const { createCanvas, loadImage } = require("canvas");
 const { Rank } = require('canvacord');
-const { MessageAttachment, MessageEmbed } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
+
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
   if (settings == undefined) client.createGuild(message.guild);
-  const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+  const x_mark = client.localEmojis.x_mark;
 
-  const canvas = createCanvas(1000, 750); 
+  const canvas = createCanvas(1000, 300); 
   const ctx = canvas.getContext("2d");
 
-  const image = await loadImage(`./Bot/Assets/noir.png`);
+  const image = await loadImage("./Bot/Assets/rank.png");
 
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
   if (user == undefined) return message.channel.send({embeds: [{ description: `${x_mark}User not found !`}]})
@@ -23,11 +24,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (user !== message.author && user !== message.member) userInfo = await client.getGuildUser(message.guild, member)
   if (userInfo == undefined) await client.createGuildUser(message.guild, user);
 
-  let statusColor = '#469A60';
-  if (user.presence.status == 'online') statusColor = '#469A60';
-  if (user.presence.status == 'offline') statusColor = '#777F8B';
-  if (user.presence.status == 'dnd') statusColor = '#DC5355';
-  if (user.presence.status == 'idle') statusColor = '#E4A230';
+  let statusColor = '';
+  if (user.presence.status == 'online') statusColor = '#009966';
+  if (user.presence.status == 'offline') statusColor = '#999999';
+  if (user.presence.status == 'dnd') statusColor = '#CC3333';
+  if (user.presence.status == 'idle') statusColor = '#FF9900';
   let xp = userInfo.XP;
   let xpReq = userInfo.XPRequire;
   xp = xp >= 1000 ? `${xp / 1000}K` : xp;
@@ -49,75 +50,63 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   userRank += 1
 //start ctx image
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  const w1 = canvas.width / 20;
-  const w2 = canvas.width - w1;
-  const h1 = canvas.height - (canvas.height / 20)
-  console.log(w1, w2, h1)
-  ctx.beginPath();
-  //bordure
-  ctx.strokeStyle = "#333333";
-  ctx.lineWidth = 50;
-  ctx.strokeRect(w1 / 2, w1 / 2, w2, h1)
 
- /*text level
- */
-  
- //progress bar
+  ctx.beginPath();
   ctx.lineWidth = 2;
+ //progress bar
   let width = (userInfo.XP / userInfo.XPRequire) * 657.5;
   if (width >= 657.5) width = 657.5;
 
-  let x1 = 100 + 18.5;
-  let y1 = 350 + 36.25;
   ctx.fillStyle = "#999999";
-  ctx.arc(x1, y1 + 18.5, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
+  ctx.arc(260 + 18.5, 160 + 18.5 + 36.25, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
   ctx.fill();
-  ctx.fillRect(x1, y1, 675 - 18.5, 37.5);
-  ctx.arc(100 + 675, y1 + 18.5, 18.75, 1.5 * Math.PI, 0.5 * Math.PI, false);
+  ctx.fillRect(260 + 18.5, 160 + 36.25, 675 - 18.5, 37.5);
+  ctx.arc(260 + 675, 160 + 18.5 + 36.25, 18.75, 1.5 * Math.PI, 0.5 * Math.PI, false);
   ctx.fill();
 
   ctx.beginPath();
+  
   ctx.fillStyle = settings.levelSystem.color;
-  ctx.arc(x1, y1 + 18.5, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
+  ctx.arc(260 + 18.5, 160 + 18.5 + 36.25, 18.5, 1.5 * Math.PI, 0.5 * Math.PI, true);
   ctx.fill();
-  ctx.fillRect(x1, y1, width, 37.5);
-  ctx.arc(x1 + width, y1 + 18.5, 18.75, 1.5 * Math.PI, 0.5 * Math.PI, false);
+  ctx.fillRect(260 + 18.5, 160 + 36.25, width, 37.5);
+  ctx.arc(260 + 18.5 + width, 160 + 18.5 + 36.25, 18.75, 1.5 * Math.PI, 0.5 * Math.PI, false);
   ctx.fill();
 
   ctx.save()
 //xp 
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
-  ctx.fillStyle = "#ffffff";
-  ctx.fillText(`${xp} / ${xpReq} XP`, x1 + 450, 375, 200);
+  ctx.fillStyle = "#000000";
+  ctx.fillText(`${xp} / ${xpReq} XP`, 500, 225, 200);
 //rank & level
-  // ctx.globalAlpha = 1;
-  // ctx.font = "75px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(`#${userRank}`, 815, 100, 175);
+  ctx.globalAlpha = 1;
+  ctx.font = "75px Calibri";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(`#${userRank}`, 815, 100, 175);
 
-  // ctx.globalAlpha = 1;
-  // ctx.font = "75px Calibri";
-  // ctx.fillStyle = "#FFFFFF";
-  // ctx.fillText(`${userInfo.level}`, 815, 175, 175);
+  ctx.globalAlpha = 1;
+  ctx.font = "75px Calibri";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(`${userInfo.level}`, 815, 175, 175);
 //username & tag
   ctx.globalAlpha = 1;
   ctx.font = "50px Calibri";
-  ctx.fillStyle = "#ffffff";
-  ctx.fillText(user.username, 300, 175, 300);
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(user.username, 280, 175, 300);
 
   ctx.globalAlpha = 1;
   ctx.font = "30px Calibri";
   ctx.fillStyle = "#999999";
-  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, (ctx.measureText(user.username).width / 300) + 600, 175, 300);
+  ctx.fillText(`#${user.discriminator.substr(0, 4)}`, (ctx.measureText(user.username).width / 300) + 580, 175, 300);
 
   //user avatar
   ctx.arc(135, 155, 100, 0, Math.PI * 2, true)
   ctx.lineWidth = 6
-  // ctx.strokeStyle = "#FFFFFF"
+  ctx.strokeStyle = "#FFFFFF"
   ctx.closePath()
   ctx.clip();
-  const avatar = await loadImage(user.displayAvatarURL({ format: "png" }))
+  const avatar = await loadImage(user.displayAvatarURL({ format: "jpg" }))
   ctx.drawImage(avatar, 35, 55, 200, 200)
   ctx.restore();
 
@@ -127,16 +116,11 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   ctx.arc(200, 225, 25, 0, Math.PI * 2)
   ctx.fill()
   ctx.closePath()
-  
+
   const file = new MessageAttachment(canvas.toBuffer(), "rank.png");
-  const img = canvas.toDataURL()
-  const embed = new MessageEmbed()
-    .setDescription("test")
-    .setImage(img)
   message.channel.send({
     content: `${user.tag} sent **${userInfo.messageSent} messages in this server.**`,
-    embeds: [embed]
-    // files: [file]
+    files: [file]
   })
 };
 

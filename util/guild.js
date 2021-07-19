@@ -3,7 +3,8 @@ const {
     Guild
 } = require('../models');
 const functions = require('./guild');
-const func = require('./functions')
+const func = require('./functions');
+const { guildModel2 } = require('./constants');
 
 module.exports = func.client = async (client) => {
     client.createGuild = async guild => {
@@ -74,7 +75,15 @@ module.exports = func.client = async (client) => {
                     cd: {
                         daily: daily,
                         hourly: daily,
-                        rob: daily
+                        rob: daily,
+                        work: daily,
+                        treasure: daily,
+                        other: daily
+                    },
+                    mines: {
+                        diamonds: 0,
+                        leftNb: 1,
+                        other: 0
                     },
                     invites: {
                         total: 0,
@@ -105,34 +114,42 @@ module.exports = func.client = async (client) => {
         }).then();
     };
     client.resetAllGuilds = async () => {
-        await Guild.deleteOne({
-            guildID: 727494941911154688
-        }).then()
-        await client.createGuild({
-            guildID: 727494941911154688
-        })
+        let nbSuccess = 0;
+        let nbF = 0;
+        await client.guilds.fetch();
+        console.log(client.guilds.cache.size)
         await client.guilds.cache.forEach(async g => {
-            await Guild.deleteOne({
+            console.log(g.id)
+            const guild = await Guild.findOne({
                 guildID: g.id
-            }).then();
-            await client.createGuild({
-                guildID: g.id
-            })
-        });
+            });
+            console.log(guild)
+            if (guild) {
+                guild.delete().then(async () => {
+                    await client.createGuild({ guildID: g.id });
+                    nbSuccess++
+                });
+            }
+            else await client.createGuild({guildID: g.id }).then(x => {
+                if (!x) nbF++;
+                else nbSuccess++;
+            });
+        })
+        return await `Success : ${nbSuccess}\nFailed : ${nbF}`
     }
     client.updateAllGuildsUsers = async (options) => {
+        await client.guilds.fetch();
         await client.guilds.cache.forEach(async g => {
             const guild = await Guild.findOne({
                 guildID: g.id
             });
-            if (guild.users) guild.users.forEach(u => {
-                Guild.updateOne({
-                    guild: g.id,
-                    "users.id": u.id
-                }, {
-                    $set: options
-                }).then();
-            })
+            if (guild.users) {
+                for (const user in guild.users) {
+                    for (const [key, value] of Object.entries(options))
+                    guild.users[user][key] = value
+                }
+            }
+            await guild.update(guild);
         })
     }
     client.updateAllGuilds = async function (query) {

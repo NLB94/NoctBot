@@ -1,0 +1,106 @@
+{
+    "usage": "Correct usage of the command :",
+    "cooldown": "Cooldown",
+    "usrNtFnd": "User not found",
+    "cmdCancel": "```diff\n- The command have been canceled !```",
+    "cmdError": "**An error occured :**\n\n```javascript\n{err}```\n\n**Reported the bug to the developer**, _we apologize for the inconvenience_, the problem will be taken care of soon.",
+    "noExample": "```There are no example for this command.```",
+    "loading": "Loading",
+    "level": {
+        "rankCard": "Rank card"
+    },
+    "economy": {
+        "bank": "Bank",
+        "bank2": "bank",
+        "cash2": "hand",
+        "cash": "Cash",
+        "cd": "You have to wait **{time}** before next reward !",
+        "daily": {
+            "desc": "```diff\n+ You just won **${nbWin}** ! \n# You have now ${newB} in your cash. \n- Your next reward will be available in 24 hours.```",
+            "title": "Daily rewards",
+            "sommaire": "**Sommaire : **\n```md\n# 🏠 Home page\n# 📅 Reward of today - Get your your reward of the day\n# 💰 Hidden treasure - Dig up hidden treasures to get a lot of rewards !!```"
+        },
+        "addmoney": {
+            "desc": "Successfully added **${toAdd}** to {user}'s balance ! He have now $`{newB}` in his `{supportName}` !",
+            "title": "Money added"
+        },
+        "addmoneyrole": {
+            "desc": "{user} added **${toAdd}** to _{usersLength}_ members's balance with <@&${role.id}> role !",
+            "title":"Money added"
+        }
+    },
+    "reactAdd": {
+        "supportS": {
+            "roles": {
+                "title": "Role Added",
+                "description": "You have successfully got **{roleName}** role by reacting in **_{guild}_** !"
+            },
+            "verif": "You have been verified by accepting the rules in **_{guild}_**"
+        },
+        "giveaway": {
+            "entryAccept": "Giveaway entry accepted for `{price}` !",
+            "givEntry": "Giveaway entry"
+        }
+    },
+    "counters": {
+        "catType": "**What is the category of counter you want ?** \nAvailable categories :",
+        "chooseNb": "Please choose a valid number !!",
+        "chooseTypeChannel": "#️⃣**Which type of channel do you want to use for this counter (choose a number) ?** \n```md\n# 1・voice\n# 2・text\n# 3・category\nor type cancel to cancel the command.```",
+        "NaN": "**Please provide a correct number next time !**",
+        "counterType": "The category type is `{cat}`. Now, what is the **type of counter** you want ? \nAvailable types for `{cat}` ",
+        "chnlInMmt": "Done, the channel will be appear in few time",
+        "success": "**Channel created !**",
+        "warningBoost": "You didn't enable **server feature `BOOST_MESSAGE`**. ",
+        "successEnabled": "Noct **enabled it for you** !",
+        "warning": "WARNING"
+    },
+    "help": {
+        "bCommands": "Bot Commands",
+        "myPrfx": "The prefix in this server is ***`{prefix}`*** \n```If you need more informations about commands, type {prefix}help <command>! ```",
+        "noCmd": "**There are no commands to visualize here !**\n_This category's commands may be on development, or they are maintained temporarily._",
+        "sommaire": "**Summary :** \n```md\n# 🏠 Home page \n# ➡️ Next page \n# ⬅️ Previous page \n# 🗑️ Delete message```"
+    },
+    "message": {
+        "onDev": "```arm\nThis command is on devlopment. \n# Please wait...",
+        "onlyPremium": "```diff\n- Only for premium servers ! \n+ Upgrade to premium for more features !```",
+        "onlyServerOwner": "```fix\nOnly the server owner can use this command !```",
+        "permissions": "```arm\nYou don't have enough permissions to use this command !```",
+        "missingPerms": "Missing Permissions",
+        "missingBotPerms": "Missing Bot Permissions",
+        "botPerm": "```arm\nI don't have enough permissions to run this command ! # Give me admin permissions !```",
+        "missingArgs": "Missing Arguments",
+        "report": {
+            "title": "Invalid Report",
+            "description": "```arm\nReport must be 25 characters or more ! \n# No duplicated message !! ``` \nYou can also join [support server](https://discord.gg/unRX2SUcvw) to report the bug in the correct channel !"
+        },
+        "cooldown": {
+            "title": "Command cooldown",
+            "description": "```arm\nYou have to wait {time} second(s) to retry this command !```"
+        }
+    },
+    "configuration": {
+        "secuLvl": "**Degree of Security**",
+        "whiteL": "White list",
+        "enable": "Enable",
+        "reset": "```React with 🔄 to reset {type} settings```",
+        "afterReset": "```The settings have been reseted```",
+        "logsThis": "Logs Enable",
+        "remOrAddRole": "```What do you want ?``` \n🇦 **Add role(s) to list** \n🇧 **Remove role(s) from the list**",
+        "remOrAddChannel": "```What do you want ?``` \n🇦 **Add channel(s) to list** \n🇧 **Remove channel(s) from the list**",
+        "chooseRoleAdd": "**Please mention the role(s) to add to white list !**",
+        "chooseChannelAdd": "**Please mention the channel(s) to add to white list !**",
+        "chooseRoleRem": "**Please mention the role(s) to remove from white list !**",
+        "chooseChannelRem": "**Please mention the channel(s) to remove from white list !**",
+        "onlyDelete": "Just delete the message",
+        "onlyWarn": "Just warn the user",
+        "warnAndDelete": "Warn the user & Delete the message",
+        "notEnable": "The `{type}` system **is not enable !** Type `{prefix}{cmdName} enable` and **retry !**",
+        "alrEnable": "The `{type}` system **is already enable !**",
+        "alrDisable": "The `{type}` system **is already disable !**",
+        "successEnable": "Successfully **enabled {type} system** !",
+        "successDisable": "Successfully **disabled `{type}` system** !",
+        "err": "Error !",
+        "firstQ": "How secure you want for the `{type}` system ? \n1 - **Just delete the message** \n2 - **Just warn the user** \n3 - **Delete the message & warn the user** \n**CHOOSE A NUMBER**",
+        "secondQ": "OK ! Do you want to add logs to this system ?"
+    }
+}

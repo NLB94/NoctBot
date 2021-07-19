@@ -24,16 +24,16 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
     try {
         let item = {
-            name: String,
-            price: Number,
-            description: String,
+            name: '',
+            price: 0,
+            description: '',
             id: (settings.economy.shop.length + 1),
-            stock: Number,
-            timeInShop: (Number || Date),
-            requiredRole: String,
-            roleToGive: String,
-            roleToRemove: String,
-            replyMsg: (String || MessageEmbed)
+            stock: 0,
+            timeInShop: 0,
+            requiredRole: '',
+            roleToGive: '',
+            roleToRemove: '',
+            replyMsg: ''
         }
         const checkMark = client.emojis.resolve(client.localEmojis.checkMark);
         const embed = new MessageEmbed()

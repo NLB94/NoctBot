@@ -10,7 +10,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   const tada = client.emojis.resolve(client.localEmojis.tada),
     warning = client.emojis.resolve(client.localEmojis.warning),
-    eyes = client.emojis.resolve(client.localEmojis.alert),
+    eyes = client.emojis.resolve(client.localEmojis.eyes_move),
     alert = client.emojis.resolve(client.localEmojis.alert),
     embed = new MessageEmbed()
     .setAuthor(message.guild.name, message.guild.iconURL(), `https://discord.gg/${(await message.guild.fetchInvites()).filter(i => !i.temporary).first().code}`)

@@ -23,7 +23,7 @@ module.exports = async (client, channel) => {
 
         const count = settings.countChannels;
         if (count.enable) {
-            const channels = count.list.filter(c => c.category.toLowerCase() == 'channels');
+            const channels = count.list.filter(c => c.category.id.toLowerCase() == 'channels');
             if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
             else {
                 const chnl = channels.find(c => c.id == channel.id);

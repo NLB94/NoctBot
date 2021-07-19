@@ -1,0 +1,106 @@
+{
+    "usage": "Utilisation de la commande :",
+    "cooldown": "Temps d'attente",
+    "usrNtFnd": "Utilisateur introuvable",
+    "cmdCancel": "```diff\n- La commande a été annulée !```",
+    "cmdError": "**Une erreur s'est produite :**\n\n```javascript\n{err}```\n\n**Le développeur du bot a été averti**, _nous nous excusons de la gêne occasionnée_, le problème sera bientôt pris en main.",
+    "noExample": "```Il n'y a pas d'exemple pour cette commande.```",
+    "loading": "Chargement",
+    "level": {
+        "rankCard": "Carte de rang"
+    },
+    "economy": {
+        "bank2": "banque",
+        "cash2": "caisse",
+        "cash": "Caisse",
+        "bank": "Banque",
+        "cd": "Tu dois attendre **{time}** avant la prochaine récompense !",
+        "daily": {
+            "desc1": "```diff\n+ Vous venez de gagner ${nbWin} ! \n\n• Vous avez maintenant ${newB} dans votre caisse. \n\n- Votre prochaine récompense sera disponible dans 24 heures.```",
+            "title": "Récompenses quotidienne",
+            "sommaire": "**Sommaire : **\n```md\n# 🏠 Page d'acceuil\n# 📅 Récompense du jour - Obtiens ta récompense d'aujourd'hui\n# 💰 Trésor caché - Déterre les trésors cachés pour obtenir plein de récompenses !!```"
+        },
+        "addmoney": {
+            "desc": "${toAdd} a été ajouté dans la balance de {user} ! Il a maintenant $`{newB}` dans sa `{supportName}` !",
+            "title": "Monnaie ajouté"
+        },
+        "addmoneyrole": {
+            "desc": "{user} a ajouté ${toAdd} à la balance de {usersLength} utilisateurs ayant le role <@&{roleID}> !",
+            "title":"Monnaie ajouté"
+        }
+    },
+    "reactAdd": {
+        "supportS": {
+            "roles": {
+                "title": "Rôle ajouté",
+                "description": "Vous venez de recevoir le rôle **{roleName}** en réagissant dans **_{guild}_** !"
+            },
+            "verif": "Vous venez d'être vérifier en acceptant les règles dans **_{guild}_**"
+        },
+        "giveaway": {
+            "entryAccept": "La participation au giveaway `{price}` a été accepté !",
+            "givEntry": "Participation au giveaway"
+        }
+    },
+    "counters": {
+        "catType": "**Quelle type de catégorie de compteur voulez-vous ?** \nCatégories disponibles :",
+        "chooseNb": "Merci de choisir un nombre valide !!",
+        "chooseTypeChannel": "#️⃣**Quelle type de salon voulez-vous utiliser pour ce compteur (choisissez un nombre) ?** \n```md\n# 1・vocal\n# 2・textuel\n# 3・catégorie\nou tapez cancel pour annuler la commande.```",
+        "NaN": "**Donnez un nombre correct la prochaine fois !**",
+        "counterType": "Le type de catégorie est `{cat}`. Quelle est le **type de compteur** que vous voulez ? \nTypes disponibles pour la catégorie `{cat}`",
+        "chnlInMmt": "Le salon apparaitra dans un moment",
+        "success": "**Le salon a été crée !**",
+        "warningBoost": "Vous n'avez pas activé **la fonction du serveur `BOOST_MESSAGE`**.",
+        "successEnabled": "Noct **a activé le système pour vous** !",
+        "warning": "ATTENTION"
+    },
+    "help": {
+        "bCommands": "Commandes du bot",
+        "myPrfx": "Le préfixe utilisé dans ce serveur est ***`{prefix}`*** \n```Si vous avez besoin de plus d'informations concernant une commande, tapez {prefix}help <commande>! ```",
+        "noCmd": "**Il n'y a pas de commandes à visualiser ici !**\n_Les commandes de cette catégorie doivent être en développement, ou bien elles sont maintenues temporairement._",
+        "sommaire": "**Sommaire : **\n```md\n# 🏠 Page d'acceuil \n# ➡️ Page suivante \n# ⬅️ Page précédente \n# 🗑️ Supprimer le message```"
+    },
+    "message": {
+        "onDev": "```arm\nCette commande est en développement. \n# Patience...",
+        "onlyPremium": "```diff\n- Seulement pour les serveurs premium ! \n+ Obtenez le mode premium pour plus de fonctionnalités !```",
+        "onlyServerOwner": "```fix\nSeulement le propriétaire du serveur peut utiliser cette commande !```",
+        "permissions": "```arm\nVous n'avez pas les permissions nécessaires pour effectuer cette commande !```",
+        "missingPerms": "Permissions Manquantes",
+        "missingBotPerms": "Permissions du Bot manquantes",
+        "botPerm": "```arm\nJe n'ai pas les permissions nécessaires pour effectuer cette commande ! # Donnez moi les permissions d'administrateur !```",
+        "missingArgs": "Arguments Manquants",
+        "report": {
+            "title": "Rapport Invalide",
+            "description": "```arm\nLe rapport doit contenir 25 caractères ou plus ! \n# Pas de texte dupliqué !! ``` \nVous pouvez aussi rejoindre le [serveur de support](https://discord.gg/unRX2SUcvw) pour faire un rapport de bugs dans le bon salon !"
+        },
+        "cooldown": {
+            "title": "Temps d'attente",
+            "description": "```arm\nVous devez attendre {time} seconde(s) avant de réessayer cette commande !```"
+        }
+    },
+    "configuration": {
+        "secuLvl": "**Niveau de sécurité**",
+        "whiteL": "Liste blanche",
+        "enable": "Activé",
+        "reset": "```Réagissez à 🔄 pour réinitialiser les paramètres du système {type}```",
+        "afterReset": "```Les paramètres ont été réinitialisés```",
+        "logsThis": "Logs Activés",
+        "remOrAddRole": "```Que voulez-vous ?``` \n🇦 **Ajouter un(des) rôle(s) à la liste** \n🇧 **Retirer un(des) rôle(s) de la liste**",
+        "remOrAddChannel": "```Que voulez-vous ?``` \n🇦 **Ajouter un(des) salon(s) à la liste** \n🇧 **Retirer un(des) salon(s) de la liste**",
+        "chooseRoleAdd": "**Veuillez mentionner le(s) rôle(s) à ajouter dans la liste blanche !**",
+        "chooseChannelAdd": "**Veuillez mentionner le(s) salon(s) à ajouter dans la liste blanche !**",
+        "chooseRoleRem": "**Veuillez mentionner le(s) rôle(s) à retirer de la liste blanche !**",
+        "chooseChannelRem": "**Veuillez mentionner le(s) salon(s) à retirer de la liste blanche !**",
+        "onlyDelete": "Supprimer le message seulement",
+        "onlyWarn": "Avertir l'utilisateur seulement",
+        "warnAndDelete": "Avertir l'utilisateur & Supprimer le message",
+        "notEnable": "Le système `{type}` **n'est pas activé !** Tapez `{prefix}{cmdName} enable` et **réessayez !**",
+        "alrEnable": "Le système `{type}` **est déjà activé !**",
+        "alrDisable": "Le système `{type}` **est déja désactivé !**",
+        "successEnable": "Le système `{type}` **a correctement été activé** !",
+        "successDisable": "Le système `{type}` **a correctement été désactivé** !",
+        "err": "Erreur !",
+        "firstQ": "Quelle est le niveau de sécurité exigé pour le système `{type}` ? \n1 - **Seulement supprimer le message** \n2 - **Seulement avertir l'utilisateur** \n3 - **Supprimer le message & avertir l'utilisateur** \n**Veuillez choisir un nombre**",
+        "secondQ": "OK ! Voulez-vous ajouter les logs à ce système ?"
+    }
+}

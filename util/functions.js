@@ -106,8 +106,8 @@ module.exports = functions.client = client => {
       $push: {
         "countChannels.list": {
           id: channel.id,
-          category: options.category.id,
-          type: options.type.type
+          category: options.category,
+          type: options.type
         }
       }
     }).then()

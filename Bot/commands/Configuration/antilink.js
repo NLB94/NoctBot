@@ -9,8 +9,8 @@ const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
     // const action = args[0] ? args[0].toLowerCase() : '1';
-    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
-    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark;
+    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark;
     // const err = strings.configuration.err;
 
     // if (!action) action = '1';

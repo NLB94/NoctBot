@@ -11,12 +11,11 @@ const DBLApi = require('@top-gg/sdk');
 
 const botGuild = require('./.bot.json');
 const emojis = require('./emojis.json');
-const string = require('./string.json');
 
 const express = require('express');
 const app = express();
 const port = 4000;
-
+const languages = ['en', 'fr'];
 const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'],
     intents: ['GUILDS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INTEGRATIONS', 'GUILD_INVITES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGE_TYPING', 'GUILD_PRESENCES', 'GUILD_VOICE_STATES', 'GUILD_WEBHOOKS', 'DIRECT_MESSAGE_TYPING', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS']
@@ -33,8 +32,10 @@ client.botGuild = botGuild;
 client.localEmojis = emojis;
 client.brawlManager = brawlManager;
 client.topAPI = topAPI;
-client.fr = string.fr;
-client.en = string.en;
+for (const lang of languages) {
+    client[lang] = require(`./string/${lang}.json`);
+    console.log(lang);
+}
 
 require('./util/constants');
 setInterval(() => {
@@ -101,7 +102,8 @@ client.login(process.env.TOKEN).then(async() => {
 	})) 
 });
 module.exports = {
-    client
+    client,
+    languages
 };
 
 process.on('uncaughtException', (err) => {

@@ -51,8 +51,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         msg.react('5️⃣');
     });
     // const action = args[0] ? args[0].toLowerCase() : '1';
-    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
-    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark;
+    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark;
     // const err = strings.configuration.err;
 
     // if (action == 'on') action.replace('on', 'enable');

@@ -75,6 +75,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
                         // if (category.type !== 'category') return message.c;
                         const channelName = `${type.name[language]} : ${cat.id == `channels` ? (type == `all` ? `${message.guild.channels.cache.size}` : message.guild.channels.cache.filter(ch => ch.type == type.type).size) : (cat.id.toLowerCase() == `members` ? (type == `all` ? `${message.guild.memberCount}` : (type == `humans` ? `Members : ${message.guild.members.cache.filter(m => !m.user.bot).size}` : `Bots : ${message.guild.members.cache.filter(m => m.user.bot).size}`)) : (type == `level` ? `Level : ${message.guild.premiumTier}` : `Boosts : ${message.guild.premiumSubscriptionCount}`))}`
+                        console.log(channelName)
                         if (message.guild.systemChannelFlags.has('SUPPRESS_PREMIUM_SUBSCRIPTIONS') && (channelName.startsWith('Level') || channelName.startsWith('Boosts'))) message.channel.send({
                             embeds: [{
                                 description: `${warning}${strings.counters.warningBoost}\n${check_mark}${strings.counters.successEnabled}`,

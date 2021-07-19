@@ -1,4 +1,7 @@
-const { MessageEmbed, GuildMember } = require('discord.js')
+const {
+    MessageEmbed,
+    GuildMember
+} = require('discord.js')
 
 const {
     Client
@@ -11,7 +14,9 @@ const {
  */
 module.exports = async (client, member) => {
     const settings = await client.getGuild(member.guild);
-    if (settings == undefined) await client.createGuild({ guildID: member.guild.id });
+    if (settings == undefined) await client.createGuild({
+        guildID: member.guild.id
+    });
     let msg = settings.lMessage;
 
     if (settings.countChannels.enable) {
@@ -39,12 +44,14 @@ module.exports = async (client, member) => {
 
 
 
-const embed = new MessageEmbed()
-.setAuthor("Member Left!")
-.setThumbnail(member.user.displayAvatarURL())
-.setColor("#000000")
-.setDescription(`${msg}`) 
-.setTimestamp();
+    const embed = new MessageEmbed()
+        .setAuthor("Member Left!")
+        .setThumbnail(member.user.displayAvatarURL())
+        .setColor("#000000")
+        .setDescription(`${msg}`)
+        .setTimestamp();
 
-client.channels.cache.get('789919985307746304').send({embeds: [embed]});
+    client.channels.cache.get('789919985307746304').send({
+        embeds: [embed]
+    });
 }

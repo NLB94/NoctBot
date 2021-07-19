@@ -21,10 +21,10 @@ module.exports = async (client, channel) => {
 
         if (!channel.manageable || !channel) return;
         const count = settings.countChannels;
-        if (count.enable) {
-            console.log(count.list.map(c => c.category + '\n' + c.type))
-            const channels = count.list.filter(c => c.category[settings.general.language].toLowerCase() == 'channels');
-            if (!channels || !channels.length || channels == undefined || channels.length < 1) return;
+        if (count.enable && count.list.length > 0) {
+            console.log(count);
+            const channels = count.list.filter(c => c.category.id.toLowerCase() == 'channels');
+            if (!channels || channels.length < 1) return;
             else {
                 channels.forEach(async m => {
                     if (m.type == 'all' || (m.type == 'categories' && channel.type == 'category') || (m.type == 'voice' && channel.type == 'voice' || (m.type == 'text' && (channel.type == 'text' || channel.type == 'news')))) {

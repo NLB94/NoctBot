@@ -1,6 +1,7 @@
 const {
     MessageEmbed
 } = require('discord.js');
+const languages = ['en', 'fr'];
 const {
     MESSAGES
 } = require("../../../util/constants");
@@ -16,7 +17,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
     const check_mark = client.emojis.resolve(client.localEmojis.checkMark)
     const arrowRight = client.emojis.resolve(client.localEmojis.arrowRight);
-    //const logs = client.channels.cache.get('789919985307746304');
+    //const logs = client.channels.cache.get('789919985307746304')
     const keys = ["logs", "prefix", "language"];
     const language = settings.general.language;
 
@@ -90,7 +91,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
                     }]
                 })
                 newSetting = newSetting.slice(0, 2)
-                if (newSetting == 'fr' || newSetting == 'en') {
+                if (languages.includes(newSetting)) {
                     message.channel.send({
                         embeds: [{
                             description: `${check_mark}${language == 'fr' ? `Langue changée : \nAvant : \`${language}\` \nAprès` : `Language changed : \nBefore : \`${language}\` \nAfter`} : \`${newSetting}\``

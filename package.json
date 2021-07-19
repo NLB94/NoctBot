@@ -21,6 +21,7 @@
     "bufferutil": "^4.0.3",
     "canvacord": "^5.0.8",
     "canvas": "^2.6.1",
+    "canvas-to-image": "^2.2.0",
     "connect-mongo": "^4.2.2",
     "cookies": "^0.8.0",
     "cors": "^2.8.5",

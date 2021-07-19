@@ -71,7 +71,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             .setDescription(`${giveaway.winnerCount} winner(s) \nTime remaining : ${ms(ms(giveaway.time))} \nHosted by : ${message.author}`);
 
         giveaway.channel.send({embeds: [embed]}).then(async msg => {
-            msg.react(client.localEmojis.tada);
+            msg.react(client.emojis.resolve(client.localEmojis.tada));
             giveaway.id = msg.id;
             client.createGiveaway(msg.guild, giveaway)
             embed.setFooter(`ID : ${msg.id}`);

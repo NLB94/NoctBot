@@ -41,8 +41,8 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     });
     
     // const action = args[0].toLowerCase();
-    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark);
-    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark);
+    // const check_mark = client.emojis.resolve(client.localEmojis.checkMark;
+    // const x_mark = client.emojis.resolve(client.localEmojis.x_mark;
 
     // if (action == 'on') action.replace('on', 'enable');
     // if (action == 'off') action.replace('off', 'disable');

@@ -25,7 +25,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       .setAuthor(user.tag, user.avatarURL())
       .setTimestamp()
       .setDescription(`${user.tag} have : \n💵Cash : ${userInfo.moneyCash} \n🏦Bank : ${userInfo.moneyBank} \n💹Net Worth : ${Math.floor(userInfo.moneyCash + userInfo.moneyBank)}`)
-      .setFooter(message.guild, message.guild.iconURL());
+      .setFooter(message.guild.name, message.guild.iconURL());
 
     message.channel.send({embeds: [embed]});
   };
