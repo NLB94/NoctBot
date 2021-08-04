@@ -27,6 +27,11 @@
         "addmoneyrole": {
             "desc": "{user} a ajouté ${toAdd} à la balance de {usersLength} utilisateurs ayant le role <@&{roleID}> !",
             "title":"Monnaie ajouté"
+        },
+        "dep": {
+            "notEnough": "Tu n'as que `${cash}` en espèces !",
+            "title": "Dépôt effectué",
+            "desc": "Dépôt d'un montant de `${toDep}` effectué vers la banque de {user} !"
         }
     },
     "reactAdd": {

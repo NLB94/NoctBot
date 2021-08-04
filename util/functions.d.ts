@@ -11,6 +11,7 @@ import {
   ClientVoiceManager,
   Guild,
   GuildManager,
+  GuildEmojiManager,
   GuildMember,
   GuildPreview,
   GuildResolvable,
@@ -170,14 +171,14 @@ export declare class Client extends BaseClient {
 
   public application: ClientApplication | null;
   public channels: ChannelManager;
-  public readonly emojis: BaseGuildEmojiManager;
+  public emojis: GuildEmojiManager;
   public guilds: GuildManager;
   public options: ClientOptions;
   public readyAt: Date | null;
   public readonly readyTimestamp: number | null;
   public shard: ShardClientUtil | null;
-  public token: string | null;
-  public readonly uptime: number | null;
+  private token: string | null;
+  public uptime: number | null;
   public user: ClientUser | null;
   public users: UserManager;
   public voice: ClientVoiceManager;

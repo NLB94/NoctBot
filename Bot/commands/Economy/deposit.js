@@ -14,23 +14,22 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({
     embeds: [{
-      description: language == 'fr' ? `${x_mark}Usage correct : \`${settings.general.prefix}dep ${module.exports.help.usage}\`` : `${x_mark}Correct usage : \`${settings.general.prefix}dep ${module.exports.help.usage}\``
+      description: `${x_mark}${strings.usage} \`${settings.general.prefix}dep ${module.exports.help.usage}\``
     }]
   });
 
   const toDep = args[0].toLowerCase().startsWith('al') ? parseInt(userInfo.moneyCash) : parseInt(args[0]);
-
-  if (toDep > userInfo.moneyCash) return message.channel.send({
-    embeds: [{
-      description: `${x_mark}You have only ${userInfo.moneyCash} on your hand!`
-    }]
-  });
+  let desc = ``
+  if (toDep > userInfo.moneyCash) {
+    desc += `${x_mark}${strings.economy.dep.notEnough.replace("{cash}", userInfo.moneyCash)}`,
+      toDep = userInfo.moneyCash
+  };
 
   const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setColor('#000000')
-    .setTitle('Deposit to bank')
-    .setDescription(`${checkMark}Successfully deposited ${toDep} to ${message.author}'s bank!`)
+    .setTitle(strings.economy.dep.title)
+    .setDescription((desc.startsWith(`${x_mark}`) ? "\n" : "") + `${checkMark}${strings.economy.dep.desc.replace("{toDep}", toDep).replace("{user}", message.author)}`)
     .setFooter(message.guild, message.guild.iconURL())
     .setTimestamp();
 
@@ -43,7 +42,9 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   client.updateGuildUI(message.guild, message.member, {
     "users.$.moneyCash": newB
   });
-  message.channel.send({embeds: [embed]});
+  message.channel.send({
+    embeds: [embed]
+  });
 };
 
 

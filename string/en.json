@@ -16,7 +16,7 @@
         "cash": "Cash",
         "cd": "You have to wait **{time}** before next reward !",
         "daily": {
-            "desc": "```diff\n+ You just won **${nbWin}** ! \n# You have now ${newB} in your cash. \n- Your next reward will be available in 24 hours.```",
+            "desc": "```diff\n+ You just won **${nbWin}** ! \n# You have now ${newB} cash. \n- Your next reward will be available in 24 hours.```",
             "title": "Daily rewards",
             "sommaire": "**Sommaire : **\n```md\n# 🏠 Home page\n# 📅 Reward of today - Get your your reward of the day\n# 💰 Hidden treasure - Dig up hidden treasures to get a lot of rewards !!```"
         },
@@ -27,6 +27,11 @@
         "addmoneyrole": {
             "desc": "{user} added **${toAdd}** to _{usersLength}_ members's balance with <@&${role.id}> role !",
             "title":"Money added"
+        },
+        "dep": {
+            "notEnough": "You have only `${cash}` cash !",
+            "title": "Deposit completed",
+            "desc": "Successfully deposited `${toDep}` to {user}'s bank !"
         }
     },
     "reactAdd": {

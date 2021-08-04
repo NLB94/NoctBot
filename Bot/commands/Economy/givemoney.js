@@ -8,7 +8,7 @@ const {
 const functions = require('../../../util/functions');
 
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
-
+  const x_mark = client.emojis.resolve(client.localEmojis.x_mark)
   if (!args[0].startsWith("<@") && !args[0].endsWith(">") && isNaN(args[1]))
     return message.channel.send(
       `Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``
