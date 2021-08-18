@@ -2,6 +2,7 @@ const {
     MessageReaction,
     User
 } = require("discord.js");
+const { getStrings } = require("../../../../util/constants");
 const {
     Client
 } = require("../../../../util/functions");
@@ -14,6 +15,8 @@ const {
  */
 module.exports = async (client, messageReaction, user) => {
     const message = messageReaction.message;
+    const settings = await client.getGuild(message.guild);
+    const language = settings.general.language;
     const strings = await getStrings(client, language);
     const loadingEmoji = client.emojis.resolve(client.localEmojis.loadingEmoji);
     //emoji number
@@ -43,7 +46,7 @@ module.exports = async (client, messageReaction, user) => {
                 embeds: [{
                     title: 'Verification',
                     description: `${check_mark}${await (strings.reactAdd.supportS.verif.replace("{guild}", message.guild.name))}`
-                }
+                }]
             })
         }).catch(err => console.log(err))
     }
@@ -61,7 +64,7 @@ module.exports = async (client, messageReaction, user) => {
                         embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", givRole.name))}`
-                        }
+                        }]
                     })
                 }).catch(() => {})
                 break;
@@ -72,7 +75,7 @@ module.exports = async (client, messageReaction, user) => {
                         embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", announRole.name))}`
-                        }
+                        }]
                     })
                 }).catch(() => {})
                 break;
@@ -83,7 +86,7 @@ module.exports = async (client, messageReaction, user) => {
                         embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", updateRole.name))}`
-                        }
+                        }]
                     })
                 }).catch(() => {})
                 break;
@@ -94,7 +97,7 @@ module.exports = async (client, messageReaction, user) => {
                         embeds: [{
                             title: strings.reactAdd.supportS.roles.title,
                             description: `${check_mark}${await (strings.reactAdd.supportS.roles.description.replace("{guild}", message.guild.name).replace("{roleName}", spoilRole.name))}`
-                        }
+                        }]
                     })
                 }).catch(() => {})
                 break;

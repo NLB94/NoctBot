@@ -32,6 +32,18 @@
             "notEnough": "You have only `${cash}` cash !",
             "title": "Deposit completed",
             "desc": "Successfully deposited `${toDep}` to {user}'s bank !"
+        },
+        "givemoney": {
+            "cantGiveBot": "You can't give money to bots!"
+        }
+    },
+    "infos": {
+        "channel": {
+            "name": "⤷ Name",
+            "topic": "⤷ Topic",
+            "category": "⤷ Category",
+            "createdAt": "⤷ Created at",
+            "msgInCache": "⤷ Messages in cache"
         }
     },
     "reactAdd": {

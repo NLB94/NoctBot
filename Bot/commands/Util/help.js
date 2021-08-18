@@ -84,24 +84,24 @@ module.exports.run = functions.run = async (client, message, args, settings, use
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-        .setDisabled(true)
-        .setCustomID('NONE')
-        .setStyle('SECONDARY')
-        .setEmoji("🏠"),
+          .setDisabled(true)
+          .setCustomId('NONE')
+          .setStyle('SECONDARY')
+          .setEmoji("🏠"),
         new MessageButton()
-        .setDisabled(true)
-        .setCustomID('NONE')
-        .setStyle('SECONDARY')
-        .setEmoji("⬅️"),
+          .setDisabled(true)
+          .setCustomId('NONE')
+          .setStyle('SECONDARY')
+          .setEmoji("⬅️"),
         new MessageButton()
-        .setCustomID(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
-        .setStyle(((categories.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
-        .setDisabled(((categories.length / 25) > 1) ? false : true)
-        .setEmoji("➡️"),
+          .setCustomId(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
+          .setStyle(((categories.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
+          .setDisabled(((categories.length / 25) > 1) ? false : true)
+          .setEmoji("➡️"),
         new MessageButton()
-        .setCustomID('delete')
-        .setStyle('DANGER')
-        .setEmoji("🗑️"),
+          .setCustomId('delete')
+          .setStyle('DANGER')
+          .setEmoji("🗑️"),
       );
     // const file = new MessageAttachment(canvas.toBuffer(), "help.png");
     // embed.attachFiles(file);
@@ -158,19 +158,19 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       const row = new MessageActionRow()
         .addComponents(
           new MessageButton()
-          .setCustomID('help-home')
+          .setCustomId('help-home')
           .setStyle('SECONDARY')
           .setEmoji("🏠"),
           new MessageButton()
-          .setCustomID('help-left')
+          .setCustomId('help-left')
           .setStyle('PRIMARY')
           .setEmoji("⬅️"),
           new MessageButton()
-          .setCustomID('help-right')
+          .setCustomId('help-right')
           .setStyle('PRIMARY')
           .setEmoji("➡️"),
           new MessageButton()
-          .setCustomID('delete')
+          .setCustomId('delete')
           .setStyle('DANGER')
           .setEmoji("🗑️"),
         );

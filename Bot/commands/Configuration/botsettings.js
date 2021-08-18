@@ -33,7 +33,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       //⌠ ⌡ ►
     )
     .setTimestamp()
-    .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
+    .setFooter(`By ${client.application.owner.tag}`);
   //   if (settings.wChannel) embed.addField('• Welcome Channel :', `${settings.wChannel}`, true)
   //   else embed.addField('• Welcome Channel :', '\u200b', true);
   //   embed.addField('\u200b', '\u200b', true);

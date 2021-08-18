@@ -10,16 +10,18 @@ const functions = require('../../../util/functions');
 module.exports.run = functions.run = async (client, message, args, settings, userInfo, strings) => {
   const x_mark = client.emojis.resolve(client.localEmojis.x_mark)
   if (!args[0].startsWith("<@") && !args[0].endsWith(">") && isNaN(args[1]))
-    return message.channel.send(
-      `Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``
-    );
+    return message.channel.send({
+      embeds: [
+        { description: `${strings.usage} : \`\`\`${settings.general.prefix}givemoney ${module.exports.help.usage}\`\`\`` }
+      ]
+    });
   const user = args[0] ? (args[0].startsWith('<@') && args[0].endsWith('>') ? message.mentions.users.first() : (isNaN(args[0]) ? (args[0].includes('#') ? client.users.cache.find(m => m.tag.toLowerCase() == args[0].toLowerCase()) : (client.users.cache.find(m => (m.username.toLowerCase()) == args[0].toLowerCase()))) : client.users.resolve(args[0]))) : message.author;
 
   const dbUser = await client.getGuildUser(message.guild, message.guild.members.resolve(user));
-  if (user.bot) return message.channel.send("You can't give money to bots!");
+  if (user.bot) return message.channel.send();
   if (user.tag === message.author.tag) return message.channel.send("You can't give money to yourself!");
   if (!dbUser || !userInfo) return;
-  if (!args[1]) return message.channel.send(`Correct usage : \`${settings.general.prefix}givemoney ${module.exports.help.usage}\``);
+  if (!args[1]) return message.channel.send(`${strings.usage} : \`\`\`${settings.general.prefix}givemoney ${module.exports.help.usage}\`\`\``);
   if (args[1] !== "all" && !isNaN(args[1])) {
     try {
       const m = parseInt(args[1]);

@@ -22,7 +22,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
         const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomID("reset-antiLink")
+                .setCustomId("reset-antiLink")
                 .setEmoji("🔄")
                 .setStyle("PRIMARY")
         )

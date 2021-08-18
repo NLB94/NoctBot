@@ -19,7 +19,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const toAdd = isNaN(args[0]) ? (isNaN(args[1]) ? parseInt(args[2]) : parseInt(args[1])) : parseInt(args[0]);
   if (isNaN(toAdd)) return message.channel.send({
     embeds: [{
-      description: `${x_mark}${strings.usage} : \`${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}\``
+      description: `${x_mark}${strings.usage} : \`\`\`${settings.general.prefix}addmoney ${module.exports.help.usage}\`\`\``
     }]
   })
   userInfo = user.id == message.author.id ? userInfo : await client.getGuildUser(message.guild, user);

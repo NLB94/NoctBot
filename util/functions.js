@@ -12,6 +12,10 @@ const {
 const {
   loadImage
 } = require('canvas');
+const {
+  loadCommands,
+  loadEvents
+} = require('./loader')
 
 module.exports = functions.client = client => {
   //random String
@@ -40,6 +44,32 @@ module.exports = functions.client = client => {
       c += e[Math.floor(Math.random() * e.length)];
     }
     return c;
+  };
+  client.reloadCommands = async (options) => {
+    let success = 'Failed :/';
+    try {
+      if (options == 'all' || !options) {
+        await client.commands.clear();
+        await loadCommands(client);
+        success = "Success :) !"
+      } else if (typeof options == 'object') {
+        await client.commands.delete(options.name);
+        const cmd = require(`../Bot/commands/${options.cat}/${options.name}`)
+        await client.commands.set(options.name, cmd)
+        success = "Success :) !"
+      } else if (Array.isArray(options)) {
+        for (const opt of options) {
+          await client.commands.delete(opt.name);
+          const cmd = require(`../Bot/commands/${opt.cat}/${opt.name}`)
+          await client.commands.set(opt.name, cmd)
+        }
+        success = "Success :) !"
+      }
+    } catch (e) {
+      success = ('Failed :/ \n' + "```" + e + "```")
+    } finally {
+      return success;
+    }
   };
   //custom command
   client.newCustomCommand = async (guild, options) => {

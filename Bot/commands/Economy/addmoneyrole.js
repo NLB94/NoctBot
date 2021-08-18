@@ -15,7 +15,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   const support = args[0] == 'bank' || args[0] == 'cash' ? args[0].toLowerCase() : 'cash';
   const users = [];
   const role = args[0].startsWith('<@&') && args[0].endsWith('>') || args[1].startsWith('<@&') && args[1].endsWith('>') ? message.guild.roles.cache.find(r => r.id == message.mentions.roles.first().id) : (args[0] == 'bank' || args[0] == 'cash' ? (isNaN(args[1]) ? message.guild.roles.cache.find(r => r.name == args[1]) : message.guild.roles.cache.find(r => r.id == args[1])) : (isNaN(args[0]) ? message.guild.roles.cache.find(r => r.name == args[0]) : message.guild.roles.cache.find(r => r.id == args[0])));
-  const correctUsage = `${x_mark}${strings.usage} : \`${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}\``
+  const correctUsage = `${x_mark}${strings.usage} : \`\`\`${settings.general.prefix}${module.exports.help.name} ${module.exports.help.usage}\`\`\``
   let nb = 0;
   if (!role) return message.channel.send({
     embeds: [{

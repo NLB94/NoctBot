@@ -14,7 +14,7 @@ module.exports.run = functions.run = async (client, message, args, settings, use
 
   if (isNaN(args[0]) && !args[0].toLowerCase().startsWith('al')) return message.channel.send({
     embeds: [{
-      description: `${x_mark}${strings.usage} \`${settings.general.prefix}dep ${module.exports.help.usage}\``
+      description: `${x_mark}${strings.usage} \`\`\`${settings.general.prefix}dep ${module.exports.help.usage}\`\`\``
     }]
   });
 

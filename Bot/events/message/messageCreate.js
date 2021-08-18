@@ -113,7 +113,7 @@ module.exports = async (client, message) => {
       let noArgsReply = `${x_mark}${message.author} ${strings.usage}`;
 
       if (command.help.usage)
-        noArgsReply += `\`${settings.general.prefix}${command.help.name} ${command.help.usage}\``;
+        noArgsReply += `\`\`\`${settings.general.prefix}${command.help.name} ${command.help.usage}\`\`\``;
       // if (command.help.name === `config` || command.help.name == 'level' || command.help.name == 'captcha' || command.help.name == 'ticket' || command.help.name == 'welcome' || command.help.name == 'leave')
       //   noArgsReply += `\nIf you want to show all available keys, type \`${settings.general.prefix}${command.help.name} keys\``;
 

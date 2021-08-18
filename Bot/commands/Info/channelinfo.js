@@ -17,16 +17,18 @@ module.exports.run = functions.run = async (client, message, args, settings, use
   if (channel && channel !== '\u200b') {
     const embed = new MessageEmbed()
       .setColor("#000000")
-      .setTitle(channel.name)
+      .setAuthor(message.guild.name, message.guild.iconURL())
+      .addField("")
       .addField('ID :', `${channel.id}`, true)
       .addField('\u200b', '\u200b', true)
       channel.topic == undefined ? '' : embed.setDescription(`Topic : **${channel.topic}**`);
       embed.addField('Category :', `**${channel.parentID == undefined ? 'None' : `Name : ${channel.parent.name} (${channel.parentID})`}**`, true)
       .addField('Created at :', `**${moment(channel.createdAt).format('ddd, DD/MM/YYYY HH:mm')} (${(Math.round(Math.floor(Date.now() - channel.createdAt) / (1000 * 3600 * 24)))} days ago)**`, true)
       .addField('\u200b', '\u200b', true)
+      //retirer les msgs du cache
       .addField('Messages in cache :', `${channel.messages == undefined || !channel.messages ? '\u200b' : channel.messages.cache.size }`, true)
       .setTimestamp()
-      .setFooter(`By ${(await client.fetchApplication()).owner.tag}`);
+      .setFooter(message.author.tag, message.author.avatarURL());
 
     message.channel.send({embeds: [embed]});
   };

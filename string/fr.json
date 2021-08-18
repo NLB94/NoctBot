@@ -32,6 +32,18 @@
             "notEnough": "Tu n'as que `${cash}` en espèces !",
             "title": "Dépôt effectué",
             "desc": "Dépôt d'un montant de `${toDep}` effectué vers la banque de {user} !"
+        },
+        "givemoney": {
+            "cantGiveBot": "Tu ne peux pas donner de l'argent à un bot !"
+        }
+    },
+    "infos": {
+        "channel": {
+            "name": "⤷ Nom du salon",
+            "topic": "⤷ Description du salon",
+            "category": "⤷ Catégorie",
+            "createdAt": "⤷ Crée le",
+            "msgInCache": "⤷ Messages dans le cache"
         }
     },
     "reactAdd": {

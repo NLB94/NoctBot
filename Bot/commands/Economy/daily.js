@@ -26,19 +26,19 @@ module.exports.run = functions.run = async (client, message, args, settings, use
       new MessageButton()
         .setDisabled(true)
         .setEmoji("🏠")
-        .setCustomID("NONE")
+        .setCustomId("NONE")
         .setStyle("SECONDARY")
     )
     .addComponents(
       new MessageButton()
         .setEmoji("📅")
-        .setCustomID(hasCd1 ? "daily-daily-on" : "daily-daily-off")
+        .setCustomId(hasCd1 ? "daily-daily-on" : "daily-daily-off")
         .setStyle(hasCd1 ? "SECONDARY" : "PRIMARY")
     )
     .addComponents(
       new MessageButton()
         .setEmoji("💰")
-        .setCustomID(hasCd2 ? "daily-treasure-on" : "daily-treasure-off")
+        .setCustomId(hasCd2 ? "daily-treasure-on" : "daily-treasure-off")
         .setStyle(hasCd2 ? "SECONDARY" : "PRIMARY")
     )
   message.channel.send({

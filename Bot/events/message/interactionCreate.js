@@ -31,7 +31,7 @@ module.exports = async (client, interaction) => {
     const settings = await client.getGuild(interaction.guild);
     const language = settings.general.language;
     const strings = await getStrings(client, language);
-    const beforeEmbed = message?.embeds[0];
+    const beforeEmbed = message ? message.embeds[0] : null;
     const emojis = {
         1: client.emojis.resolve(client.localEmojis.emoji1),
         2: client.emojis.resolve(client.localEmojis.emoji2),
@@ -67,11 +67,11 @@ module.exports = async (client, interaction) => {
                 const loadingEmbed = new MessageEmbed()
                     .setTitle(strings.help.bCommands)
                     .setDescription(`${strings.loading}${emojis.loadingEmoji}`)
-                console.log(interaction.customID);
+                console.log(interaction.customId);
                 await interaction.update({
                     embeds: [loadingEmbed]
                 });
-                if (interaction.customID.startsWith("help")) {
+                if (interaction.customId.startsWith("help")) {
                     // const txtColor1 = settings.general.apparence == "light" ? "#000000" : "#ffffff";
                     // const txtColor2 = settings.general.apparence == "light" ? "darkblue" : "darkblue";
                     // let canvas = createCanvas(2000, 2000);
@@ -91,17 +91,20 @@ module.exports = async (client, interaction) => {
                     row
                         .addComponents(
                             new MessageButton()
-                            .setCustomID('help-home')
+                            .setCustomId('help-home')
                             .setStyle('SUCCESS')
                             .setEmoji("🏠"),
                         );
                     embed.setDescription((embed.description ? embed.description + '\n\n' : '') + `${strings.help.sommaire}`)
-                    if (interaction.customID == 'NONE') return interaction.editReply({
+                    if (interaction.customId == 'NONE') return interaction.editReply({
                         embeds: [beforeEmbed]
                     })
-                    else if (interaction.customID == 'delete') return message.delete();
+                    else if (interaction.customId == 'delete') {
+                        if (message.partial) await message.fetch(true);
+                        return await message.delete();
+                    }
                     else {
-                        if (interaction.customID == 'help-home') {
+                        if (interaction.customId == 'help-home') {
                             // canvas = await client.drawHelpHome(canvas, ctx, {
                             //     page: 1,
                             //     txtColor1,
@@ -111,33 +114,33 @@ module.exports = async (client, interaction) => {
                                 embed.addField(`${await client.emojis.resolve(cat.emoji)} • ${cat.name[language]}`, `\`\`\`md\n# ${cat.description[language]}\`\`\``);
                             }
                             embed.setFooter('Page 1');
-                            row.components[0].setDisabled(true).setStyle("SECONDARY").setCustomID('NONE')
+                            row.components[0].setDisabled(true).setStyle("SECONDARY").setCustomId('NONE')
                             row.addComponents(
                                 new MessageButton()
                                 .setDisabled(true)
-                                .setCustomID("NONE")
+                                .setCustomId("NONE")
                                 .setStyle('SECONDARY')
                                 .setEmoji("⬅️"),
                                 new MessageButton()
-                                .setCustomID(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
+                                .setCustomId(((categories.length / 25) > 1) ? 'help-right-home1' : 'NONE')
                                 .setStyle(((categories.length / 25) > 1) ? 'PRIMARY' : 'SECONDARY')
                                 .setEmoji("➡️")
                                 .setDisabled(((categories.length / 25) > 1) ? false : true),
                             )
                         } else {
-                            if (interaction.customID.startsWith("help-right-home")) {
-                                const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
+                            if (interaction.customId.startsWith("help-right-home")) {
+                                const page = parseInt(interaction.customId.slice(interaction.customId.length - 1))
                                 const nxtPage = page + 1;
                                 if ((categories.length / 25) == 1 || (categories.length / 25) == 0 || ((categories.length / 25) + 1) < nxtPage) return interaction.editReply({
                                     embeds: [beforeEmbed]
                                 })
                                 row.addComponents(
                                     new MessageButton()
-                                    .setCustomID('help-left-home' + nxtPage)
+                                    .setCustomId('help-left-home' + nxtPage)
                                     .setStyle('PRIMARY')
                                     .setEmoji("⬅️"),
                                     new MessageButton()
-                                    .setCustomID('help-right-home' + nxtPage)
+                                    .setCustomId('help-right-home' + nxtPage)
                                     .setStyle('PRIMARY')
                                     .setEmoji("➡️"),
                                 )
@@ -150,20 +153,20 @@ module.exports = async (client, interaction) => {
                                     embed.addField(`${await client.emojis.resolve(cat.emoji)} • ${cat.name[language]}`, `\`\`\`md\n# ${cat.description[language]}\`\`\``);
                                 }
                                 embed.setFooter("Page " + nxtPage);
-                                if (nxtPage >= (categories.length / 25)) row.components[2].setStyle("SECONDARY").setCustomID('NONE').setDisabled(true);
-                            } else if (interaction.customID.startsWith("help-left-home")) {
-                                const page = parseInt(interaction.customID.slice(interaction.customID.length - 1))
+                                if (nxtPage >= (categories.length / 25)) row.components[2].setStyle("SECONDARY").setCustomId('NONE').setDisabled(true);
+                            } else if (interaction.customId.startsWith("help-left-home")) {
+                                const page = parseInt(interaction.customId.slice(interaction.customId.length - 1))
                                 const nxtPage = page - 1;
                                 if ((categories.length / 25) == 1 || (categories.length / 25) == 0 || ((categories.length / 25)) < nxtPage) return interaction.editReply({
                                     embeds: [beforeEmbed]
                                 })
                                 row.addComponents(
                                     new MessageButton()
-                                    .setCustomID('help-left-home' + nxtPage)
+                                    .setCustomId('help-left-home' + nxtPage)
                                     .setStyle('PRIMARY')
                                     .setEmoji("⬅️"),
                                     new MessageButton()
-                                    .setCustomID('help-right-home' + nxtPage)
+                                    .setCustomId('help-right-home' + nxtPage)
                                     .setStyle("PRIMARY")
                                     .setEmoji("➡️"),
                                 )
@@ -175,12 +178,12 @@ module.exports = async (client, interaction) => {
                                 //     txtColor1,
                                 //     txtColor2
                                 // });
-                                if (nxtPage == 1) row.components[0].setStyle("SECONDARY").setDisabled(true).setCustomID("NONE"), row.components[1].setStyle("SECONDARY").setDisabled(true).setCustomID("NONE");
+                                if (nxtPage == 1) row.components[0].setStyle("SECONDARY").setDisabled(true).setCustomId("NONE"), row.components[1].setStyle("SECONDARY").setDisabled(true).setCustomId("NONE");
                                 embed.setFooter("Page " + nxtPage);
                                 // if (nxtPage >= (categories.length / 25)) row.components[2].setStyle("SECONDARY");
                             } else {
-                                if (interaction.customID.startsWith('help-left-cats')) {
-                                    const pos = interaction.customID.slice('help-left-cats'.length);
+                                if (interaction.customId.startsWith('help-left-cats')) {
+                                    const pos = interaction.customId.slice('help-left-cats'.length);
                                     const newCat = categories.find(e => e.position == (parseInt(pos) - 1))
                                     // canvas = await client.drawHelpCats(canvas, ctx, newCat, {
                                     //     txtColor1, txtColor2
@@ -218,19 +221,19 @@ module.exports = async (client, interaction) => {
                                     embed.fields = embed.fields.filter(f => !f.value.endsWith("`"))
                                     row.addComponents(
                                         new MessageButton()
-                                        .setCustomID(newCat.position <= 1 ? 'NONE' : 'help-left-cats' + newCat.position)
+                                        .setCustomId(newCat.position <= 1 ? 'NONE' : 'help-left-cats' + newCat.position)
                                         .setStyle(newCat.position <= 1 ? 'SECONDARY' : 'PRIMARY')
                                         .setEmoji("⬅️")
                                         .setDisabled(newCat.position <= 1 ? true : false),
                                         new MessageButton()
-                                        .setCustomID(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
+                                        .setCustomId(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
                                         .setStyle(newCat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                                         .setEmoji("➡️")
                                         .setDisabled(newCat.position == categories.length ? true : false),
                                     )
                                     if (embed.description.endsWith("```") && embed.fields.length < 1) embed.setDescription(embed.description + `\n\n` + strings.help.noCmd)
-                                } else if (interaction.customID.startsWith('help-right-cats')) {
-                                    const pos = interaction.customID.slice('help-right-cats'.length);
+                                } else if (interaction.customId.startsWith('help-right-cats')) {
+                                    const pos = interaction.customId.slice('help-right-cats'.length);
                                     const newCat = categories.find(e => e.position == (parseInt(pos) + 1))
                                     // canvas = await client.drawHelpCats(canvas, ctx, newCat, {
                                     //     txtColor1, txtColor2
@@ -268,12 +271,12 @@ module.exports = async (client, interaction) => {
                                     embed.fields = embed.fields.filter(f => !f.value.endsWith("`"))
                                     row.addComponents(
                                         new MessageButton()
-                                        .setCustomID(newCat.position <= 1 ? 'NONE' : 'help-left-cats' + newCat.position)
+                                        .setCustomId(newCat.position <= 1 ? 'NONE' : 'help-left-cats' + newCat.position)
                                         .setStyle(newCat.position <= 1 ? 'SECONDARY' : 'PRIMARY')
                                         .setEmoji("⬅️")
                                         .setDisabled(newCat.position <= 1 ? true : false),
                                         new MessageButton()
-                                        .setCustomID(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
+                                        .setCustomId(newCat.position == categories.length ? 'NONE' : 'help-right-cats' + newCat.position)
                                         .setStyle(newCat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                                         .setEmoji("➡️")
                                         .setDisabled(newCat.position == categories.length ? true : false),
@@ -285,12 +288,12 @@ module.exports = async (client, interaction) => {
                     };
                     row.addComponents(
                         new MessageButton()
-                        .setCustomID('delete')
+                        .setCustomId('delete')
                         .setStyle('DANGER')
                         .setEmoji("🗑️"), )
                 } else {
-                    if (interaction.customID.startsWith("reset")) {
-                        const toReset = interaction.customID.split("-")[1];
+                    if (interaction.customId.startsWith("reset")) {
+                        const toReset = interaction.customId.split("-")[1];
                         let setReset = {
                             enable: false,
                             onlyWarn: false,
@@ -302,7 +305,7 @@ module.exports = async (client, interaction) => {
                         await settings.update(settings);
                         row.addComponents(
                             new MessageButton()
-                            .setCustomID("NONE")
+                            .setCustomId("NONE")
                             .setDisabled(true)
                             .setStyle("SECONDARY")
                             .setEmoji("🔄")
@@ -342,8 +345,8 @@ module.exports = async (client, interaction) => {
                         //     }
                         // }
                     } else {
-                        if (interaction.customID.startsWith("daily")) {
-                            const arr1 = interaction.customID.split("-");
+                        if (interaction.customId.startsWith("daily")) {
+                            const arr1 = interaction.customId.split("-");
                             const dailyCd = 8.64e+7;
                             const lastD = userInfo.cd[arr1[1]]
                             const type = arr1[1];
@@ -354,15 +357,15 @@ module.exports = async (client, interaction) => {
                             const hasCd2 = ((t !== null && dailyCd - (Date.now() - t) > 0) ? true : false);
                             row.addComponents(
                                 new MessageButton()
-                                .setCustomID("daily-home")
+                                .setCustomId("daily-home")
                                 .setStyle("SUCCESS")
                                 .setEmoji("🏠"),
                                 new MessageButton()
-                                .setCustomID(`daily-daily-${hasCd1 ? 'on' : 'off'}`)
+                                .setCustomId(`daily-daily-${hasCd1 ? 'on' : 'off'}`)
                                 .setStyle(hasCd1 ? 'SECONDARY' : 'PRIMARY')
                                 .setEmoji("📅"),
                                 new MessageButton()
-                                .setCustomID(`daily-treasure-${hasCd2 ? 'on' : 'off'}`)
+                                .setCustomId(`daily-treasure-${hasCd2 ? 'on' : 'off'}`)
                                 .setEmoji("💰")
                                 .setStyle(hasCd2 ? "SECONDARY" : "PRIMARY")
                             )
@@ -383,7 +386,7 @@ module.exports = async (client, interaction) => {
                             switch (type) {
                                 case 'home': {
                                     row.components[0]
-                                        .setCustomID("NONE")
+                                        .setCustomId("NONE")
                                         .setStyle("SECONDARY")
                                         .setDisabled(true)
 
@@ -465,10 +468,10 @@ module.exports = async (client, interaction) => {
                 }
 
                 // const file = new MessageAttachment(canvas.toBuffer(), "help.png");
-                // if (!IDs.includes(interaction.customID)) return interaction.update({
+                // if (!IDs.includes(interaction.customId)) return interaction.update({
                 //     embeds: [beforeEmbed]
                 // })
-                if (interaction && !(blackListedIDs.map(b => b.id).includes(interaction.customID))) await interaction.editReply({
+                if (interaction && !(blackListedIDs.map(b => b.id).includes(interaction.customId))) await interaction.editReply({
                     embeds: [loadingEmbed]
                 }).then(async () => {
                     // embed.attachFiles(file);
@@ -493,17 +496,16 @@ module.exports = async (client, interaction) => {
                 console.log(e);
                 return interaction.update({
                     embeds: [beforeEmbed]
-                }).catch((err) => {
+                }).catch(() => {
                     interaction.editReply({
                         embeds: [beforeEmbed]
                     });
-                    console.log(err)
                 })
             }
             break;
         }
         case 'PING': {
-            console.log(message.content);
+            console.log(message);
             break;
         }
     }

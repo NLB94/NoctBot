@@ -5,9 +5,7 @@ const session = require('express-session');
 const cors = require('cors');
 
 const port = process.env.PORT || 80;
-const {
-    default: Store
-} = require('connect-mongo');
+const Store = require('connect-mongo');
 const {
     default: fetch
 } = require('node-fetch');

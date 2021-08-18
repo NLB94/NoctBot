@@ -22,10 +22,10 @@ module.exports.run = functions.run = async (client, message, args, settings, use
             value: `${settings.automod.whiteList.bots ? '🟢' : '🔴'}`
         }, {
             name: `4️⃣ \`\`\`Roles\`\`\``,
-            value: `${settings.automod.whiteList.whiteRoles.map(r => `<@&${r.id}>`).join(", ")}`
+            value: settings.automod.whiteList.whiteRoles.length == 0 ? '\u200b' : `${settings.automod.whiteList.whiteRoles.map(r => `<@&${r.id}>`).join(", ")}`
         }, {
             name: `5️⃣ \`\`\`Channels\`\`\``,
-            value: `${settings.automod.whiteList.channels.map(c => `<#${c.id}>`).join(", ")}`
+            value: settings.automod.whiteList.channels.length == 0 ? '\u200b' : `${settings.automod.whiteList.channels.map(c => `<#${c.id}>`).join(", ")}`
         }, )
         .setFooter(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setTimestamp();

@@ -74,7 +74,7 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
     const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
-            .setCustomID('help-home')
+            .setCustomId('help-home')
             .setStyle('SUCCESS')
             .setEmoji("🏠"),
         );
@@ -155,19 +155,19 @@ module.exports = functions.reactionAdd = async (client, messageReaction, user) =
                         embed.fields = embed.fields.filter(f => !f.value.endsWith("`"))
                         row.addComponents(
                             new MessageButton()
-                            .setCustomID(cat.position <= 1 ? 'NONE' : 'help-left-cats' + cat.position)
+                            .setCustomId(cat.position <= 1 ? 'NONE' : 'help-left-cats' + cat.position)
                             .setStyle(cat.position <= 1 ? 'SECONDARY' : 'PRIMARY')
                             .setEmoji("⬅️")
                             .setDisabled(cat.position <= 1 ? true : false),
                             new MessageButton()
-                            .setCustomID(cat.position == categories.length ? 'NONE' : 'help-right-cats' + cat.position)
+                            .setCustomId(cat.position == categories.length ? 'NONE' : 'help-right-cats' + cat.position)
                             .setStyle(cat.position == categories.length ? 'SECONDARY' : 'PRIMARY')
                             .setEmoji("➡️")
                             .setDisabled(cat.position == categories.length ? true : false),
                         )
                         row.addComponents(
                             new MessageButton()
-                            .setCustomID('delete')
+                            .setCustomId('delete')
                             .setStyle('DANGER')
                             .setEmoji("🗑️"),
                         )
