@@ -1,6 +1,6 @@
-# I2Z7
+# NoctBot
 
-~~_I2Z7 est un bot multifonction qui permet à chaque serveur d'automatiser + de 40 tâches !_~~
+~~_NoctBot est un bot multifonction qui permet à chaque serveur d'automatiser + de 40 tâches !_~~
 
-### Le projet a malheureusement été arrêté, le bot n'est donc plus fonctionnel
+### Le projet a malheureusement été arrêté, le bot n'est donc plus fonctionnel _RIP NoctBot_
 Toutefois, vous pouvez partir de ce code et le mettre à jour vers la nouvelle version de la librairie [discord.js](https://discord.js.org)
