@@ -45,7 +45,6 @@ setInterval(() => {
     })
 }, 1800000);
 
-
 const {
     loadEvents,
     loadCommands,
@@ -98,6 +97,7 @@ module.exports = {
     client,
     languages
 };
+require('./Dashboard/server.js')(client)
 
 process.on('uncaughtException', (err) => {
     console.log(`Erreur attrapé :`);
