@@ -4,8 +4,6 @@ const Discord = require('discord.js');
 // const {
 //     GiveawaysManager
 // } = require('./util/giveaway/');
-const Brawl = require('@statscell/brawl');
-const translate = require('@vitalets/google-translate-api');
 
 const DBLApi = require('@top-gg/sdk');
 
@@ -22,7 +20,7 @@ const client = new Discord.Client({
     
 });
 const topAPI = new DBLApi.Api(process.env.DBL_TOKEN);
-const webhook = new DBLApi.Webhook('Topgg_94Noct_94');
+const webhook = new DBLApi.Webhook('Your_password');
 
 const brawlManager = new Brawl.Client({
     token: process.env.BRAWL_TOKEN
@@ -63,7 +61,6 @@ require('./util/user')(client);
 setTimeout(() => {
     require('./Dashboard/server')(client);
 }, 3000)
-require('./util/brawlstars')(client);
 require("./util/guild")(client);
 require('./util/message')(client);
 require("./util/functions")(client);
@@ -92,11 +89,6 @@ client.login(process.env.TOKEN).then(async() => {
     await app.get('/commands', (req, res) => {
         res.send(client.commands.map(cmd => cmd.help))
     })
-	await app.get('/client', (req, res) => {
-        if(req.headers.authorization !== 'Bearer 817kHUIa7189.ioHuaoç9.PIIHOan') return res.status(403).send({ msg: 'Unauthorized'})
-        res.send(client);
-    })
-
 	app.post('/dblwebhook', webhook.listener(async vote => {
   		if (!vote.bot) return;
         await client.newVote(vote, Date.now());
